@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorWhite">
+    <include layout="@layout/navbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Mawb"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_mawb_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:inputType="number"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_pc"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_pc_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_weight"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_weight_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_volume"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_volume_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_SpCode"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_spcode_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_child_goods_en"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_goods_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_child_goods_cn"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_goodscn_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_businessType"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_businesstype_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+                <Spinner
+                    android:id="@+id/update_group_businesstype_spinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Package"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_package_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_origin"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_origin_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Dep"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_dep_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Dest1"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_dest_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/group_dest2_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Dest2"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_dest2_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_by"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_by_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_tranFlag"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_tranFlag_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+
+                <Spinner
+                    android:id="@+id/update_group_traflag_spinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Remark"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_remake_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_FDate"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_fdate_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Fno"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_fno_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_customsCode"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_customsCode_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_transPortMode"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_transPortMode_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+                <Spinner
+                    android:id="@+id/update_group_transPortMode_spinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_freightPayment"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_freightPayment_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_cNEECity"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_cNEECity_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_cNEECountry"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_cNEECountry_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_mftStatus"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_mftStatus_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Shipper"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_shipper_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Consignee"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_consignee_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_gprice"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/int_group_gprice_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_cIQStatus"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_cIQStatus_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/int_group_cIQNumber"
+                    android:textSize="@dimen/awb_detail_size" />
+                <EditText
+                    android:id="@+id/int_group_cIQNumber_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="@color/awb_detail_color"/>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <Button
+                android:id="@+id/update_int_group_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/awb_detail_update"/>
+            <Button
+                android:id="@+id/sure_int_group_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="@string/awb_detail_sure"/>
+            <Button
+                android:id="@+id/delete_int_group_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/int_child_delete"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

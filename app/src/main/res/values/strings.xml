@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">南京禄口国际机场</string>
+    <string name="company_name">南京禄口国际机场</string>
+    <string name="user_bumen">请输入您的部门名称</string>
+    <string name="user_name">请输入您的用户名</string>
+    <string name="user_pass">请输入您的密码</string>
+    <string name="login">登录</string>
+    <string name="save_pass">记住密码</string>
+    <string name="autoLogin">自动登录</string>
+    <string name="user">用户账户:</string>
+    <string name="pass">用户密码:</string>
+    <string name="bumen">部门名称:</string>
+
+    <string name="title_name">这里是标题</string>
+    <string name="userhome_title">首页</string>
+    <string name="person">我的</string>
+
+    <string name="setting_pass">设置锁屏</string>
+    <string name="reset_pass">重置密码锁</string>
+    <string name="version_update">检查版本</string>
+    <string name="exit_login">退出登录</string>
+
+    <string name="not_use">已经超过使用期</string>
+
+    <!--AWB界面 国内-->
+    <string name="awb_detail">订单详情</string>
+    <string name="awb_add">增加订单</string>
+    <string name="awb_load">正在加载数据</string>
+    <string name="awb_detail_Mawb">主运单号:</string>
+    <string name="awb_detail_pc">件数:</string>
+    <string name="awb_all_detail_pc">总件数:</string>
+    <string name="awb_detail_weight">重量:</string>
+    <string name="awb_detail_volume">体积:</string>
+    <string name="awb_detail_SpCode">特码:</string>
+    <string name="awb_detail_Goods">品名:</string>
+    <string name="awb_detail_businessType">业务类型:</string>
+    <string name="awb_detail_Package">包装类型:</string>
+    <string name="awb_detail_By">承运人:</string>
+    <string name="awb_detail_Dep">启运港:</string>
+    <string name="awb_detail_Dest1">目的港:</string>
+    <string name="awb_detail_Dest2">第二目的港:</string>
+    <string name="awb_detail_Remark">备注:</string>
+    <string name="awb_detail_FlightChecked">定舱确认:</string>
+    <string name="awb_detail_FDate">计划航班日期:</string>
+    <string name="awb_detail_Fno">计划航班号:</string>
+    <string name="awb_detail_Shipper">托运人:</string>
+    <string name="awb_detail_ShipperTEL">托运人电话:</string>
+    <string name="awb_detail_Consignee">收货人:</string>
+    <string name="awb_detail_CNEETEL">收货人电话:</string>
+    <string name="awb_detail_TransportNO">运输证:</string>
+    <string name="awb_detail_AllowTransNO">准运证:</string>
+    <string name="awb_detail_CIQNumber">商检号:</string>
+    <string name="awb_detail_update">更新订单</string>
+    <string name="awb_detail_sure">提交</string>
+
+    <!--house界面 国内-->
+    <string name="house_sure">提交</string>
+    <string name="house_begin_time">开始时间</string>
+    <string name="house_end_time">结束时间</string>
+    <string name="house_yundanhao">运单号:</string>
+    <string name="house_rukushijian">入库日期:</string>
+    <string name="house_guonei_ruku">国内出港入库查询</string>
+    <string name="house_guonei_ruku_detail">国内出港入库列表</string>
+
+    <!--int界面 国际出港预录入-->
+    <string name="int_prepare_title">国际出港预录入</string>
+    <string name="int_prepare_child_title">分页列表详情</string>
+    <string name="int_prepare_group_title">主单列表详情</string>
+    <string name="int_child_hno">分运单号:</string>
+    <string name="int_child_pc">分单件数:</string>
+    <string name="int_child_weight">分单重量:</string>
+    <string name="int_child_volume">分单体积:</string>
+    <string name="int_child_goods_en">品名（英文）:</string>
+    <string name="int_child_goods_cn">品名（中文）:</string>
+    <string name="int_child_mftstatus">预配状态:</string>
+    <string name="int_child_updata">修改分单</string>
+    <string name="int_group_pc">主单件数:</string>
+    <string name="int_group_weight">主单重量:</string>
+    <string name="int_group_volume">主单体积:</string>
+    <string name="int_group_origin">货源地:</string>
+    <string name="int_group_by">承运人:</string>
+    <string name="int_group_tranFlag">报关类型:</string>
+    <string name="int_group_customsCode">支线离境关区:</string>
+    <string name="int_group_transPortMode">离境方式:</string>
+    <string name="int_group_freightPayment">支付方式:</string>
+    <string name="int_group_cNEECity">收货城市:</string>
+    <string name="int_group_cNEECountry">收货国家:</string>
+    <string name="int_group_mftStatus">预配状态:</string>
+    <string name="int_group_gprice">货值:</string>
+    <string name="int_group_cIQStatus">商检状态:</string>
+    <string name="int_group_cIQNumber">商检号:</string>
+    <string name="int_child_add">增加分单</string>
+    <string name="int_child_delete">删除分单</string>
+</resources>
