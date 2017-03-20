@@ -20,6 +20,8 @@ import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.text.ParseException;
+
 /**
  * 国际出港入库管理
  */
@@ -34,6 +36,7 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
     private String mawb;
     private String begainTime;
     private String endTime;
+    private int countTime;
 
     private String ErrString = "";
     private String userBumen;
@@ -95,10 +98,11 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
         houseSearchBtn.setOnClickListener(this);
     }
 
-    private void getEditext() {
+    private void getEditext() throws ParseException {
         mawb = mawbEt.getText().toString().trim();
         begainTime = begainTimeEt.getText().toString().trim();
         endTime = endTimeEt.getText().toString().trim();
+        countTime = DateUtils.daysBetween(begainTime, endTime);
     }
 
     @Override
@@ -106,10 +110,19 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
         switch (view.getId()) {
             case R.id.int_house_search_btn:
                 wareHousePb.setVisibility(View.VISIBLE);
-                getEditext();
-                xml = HttpIntawbPrepareHouse.getIntWareHouseXml(mawb, begainTime, endTime);
-                task = new AppIntExpAWBHouseManageActivity.GetIntHouseXmlAsyncTask();
-                task.execute();
+                try {
+                    getEditext();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (countTime>3) {
+                    Toast.makeText(this, "时间差不能超过3天", Toast.LENGTH_LONG).show();
+                    wareHousePb.setVisibility(View.GONE);
+                } else {
+                    xml = HttpIntawbPrepareHouse.getIntWareHouseXml(mawb, begainTime, endTime);
+                    task = new GetIntHouseXmlAsyncTask();
+                    task.execute();
+                }
                 break;
 
             case R.id.int_house_begin_time_btn:
