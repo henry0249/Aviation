@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.prepareawb;
+package com.example.administrator.aviation.ui.activity.domprepareawb;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -172,12 +172,6 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            // 设置偶数项灰色
-//            if (position % 2 == 0) {
-//                viewHolder.awbLayout.setBackgroundColor(Color.parseColor("#FFC4C1C1"));
-//            } else {
-//                viewHolder.awbLayout.setBackgroundColor(Color.WHITE);
-//            }
 
             String mawb = awbInfoList.get(position).getMawb();
             if (!mawb.equals("")) {

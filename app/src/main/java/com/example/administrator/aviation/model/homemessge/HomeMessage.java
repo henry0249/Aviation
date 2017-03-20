@@ -18,6 +18,16 @@ public class HomeMessage {
     // 到期时间
     private String activeDate;
 
+    private AppConfig appconfig;
+
+    public AppConfig getAppconfig() {
+        return appconfig;
+    }
+
+    public void setAppconfig(AppConfig appconfig) {
+        this.appconfig = appconfig;
+    }
+
     public String getName() {
         return name;
     }

@@ -29,7 +29,7 @@
                     android:textSize="@dimen/house_size"/>
 
                 <EditText
-                    android:id="@+id/house_mawb_et"
+                    android:id="@+id/int_house_mawb_et"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLength="11"
@@ -50,14 +50,14 @@
                     android:textSize="@dimen/house_size"/>
 
                 <EditText
-                    android:id="@+id/house_begin_time_et"
+                    android:id="@+id/int_house_begin_time_et"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"/>
 
                 <EditText
-                    android:id="@+id/house_end_time_et"
+                    android:id="@+id/int_house_end_time_et"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -70,7 +70,7 @@
                 android:layout_marginTop="10dp">
 
                 <Button
-                    android:id="@+id/house_begin_time_btn"
+                    android:id="@+id/int_house_begin_time_btn"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
@@ -80,7 +80,7 @@
                     android:textSize="12sp"/>
 
                 <Button
-                    android:id="@+id/house_end_time_btn"
+                    android:id="@+id/int_house_end_time_btn"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
@@ -96,18 +96,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="目的港："
-                    android:textSize="@dimen/house_size"/>
-
-                <EditText
-                    android:id="@+id/house_dest_et"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"/>
             </LinearLayout>
 
             <LinearLayout
@@ -116,19 +104,19 @@
                 android:layout_marginTop="10dp">
 
                 <Button
-                    android:id="@+id/house_search_btn"
+                    android:id="@+id/int_house_search_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/button_circle"
-                    android:text="@string/house_sure"
+                    android:text="@string/int_awb_house_search"
                     android:textSize="@dimen/house_size"/>
             </LinearLayout>
 
         </LinearLayout>
         <ProgressBar
-            android:id="@+id/ware_house_pb"
+            android:id="@+id/int_ware_house_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

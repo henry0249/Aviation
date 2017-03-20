@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center">
+              android:layout_marginBottom="5dp"
+              android:layout_marginTop="5dp"
+              android:gravity="center"
+              android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/int_group_iv"
         android:layout_width="0dp"
-        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:layout_height="wrap_content"/>
+        android:layout_weight="0.5"/>
+
     <TextView
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/house_size"
-        android:text="主运单号："/>
+        android:layout_weight="1"
+        android:text="主运单号："
+        android:textSize="@dimen/house_size"/>
+
     <TextView
         android:id="@+id/int_group_mawb_tv"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/house_size"
-        android:text="11111111"/>
+        android:layout_weight="1"
+        android:text="11111111"
+        android:textSize="@dimen/house_size"/>
+
+    <ImageView
+        android:id="@+id/int_group_imageview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="0.2"
+        android:src="@drawable/dayuhaotwo"/>
 
 </LinearLayout>

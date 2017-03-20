@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbAdd;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -141,15 +142,21 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         volumeEt = (EditText) findViewById(R.id.int_group_add_volume_detail_tv);
         spCodeEt = (EditText) findViewById(R.id.int_group_add_spcode_detail_tv);
         goodsEt = (EditText) findViewById(R.id.int_group_add_goods_detail_tv);
+        goodsEt.setTransformationMethod(new AllCapTransformationMethod());
         goodsCNEt = (EditText) findViewById(R.id.int_group_add_goodscn_detail_tv);
         businessTypeEt = (TextView) findViewById(R.id.int_group_add_businesstype_detail_tv);
         packAgeEt = (EditText) findViewById(R.id.int_group_add_package_detail_tv);
         originEt = (EditText) findViewById(R.id.int_group_add_origin_detail_tv);
+        originEt.setTransformationMethod(new AllCapTransformationMethod());
         depEt = (EditText) findViewById(R.id.int_group_add_dep_detail_tv);
+        depEt.setTransformationMethod(new AllCapTransformationMethod());
         dest1Et = (EditText) findViewById(R.id.int_group_add_dest_detail_tv);
+        dest1Et.setTransformationMethod(new AllCapTransformationMethod());
         dest2Et = (EditText) findViewById(R.id.int_group_add_dest2_detail_tv);
+        dest2Et.setTransformationMethod(new AllCapTransformationMethod());
         dest2Layout = (LinearLayout) findViewById(R.id.group_add_dest2_layout);
         by1Et = (EditText) findViewById(R.id.int_group_add_by_detail_tv);
+        by1Et.setTransformationMethod(new AllCapTransformationMethod());
         tranFlagEt = (TextView) findViewById(R.id.int_group_add_tranFlag_detail_tv);
         remarkEt = (EditText) findViewById(R.id.int_group_add_remake_detail_tv);
         fDateEt = (EditText) findViewById(R.id.int_group_add_fdate_detail_tv);
@@ -157,8 +164,10 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         customsCodeEt = (EditText) findViewById(R.id.int_group_add_customsCode_detail_tv);
         transPortModeEt = (TextView) findViewById(R.id.int_group_add_transPortMode_detail_tv);
         freightPaymentEt = (EditText) findViewById(R.id.int_group_add_freightPayment_detail_tv);
+        freightPaymentEt.setTransformationMethod(new AllCapTransformationMethod());
         cNEECityEt = (EditText) findViewById(R.id.int_group_add_cNEECity_detail_tv);
         cNEECountryEt = (EditText) findViewById(R.id.int_group_add_cNEECountry_detail_tv);
+        cNEECountryEt.setTransformationMethod(new AllCapTransformationMethod());
         mftStatusEt = (EditText) findViewById(R.id.int_group_add_mftStatus_detail_tv);
         shipperEt = (EditText) findViewById(R.id.int_group_add_shipper_detail_tv);
         consigneeEt = (EditText) findViewById(R.id.int_group_add_consignee_detail_tv);
@@ -196,9 +205,6 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
                 businessType = AviationNoteConvert.cNtoEn(cnbusinessType);
             }
         });
-//        if (businessTypeAdapter.getCount() > 0) {
-//            businessTypeSpinner.setSelection(0);
-//        }
 
         // tranFlag报关类型
         Spinner tranFlagSpinner = (Spinner) findViewById(R.id.tranFlag_spinner);
@@ -259,13 +265,21 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         volume = volumeEt.getText().toString();
         spCode = spCodeEt.getText().toString();
         goods = goodsEt.getText().toString();
+
+        // 将输入框的内容转换成大写
+        goods = goods.toUpperCase();
         goodsCN = goodsCNEt.getText().toString();
         packAge = packAgeEt.getText().toString();
         origin = originEt.getText().toString();
+        origin = origin.toUpperCase();
         dep = depEt.getText().toString();
+        dep = dep.toUpperCase();
         dest1 = dest1Et.getText().toString();
+        dest1 = dest1.toUpperCase();
         dest2 = dest2Et.getText().toString();
+        dest2 = dest2.toUpperCase();
         by1 = by1Et.getText().toString();
+        by1 = by1.toUpperCase();
 //        String cntranFlag = tranFlagEt.getText().toString();
 //        tranFlag = AviationNoteConvert.cNtoEn(cntranFlag);
         remark = remarkEt.getText().toString();
@@ -275,8 +289,10 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
 //        String cntransPortMode = transPortModeEt.getText().toString();
 //        transPortMode = AviationNoteConvert.cNtoEn(cntransPortMode);
         freightPayment = freightPaymentEt.getText().toString();
+        freightPayment = freightPayment.toUpperCase();
         cNEECity = cNEECityEt.getText().toString();
         cNEECountry = cNEECountryEt.getText().toString();
+        cNEECountry = cNEECountry.toUpperCase();
         mftStatus = mftStatusEt.getText().toString();
         shipper = shipperEt.getText().toString();
         consignee = consigneeEt.getText().toString();

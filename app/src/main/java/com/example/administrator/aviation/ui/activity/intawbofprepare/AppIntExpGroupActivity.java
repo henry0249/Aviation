@@ -22,6 +22,7 @@ import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbDelete;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbUpdate;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
@@ -112,6 +113,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private Button updateBtn;
     private Button sureBtn;
     private Button deleteBtn;
+    private LinearLayout hideLayout;
 
     private ArrayAdapter<String> businessTypeAdapter;
     private Spinner businessTypeSpinner;
@@ -170,15 +172,21 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         volumeEt = (EditText) findViewById(R.id.int_group_volume_detail_tv);
         spCodeEt = (EditText) findViewById(R.id.int_group_spcode_detail_tv);
         goodsEt = (EditText) findViewById(R.id.int_group_goods_detail_tv);
+        goodsEt.setTransformationMethod(new AllCapTransformationMethod());
         goodsCNEt = (EditText) findViewById(R.id.int_group_goodscn_detail_tv);
         businessTypeEt = (EditText) findViewById(R.id.int_group_businesstype_detail_tv);
         packAgeEt = (EditText) findViewById(R.id.int_group_package_detail_tv);
         originEt = (EditText) findViewById(R.id.int_group_origin_detail_tv);
+        originEt.setTransformationMethod(new AllCapTransformationMethod());
         depEt = (EditText) findViewById(R.id.int_group_dep_detail_tv);
+        depEt.setTransformationMethod(new AllCapTransformationMethod());
         dest1Et = (EditText) findViewById(R.id.int_group_dest_detail_tv);
+        dest1Et.setTransformationMethod(new AllCapTransformationMethod());
         dest2Et = (EditText) findViewById(R.id.int_group_dest2_detail_tv);
+        dest2Et.setTransformationMethod(new AllCapTransformationMethod());
         dest2Layout = (LinearLayout) findViewById(R.id.group_dest2_layout);
         by1Et = (EditText) findViewById(R.id.int_group_by_detail_tv);
+        by1Et.setTransformationMethod(new AllCapTransformationMethod());
         tranFlagEt = (EditText) findViewById(R.id.int_group_tranFlag_detail_tv);
         remarkEt = (EditText) findViewById(R.id.int_group_remake_detail_tv);
         fDateEt = (EditText) findViewById(R.id.int_group_fdate_detail_tv);
@@ -186,8 +194,10 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         customsCodeEt = (EditText) findViewById(R.id.int_group_customsCode_detail_tv);
         transPortModeEt = (EditText) findViewById(R.id.int_group_transPortMode_detail_tv);
         freightPaymentEt = (EditText) findViewById(R.id.int_group_freightPayment_detail_tv);
+        freightPaymentEt.setTransformationMethod(new AllCapTransformationMethod());
         cNEECityEt = (EditText) findViewById(R.id.int_group_cNEECity_detail_tv);
         cNEECountryEt = (EditText) findViewById(R.id.int_group_cNEECountry_detail_tv);
+        cNEECountryEt.setTransformationMethod(new AllCapTransformationMethod());
         mftStatusEt = (EditText) findViewById(R.id.int_group_mftStatus_detail_tv);
         shipperEt = (EditText) findViewById(R.id.int_group_shipper_detail_tv);
         consigneeEt = (EditText) findViewById(R.id.int_group_consignee_detail_tv);
@@ -197,6 +207,14 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         updateBtn = (Button) findViewById(R.id.update_int_group_btn);
         sureBtn = (Button) findViewById(R.id.sure_int_group_btn);
         deleteBtn = (Button) findViewById(R.id.delete_int_group_btn);
+        hideLayout = (LinearLayout) findViewById(R.id.hide_int_house_sure_linearlayout);
+
+        // 国际出港入库管理进入主单界面不能修改和删除还有增加主单
+        if (getIntent().getStringExtra(AviationCommons.HIDE_INT_AWB_UPDATE) != null && getIntent().getStringExtra(AviationCommons.HIDE_INT_AWB_UPDATE).equals("hide")) {
+            hideLayout.setVisibility(View.GONE);
+        } else {
+            hideLayout.setVisibility(View.VISIBLE);
+        }
 
         userBumen = PreferenceUtils.getUserBumen(this);
         userName = PreferenceUtils.getUserName(this);
@@ -322,7 +340,6 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         cIQNumber = mawbInfo.getMawbm().getCIQNumber();
         cIQNumberEt.setText(cIQNumber);
 
-
     }
 
     // 隐藏EditText
@@ -393,16 +410,16 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.update_int_group_btn:
-                setEditTextVisible();
-                sureBtn.setVisibility(View.VISIBLE);
-                updateBtn.setVisibility(View.GONE);
-                dest2Layout.setVisibility(View.VISIBLE);
-                businessTypeEt.setVisibility(View.GONE);
-                businessTypeSpinner.setVisibility(View.VISIBLE);
-                tranFlagEt.setVisibility(View.GONE);
-                tranFlagSpinner.setVisibility(View.VISIBLE);
-                transPortModeEt.setVisibility(View.GONE);
-                transPortModeSpinner.setVisibility(View.VISIBLE);
+                    setEditTextVisible();
+                    sureBtn.setVisibility(View.VISIBLE);
+                    updateBtn.setVisibility(View.GONE);
+                    dest2Layout.setVisibility(View.VISIBLE);
+                    businessTypeEt.setVisibility(View.GONE);
+                    businessTypeSpinner.setVisibility(View.VISIBLE);
+                    tranFlagEt.setVisibility(View.GONE);
+                    tranFlagSpinner.setVisibility(View.VISIBLE);
+                    transPortModeEt.setVisibility(View.GONE);
+                    transPortModeSpinner.setVisibility(View.VISIBLE);
 
                 businessTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -559,23 +576,31 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         volume = volumeEt.getText().toString();
         spCode = spCodeEt.getText().toString();
         goods = goodsEt.getText().toString();
+        goods = goods.toUpperCase();
         goodsCN = goodsCNEt.getText().toString();
-
         packAge = packAgeEt.getText().toString();
         origin = originEt.getText().toString();
+        origin = origin.toUpperCase();
         dep = depEt.getText().toString();
+        dep = dep.toUpperCase();
         dest1 = dest1Et.getText().toString();
+        dest1 = dest1.toUpperCase();
         dest2 = dest2Et.getText().toString();
+        dest2 = dest2.toUpperCase();
         by1 = by1Et.getText().toString();
-
+        by1 = by1.toUpperCase();
         remark = remarkEt.getText().toString();
         fDate = fDateEt.getText().toString();
         fno = fnoEt.getText().toString();
         customsCode = customsCodeEt.getText().toString();
 
         freightPayment = freightPaymentEt.getText().toString();
+
+        // 将得到输入框的值转换成大写字母
+        freightPayment = freightPayment.toUpperCase();
         cNEECity = cNEECityEt.getText().toString();
         cNEECountry = cNEECountryEt.getText().toString();
+        cNEECountry = cNEECountry.toUpperCase();
         mftStatus = mftStatusEt.getText().toString();
         shipper = shipperEt.getText().toString();
         consignee = consigneeEt.getText().toString();

@@ -2,6 +2,7 @@ package com.example.administrator.aviation.model.updateversion;
 
 /**
  * 版本更新的一个类，用来与update.txt的被容相对应
+ * 可删除（apk放在服务器）
  */
 
 public class UpdateInfo {

@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.house;
+package com.example.administrator.aviation.ui.activity.domexphouse;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,8 +31,11 @@ public class AppDomExpWareHouseItemActivity extends Activity{
     private String xml;
     private ListView houseLv;
     private ProgressBar housePb;
+    private TextView showTv;
 
+    private List<WhsInfo> list;
     private HouseAdapter mHouseAdapter;
+
 
     // 接收消息隐藏加载图标
     Handler mHandler = new Handler() {
@@ -40,6 +43,9 @@ public class AppDomExpWareHouseItemActivity extends Activity{
         public void handleMessage(Message msg) {
             if (msg.what == AviationCommons.HOUSE_HANDLER) {
                 housePb.setVisibility(View.GONE);
+                if (list.size() >= 1) {
+                    showTv.setVisibility(View.GONE);
+                }
             }
         }
     };
@@ -57,13 +63,14 @@ public class AppDomExpWareHouseItemActivity extends Activity{
         navBar.setTitle(R.string.house_guonei_ruku_detail);
         houseLv = (ListView) findViewById(R.id.house_listview);
         housePb = (ProgressBar) findViewById(R.id.house_pb);
+        showTv = (TextView) findViewById(R.id.house_show_tv);
 
         // 解析house的xml数据
         new Thread() {
             @Override
             public void run() {
                 xml = getIntent().getStringExtra("houseXml");
-                List<WhsInfo> list = PrepareceWhsInfo.parseWhsInfoXml(xml);
+                list = PrepareceWhsInfo.parseWhsInfoXml(xml);
                 mHouseAdapter = new HouseAdapter(list, AppDomExpWareHouseItemActivity.this);
                 houseLv.setAdapter(mHouseAdapter);
                 mHandler.sendEmptyMessage(AviationCommons.HOUSE_HANDLER);

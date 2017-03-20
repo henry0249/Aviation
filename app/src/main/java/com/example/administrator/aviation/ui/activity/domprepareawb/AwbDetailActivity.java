@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.prepareawb;
+package com.example.administrator.aviation.ui.activity.domprepareawb;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

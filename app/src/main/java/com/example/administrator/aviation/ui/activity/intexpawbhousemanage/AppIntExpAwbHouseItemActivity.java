@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.intawbofprepare;
+package com.example.administrator.aviation.ui.activity.intexpawbhousemanage;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +20,9 @@ import com.example.administrator.aviation.http.getIntawbofprepare.HttpGetIntExpo
 import com.example.administrator.aviation.model.intawbprepare.Hawb;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
 import com.example.administrator.aviation.model.intawbprepare.PrepareIntAwbInfo;
+import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpChildActivity;
+import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpGroupActivity;
+import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpGroupAddActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -29,15 +32,10 @@ import org.ksoap2.serialization.SoapObject;
 import java.util.List;
 
 /**
- * 获取国际预录入订单列表
+ * 国际出港入库管理it
  */
 
-public class AppIntExpPrepareAWBActivity extends Activity{
-    private String ErrString = "";
-    private String userBumen;
-    private String userName;
-    private String userPass;
-    private String loginFlag;
+public class AppIntExpAwbHouseItemActivity extends Activity{
 
     private List<MawbInfo> groupList;
     private ExpandableListView listView;
@@ -55,27 +53,14 @@ public class AppIntExpPrepareAWBActivity extends Activity{
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle(R.string.int_prepare_title);
+        navBar.setTitle(R.string.int_awb_house_item_title);
         navBar.showRight();
-        navBar.setRight(R.drawable.add);
-        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AppIntExpPrepareAWBActivity.this, AppIntExpGroupAddActivity.class);
-                startActivity(intent);
-            }
-        });
+        navBar.hideRight();
 
         listView = (ExpandableListView) findViewById(R.id.int_exp_listview);
         intawbProgressBar = (ProgressBar) findViewById(R.id.int_awb_pb);
         intawbLoadTv = (TextView) findViewById(R.id.int_awb_load_tv);
-        userBumen = PreferenceUtils.getUserBumen(this);
-        userName = PreferenceUtils.getUserName(this);
-        userPass = PreferenceUtils.getUserPass(this);
-        loginFlag = PreferenceUtils.getLoginFlag(this);
-
         new GetIntPrepareAsync().execute();
-
     }
 
     @Override
@@ -96,41 +81,24 @@ public class AppIntExpPrepareAWBActivity extends Activity{
 
     // 得到数据的异步请求
     class GetIntPrepareAsync extends AsyncTask<Void, Void, String> {
-
         @Override
         protected String doInBackground(Void... voids) {
-            SoapObject object = HttpGetIntExportAwbOfPrepare.getIntExportAwbOfPrepareInfo(userBumen, userName, userPass, loginFlag);
-            if (object == null) {
-                ErrString = "服务器响应失败";
-                return null;
-            } else {
-                String result = object.getProperty(0).toString();
-                if (result.equals("false")) {
-                    ErrString = object.getProperty(2).toString();
-                    return result;
-                } else {
-                    result = object.getProperty(0).toString();
-                    groupList = PrepareIntAwbInfo.parseAwbInfoXml(result);
-                    return result;
-                }
-            }
+            String result = getIntent().getStringExtra(AviationCommons.INT_AWB_HOUSE);
+            groupList = PrepareIntAwbInfo.parseAwbInfoXml(result);
+            return result;
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (result == null && !ErrString.equals("")) {
-                Toast.makeText(AppIntExpPrepareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else {
                 if (groupList == null) {
-                    Toast.makeText(AppIntExpPrepareAWBActivity.this, "没有数据信息", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AppIntExpAwbHouseItemActivity.this, "没有数据信息", Toast.LENGTH_LONG).show();
                 } else {
-                    expandableAdapter = new ExpandableAdapter(AppIntExpPrepareAWBActivity.this);
+                    expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseItemActivity.this);
                     listView.setAdapter(expandableAdapter);
                     intawbProgressBar.setVisibility(View.GONE);
                     intawbLoadTv.setVisibility(View.GONE);
                 }
-            }
         }
     }
 
@@ -176,24 +144,25 @@ public class AppIntExpPrepareAWBActivity extends Activity{
 
         @Override
         public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            GroupViewHolder groupViewHolder;
+            ExpandableAdapter.GroupViewHolder groupViewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(activity).inflate(R.layout.int_group_item, parent, false);
-                groupViewHolder = new GroupViewHolder();
+                groupViewHolder = new ExpandableAdapter.GroupViewHolder();
                 groupViewHolder.groupMawbIdTv = (TextView) convertView.findViewById(R.id.int_group_mawb_tv);
                 groupViewHolder.groupImage = (ImageView) convertView.findViewById(R.id.int_group_imageview);
                 convertView.setTag(groupViewHolder);
             } else {
-                groupViewHolder = (GroupViewHolder) convertView.getTag();
+                groupViewHolder = (ExpandableAdapter.GroupViewHolder) convertView.getTag();
             }
             groupViewHolder.groupMawbIdTv.setText(groupList.get(groupPosition).getMawb());
             groupViewHolder.groupMawbIdTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AppIntExpPrepareAWBActivity.this, AppIntExpGroupActivity.class);
+                    Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpGroupActivity.class);
                     Bundle bundle = new Bundle();
                     MawbInfo mawbInfo = groupList.get(groupPosition);
                     bundle.putSerializable(AviationCommons.INT_GROUP_INFO, mawbInfo);
+                    bundle.putString(AviationCommons.HIDE_INT_AWB_UPDATE, "hide");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -201,10 +170,11 @@ public class AppIntExpPrepareAWBActivity extends Activity{
             groupViewHolder.groupImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AppIntExpPrepareAWBActivity.this, AppIntExpGroupActivity.class);
+                    Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpGroupActivity.class);
                     Bundle bundle = new Bundle();
                     MawbInfo mawbInfo = groupList.get(groupPosition);
                     bundle.putSerializable(AviationCommons.INT_GROUP_INFO, mawbInfo);
+                    bundle.putString(AviationCommons.HIDE_INT_AWB_UPDATE, "hide");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -215,15 +185,15 @@ public class AppIntExpPrepareAWBActivity extends Activity{
 
         @Override
         public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            ChildViewHolder childViewHolder;
+            ExpandableAdapter.ChildViewHolder childViewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(activity).inflate(R.layout.int_child_group, parent, false);
-                childViewHolder = new ChildViewHolder();
+                childViewHolder = new ExpandableAdapter.ChildViewHolder();
                 childViewHolder.childText = (TextView) convertView.findViewById(R.id.int_child_hawbid_tv);
                 childViewHolder.childLayout = (LinearLayout) convertView.findViewById(R.id.int_child_layout);
                 convertView.setTag(childViewHolder);
             } else {
-                childViewHolder = (ChildViewHolder) convertView.getTag();
+                childViewHolder = (ExpandableAdapter.ChildViewHolder) convertView.getTag();
             }
             if (!groupList.get(groupPosition).getHawb().get(childPosition).getHno().equals("")) {
                 childViewHolder.childText.setText(groupList.get(groupPosition).getHawb().get(childPosition).getHno());
@@ -234,7 +204,7 @@ public class AppIntExpPrepareAWBActivity extends Activity{
             childViewHolder.childLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AppIntExpPrepareAWBActivity.this, AppIntExpChildActivity.class);
+                    Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpChildActivity.class);
                     Hawb hawb = groupList.get(groupPosition).getHawb().get(childPosition);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(AviationCommons.INT_CHILD_INFO, hawb);

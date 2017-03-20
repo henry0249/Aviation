@@ -19,9 +19,11 @@ public class AviationCommons {
     public static final String HOUSE_ITEM_INFO = "housedetail";
     public static final String INT_CHILD_INFO = "fenyeshuju";
     public static final String INT_GROUP_INFO = "zhufendanshuju";
+    public static final String INT_AWB_HOUSE = "intawbhousexml";
 
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";
+    public static final String HIDE_INT_AWB_UPDATE = "hidehouse";
 
     // HomePageFragment内容
     public static final String APP_DOM_EXP_PREPARE_AWB = "appDomExpPrepareAWB";

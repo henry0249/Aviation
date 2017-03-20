@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntHawbAdd;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntHawbUpdate;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -60,6 +61,7 @@ public class AppIntExpChildAddActivity extends Activity implements View.OnClickL
         weightEt = (EditText) findViewById(R.id.weight_int_child_add_tv);
         volumeEt = (EditText) findViewById(R.id.volume_int_child_add_tv);
         goodsEt = (EditText) findViewById(R.id.goods_int_child_add_tv);
+        goodsEt.setTransformationMethod(new AllCapTransformationMethod());
         goodsCNEt = (EditText) findViewById(R.id.goodscn_int_child_add_tv);
         sureBtn = (Button) findViewById(R.id.int_child_add_btn);
         sureBtn.setOnClickListener(this);
@@ -127,6 +129,7 @@ public class AppIntExpChildAddActivity extends Activity implements View.OnClickL
         weight = weightEt.getText().toString();
         volume = volumeEt.getText().toString();
         goods = goodsEt.getText().toString();
+        goods = goods.toUpperCase();
         goodsCN = goodsCNEt.getText().toString();
     }
 }

@@ -1,6 +1,9 @@
 package com.example.administrator.aviation.model.homemessge;
 
+import android.content.Context;
 import android.util.Xml;
+
+import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -14,9 +17,10 @@ import java.util.List;
 
 public class PrefereceHomeMessage {
     // 经典的pull解析方法
-    public static List<HomeMessage> pullXml (String xml) {
+    public static List<HomeMessage> pullXml (String xml,Context context) {
         List<HomeMessage> xmlList = null;
         HomeMessage homeMessage = null;
+        AppConfig appConfig = null;
         ByteArrayInputStream tInputStringStream = null;
         try {
             if (xml != null && !xml.trim().equals("")) {
@@ -52,6 +56,14 @@ public class PrefereceHomeMessage {
                             homeMessage.setIsreadonly(parser.nextText());
                         } else if (name.equalsIgnoreCase("ACTIVEDATE")) {
                             homeMessage.setActiveDate(parser.nextText());
+                        } else if (name.equalsIgnoreCase("AppConfig")) {
+                            appConfig = new AppConfig();
+                        } else if (name.equalsIgnoreCase("APPVersion")) {
+                            appConfig.setAPPVersion(parser.nextText());
+                        } else if (name.equalsIgnoreCase("APPDescribe")) {
+                            appConfig.setAPPDescribe(parser.nextText());
+                        } else if (name.equalsIgnoreCase("APPURL")) {
+                            appConfig.setAPPURL(parser.nextText());
                         }
                         break;
 
@@ -60,6 +72,17 @@ public class PrefereceHomeMessage {
                         if (parser.getName().equalsIgnoreCase("Table")) {
                             assert xmlList != null;
                             xmlList.add(homeMessage);
+                        } else if (parser.getName().equalsIgnoreCase("AppConfig")) {
+                            homeMessage.setAppconfig(appConfig);
+
+                            // 保存版本升级的内容
+                            String version = appConfig.getAPPVersion();
+                            String describe = appConfig.getAPPDescribe();
+                            String url = appConfig.getAPPURL();
+                            PreferenceUtils.saveAPPVersion(context,version);
+                            PreferenceUtils.saveAPPDescribe(context,describe);
+                            PreferenceUtils.saveAppUrl(context,url);
+
                         }
                         break;
 

@@ -5,16 +5,18 @@ package com.example.administrator.aviation.http;
  */
 
 public class HttpCommons {
-    // 版本升级的url（目前是从txt文件中获取版本升级的url和版本的versionCode）
-    public static final String UPDATE_VERSION_URL = "https://github.com/mxzs1314/.github.io/raw/master";
+    // 版本升级的url（目前是从txt文件中获取版本升级的url和版本的versionCode）https://github.com/mxzs1314/.github.io/raw/master
+    public static final String UPDATE_VERSION_URL = "https://github.com/mxzs1314/Aviations/raw/master/app";
     // apk下载地址
     public static final String APK_URL = "https://github.com/mxzs1314/.github.io/raw/master/app/app-release.apk";
 
     // 命名空间
     public static final String NAME_SPACE = "http://58.213.128.130/";
 
-    // EndPoint
-    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
+    // EndPoint 正式版本
+//    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
+    // EndPoint 测试版本
+    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirLogisticsService.asmx";
 
     // 登录
     public static final String LOGIN_METHOD_NAME = "APPUserLogin";
@@ -38,7 +40,7 @@ public class HttpCommons {
     public static final String AWB_DELETE_METHOD_ACTION = "http://58.213.128.130/CGODeleteDomExportAWBofPrepare";
 
     /**
-     * house界面的url
+     * 国内入库管理house界面的url
      */
     // 获取house详情
     public static final String HOUSE_SEARCH_METHOD_NAME = "CGOGetDomExportWarehouse";
@@ -47,7 +49,7 @@ public class HttpCommons {
     /**
      * 国际
      */
-    // 获取所有订单信息
+    // 获取所有订单信息（预录入）
     public static final String GET_INT_METHOD_NAME = "CGOGetIntExportAWBofPrepare";
     public static final String GET_INT_METHOD_ACTION = "http://58.213.128.130/CGOGetIntExportAWBofPrepare";
 
@@ -66,4 +68,8 @@ public class HttpCommons {
     public static final String ADD_INT_HAWB_METHOD_ACTION = "http://58.213.128.130/CGOAddIntExportHawb";
     public static final String DELETE_INT_HAWB_METHOD_NAME = "CGODeleteIntExportHawb";
     public static final String DELETE_INT_HAWB_METHOD_ACTION = "http://58.213.128.130/CGODeleteIntExportHawb";
+
+    // 国际入库管理house界面查询
+    public static final String GET_INT_WARE_HOUSE_NAME = "CGOGetIntExportAWBofWarehouse";
+    public static final String GET_INT_WARE_HOUSE_ACTION = "http://58.213.128.130/CGOGetIntExportAWBofWarehouse";
 }

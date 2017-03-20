@@ -18,9 +18,9 @@ import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
-import com.example.administrator.aviation.ui.activity.house.AppDomExpWareHouseActivity;
-import com.example.administrator.aviation.ui.activity.intexpawbmanage.AppIntExpAWBManageActivity;
-import com.example.administrator.aviation.ui.activity.prepareawb.AppDomExpPrePareAWBActivity;
+import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
+import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
+import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -75,7 +75,7 @@ public class HomePageFragment extends Fragment{
 
         // 得到登录传递过来的xml数据
         xml = getActivity().getIntent().getStringExtra(AviationCommons.LOGIN_XML);
-        list = PrefereceHomeMessage.pullXml(xml);
+        list = PrefereceHomeMessage.pullXml(xml,getActivity());
 
         // 判断是否设置过锁屏密码
 //        if (!TextUtils.isEmpty(lockPass)) {
@@ -120,7 +120,7 @@ public class HomePageFragment extends Fragment{
                     Intent intentHouse = new Intent(getActivity(), AppDomExpWareHouseActivity.class);
                     startActivity(intentHouse);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXP_AWB_MANAGE)) {
-                    Intent intentIntManage = new Intent(getActivity(), AppIntExpAWBManageActivity.class);
+                    Intent intentIntManage = new Intent(getActivity(), AppIntExpAWBHouseManageActivity.class);
                     startActivity(intentIntManage);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXP_PREPARE_AWB)) {
                     Intent intentIntAwb = new Intent(getActivity(), AppIntExpPrepareAWBActivity.class);

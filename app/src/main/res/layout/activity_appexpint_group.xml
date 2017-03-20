@@ -31,9 +31,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:maxLength="11"/>
             </LinearLayout>
 
             <LinearLayout
@@ -52,8 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,8 +70,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,8 +88,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +106,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <LinearLayout
@@ -128,7 +124,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <LinearLayout
@@ -146,8 +141,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,8 +159,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
                 <Spinner
                     android:id="@+id/update_group_businesstype_spinner"
                     android:layout_width="0dp"
@@ -190,8 +183,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,8 +201,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,8 +219,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -246,8 +236,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/group_dest2_layout"
@@ -266,8 +255,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,8 +273,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -304,8 +291,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
 
                 <Spinner
                     android:id="@+id/update_group_traflag_spinner"
@@ -330,8 +316,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
 
             <LinearLayout
@@ -349,8 +334,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -368,8 +352,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -387,8 +370,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -406,8 +388,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
                 <Spinner
                     android:id="@+id/update_group_transPortMode_spinner"
                     android:layout_width="0dp"
@@ -431,8 +412,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -450,8 +430,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -469,8 +448,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -488,8 +466,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -506,8 +483,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -524,8 +500,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -543,8 +518,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
 
             <LinearLayout
@@ -562,8 +536,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
 
             <LinearLayout
@@ -581,10 +554,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
         <LinearLayout
+            android:id="@+id/hide_int_house_sure_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
@@ -594,7 +567,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/awb_detail_update"/>
+                android:text="@string/int_group_update"/>
             <Button
                 android:id="@+id/sure_int_group_btn"
                 android:layout_width="0dp"
@@ -609,7 +582,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/int_child_delete"/>
+                android:text="@string/int_group_delete"/>
             </LinearLayout>
 
         </LinearLayout>

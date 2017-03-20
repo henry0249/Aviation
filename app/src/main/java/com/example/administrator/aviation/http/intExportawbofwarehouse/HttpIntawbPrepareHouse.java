@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.http.house;
+package com.example.administrator.aviation.http.intExportawbofwarehouse;
 
 import android.util.Log;
 
@@ -12,11 +12,11 @@ import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
 /**
- * house提交信息到服务器获取返回值
+ * 国际出港入库管理
  */
 
-public class HttpPrepareHouse {
-    public static SoapObject getHouseDetail(String userBumen, String userName, String userPass, String loginFlag, String xml){
+public class HttpIntawbPrepareHouse {
+    public static SoapObject getIntWareHouseDetail(String userBumen, String userName, String userPass, String loginFlag, String xml){
         // 定义SoapHeader，加入4个节点
         Element[] healder = new Element[1];
         healder[0] = new Element().createElement(HttpCommons.NAME_SPACE, "AuthHeaderNKG");
@@ -38,10 +38,10 @@ public class HttpPrepareHouse {
         healder[0].addChild(Node.ELEMENT, loginFlagE);
 
         // 指定WebService的命名空间和调用的方法名
-        SoapObject rpc = new SoapObject(HttpCommons.NAME_SPACE, HttpCommons.HOUSE_SEARCH_METHOD_NAME);
+        SoapObject rpc = new SoapObject(HttpCommons.NAME_SPACE, HttpCommons.GET_INT_WARE_HOUSE_NAME);
 
         // 设置调用webservice接口需要传入的参数
-        rpc.addProperty("whsXml", xml);
+        rpc.addProperty("awbXml", xml);
         rpc.addProperty("ErrString", "");
 
         // 生成调用WebService方法的SOAP请求信息,并指定SOAP的版本
@@ -56,7 +56,7 @@ public class HttpPrepareHouse {
         HttpTransportSE transportSE = new HttpTransportSE(HttpCommons.END_POINT);
         try {
             // 调用webservice
-            transportSE.call(HttpCommons.HOUSE_SEARCH_METHOD_ACTION, envelope);
+            transportSE.call(HttpCommons.GET_INT_WARE_HOUSE_ACTION, envelope);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -71,15 +71,15 @@ public class HttpPrepareHouse {
         return object;
     }
 
-    public static String getHouseXml(String Mawb, String begintime, String endTime, String Dest) {
-        String xml = new String("<DomExportWarehouse>"
-                +"<whsInfo>"
+    public static String getIntWareHouseXml(String Mawb, String begintime, String endTime) {
+        String xml = new String("<IntExportAWB>"
+                +"<AWBCondition>"
                 +"<Mawb>"+Mawb+"</Mawb>"
-                +"<OPDate>"+begintime+"</OPDate>"
-                +"<PaperTime>"+endTime+"</PaperTime>"
-                +"<Dest>"+Dest+"</Dest>"
-                +"</whsInfo>"
-                +"</DomExportWarehouse>");
+                +"<Hno>"+""+"</Hno>"
+                +"<StartDate>"+begintime+"</StartDate>"
+                +"<endDate>"+endTime+"</endDate>"
+                +"</AWBCondition>"
+                +"</IntExportAWB>");
         return xml;
     }
 }

@@ -28,6 +28,11 @@ public class PreferenceUtils {
     // 锁屏密码
     private static final String lockPassKey = "password";
 
+    // APP升级用到的信息
+    private static final String APP_VERSION = "APPVersion";
+    private static final String APP_DESCRIBE = "APPDescribe";
+    private static final String APP_URL = "appurl";
+
     // -------------以下是存储信息-------------
     /**
      * 获取用户和密码
@@ -70,13 +75,43 @@ public class PreferenceUtils {
         editor.commit();
     }
 
+
     public static void saveIsFirst(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("ISFIRST", false);
         editor.commit();
     }
-
+    public static void saveAppUrl(Context context, String url) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(APP_URL, url);
+        editor.commit();
+    }
+    public static String getAppUrl(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(APP_URL, "");
+    }
+    public static void saveAPPVersion(Context context, String version) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(APP_VERSION, version);
+        editor.commit();
+    }
+    public static String getAPPVersion(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(APP_VERSION, "");
+    }
+    public static void saveAPPDescribe(Context context, String describe) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(APP_DESCRIBE, describe);
+        editor.commit();
+    }
+    public static String getAPPDescribe(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(APP_DESCRIBE, "");
+    }
     //---------以下是取得信息-------------------
     /**
      * 获取用户名

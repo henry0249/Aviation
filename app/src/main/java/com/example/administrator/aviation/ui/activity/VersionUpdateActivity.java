@@ -13,12 +13,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
-import com.example.administrator.aviation.model.updateversion.GetUpdateInfo;
-import com.example.administrator.aviation.model.updateversion.UpdateInfo;
+import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,17 +30,24 @@ import java.io.InputStream;
 
 /**
  * 版本更新activity
- * 适用于版本的更新
+ * 适用于版本的更新(测试后期删除)
  */
 
 public class VersionUpdateActivity extends Activity{
-    private UpdateInfo info;
+//    private UpdateInfo info;
+//    private HomeMessage mHomeMessage;
     private ProgressDialog pBar;
+    private String version;
+    private String describe;
+    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_version_update);
 
+        version = PreferenceUtils.getAPPVersion(this);
+        describe = PreferenceUtils.getAPPDescribe(this);
+        url = PreferenceUtils.getAppUrl(this);
         Toast.makeText(VersionUpdateActivity.this, "正在检查版本更新", Toast.LENGTH_LONG).show();
 
         // 自动检查有没有新版本，如果有新版本就提示更新
@@ -51,8 +56,6 @@ public class VersionUpdateActivity extends Activity{
             public void run() {
                 super.run();
                 try {
-                    GetUpdateInfo updateInfoService = new GetUpdateInfo(VersionUpdateActivity.this);
-                    info = updateInfoService.getUpdateInfo();
                     handler1.sendEmptyMessage(0);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -77,15 +80,15 @@ public class VersionUpdateActivity extends Activity{
     private void showUpdateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setIcon(android.R.drawable.ic_dialog_info);
-        builder.setTitle("请升级APP至版本" + info.getVersion());
-        builder.setMessage(info.getDescription());
+        builder.setTitle("请升级APP至版本" + version);
+        builder.setMessage(describe);
         builder.setCancelable(false);
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                    downFile(info.getUrl());
+                    downFile(url);
 
                     // 调用ApkDownService进行下载
 //                    Intent intent = new Intent(UpdateActivity.this, ApkDownService.class);
@@ -107,12 +110,8 @@ public class VersionUpdateActivity extends Activity{
     }
 
     private boolean isNeedUpdate() {
-        // 获取最新版本号
-        String newVersion = info.getVersion();
-        Log.d("version", newVersion);
-
         // 比较新版本和旧版本值是否相等
-        if (newVersion.equals(getVersion())) {
+        if (version.equals(getVersion())) {
             return false;
         } else {
             return true;

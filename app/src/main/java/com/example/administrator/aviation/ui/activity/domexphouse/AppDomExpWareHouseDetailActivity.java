@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.house;
+package com.example.administrator.aviation.ui.activity.domexphouse;
 
 import android.app.Activity;
 import android.os.Bundle;

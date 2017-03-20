@@ -47,13 +47,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-            <ProgressBar
-                android:id="@+id/awb_pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                style="?android:attr/progressBarStyleLarge"/>
+
             <TextView
                 android:id="@+id/awb_load_tv"
                 android:layout_width="wrap_content"
@@ -78,6 +72,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 style="?android:attr/progressBarStyleLarge"/>
+
+            <TextView
+                android:id="@+id/house_show_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/small_size"
+                android:text="没有数据信息"/>
 
             <ListView
                 android:id="@+id/house_listview"

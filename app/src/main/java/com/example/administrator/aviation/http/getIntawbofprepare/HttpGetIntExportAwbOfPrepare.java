@@ -12,7 +12,7 @@ import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
 /**
- * 获取国际出港入库管理
+ * 获取国际出港预录入
  */
 
 public class HttpGetIntExportAwbOfPrepare {

@@ -11,6 +11,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import com.example.administrator.aviation.model.homemessge.HomeMessage;
+
 import java.io.File;
 
 /**
@@ -29,7 +31,9 @@ public class ApkDownService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String apkUrl = intent.getStringExtra("apkUrl");
+//        String apkUrl = intent.getStringExtra("apkUrl");
+        HomeMessage homeMessage = new HomeMessage();
+        String apkUrl = homeMessage.getAppconfig().getAPPURL();
         registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         startDownload(apkUrl);
         return super.onStartCommand(intent, flags, startId);

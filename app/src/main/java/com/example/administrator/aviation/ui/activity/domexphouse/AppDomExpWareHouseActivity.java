@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.house;
+package com.example.administrator.aviation.ui.activity.domexphouse;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.house.HttpPrepareHouse;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
@@ -29,11 +31,13 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
     private EditText endTimeEt;
     private EditText destEt;
     private Button houseSearchBtn;
+    private ProgressBar wareHousePb;
 
     private String mawb;
     private String begainTime;
     private String endTime;
     private String dest;
+    private String updest;
 
     private String ErrString = "";
     private String userBumen;
@@ -42,6 +46,8 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
     private String loginFlag;
     private String xml;
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
+
+    private GetHouseXmlAsyncTask task;
     // 获取当前时间
     private String currentTime;
     @Override
@@ -49,6 +55,22 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appdomexpwarehouse);
         initView();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+//            task.cancel(true);
+//        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+            task.cancel(true);
+        }
+        super.onDestroy();
     }
 
     private void initView() {
@@ -65,6 +87,8 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
         begainTimeEt = (EditText) findViewById(R.id.house_begin_time_et);
         endTimeEt = (EditText) findViewById(R.id.house_end_time_et);
         destEt = (EditText) findViewById(R.id.house_dest_et);
+        destEt.setTransformationMethod(new AllCapTransformationMethod());
+        wareHousePb = (ProgressBar) findViewById(R.id.ware_house_pb);
         houseSearchBtn = (Button) findViewById(R.id.house_search_btn);
         Button beginTime = (Button) findViewById(R.id.house_begin_time_btn);
         Button endTime = (Button) findViewById(R.id.house_end_time_btn);
@@ -82,15 +106,20 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
         begainTime = begainTimeEt.getText().toString().trim();
         endTime = endTimeEt.getText().toString().trim();
         dest = destEt.getText().toString().trim();
+
+        // 将小写转换成大写
+        updest = dest.toUpperCase();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.house_search_btn:
+                wareHousePb.setVisibility(View.VISIBLE);
                 getEditext();
-                xml = HttpPrepareHouse.getHouseXml(mawb, dest);
-                new GetHouseXmlAsyncTask().execute();
+                xml = HttpPrepareHouse.getHouseXml(mawb, begainTime, endTime, updest);
+                task = new GetHouseXmlAsyncTask();
+                task.execute();
                 break;
 
             case R.id.house_begin_time_btn:
@@ -110,6 +139,9 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
     class GetHouseXmlAsyncTask extends AsyncTask<Object, Object, String> {
         @Override
         protected String doInBackground(Object... objects) {
+            if (isCancelled()) {
+              return null;
+            }
             SoapObject object = HttpPrepareHouse.getHouseDetail(userBumen, userName,userPass,loginFlag, xml);
             if (object == null) {
                 ErrString = "服务器响应失败";
@@ -139,9 +171,18 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
                 intent.putExtras(bundle);
                 startActivity(intent);
                 // 上传成功后finish掉当前的activity
-                finish();
+//                finish();
+                wareHousePb.setVisibility(View.GONE);
             }
             super.onPostExecute(request);
+        }
+
+        @Override
+        protected void onProgressUpdate(Object... values) {
+            super.onProgressUpdate(values);
+            if (isCancelled()) {
+                return;
+            }
         }
     }
 }
