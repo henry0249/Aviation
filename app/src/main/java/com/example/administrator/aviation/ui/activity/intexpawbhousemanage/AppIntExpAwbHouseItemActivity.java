@@ -16,13 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
-import com.example.administrator.aviation.http.getIntawbofprepare.HttpGetIntExportAwbOfPrepare;
+import com.example.administrator.aviation.http.intExportawbofwarehouse.HttpIntawbPrepareHouse;
 import com.example.administrator.aviation.model.intawbprepare.Hawb;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
 import com.example.administrator.aviation.model.intawbprepare.PrepareIntAwbInfo;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpChildActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpGroupActivity;
-import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpGroupAddActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -36,6 +35,11 @@ import java.util.List;
  */
 
 public class AppIntExpAwbHouseItemActivity extends Activity{
+    private String ErrString = "";
+    private String userBumen;
+    private String userName;
+    private String userPass;
+    private String loginFlag;
 
     private List<MawbInfo> groupList;
     private ExpandableListView listView;
@@ -43,6 +47,9 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
 
     private ProgressBar intawbProgressBar;
     private TextView intawbLoadTv;
+
+    // 提示没有数据信息
+    private TextView showDataTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +67,20 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         listView = (ExpandableListView) findViewById(R.id.int_exp_listview);
         intawbProgressBar = (ProgressBar) findViewById(R.id.int_awb_pb);
         intawbLoadTv = (TextView) findViewById(R.id.int_awb_load_tv);
+        showDataTv = (TextView) findViewById(R.id.int_awb_house_load_tv);
+
+        userBumen = PreferenceUtils.getUserBumen(this);
+        userName = PreferenceUtils.getUserName(this);
+        userPass = PreferenceUtils.getUserPass(this);
+        loginFlag = PreferenceUtils.getLoginFlag(this);
         new GetIntPrepareAsync().execute();
     }
 
+    // 重新进入此界面重新从服务器获取数据（每次修改完数据信息调用此方法重新获取数据）
     @Override
     protected void onResume() {
         super.onResume();
-        new GetIntPrepareAsync().execute();
+        new GetIntHousePrepareAsync().execute();
     }
 
     // 回传参数(接收更新和添加订单传递过来的值更新列表)
@@ -83,6 +97,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
     class GetIntPrepareAsync extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
+            // 查询界面返回的xml数据
             String result = getIntent().getStringExtra(AviationCommons.INT_AWB_HOUSE);
             groupList = PrepareIntAwbInfo.parseAwbInfoXml(result);
             return result;
@@ -91,8 +106,10 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-                if (groupList == null) {
-                    Toast.makeText(AppIntExpAwbHouseItemActivity.this, "没有数据信息", Toast.LENGTH_LONG).show();
+                if (groupList == null || groupList.size() <= 0) {
+                    showDataTv.setVisibility(View.VISIBLE);
+                    intawbProgressBar.setVisibility(View.GONE);
+                    intawbLoadTv.setVisibility(View.GONE);
                 } else {
                     expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseItemActivity.this);
                     listView.setAdapter(expandableAdapter);
@@ -235,6 +252,52 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         class ChildViewHolder{
             TextView childText;
             LinearLayout childLayout;
+        }
+    }
+
+    // 得到数据的异步请求
+    class GetIntHousePrepareAsync extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String mawb = getIntent().getStringExtra(AviationCommons.MANAGE_HOUSE_MAWAB);
+            String begainTime = getIntent().getStringExtra(AviationCommons.MANAGE_HOUSE_BEGAIN_TIME);
+            String endTime = getIntent().getStringExtra(AviationCommons.MANAGE_HOUSE_END_TIME);
+            String xml = HttpIntawbPrepareHouse.getIntWareHouseXml(mawb, begainTime, endTime);
+            SoapObject object = HttpIntawbPrepareHouse.getIntWareHouseDetail(userBumen, userName,userPass,loginFlag, xml);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                String result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                } else {
+                    result = object.getProperty(0).toString();
+                    groupList = PrepareIntAwbInfo.parseAwbInfoXml(result);
+                    return result;
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntExpAwbHouseItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else {
+                if (groupList == null || groupList.size() <= 0) {
+                    showDataTv.setVisibility(View.VISIBLE);
+                    intawbProgressBar.setVisibility(View.GONE);
+                    intawbLoadTv.setVisibility(View.GONE);
+                } else {
+                    expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseItemActivity.this);
+                    listView.setAdapter(expandableAdapter);
+                    intawbProgressBar.setVisibility(View.GONE);
+                    intawbLoadTv.setVisibility(View.GONE);
+                }
+            }
         }
     }
 }

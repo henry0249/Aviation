@@ -171,6 +171,9 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
                 Intent intent = new Intent(AppIntExpAWBHouseManageActivity.this, AppIntExpAwbHouseItemActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(AviationCommons.INT_AWB_HOUSE, request);
+                bundle.putString(AviationCommons.MANAGE_HOUSE_MAWAB, mawb);
+                bundle.putString(AviationCommons.MANAGE_HOUSE_BEGAIN_TIME, begainTime);
+                bundle.putString(AviationCommons.MANAGE_HOUSE_END_TIME, endTime);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 // 上传成功后finish掉当前的activity

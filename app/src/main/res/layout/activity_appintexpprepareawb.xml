@@ -25,6 +25,14 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/awb_load"
             android:textSize="@dimen/awb_size"/>
+        <TextView
+            android:id="@+id/int_awb_house_load_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/not_data"
+            android:visibility="gone"
+            android:textSize="@dimen/awb_size"/>
 
     </LinearLayout>
     <ExpandableListView

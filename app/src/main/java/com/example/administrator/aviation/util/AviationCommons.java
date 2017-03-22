@@ -24,6 +24,9 @@ public class AviationCommons {
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";
     public static final String HIDE_INT_AWB_UPDATE = "hidehouse";
+    public static final String MANAGE_HOUSE_MAWAB = "housemawb";
+    public static final String MANAGE_HOUSE_BEGAIN_TIME = "beagintime";
+    public static final String MANAGE_HOUSE_END_TIME = "endtime";
 
     // HomePageFragment内容
     public static final String APP_DOM_EXP_PREPARE_AWB = "appDomExpPrepareAWB";
