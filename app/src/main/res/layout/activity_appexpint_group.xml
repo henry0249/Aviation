@@ -583,6 +583,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/int_group_delete"/>
+            <Button
+                android:id="@+id/declare_mawb_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/int_declare_mawb"/>
             </LinearLayout>
 
         </LinearLayout>

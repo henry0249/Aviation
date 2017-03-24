@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbDeclare;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbDelete;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbUpdate;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
@@ -113,6 +114,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private Button updateBtn;
     private Button sureBtn;
     private Button deleteBtn;
+    private Button declareBtn;
     private LinearLayout hideLayout;
 
     private ArrayAdapter<String> businessTypeAdapter;
@@ -207,6 +209,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         updateBtn = (Button) findViewById(R.id.update_int_group_btn);
         sureBtn = (Button) findViewById(R.id.sure_int_group_btn);
         deleteBtn = (Button) findViewById(R.id.delete_int_group_btn);
+        declareBtn = (Button) findViewById(R.id.declare_mawb_btn);
         hideLayout = (LinearLayout) findViewById(R.id.hide_int_house_sure_linearlayout);
 
         // 国际出港入库管理进入主单界面不能修改和删除还有增加主单
@@ -224,6 +227,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         updateBtn.setOnClickListener(this);
         sureBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
+        declareBtn.setOnClickListener(this);
         setGroupEdiText();
         setEditTextInvisible();
 
@@ -492,6 +496,11 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
                         });
                 builder.create().show();
                 break;
+
+            // 预配申报
+            case R.id.declare_mawb_btn:
+                new DeclareMawbAsyncTask().execute();
+                break;
             default:
                 break;
         }
@@ -533,6 +542,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         }
     }
 
+    // 删除主单
     class DeleteGroupAsyncTask extends AsyncTask<Object, Object, String> {
         @Override
         protected String doInBackground(Object... objects) {
@@ -562,6 +572,43 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
                 Toast.makeText(AppIntExpGroupActivity.this, "删除成功", Toast.LENGTH_LONG).show();
 //                Intent intent = new Intent(AppIntExpGroupActivity.this, AppIntExpPrepareAWBActivity.class);
 //                startActivityForResult(intent, 6);
+                finish();
+            }
+            super.onPostExecute(request);
+        }
+    }
+
+    // 预配申报异步任务
+    // 删除主单
+    class DeclareMawbAsyncTask extends AsyncTask<Object, Object, String> {
+        @Override
+        protected String doInBackground(Object... objects) {
+            SoapObject object = HttpIntMawbDeclare.declareIntMawb(userBumen, userName, userPass, loginFlag, mawb);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                String result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                } else {
+                    result = object.getProperty(0).toString();
+                    return result;
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String request) {
+            if (request == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntExpGroupActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (request.equals("false") && !ErrString.equals("")) {
+                Toast.makeText(AppIntExpGroupActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (request.equals("true")) {
+                Toast.makeText(AppIntExpGroupActivity.this, "申报成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntExpGroupActivity.this, AppIntExpPrepareAWBActivity.class);
+                startActivity(intent);
                 finish();
             }
             super.onPostExecute(request);

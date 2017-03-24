@@ -61,6 +61,10 @@ public class HttpCommons {
     public static final String ADD_INT_MAWB_METHOD_NAME = "CGOAddIntExportMawbOfPrepare";
     public static final String ADD_INT_MAWB_METHOD_ACTION = "http://58.213.128.130/CGOAddIntExportMawbOfPrepare";
 
+    // 预配申报
+    public static final String DECLARE_INT_MAWB_METHOD_NAME = "CGOExportDeclareAirManifest";
+    public static final String DECLARE_INT_MAWB_METHOD_ACTION = "http://58.213.128.130/CGOExportDeclareAirManifest";
+
     // 分单列表的更新，增加,删除
     public static final String UPDATE_INT_HAWB_METHOD_NAME = "CGOUpdateIntExportHawb";
     public static final String UPDATE_INT_HAWB_METHOD_ACTION = "http://58.213.128.130/CGOUpdateIntExportHawb";
@@ -72,4 +76,8 @@ public class HttpCommons {
     // 国际入库管理house界面查询
     public static final String GET_INT_WARE_HOUSE_NAME = "CGOGetIntExportAWBofWarehouse";
     public static final String GET_INT_WARE_HOUSE_ACTION = "http://58.213.128.130/CGOGetIntExportAWBofWarehouse";
+
+    // 国际预配运抵申报
+    public static final String GET_INT_EXPORT_ONE_KEY_DECLARE_NAME = "CGOGetIntExportOneKeyDeclare";
+    public static final String GET_INT_EXPORT_ONE_KEY_DECLARE_ACTION = "http://58.213.128.130/CGOGetIntExportOneKeyDeclare";
 }

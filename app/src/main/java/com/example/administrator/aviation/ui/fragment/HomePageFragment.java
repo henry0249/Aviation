@@ -21,6 +21,7 @@ import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpP
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
 import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
 import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
+import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -96,6 +97,8 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.awb);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXP_PREPARE_AWB)) {
                     holder.setImageResource(R.id.image_iv, R.drawable.awb);
+                } else if (obj.getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.awb);
                 }
                 Log.d("guoji", obj.getName());
                 holder.setText(R.id.image_tv, obj.getNameCN());
@@ -125,7 +128,10 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXP_PREPARE_AWB)) {
                     Intent intentIntAwb = new Intent(getActivity(), AppIntExpPrepareAWBActivity.class);
                     startActivity(intentIntAwb);
-                } else {
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE)) {
+                    Intent intentDeclare = new Intent(getActivity(), AppIntExpOneKeyDeclareActivity.class);
+                    startActivity(intentDeclare);
+                }else {
                     Toast.makeText(getActivity(), "过了使用期", Toast.LENGTH_LONG).show();
                 }
             }

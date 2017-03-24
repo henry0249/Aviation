@@ -20,6 +20,7 @@ public class AviationCommons {
     public static final String INT_CHILD_INFO = "fenyeshuju";
     public static final String INT_GROUP_INFO = "zhufendanshuju";
     public static final String INT_AWB_HOUSE = "intawbhousexml";
+    public static final String INT_ONEKEY_DECLARE = "decalrexml";
 
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";
@@ -33,6 +34,7 @@ public class AviationCommons {
     public static final String APP_DOM_EXP_WARE_HOUSE = "appDomExpWareHouse";
     public static final String APP_INT_EXP_AWB_MANAGE = "appIntExpAWBManage";
     public static final String APP_INT_EXP_PREPARE_AWB = "appIntExpPrepareAWB";
+    public static final String APP_INT_EXPONEKEY_DECLARE = "appIntExpOneKeyDeclare";
 
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;

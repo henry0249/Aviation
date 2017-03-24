@@ -102,8 +102,10 @@
     <string name="int_group_update">更新主单</string>
     <string name="int_group_delete">删除主单</string>
     <string name="int_child_add">增加分单</string>
+    <string name="int_declare_mawb">预配申报</string>
     <string name="int_child_delete">删除分单</string>
     <string name="int_awb_house_title">国际出港入库查询</string>
     <string name="int_awb_house_item_title">国际出港入库信息</string>
     <string name="int_awb_house_search">查询</string>
+    <string name="int_declare_title">预配/运抵申报查询</string>
 </resources>

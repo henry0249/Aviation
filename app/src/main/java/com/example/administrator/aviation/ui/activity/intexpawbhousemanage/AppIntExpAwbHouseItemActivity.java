@@ -80,7 +80,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        new GetIntHousePrepareAsync().execute();
+        new  GetIntHousePrepareAsync().execute();
     }
 
     // 回传参数(接收更新和添加订单传递过来的值更新列表)

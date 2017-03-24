@@ -80,6 +80,13 @@
             android:name=".ui.activity.intexpawbhousemanage.AppIntExpAwbHouseItemActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
+        <!--预配与运抵界面-->
+        <activity
+            android:name=".ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+
     </application>
 
 </manifest>
