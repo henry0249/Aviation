@@ -2,8 +2,6 @@ package com.example.administrator.aviation.model.intonekeydeclare;
 
 import android.util.Xml;
 
-import com.example.administrator.aviation.model.house.WhsInfo;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

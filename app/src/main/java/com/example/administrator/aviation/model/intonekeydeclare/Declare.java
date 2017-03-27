@@ -1,10 +1,12 @@
 package com.example.administrator.aviation.model.intonekeydeclare;
 
+import java.io.Serializable;
+
 /**
  * 预配/运抵信息列表
  */
 
-public class Declare {
+public class Declare implements Serializable{
     private String Mawb;
     private String Hno;
     private String RearchID;

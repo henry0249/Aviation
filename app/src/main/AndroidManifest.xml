@@ -86,6 +86,8 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
 
     </application>
 

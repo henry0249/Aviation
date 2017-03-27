@@ -108,4 +108,17 @@
     <string name="int_awb_house_item_title">国际出港入库信息</string>
     <string name="int_awb_house_search">查询</string>
     <string name="int_declare_title">预配/运抵申报查询</string>
+    
+    <!--运抵与申报界面-->
+    <string name="declare_rearchid">运抵编号:</string>
+    <string name="declare_cmdstatus">海关指令:</string>
+    <string name="declare_dest1">卸货港:</string>
+    <string name="declare_CustomsCode">离境关区:</string>
+    <string name="declare_Transportmode">离境方式:</string>
+    <string name="declare_MftStatus">预配状态:</string>
+    <string name="declare_MftMSGID">预配编号:</string>
+    <string name="declare_ArrivalStatus">运抵状态:</string>
+    <string name="declare_ArrMSGID">运抵编号:</string>
+    <string name="declare_Response">海关回执</string>
+    <string name="declare_pc">件数:</string>
 </resources>
