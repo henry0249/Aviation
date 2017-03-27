@@ -119,15 +119,10 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
                 viewHolder.declareCmdstatusTv = (TextView) convertView.findViewById(R.id.declare_cmdstatus_tv);
                 viewHolder.declareMftstatusTv = (TextView) convertView.findViewById(R.id.declare_mftstatus_tv);
                 viewHolder.declareArrivalstatusTv = (TextView) convertView.findViewById(R.id.declare_arrivalstatus_tv);
-                final Boolean ischecked = true;
                 viewHolder.declareCheckBox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (ischecked.equals(true)) {
-                            Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "显示", Toast.LENGTH_LONG).show();
-                        } else if (ischecked.equals(false)){
-                            Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "没选中", Toast.LENGTH_LONG).show();
-                        }
+
                     }
                 });
                 convertView.setTag(viewHolder);
