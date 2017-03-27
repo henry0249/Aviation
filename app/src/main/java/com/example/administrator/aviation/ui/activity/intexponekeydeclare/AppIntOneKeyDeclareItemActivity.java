@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +24,11 @@ import com.example.administrator.aviation.model.intonekeydeclare.PrepareIntDecla
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 预配及运抵列表界面
@@ -34,17 +41,22 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
     private DeclareAdapter declareAdapter;
 
     private ListView declareLv;
+    private Map<String,Declare> checkedDeclareMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appintexponekeydeclareitem);
         initView();
+        checkedDeclareMap = new HashMap<>();
     }
 
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.setTitle("预配与运抵信息");
         navBar.hideRight();
+
+        // 测试
+        Button button = (Button) findViewById(R.id.shenbai_btn);
 
         declareLv = (ListView) findViewById(R.id.declare_lv);
         declareLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,12 +70,17 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
                 startActivity(intent);
             }
         });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         // 得到list数据
         new GetDeclarListAsyTask().execute();
 
     }
-
 
     // 得到预配与运抵信息
     private class GetDeclarListAsyTask extends AsyncTask<Void, Void, String> {
@@ -108,7 +125,8 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            final Declare declare = (Declare) getItem(position);
             ViewHolder viewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.declare_item, parent, false);
@@ -119,12 +137,35 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
                 viewHolder.declareCmdstatusTv = (TextView) convertView.findViewById(R.id.declare_cmdstatus_tv);
                 viewHolder.declareMftstatusTv = (TextView) convertView.findViewById(R.id.declare_mftstatus_tv);
                 viewHolder.declareArrivalstatusTv = (TextView) convertView.findViewById(R.id.declare_arrivalstatus_tv);
-                viewHolder.declareCheckBox.setOnClickListener(new View.OnClickListener() {
+                viewHolder.declareCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onClick(View view) {
-
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (isChecked) {
+                                checkedDeclareMap.put(declare.getMawb(),declare);
+                                Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
+                                for (Map.Entry<String, Declare> entry : entries) {
+                                    Declare declare = checkedDeclareMap.get(entry.getKey());
+                                    String a = declare.getMawb();
+                                    Log.d("abc", a);
+                                }
+                            }else {
+                                if (checkedDeclareMap.get(declare.getMawb()) != null) {
+                                    checkedDeclareMap.remove(declare.getMawb());
+                                    Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
+                                    for (Map.Entry<String, Declare> entry : entries) {
+                                        Declare declare = checkedDeclareMap.get(entry.getKey());
+                                        String a = declare.getMawb();
+                                        if (a.equals("") && checkedDeclareMap.size() == 0) {
+                                            Log.d("abc", "没有数据了");
+                                        } else {
+                                            Log.d("abc", a);
+                                        }
+                                    }
+                                }
+                            }
                     }
                 });
+
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
