@@ -16,7 +16,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.model.intonekeydeclare.Declare;
@@ -24,8 +23,8 @@ import com.example.administrator.aviation.model.intonekeydeclare.PrepareIntDecla
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,20 +33,25 @@ import java.util.Set;
  * 预配及运抵列表界面
  */
 
-public class AppIntOneKeyDeclareItemActivity extends Activity{
+public class AppIntOneKeyDeclareItemActivity extends Activity {
     // list数据
     private List<Declare> declareList;
+    private List<String> mawbList;
 
     private DeclareAdapter declareAdapter;
 
     private ListView declareLv;
-    private Map<String,Declare> checkedDeclareMap;
+    private Map<String, Declare> checkedDeclareMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appintexponekeydeclareitem);
         initView();
         checkedDeclareMap = new HashMap<>();
+
+        // 初始化xml的list
+        mawbList = new ArrayList<>();
     }
 
     private void initView() {
@@ -73,7 +77,15 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mawbList.clear();
+                Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
+                for (Map.Entry<String, Declare> entry : entries) {
+                    Declare declare = checkedDeclareMap.get(entry.getKey());
+                    String a = declare.getMawb();
+                    mawbList.add(a);
+                }
+                String xml = getHouseXml(mawbList);
+                Log.d("tag", xml);
             }
         });
 
@@ -104,6 +116,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
     private class DeclareAdapter extends BaseAdapter {
         private List<Declare> declareList;
         private Context context;
+
         public DeclareAdapter(List<Declare> declareList, Context context) {
             this.declareList = declareList;
             this.context = context;
@@ -140,29 +153,31 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
                 viewHolder.declareCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                checkedDeclareMap.put(declare.getMawb(),declare);
+                        if (isChecked) {
+                            checkedDeclareMap.put(declare.getMawb(), declare);
+                            String str = null;
+                            Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
+                            for (Map.Entry<String, Declare> entry : entries) {
+                                Declare declare = checkedDeclareMap.get(entry.getKey());
+                                String a = declare.getMawb();
+                                str += "," + a;
+                                Log.d("abc", str);
+                            }
+                        } else {
+                            if (checkedDeclareMap.get(declare.getMawb()) != null) {
+                                checkedDeclareMap.remove(declare.getMawb());
                                 Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
                                 for (Map.Entry<String, Declare> entry : entries) {
                                     Declare declare = checkedDeclareMap.get(entry.getKey());
                                     String a = declare.getMawb();
-                                    Log.d("abc", a);
-                                }
-                            }else {
-                                if (checkedDeclareMap.get(declare.getMawb()) != null) {
-                                    checkedDeclareMap.remove(declare.getMawb());
-                                    Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
-                                    for (Map.Entry<String, Declare> entry : entries) {
-                                        Declare declare = checkedDeclareMap.get(entry.getKey());
-                                        String a = declare.getMawb();
-                                        if (a.equals("") && checkedDeclareMap.size() == 0) {
-                                            Log.d("abc", "没有数据了");
-                                        } else {
-                                            Log.d("abc", a);
-                                        }
+                                    if (a.equals("") && checkedDeclareMap.size() == 0) {
+                                        Log.d("abc", "没有数据了");
+                                    } else {
+                                        Log.d("abc", a);
                                     }
                                 }
                             }
+                        }
                     }
                 });
 
@@ -211,5 +226,18 @@ public class AppIntOneKeyDeclareItemActivity extends Activity{
             TextView declareMftstatusTv;
             TextView declareArrivalstatusTv;
         }
+    }
+
+    private String getHouseXml(List<String> Mawb) {
+       String pre = "<DomExportWarehouse>"
+               +"<whsInfo>";
+        String after = "</whsInfo>"
+                +"</DomExportWarehouse>";
+        String result = pre;
+        for (String mawb:Mawb) {
+            result = result + "<Mwab>"+mawb+"</Mawb>";
+        }
+        result = result+after;
+        return result;
     }
 }

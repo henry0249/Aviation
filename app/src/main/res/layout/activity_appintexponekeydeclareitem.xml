@@ -63,18 +63,19 @@
             android:src="@drawable/dayuhao"
             android:visibility="invisible"/>
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/declare_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:divider="@null">
+    </ListView>
+
     <Button
         android:id="@+id/shenbai_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="申报"/>
-    <ListView
-        android:id="@+id/declare_lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null">
-    </ListView>
-
-
 
 </LinearLayout>
