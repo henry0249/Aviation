@@ -155,27 +155,27 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             checkedDeclareMap.put(declare.getMawb(), declare);
-                            String str = null;
-                            Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
-                            for (Map.Entry<String, Declare> entry : entries) {
-                                Declare declare = checkedDeclareMap.get(entry.getKey());
-                                String a = declare.getMawb();
-                                str += "," + a;
-                                Log.d("abc", str);
-                            }
+//                            String str = null;
+//                            Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
+//                            for (Map.Entry<String, Declare> entry : entries) {
+//                                Declare declare = checkedDeclareMap.get(entry.getKey());
+//                                String a = declare.getMawb();
+//                                str += "," + a;
+//                                Log.d("abc", str);
+//                            }
                         } else {
                             if (checkedDeclareMap.get(declare.getMawb()) != null) {
                                 checkedDeclareMap.remove(declare.getMawb());
-                                Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
-                                for (Map.Entry<String, Declare> entry : entries) {
-                                    Declare declare = checkedDeclareMap.get(entry.getKey());
-                                    String a = declare.getMawb();
-                                    if (a.equals("") && checkedDeclareMap.size() == 0) {
-                                        Log.d("abc", "没有数据了");
-                                    } else {
-                                        Log.d("abc", a);
-                                    }
-                                }
+//                                Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
+//                                for (Map.Entry<String, Declare> entry : entries) {
+//                                    Declare declare = checkedDeclareMap.get(entry.getKey());
+//                                    String a = declare.getMawb();
+//                                    if (a.equals("") && checkedDeclareMap.size() == 0) {
+//                                        Log.d("abc", "没有数据了");
+//                                    } else {
+//                                        Log.d("abc", a);
+//                                    }
+//                                }
                             }
                         }
                     }

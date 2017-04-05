@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="指令"
+            android:text="@string/declare_zhiling"
             android:textSize="@dimen/declare_size"/>
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="预配状态"
+            android:text="@string/declare_MftStatus"
             android:textSize="@dimen/declare_size"/>
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="运抵状态"
+            android:text="@string/declare_ArrivalStatus"
             android:textSize="@dimen/declare_size"/>
 
         <ImageView
@@ -76,6 +76,6 @@
         android:id="@+id/shenbai_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="申报"/>
+        android:text="@string/declare_shenbao"/>
 
 </LinearLayout>

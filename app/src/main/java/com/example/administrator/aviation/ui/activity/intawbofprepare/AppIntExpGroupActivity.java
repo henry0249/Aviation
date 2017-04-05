@@ -579,7 +579,6 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     }
 
     // 预配申报异步任务
-    // 删除主单
     class DeclareMawbAsyncTask extends AsyncTask<Object, Object, String> {
         @Override
         protected String doInBackground(Object... objects) {

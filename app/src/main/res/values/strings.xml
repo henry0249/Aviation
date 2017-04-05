@@ -121,4 +121,6 @@
     <string name="declare_ArrMSGID">运抵编号:</string>
     <string name="declare_Response">海关回执</string>
     <string name="declare_pc">件数:</string>
+    <string name="declare_shenbao">一键申报</string>
+    <string name="declare_zhiling">指令</string>
 </resources>
