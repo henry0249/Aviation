@@ -16,12 +16,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOExportOneKeyDeclare;
 import com.example.administrator.aviation.model.intonekeydeclare.Declare;
 import com.example.administrator.aviation.model.intonekeydeclare.PrepareIntDeclare;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PreferenceUtils;
+
+import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +39,11 @@ import java.util.Set;
  */
 
 public class AppIntOneKeyDeclareItemActivity extends Activity {
+    private String ErrString = "";
+    private String userBumen;
+    private String userName;
+    private String userPass;
+    private String loginFlag;
     // list数据
     private List<Declare> declareList;
     private List<String> mawbList;
@@ -41,7 +51,12 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
     private DeclareAdapter declareAdapter;
 
     private ListView declareLv;
+    private TextView nodateTv;
+
     private Map<String, Declare> checkedDeclareMap;
+
+    // 一键申报
+    private Button shenbaoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +74,17 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         navBar.setTitle("预配与运抵信息");
         navBar.hideRight();
 
+        // 获得用户信息
+        userBumen = PreferenceUtils.getUserBumen(this);
+        userName = PreferenceUtils.getUserName(this);
+        userPass = PreferenceUtils.getUserPass(this);
+        loginFlag = PreferenceUtils.getLoginFlag(this);
+
         // 测试
-        Button button = (Button) findViewById(R.id.shenbai_btn);
+        shenbaoBtn = (Button) findViewById(R.id.shenbai_btn);
 
         declareLv = (ListView) findViewById(R.id.declare_lv);
+        nodateTv = (TextView) findViewById(R.id.int_declare_nodata_tv);
         declareLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -74,18 +96,20 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                 startActivity(intent);
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
+
+        // 一键申报点击事件
+        shenbaoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mawbList.clear();
                 Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
                 for (Map.Entry<String, Declare> entry : entries) {
                     Declare declare = checkedDeclareMap.get(entry.getKey());
-                    String a = declare.getMawb();
-                    mawbList.add(a);
+                    String mawb = declare.getMawb();
+                    mawbList.add(mawb);
+                    new CgoExportOneKeyDeclareAsyTask(mawb).execute();
                 }
-                String xml = getHouseXml(mawbList);
-                Log.d("tag", xml);
+                finish();
             }
         });
 
@@ -110,6 +134,9 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             super.onPostExecute(s);
             declareAdapter = new DeclareAdapter(declareList, AppIntOneKeyDeclareItemActivity.this);
             declareLv.setAdapter(declareAdapter);
+            if (declareList.size() <= 0) {
+                nodateTv.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -155,27 +182,9 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             checkedDeclareMap.put(declare.getMawb(), declare);
-//                            String str = null;
-//                            Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
-//                            for (Map.Entry<String, Declare> entry : entries) {
-//                                Declare declare = checkedDeclareMap.get(entry.getKey());
-//                                String a = declare.getMawb();
-//                                str += "," + a;
-//                                Log.d("abc", str);
-//                            }
                         } else {
                             if (checkedDeclareMap.get(declare.getMawb()) != null) {
                                 checkedDeclareMap.remove(declare.getMawb());
-//                                Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
-//                                for (Map.Entry<String, Declare> entry : entries) {
-//                                    Declare declare = checkedDeclareMap.get(entry.getKey());
-//                                    String a = declare.getMawb();
-//                                    if (a.equals("") && checkedDeclareMap.size() == 0) {
-//                                        Log.d("abc", "没有数据了");
-//                                    } else {
-//                                        Log.d("abc", a);
-//                                    }
-//                                }
                             }
                         }
                     }
@@ -239,5 +248,41 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         }
         result = result+after;
         return result;
+    }
+
+    // 一键申报异步任务
+    private class CgoExportOneKeyDeclareAsyTask extends AsyncTask<Void, Void, String> {
+        String result = null;
+        String mawb = null;
+
+        public CgoExportOneKeyDeclareAsyTask(String mawb) {
+            this.mawb = mawb;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+                SoapObject object = HttpCGOExportOneKeyDeclare.cgoExportOneKeyDeclare(userBumen, userName, userPass, loginFlag, mawb);
+                if (object == null) {
+                    ErrString = "服务器响应失败";
+                    return null;
+                } else {
+                    result = object.getProperty(0).toString();
+                    if (result.equals("false")) {
+                        ErrString = object.getProperty(1).toString();
+                        return result;
+                    }
+                }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("false") && !ErrString.equals("") ) {
+                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

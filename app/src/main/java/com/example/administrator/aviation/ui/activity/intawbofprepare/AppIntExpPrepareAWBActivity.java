@@ -45,6 +45,7 @@ public class AppIntExpPrepareAWBActivity extends Activity{
 
     private ProgressBar intawbProgressBar;
     private TextView intawbLoadTv;
+    private TextView intawbNoneDataTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class AppIntExpPrepareAWBActivity extends Activity{
         listView = (ExpandableListView) findViewById(R.id.int_exp_listview);
         intawbProgressBar = (ProgressBar) findViewById(R.id.int_awb_pb);
         intawbLoadTv = (TextView) findViewById(R.id.int_awb_load_tv);
+        intawbNoneDataTv = (TextView) findViewById(R.id.int_awb_house_load_tv);
         userBumen = PreferenceUtils.getUserBumen(this);
         userName = PreferenceUtils.getUserName(this);
         userPass = PreferenceUtils.getUserPass(this);
@@ -122,8 +124,10 @@ public class AppIntExpPrepareAWBActivity extends Activity{
             if (result == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntExpPrepareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else {
-                if (groupList == null) {
-                    Toast.makeText(AppIntExpPrepareAWBActivity.this, "没有数据信息", Toast.LENGTH_LONG).show();
+                if (groupList == null || groupList.size()<=0) {
+                    intawbNoneDataTv.setVisibility(View.VISIBLE);
+                    intawbProgressBar.setVisibility(View.GONE);
+                    intawbLoadTv.setVisibility(View.GONE);
                 } else {
                     expandableAdapter = new ExpandableAdapter(AppIntExpPrepareAWBActivity.this);
                     listView.setAdapter(expandableAdapter);

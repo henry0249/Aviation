@@ -63,6 +63,14 @@
             android:src="@drawable/dayuhao"
             android:visibility="invisible"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/int_declare_nodata_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/not_data"
+        android:visibility="gone"
+        android:textSize="@dimen/awb_size"/>
 
     <ListView
         android:id="@+id/declare_lv"
