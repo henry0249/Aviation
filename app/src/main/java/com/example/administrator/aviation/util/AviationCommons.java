@@ -22,6 +22,8 @@ public class AviationCommons {
     public static final String INT_AWB_HOUSE = "intawbhousexml";
     public static final String INT_ONEKEY_DECLARE = "decalrexml";
     public static final String DECLARE_INFO = "declareinfo";
+    public static final String DECLARE_MAWB = "mawb";
+    public static final String DECLARE_REARCHID = "rearchID";
 
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";

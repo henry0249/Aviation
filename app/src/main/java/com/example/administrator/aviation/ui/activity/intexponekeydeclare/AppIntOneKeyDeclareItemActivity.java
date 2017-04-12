@@ -47,6 +47,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
     // list数据
     private List<Declare> declareList;
     private List<String> mawbList;
+    private String mawb;
 
     private DeclareAdapter declareAdapter;
 
@@ -89,9 +90,13 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Declare declare = (Declare) declareAdapter.getItem(position);
+                String mawb = ((Declare) declareAdapter.getItem(position)).getMawb();
+                String rearchID = ((Declare) declareAdapter.getItem(position)).getRearchID();
                 Intent intent = new Intent(AppIntOneKeyDeclareItemActivity.this, AppIntOneKeyDeclareItemDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(AviationCommons.DECLARE_INFO, declare);
+                bundle.putString(AviationCommons.DECLARE_MAWB, mawb);
+                bundle.putString(AviationCommons.DECLARE_REARCHID, rearchID);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -105,11 +110,15 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                 Set<Map.Entry<String, Declare>> entries = checkedDeclareMap.entrySet();
                 for (Map.Entry<String, Declare> entry : entries) {
                     Declare declare = checkedDeclareMap.get(entry.getKey());
-                    String mawb = declare.getMawb();
+                    mawb = declare.getMawb();
                     mawbList.add(mawb);
                     new CgoExportOneKeyDeclareAsyTask(mawb).execute();
                 }
-                finish();
+                if (mawbList.size() <= 0 ) {
+                    Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "没有申报项",Toast.LENGTH_LONG).show();
+                } else {
+                    finish();
+                }
             }
         });
 
@@ -237,19 +246,6 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         }
     }
 
-    private String getHouseXml(List<String> Mawb) {
-       String pre = "<DomExportWarehouse>"
-               +"<whsInfo>";
-        String after = "</whsInfo>"
-                +"</DomExportWarehouse>";
-        String result = pre;
-        for (String mawb:Mawb) {
-            result = result + "<Mwab>"+mawb+"</Mawb>";
-        }
-        result = result+after;
-        return result;
-    }
-
     // 一键申报异步任务
     private class CgoExportOneKeyDeclareAsyTask extends AsyncTask<Void, Void, String> {
         String result = null;
@@ -281,7 +277,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             if (result == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (result.equals("false") && !ErrString.equals("") ) {
-                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -39,9 +39,22 @@ public class AviationNoteConvert {
             return "陆运";
         } else if (name.equals("4") && !name.equals("")) {
             return "空运 ";
-        }
+        } else {
             return "未知";
         }
+
+    }
+
+    public static String getCNfreightPayment(String name) {
+        if (name.equals("PP") && !name.equals("")) {
+            return "预付";
+        } else if (name.equals("CC") && !name.equals("")) {
+            return "到付 ";
+        } else {
+            return "未知";
+        }
+
+    }
 
     // 将中文转换成英文
     public static String  cNtoEn(String name) {
@@ -63,6 +76,10 @@ public class AviationNoteConvert {
             return "3";
         } else if (name.equals("空运") && !name.equals("")) {
             return "4";
+        } else if (name.equals("预付")) {
+            return "PP";
+        } else if (name.equals("到付")) {
+            return "CC";
         }else {
             return "未知";
         }

@@ -84,4 +84,8 @@ public class HttpCommons {
     // 一键申报
     public static final String CGO_EXPORT_ONE_KEY_DECLARE_NAME = "CGOExportOneKeyDeclare";
     public static final String CGO_EXPORT_ONE_KEY_DECLARE_ACTION = "http://58.213.128.130/CGOExportOneKeyDeclare";
+
+    // 重置申报
+    public static final String CGORESET_EXPORT_ONE_KEY_DECLARE_NAME = "CGOResetExportDeclareInfo";
+    public static final String CGORESET_EXPORT_ONE_KEY_DECLARE_ACTION = "http://58.213.128.130/CGOResetExportDeclareInfo";
 }

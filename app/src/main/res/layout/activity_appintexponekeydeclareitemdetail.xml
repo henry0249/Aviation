@@ -13,9 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -70,8 +69,31 @@
                     android:text="@string/declare_rearchid"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_rearchid_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/new_declare_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/declare_new_rearchid"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/declare_new_rearchid_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -154,7 +176,7 @@
                     android:text="@string/awb_detail_FDate"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_fdate_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,7 +197,7 @@
                     android:text="@string/awb_detail_Fno"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_fno_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -238,7 +260,7 @@
                     android:text="@string/declare_CustomsCode"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_customscode_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -259,13 +281,20 @@
                     android:text="@string/int_group_transPortMode"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_transPortMode_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:maxLength="11"
                     android:textSize="@dimen/awb_detail_size" />
+
+                <Spinner
+                    android:id="@+id/declare_transPortMode_spinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
@@ -280,13 +309,19 @@
                     android:text="@string/int_group_freightPayment"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_FreightPayment_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:maxLength="11"
                     android:textSize="@dimen/awb_detail_size" />
+                <Spinner
+                    android:id="@+id/declare_FreightPayment_spinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
@@ -301,7 +336,7 @@
                     android:text="@string/int_group_cNEECity"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_cneecity_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -322,7 +357,7 @@
                     android:text="@string/int_group_cNEECountry"
                     android:textSize="@dimen/awb_detail_size" />
 
-                <TextView
+                <EditText
                     android:id="@+id/declare_cneecountry_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -456,6 +491,7 @@
                     android:maxLength="11"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -476,6 +512,7 @@
                     android:maxLength="11"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -496,9 +533,25 @@
                     android:maxLength="11"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
-
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/resert_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/declare_resert" />
+                <Button
+                    android:id="@+id/resert_sure_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:text="@string/house_sure" />
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

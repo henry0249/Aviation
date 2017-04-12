@@ -111,6 +111,7 @@
     
     <!--运抵与申报界面-->
     <string name="declare_rearchid">运抵编号:</string>
+    <string name="declare_new_rearchid">新运抵编号</string>
     <string name="declare_cmdstatus">海关指令:</string>
     <string name="declare_dest1">卸货港:</string>
     <string name="declare_CustomsCode">离境关区:</string>
@@ -122,5 +123,6 @@
     <string name="declare_Response">海关回执</string>
     <string name="declare_pc">件数:</string>
     <string name="declare_shenbao">一键申报</string>
+    <string name="declare_resert">重置申报</string>
     <string name="declare_zhiling">指令</string>
 </resources>

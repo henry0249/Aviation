@@ -80,10 +80,17 @@
         android:divider="@null">
     </ListView>
 
-    <Button
-        android:id="@+id/shenbai_btn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/declare_shenbao"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/shenbai_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/declare_shenbao" />
+
+    </LinearLayout>
 
 </LinearLayout>
