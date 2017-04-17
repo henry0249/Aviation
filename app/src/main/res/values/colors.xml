@@ -8,4 +8,5 @@
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="bg_control_center_switch">#979797</color>
     <color name="awb_detail_color">#FFFFFFFF</color>
+    <color name="splite_color">#a3a3a3</color>
 </resources>

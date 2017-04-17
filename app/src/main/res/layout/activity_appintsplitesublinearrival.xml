@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/navbar"
+        android:id="@+id/splite_title_layout"/>
+    <LinearLayout
+        android:id="@+id/splite_first_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splite_title_layout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:text="@string/declare_pc"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:text="@string/awb_detail_weight"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:text="@string/awb_detail_volume"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/splite_second_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splite_first_layout"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/splite_pcone_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:gravity="center"
+            android:background="@color/splite_color"
+            android:inputType="number"
+            android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:id="@+id/splite_weightone_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:gravity="center"
+            android:background="@color/splite_color"
+            android:inputType="number"
+            android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:id="@+id/splite_volumeone_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:gravity="center"
+            android:background="@color/splite_color"
+            android:inputType="number"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/splite_third_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splite_second_layout"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/splite_pctwo_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:gravity="center"
+            android:background="@color/splite_color"
+            android:inputType="number"
+            android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:id="@+id/splite_weighttwo_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:gravity="center"
+            android:background="@color/splite_color"
+            android:inputType="number"
+            android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:id="@+id/splite_volumetwo_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/awb_size"
+            android:gravity="center"
+            android:background="@color/splite_color"
+            android:inputType="number"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splite_third_layout"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:id="@+id/splite_sure_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/splite_sure"
+            android:layout_marginLeft="5dp" />
+
+        <Button
+            android:id="@+id/splite_submit_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/house_sure"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

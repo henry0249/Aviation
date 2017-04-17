@@ -31,6 +31,10 @@ public class AviationCommons {
     public static final String MANAGE_HOUSE_MAWAB = "housemawb";
     public static final String MANAGE_HOUSE_BEGAIN_TIME = "beagintime";
     public static final String MANAGE_HOUSE_END_TIME = "endtime";
+    public static final String SPLITE_REARCHID = "rearchid";
+    public static final String SPLITE_PC = "pc";
+    public static final String SPLITE_WEIGHT = "weight";
+    public static final String SPLITE_VOLUME = "volume";
 
     // HomePageFragment内容
     public static final String APP_DOM_EXP_PREPARE_AWB = "appDomExpPrepareAWB";

@@ -549,6 +549,12 @@
                     android:layout_weight="1"
                     android:visibility="gone"
                     android:text="@string/house_sure" />
+                <Button
+                    android:id="@+id/splite_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/declare_splite" />
             </LinearLayout>
         </LinearLayout>
 

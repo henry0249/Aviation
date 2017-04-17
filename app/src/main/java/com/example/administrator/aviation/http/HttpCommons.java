@@ -88,4 +88,12 @@ public class HttpCommons {
     // 重置申报
     public static final String CGORESET_EXPORT_ONE_KEY_DECLARE_NAME = "CGOResetExportDeclareInfo";
     public static final String CGORESET_EXPORT_ONE_KEY_DECLARE_ACTION = "http://58.213.128.130/CGOResetExportDeclareInfo";
+
+    // 支线拆分
+    public static final String CGO_SPLIT_SUB_LINE_ARRIVAL_NAME = "CGOSplitSubLineArrival";
+    public static final String CGO_SPLIT_SUB_LINE_ARRIVAL_ACTION = "http://58.213.128.130/CGOSplitSubLineArrival";
+
+    // 支线合并
+    public static final String CGO_MERGER_SUB_LINE_ARRIVAL_NAME = "CGOMergerSubLineArrival";
+    public static final String CGO_MERGER_SUB_LINE_ARRIVAL_ACTION = "http://58.213.128.130/CGOMergerSubLineArrival";
 }

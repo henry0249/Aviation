@@ -52,6 +52,7 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
     private String fDate="";
     private String fno="";
 
+
     private TextView mawbTv;
     private TextView hnoTv;
     private EditText rearchIDTv;
@@ -94,6 +95,12 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
 
     private Button resrtBtn;
     private Button sureResrtBtn;
+    private Button spliteBtn;
+    private String pc;
+    private Declare declare;
+    private String weight;
+    private String volume;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,7 +153,12 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
         sureResrtBtn = (Button) findViewById(R.id.resert_sure_btn);
         sureResrtBtn.setOnClickListener(this);
 
+        // 支线拆分
+        spliteBtn = (Button) findViewById(R.id.splite_btn);
+        spliteBtn.setOnClickListener(this);
+
         // 给控件赋值
+        declare = (Declare) getIntent().getSerializableExtra(AviationCommons.DECLARE_INFO);
         setTextView();
         setEditTextInvisable();
 
@@ -238,6 +250,16 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
                 new ResetDeclareAsyTask(xml).execute();
                 break;
 
+            // 支线拆分事件
+            case R.id.splite_btn:
+                Intent intent = new Intent(this, AppIntSplitSubLineArrivalActivity.class);
+                intent.putExtra(AviationCommons.SPLITE_REARCHID, rearchID);
+                intent.putExtra(AviationCommons.SPLITE_PC, pc);
+                intent.putExtra(AviationCommons.SPLITE_WEIGHT, weight);
+                intent.putExtra(AviationCommons.SPLITE_VOLUME, volume);
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }
@@ -246,8 +268,6 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
 
     // 给textView赋值
     private void setTextView() {
-        Declare declare;
-        declare = (Declare) getIntent().getSerializableExtra(AviationCommons.DECLARE_INFO);
         String mawb = declare.getMawb();
         mawbTv.setText(mawb);
         String hno = declare.getHno();
@@ -287,11 +307,11 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
         mftStatusTv.setText(mftStatus);
         String mftMSGID = declare.getMftMSGID();
         mftMSGIDTv.setText(mftMSGID);
-        String pc = declare.getPC();
+        pc = declare.getPC();
         pcTv.setText(pc);
-        String weight = declare.getWeight();
+        weight = declare.getWeight();
         weightTv.setText(weight);
-        String volume = declare.getVolume();
+        volume = declare.getVolume();
         volumeTv.setText(volume);
         String arrivalStatus = declare.getArrivalStatus();
         arrivalStatusTv.setText(arrivalStatus);

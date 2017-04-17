@@ -81,7 +81,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         userPass = PreferenceUtils.getUserPass(this);
         loginFlag = PreferenceUtils.getLoginFlag(this);
 
-        // 测试
+        // 申报
         shenbaoBtn = (Button) findViewById(R.id.shenbai_btn);
 
         declareLv = (ListView) findViewById(R.id.declare_lv);

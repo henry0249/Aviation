@@ -65,6 +65,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private String transPortMode;
     private String cntransPortMode;
     private String freightPayment;
+    private String cnfreightPayment;
     private String cNEECity;
     private String cNEECountry;
     private String mftStatus;
@@ -129,9 +130,14 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private Spinner tranFlagSpinner;
     private List<String> tranFlagList;
 
+    private ArrayAdapter<String> freightPaymentAdapter;
+    private Spinner freightPaymentSpinner;
+    private List<String> freightPaymentList;
+
     private int businessTypeSpinnerPosition;
     private int transPortModeSpinnerPosition;
     private int tranFlagSpinnerPosition;
+    private int freightPaymentPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,13 +202,14 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         customsCodeEt = (EditText) findViewById(R.id.int_group_customsCode_detail_tv);
         transPortModeEt = (EditText) findViewById(R.id.int_group_transPortMode_detail_tv);
         freightPaymentEt = (EditText) findViewById(R.id.int_group_freightPayment_detail_tv);
-        freightPaymentEt.setTransformationMethod(new AllCapTransformationMethod());
         cNEECityEt = (EditText) findViewById(R.id.int_group_cNEECity_detail_tv);
         cNEECountryEt = (EditText) findViewById(R.id.int_group_cNEECountry_detail_tv);
         cNEECountryEt.setTransformationMethod(new AllCapTransformationMethod());
         mftStatusEt = (EditText) findViewById(R.id.int_group_mftStatus_detail_tv);
         shipperEt = (EditText) findViewById(R.id.int_group_shipper_detail_tv);
+        shipperEt.setTransformationMethod(new AllCapTransformationMethod());
         consigneeEt = (EditText) findViewById(R.id.int_group_consignee_detail_tv);
+        consigneeEt.setTransformationMethod(new AllCapTransformationMethod());
         gpriceEt = (EditText) findViewById(R.id.int_group_gprice_detail_tv);
         cIQStatusEt = (EditText) findViewById(R.id.int_group_cIQStatus_detail_tv);
         cIQNumberEt = (EditText) findViewById(R.id.int_group_cIQNumber_detail_tv);
@@ -260,6 +267,15 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         transPortModeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, transPortModeList);
         transPortModeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         transPortModeSpinner.setAdapter(transPortModeAdapter);
+
+        // 支付方式
+        freightPaymentSpinner = (Spinner) findViewById(R.id.update_group_freightPayment_spinner);
+        freightPaymentList = new ArrayList<>();
+        freightPaymentList.add("到付");
+        freightPaymentList.add("预付");
+        freightPaymentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, freightPaymentList);
+        freightPaymentAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        freightPaymentSpinner.setAdapter(freightPaymentAdapter);
 //=============================================================================================================
         for (int i = 0; i <businessTypeList.size() ; i++) {
             if (AviationNoteConvert.cNtoEn(businessTypeList.get(i)).equals(businessType)) {
@@ -276,6 +292,12 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         for (int i = 0; i <transPortModeList.size() ; i++) {
             if (AviationNoteConvert.cNtoEn(transPortModeList.get(i)).equals(transPortMode)) {
                 transPortModeSpinnerPosition =  i;
+            }
+        }
+
+        for (int i = 0; i <freightPaymentList.size(); i++) {
+            if (AviationNoteConvert.cNtoEn(freightPaymentList.get(i)).equals(freightPayment)) {
+                freightPaymentPosition = i;
             }
         }
 //================================================================================================================
@@ -326,7 +348,8 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         String cnTransPortMode = AviationNoteConvert.getCNTransPortMode(transPortMode);
         transPortModeEt.setText(cnTransPortMode);
         freightPayment = mawbInfo.getMawbm().getFreightPayment();
-        freightPaymentEt.setText(freightPayment);
+        String cnFreightPayment = AviationNoteConvert.getCNfreightPayment(freightPayment);
+        freightPaymentEt.setText(cnFreightPayment);
         cNEECity = mawbInfo.getMawbm().getCNEECity();
         cNEECityEt.setText(cNEECity);
         cNEECountry = mawbInfo.getMawbm().getCNEECountry();
@@ -414,16 +437,18 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.update_int_group_btn:
-                    setEditTextVisible();
-                    sureBtn.setVisibility(View.VISIBLE);
-                    updateBtn.setVisibility(View.GONE);
-                    dest2Layout.setVisibility(View.VISIBLE);
-                    businessTypeEt.setVisibility(View.GONE);
-                    businessTypeSpinner.setVisibility(View.VISIBLE);
-                    tranFlagEt.setVisibility(View.GONE);
-                    tranFlagSpinner.setVisibility(View.VISIBLE);
-                    transPortModeEt.setVisibility(View.GONE);
-                    transPortModeSpinner.setVisibility(View.VISIBLE);
+                setEditTextVisible();
+                sureBtn.setVisibility(View.VISIBLE);
+                updateBtn.setVisibility(View.GONE);
+                dest2Layout.setVisibility(View.VISIBLE);
+                businessTypeEt.setVisibility(View.GONE);
+                businessTypeSpinner.setVisibility(View.VISIBLE);
+                tranFlagEt.setVisibility(View.GONE);
+                tranFlagSpinner.setVisibility(View.VISIBLE);
+                transPortModeEt.setVisibility(View.GONE);
+                transPortModeSpinner.setVisibility(View.VISIBLE);
+                freightPaymentEt.setVisibility(View.GONE);
+                freightPaymentSpinner.setVisibility(View.VISIBLE);
 
                 businessTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -464,9 +489,24 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
                     }
                 });
 
+                freightPaymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                        cnfreightPayment = freightPaymentAdapter.getItem(position);
+                        freightPayment = AviationNoteConvert.cNtoEn(cnfreightPayment);
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        cnfreightPayment = freightPaymentAdapter.getItem(0);
+                        freightPayment = AviationNoteConvert.cNtoEn(cnfreightPayment);
+                    }
+                });
+
+
                 businessTypeSpinner.setSelection(businessTypeSpinnerPosition);
                 tranFlagSpinner.setSelection(tranFlagSpinnerPosition);
                 transPortModeSpinner.setSelection(transPortModeSpinnerPosition);
+                freightPaymentSpinner.setSelection(freightPaymentPosition);
                 break;
 
             // 更新确定按钮
@@ -640,16 +680,15 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         fno = fnoEt.getText().toString();
         customsCode = customsCodeEt.getText().toString();
 
-        freightPayment = freightPaymentEt.getText().toString();
-
         // 将得到输入框的值转换成大写字母
-        freightPayment = freightPayment.toUpperCase();
         cNEECity = cNEECityEt.getText().toString();
         cNEECountry = cNEECountryEt.getText().toString();
         cNEECountry = cNEECountry.toUpperCase();
         mftStatus = mftStatusEt.getText().toString();
         shipper = shipperEt.getText().toString();
+        shipper = shipper.toUpperCase();
         consignee = consigneeEt.getText().toString();
+        consignee = consignee.toUpperCase();
         gprice = gpriceEt.getText().toString();
         cIQStatus = cIQStatusEt.getText().toString();
         cIQNumber = cIQNumberEt.getText().toString();
