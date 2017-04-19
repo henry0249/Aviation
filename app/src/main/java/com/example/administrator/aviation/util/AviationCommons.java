@@ -46,4 +46,8 @@ public class AviationCommons {
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int INT_AWB_HANDLER = 0x222;
+
+    // intent传值需要返回
+    public static final int AWB_ADD = 3;
+    public static final int AWB_UPDATA = 2;
 }

@@ -90,9 +90,9 @@ public class HomePageFragment extends Fragment{
             @Override
             public void bindView(ViewHolder holder, HomeMessage obj) {
                 if (obj.getName().equals(AviationCommons.APP_DOM_EXP_PREPARE_AWB)) {
-                    holder.setImageResource(R.id.image_iv,  R.drawable.awb);
+                    holder.setImageResource(R.id.image_iv,  R.drawable.domawb);
                 }else if (obj.getName().equals(AviationCommons.APP_DOM_EXP_WARE_HOUSE)){
-                    holder.setImageResource(R.id.image_iv,  R.drawable.house);
+                    holder.setImageResource(R.id.image_iv,  R.drawable.domhouses);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXP_AWB_MANAGE)) {
                     holder.setImageResource(R.id.image_iv, R.drawable.awb);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXP_PREPARE_AWB)) {

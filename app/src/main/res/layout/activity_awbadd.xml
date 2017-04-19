@@ -25,7 +25,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Mawb"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/mawb_add_tv"
@@ -47,13 +48,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_pc"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/pc_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:inputType="number"
                     android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
 
@@ -67,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_weight"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/weight_add_tv"
@@ -87,34 +91,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_volume"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/volume_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_SpCode"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/spcode_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +112,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Goods"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/goods_add_tv"
@@ -147,7 +133,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_businessType"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <Spinner
                     android:id="@+id/awb_businesstype_spinner"
@@ -170,46 +157,6 @@
 
                 <EditText
                     android:id="@+id/package_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_By"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/by_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_Dep"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/dep_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -286,63 +233,26 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/awb_detail_FlightChecked"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/flightchecked_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/date_chose_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/button_circle"
-                    android:text="选择日期"
-                    android:textSize="12dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/awb_detail_FDate"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/fdate_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:textSize="@dimen/awb_detail_size"/>
+                <Button
+                    android:id="@+id/date_chose_btn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_circle"
+                    android:text="选择日期"
+                    android:textSize="12dp"/>
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="10dp">-->
-                <!--<DatePicker-->
-                <!--android:id="@+id/fdate_add_dp"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:startYear="2000"-->
-                <!--android:endYear="2050"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:calendarViewShown="true"-->
-                <!--android:spinnersShown="true"/>-->
             </LinearLayout>
 
             <LinearLayout
@@ -355,7 +265,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Fno"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/fno_add_tv"
@@ -394,111 +305,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/awb_detail_ShipperTEL"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/shippertel_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/awb_detail_Consignee"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
                     android:id="@+id/consignee_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_CNEETEL"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/cneetel_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_TransportNO"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/transportno_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_AllowTransNO"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/allowtransno_add_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_CIQNumber"
-                    android:textSize="@dimen/awb_detail_size"/>
-
-                <EditText
-                    android:id="@+id/ciqnumber_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"

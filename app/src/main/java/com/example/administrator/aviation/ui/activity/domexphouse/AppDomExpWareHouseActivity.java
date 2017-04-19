@@ -20,6 +20,8 @@ import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.text.ParseException;
+
 /**
  * AppDomExpWareHouse功能模块
  * 输入信息查询结果
@@ -50,6 +52,7 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
     private GetHouseXmlAsyncTask task;
     // 获取当前时间
     private String currentTime;
+    private int countTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +104,7 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
         houseSearchBtn.setOnClickListener(this);
     }
 
-    private void getEditext() {
+    private void getEditext() throws ParseException {
         mawb = mawbEt.getText().toString().trim();
         begainTime = begainTimeEt.getText().toString().trim();
         endTime = endTimeEt.getText().toString().trim();
@@ -109,6 +112,7 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
 
         // 将小写转换成大写
         updest = dest.toUpperCase();
+        countTime = DateUtils.daysBetween(begainTime, endTime);
     }
 
     @Override
@@ -116,10 +120,19 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
         switch (view.getId()) {
             case R.id.house_search_btn:
                 wareHousePb.setVisibility(View.VISIBLE);
-                getEditext();
-                xml = HttpPrepareHouse.getHouseXml(mawb, begainTime, endTime, updest);
-                task = new GetHouseXmlAsyncTask();
-                task.execute();
+                try {
+                    getEditext();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (countTime > 3) {
+                    Toast.makeText(AppDomExpWareHouseActivity.this, "查询日期不能超过3天", Toast.LENGTH_LONG).show();
+                    wareHousePb.setVisibility(View.GONE);
+                } else {
+                    xml = HttpPrepareHouse.getHouseXml(mawb, begainTime, endTime, updest);
+                    task = new GetHouseXmlAsyncTask();
+                    task.execute();
+                }
                 break;
 
             case R.id.house_begin_time_btn:

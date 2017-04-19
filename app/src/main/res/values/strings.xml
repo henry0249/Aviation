@@ -47,8 +47,8 @@
     <string name="awb_detail_Package">包装类型:</string>
     <string name="awb_detail_By">承运人:</string>
     <string name="awb_detail_Dep">启运港:</string>
-    <string name="awb_detail_Dest1">目的港:</string>
-    <string name="awb_detail_Dest2">第二目的港:</string>
+    <string name="awb_detail_Dest1">第一航线:</string>
+    <string name="awb_detail_Dest2">第二航线:</string>
     <string name="awb_detail_Remark">备注:</string>
     <string name="awb_detail_FlightChecked">定舱确认:</string>
     <string name="awb_detail_FDate">计划航班日期:</string>
@@ -125,6 +125,7 @@
     <string name="declare_shenbao">一键申报</string>
     <string name="declare_resert">重置申报</string>
     <string name="declare_splite">支线拆分</string>
+    <string name="declare_hebing">支线合并</string>
     <string name="declare_zhiling">指令</string>
     <string name="splite_sure">确定</string>
     <string name="splite_update">修改</string>

@@ -109,4 +109,41 @@ public class HttpPrepareAWBUpdate {
                 +"</DomExportPrepareAWB>");
         return xml;
     }
+
+    public static String getSmallXml(String MawbId, String mawb, String pc, String weight, String volume, String spCode,
+                                String goods, String businessType, String packg, String by, String dep,
+                                String dest1, String dest2, String remark, String flightChecked,
+                                String fDate, String fNo, String shipper,
+                                String consignee, String transportNO, String allowTransNO,
+                                String cIQNumber) {
+        String xml = new String("<DomExportPrepareAWB>"
+                +"<MawbInfo>"
+                +"<MawbID>"+MawbId+"</MawbID>"
+                +"<Mawb>"+ mawb +"</Mawb>"
+                +" <PC>"+pc+"</PC>"
+                +" <Weight>"+weight+"</Weight>"
+                +" <Volume>"+volume+"</Volume>"
+                +" <SpCode>"+spCode+"</SpCode>"
+                +"  <Goods>"+goods+"</Goods>"
+                +"<BusinessType>"+businessType+"</BusinessType>"
+                +" <Package>"+packg+"</Package>"
+                +" <By>"+by+"</By>"
+                +" <Dep>"+dep+"</Dep>"
+                +" <Dest1>"+dest1+"</Dest1>"
+                +" <Dest2>"+dest2+"</Dest2>"
+                +"<Remark>"+remark+"</Remark>"
+                +"<Mawbm>"
+                +"<FlightChecked>"+flightChecked+"</FlightChecked>"
+                +"<FDate>"+fDate+"</FDate>"
+                +"<Fno>"+fNo+"</Fno>"
+                +"<Shipper>"+shipper+"</Shipper>"
+                +"<Consignee >"+consignee+"</Consignee>"
+                +"<TransportNO >"+transportNO+"</TransportNO>"
+                +"<AllowTransNO >"+allowTransNO+"</AllowTransNO>"
+                +"<CIQNumber >"+cIQNumber+"</CIQNumber>"
+                +"</Mawbm>"
+                +"</MawbInfo>"
+                +"</DomExportPrepareAWB>");
+        return xml;
+    }
 }

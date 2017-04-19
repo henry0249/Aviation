@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOExportOneKeyDeclare;
+import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOMergerSubLineArrival;
 import com.example.administrator.aviation.model.intonekeydeclare.Declare;
 import com.example.administrator.aviation.model.intonekeydeclare.PrepareIntDeclare;
 import com.example.administrator.aviation.ui.base.NavBar;
@@ -59,6 +60,9 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
     // 一键申报
     private Button shenbaoBtn;
 
+    // 支线合并
+    private Button zhixianHebingBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
 
         // 申报
         shenbaoBtn = (Button) findViewById(R.id.shenbai_btn);
+        zhixianHebingBtn = (Button) findViewById(R.id.zhixian_hebing_btn);
 
         declareLv = (ListView) findViewById(R.id.declare_lv);
         nodateTv = (TextView) findViewById(R.id.int_declare_nodata_tv);
@@ -119,6 +124,14 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                 } else {
                     finish();
                 }
+            }
+        });
+
+        // 支线合并
+        zhixianHebingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -278,6 +291,41 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                 Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (result.equals("false") && !ErrString.equals("") ) {
                 Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    // 支线合并异步任务
+    private class ZhixianAsynck extends AsyncTask<Void, Void, String> {
+        String xml = null;
+        String result = null;
+        public ZhixianAsynck(String xml) {
+            this.xml = xml;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            SoapObject object = HttpCGOMergerSubLineArrival.cGOMergerSubLineArrival(userBumen, userName, userPass, loginFlag, xml);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("false") && !ErrString.equals("") ) {
+                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -28,18 +28,24 @@
 
         <activity
             android:name=".ui.activity.UserHomePageActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".ui.activity.VersionUpdateActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".ui.activity.SettingPasswordActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".ui.activity.ResetPasswordActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
 
-        <activity android:name=".ui.activity.domprepareawb.AppDomExpPrePareAWBActivity" />
+        <activity android:name=".ui.activity.domprepareawb.AppDomExpPrePareAWBActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".ui.activity.domprepareawb.AwbDetailActivity"
             android:launchMode="singleTask"

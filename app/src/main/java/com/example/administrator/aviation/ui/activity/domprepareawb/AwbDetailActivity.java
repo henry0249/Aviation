@@ -21,9 +21,11 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.prepareawb.HttpPrepareAWBUpdate;
 import com.example.administrator.aviation.model.prepareawb.MawbInfo;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
+import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
@@ -103,6 +105,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private List<String> businessTypeList;
     private int businessTypeSpinnerPosition;
 
+    ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,25 +138,41 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         weightTv = (EditText) findViewById(R.id.weight_detail_tv);
         volumeTv = (EditText) findViewById(R.id.volume_detail_tv);
         spcodeTv = (EditText) findViewById(R.id.spcode_detail_tv);
+        spcodeTv.setTransformationMethod(new AllCapTransformationMethod());
         goodsTv = (EditText) findViewById(R.id.goods_detail_tv);
+        goodsTv.setTransformationMethod(new AllCapTransformationMethod());
         businessTypeTv = (EditText) findViewById(R.id.businesstype_detail_tv);
         packageTv = (EditText) findViewById(R.id.package_detail_tv);
+        packageTv.setTransformationMethod(new AllCapTransformationMethod());
         byTv = (EditText) findViewById(R.id.by_detail_tv);
+        byTv.setTransformationMethod(new AllCapTransformationMethod());
         depTv = (EditText) findViewById(R.id.dep_detail_tv);
+        depTv.setTransformationMethod(new AllCapTransformationMethod());
         dest1Tv = (EditText) findViewById(R.id.dest_detail_tv);
+        dest1Tv.setTransformationMethod(new AllCapTransformationMethod());
         dest2Tv = (EditText) findViewById(R.id.dest2_detail_tv);
+        dest2Tv.setTransformationMethod(new AllCapTransformationMethod());
         remarkTv = (EditText) findViewById(R.id.remake_detail_tv);
+        remarkTv.setTransformationMethod(new AllCapTransformationMethod());
         flightCheckedTv = (EditText) findViewById(R.id.flightchecked_detail_tv);
+        flightCheckedTv.setTransformationMethod(new AllCapTransformationMethod());
         fDateTv = (EditText) findViewById(R.id.fdate_detail_tv);
         changeTimeBtn = (Button) findViewById(R.id.change_awb_time);
         fnoTv = (EditText) findViewById(R.id.fno_detail_tv);
+        fnoTv.setTransformationMethod(new AllCapTransformationMethod());
         shipperTv = (EditText) findViewById(R.id.shipper_detail_tv);
+        shipperTv.setTransformationMethod(new AllCapTransformationMethod());
         shipperTELTv = (EditText) findViewById(R.id.shippertel_detail_tv);
+        shipperTELTv.setTransformationMethod(new AllCapTransformationMethod());
         consigneeTv = (EditText) findViewById(R.id.consignee_detail_tv);
+        consigneeTv.setTransformationMethod(new AllCapTransformationMethod());
         cNEETELTv = (EditText) findViewById(R.id.cneetel_detail_tv);
+        cNEETELTv.setTransformationMethod(new AllCapTransformationMethod());
         transportNOTv = (EditText) findViewById(R.id.transportno_detail_tv);
         allowTransNOTv = (EditText) findViewById(R.id.allowtransno_detail_tv);
+        allowTransNOTv.setTransformationMethod(new AllCapTransformationMethod());
         cIQNumberTv = (EditText) findViewById(R.id.ciqnumber_detail_tv);
+        cIQNumberTv.setTransformationMethod(new AllCapTransformationMethod());
 
         updateBtn = (Button) findViewById(R.id.update_detail_btn);
         updateBtn.setOnClickListener(this);
@@ -325,12 +344,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 new PushXmlAsyncTask().execute();
                 break;
             case R.id.change_awb_time:
-                new DatePickerDialog(AwbDetailActivity.this,new DatePickerDialog.OnDateSetListener(){
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        fDateTv.setText(String.format("%d-%d-%d",year,monthOfYear+1,dayOfMonth));
-                    }
-                },2016,12,20).show();
+                choseTimeMethod.getCurrentTime(AwbDetailActivity.this, fDateTv);
                 break;
             default:
                 break;
@@ -346,24 +360,40 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         weight= weightTv.getText().toString();
         volume= volumeTv.getText().toString();
         spCode= spcodeTv.getText().toString();
+        spCode = spCode.toUpperCase();
         goods = goodsTv.getText().toString();
+        goods = goods.toUpperCase();
 //        businessType = businessTypeTv.getText().toString();
         packg = packageTv.getText().toString();
+        packg = packg.toUpperCase();
         by = byTv.getText().toString();
+        by = by.toUpperCase();
         dep = depTv.getText().toString();
+        dep = dep.toUpperCase();
         dest1 = dest1Tv.getText().toString();
+        dest1 = dest1.toUpperCase();
         dest2 = dest2Tv.getText().toString();
+        dest2 = dest2.toUpperCase();
         remark = remarkTv.getText().toString();
+        remark = remark.toUpperCase();
         flightChecked = flightCheckedTv.getText().toString();
         fDate = fDateTv.getText().toString();
         fNo = fnoTv.getText().toString();
+        fNo = fNo.toUpperCase();
         shipper = shipperTv.getText().toString();
+        shipper = shipper.toUpperCase();
         shipperTEL = shipperTELTv.getText().toString();
+        shipperTEL = shipperTEL.toUpperCase();
         consignee = consigneeTv.getText().toString();
+        consignee = consignee.toUpperCase();
         cNEETEL = cNEETELTv.getText().toString();
+        cNEETEL = cNEETEL.toUpperCase();
         transportNO = transportNOTv.getText().toString();
+        transportNO = transportNO.toUpperCase();
         allowTransNO = allowTransNOTv.getText().toString();
+        allowTransNO = allowTransNO.toUpperCase();
         cIQNumber = cIQNumberTv.getText().toString();
+        cIQNumber = cIQNumber.toUpperCase();
     }
 
     // 上传xml到服务器
@@ -394,8 +424,8 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 Toast.makeText(AwbDetailActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (request.equals("true")){
                 Toast.makeText(AwbDetailActivity.this, "修改成功", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(AwbDetailActivity.this, AppDomExpPrePareAWBActivity.class);
-//                startActivityForResult(intent, 1);
+                Intent intent = new Intent(AwbDetailActivity.this, AppDomExpPrePareAWBActivity.class);
+                startActivityForResult(intent, AviationCommons.AWB_UPDATA);
                 finish();
             }
             super.onPostExecute(request);

@@ -91,6 +91,13 @@
             android:layout_weight="1"
             android:text="@string/declare_shenbao" />
 
+        <Button
+            android:id="@+id/zhixian_hebing_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/declare_hebing" />
+
     </LinearLayout>
 
 </LinearLayout>

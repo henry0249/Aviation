@@ -252,12 +252,17 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
 
             // 支线拆分事件
             case R.id.splite_btn:
-                Intent intent = new Intent(this, AppIntSplitSubLineArrivalActivity.class);
-                intent.putExtra(AviationCommons.SPLITE_REARCHID, rearchID);
-                intent.putExtra(AviationCommons.SPLITE_PC, pc);
-                intent.putExtra(AviationCommons.SPLITE_WEIGHT, weight);
-                intent.putExtra(AviationCommons.SPLITE_VOLUME, volume);
-                startActivity(intent);
+                rearchID = getIntent().getStringExtra(AviationCommons.DECLARE_REARCHID);
+                if (rearchID.equals("")) {
+                    Toast.makeText(AppIntOneKeyDeclareItemDetailActivity.this, "不支持支线拆分", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(this, AppIntSplitSubLineArrivalActivity.class);
+                    intent.putExtra(AviationCommons.SPLITE_REARCHID, rearchID);
+                    intent.putExtra(AviationCommons.SPLITE_PC, pc);
+                    intent.putExtra(AviationCommons.SPLITE_WEIGHT, weight);
+                    intent.putExtra(AviationCommons.SPLITE_VOLUME, volume);
+                    startActivity(intent);
+                }
                 break;
 
             default:

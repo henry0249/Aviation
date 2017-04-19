@@ -45,7 +45,10 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
     private ListView awbListView;
     private ProgressBar awbProgressBar;
     private TextView awbLoadTv;
+    private TextView noDataTv;
     private AwbAdapter awbAdapter;
+
+    private GetPrepareAWBAsync getPrepareAWBAsync;
 
     private List<MawbInfo> list;
     private String mawb;
@@ -56,6 +59,17 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         setContentView(R.layout.activity_appdomexpprepareawb);
         initView();
     }
+
+    // 离开界面终止异步请求
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (getPrepareAWBAsync != null && getPrepareAWBAsync.getStatus() == AsyncTask.Status.RUNNING) {
+            getPrepareAWBAsync.cancel(true);
+        }
+    }
+
+
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.showRight();
@@ -65,12 +79,14 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
             public void onClick(View view) {
                 Intent intent = new Intent(AppDomExpPrePareAWBActivity.this, AwbAddActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         navBar.setTitle(R.string.awb_detail);
         awbListView = (ListView) findViewById(R.id.awb_listview);
         awbProgressBar = (ProgressBar) findViewById(R.id.awb_pb);
         awbLoadTv = (TextView) findViewById(R.id.awb_load_tv);
+        noDataTv = (TextView) findViewById(R.id.awb_nodate_tv);
         awbListView.setOnItemClickListener(this);
 
         // 长按点击删除
@@ -80,22 +96,16 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         userName = PreferenceUtils.getUserName(this);
         userPass = PreferenceUtils.getUserPass(this);
         loginFlag = PreferenceUtils.getLoginFlag(this);
+        getPrepareAWBAsync = new GetPrepareAWBAsync();
 
-        new GetPrepareAWB().execute();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new GetPrepareAWB().execute();
+        getPrepareAWBAsync.execute();
     }
 
     // 回传参数(接收更新和添加订单传递过来的值更新列表)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 || requestCode == 1) {
+        if (requestCode == AviationCommons.AWB_ADD || requestCode == AviationCommons.AWB_UPDATA) {
             awbAdapter.notifyDataSetChanged();
         }
     }
@@ -109,6 +119,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         bundle.putSerializable(AviationCommons.AWB_ITEM_INFO, mawbInfo);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     // 长按每一项实现删除
@@ -217,9 +228,12 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
     }
 
     // 得到数据列表的异步任务
-    class GetPrepareAWB extends AsyncTask<Object, Object, String> {
+    class GetPrepareAWBAsync extends AsyncTask<Object, Object, String> {
         @Override
         protected String doInBackground(Object... objects) {
+            if (isCancelled()) {
+                return null;
+            }
             SoapObject object = HttpPrepareAWB.getAWBInfo(userBumen, userName, userPass, loginFlag);
             if (object == null) {
                 ErrString = "服务器响应失败";
@@ -232,20 +246,26 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
                 } else {
                     result = object.getProperty(0).toString();
                     list = PrepareceAwbInfo.parseAwbInfoXml(result);
-                    return result;
+                     return result;
                 }
             }
         }
 
         @Override
         protected void onPostExecute(String request) {
+            super.onPostExecute(request);
+            if (isCancelled()) {
+                return;
+            }
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else if (request.equals("False") && !ErrString.equals("") ) {
+            } else if (request.equals("false") && !ErrString.equals("") ) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else {
-                if (list == null) {
-                    Toast.makeText(AppDomExpPrePareAWBActivity.this, "没有数据", Toast.LENGTH_LONG).show();
+                if (list.size() <= 0) {
+                    noDataTv.setVisibility(View.VISIBLE);
+                    awbProgressBar.setVisibility(View.GONE);
+                    awbLoadTv.setVisibility(View.GONE);
                 } else {
                     // 加载数据
                     awbAdapter = new AwbAdapter(list, AppDomExpPrePareAWBActivity.this);
@@ -254,7 +274,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
                     awbLoadTv.setVisibility(View.GONE);
                 }
             }
-            super.onPostExecute(request);
+
         }
     }
 
@@ -285,6 +305,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
 
         @Override
         protected void onPostExecute(String request) {
+            super.onPostExecute(request);
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (request.equals("false") && !ErrString.equals("") ) {
@@ -294,7 +315,6 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
                 awbAdapter.notifyDataSetChanged();
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, "删除成功"+ErrString, Toast.LENGTH_LONG).show();
             }
-            super.onPostExecute(request);
         }
     }
 }

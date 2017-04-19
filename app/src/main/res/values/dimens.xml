@@ -10,6 +10,8 @@
     <dimen name="awb_size">20sp</dimen>
     <dimen name="awb_detail_size">18sp</dimen>
 
+    <dimen name="house_small_size">12sp</dimen>
+
     <dimen name="house_size">20sp</dimen>
     <dimen name="declare_size">15sp</dimen>
 

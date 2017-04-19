@@ -1,15 +1,25 @@
 package com.example.administrator.aviation.ui.activity.intexponekeydeclare;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOSplitSubLineArrival;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
+
+import org.ksoap2.serialization.SoapObject;
+
+import java.text.DecimalFormat;
 
 /**
  * 国际支线拆分支线拆分
@@ -21,6 +31,7 @@ public class AppIntSplitSubLineArrivalActivity extends Activity implements View.
     private String userName;
     private String userPass;
     private String loginFlag;
+    private String xml;
 
     private String rechid;
     private String pc;
@@ -102,6 +113,8 @@ public class AppIntSplitSubLineArrivalActivity extends Activity implements View.
                 break;
 
             case R.id.splite_submit_btn:
+                xml = HttpCGOSplitSubLineArrival.getSpilteXml(rechid, pcOne, weightOne, volumeOne);
+                new SpliteAsynck(xml).execute();
                 break;
 
             default:
@@ -111,24 +124,72 @@ public class AppIntSplitSubLineArrivalActivity extends Activity implements View.
 
     private void getEditText() {
         pcOne = pcOneEt.getText().toString().trim();
-        pcTwo = pcTwoEt.getText().toString().trim();
-        weightOne = weightOneEt.getText().toString().trim();
-        weightTwo = weightTwoEt.getText().toString().trim();
-        volumeOne = volumeOneEt.getText().toString().trim();
-        volumeTwo = volumeTwoEt.getText().toString().trim();
-        intpc = Integer.parseInt(pc);
-        doubleweight = Double.valueOf(weight);
-        doublevolume = Double.valueOf(volume);
-        intpcOne = Integer.parseInt(pcOne);
-//        doubleweightOne = Double.valueOf(weightOne);
-//        doublevolumeOne = Double.valueOf(volumeOne);
-//        intpcTwo = Integer.parseInt(pcTwo);
-//        doubleweightTwo = Double.valueOf(weightTwo);
-//        doublevolumeTwo = Double.valueOf(volumeTwo);
-        if (!pcOne.equals("")) {
+        if (!pcOne.equals("") ) {
+            intpcOne = Integer.parseInt(pcOne);
+            intpc = Integer.parseInt(pc);
+            doubleweight = Double.valueOf(weight);
+            doublevolume = Double.valueOf(volume);
+            intpcOne = Integer.parseInt(pcOne);
+            double oneWeight = doubleweight / intpc;
+            double oneVolume = doublevolume / intpc;
+            DecimalFormat df = new DecimalFormat("0.0");
             intpcTwo = intpc - intpcOne;
             pcTwo = String.valueOf(intpcTwo);
             pcTwoEt.setText(pcTwo);
+            doubleweightOne = oneWeight * intpcOne;
+            weightOne = df.format(doubleweightOne);
+            weightOneEt.setText(weightOne);
+            doublevolumeOne = oneVolume * intpcOne;
+            volumeOne = df.format(doublevolumeOne);
+            volumeOneEt.setText(volumeOne);
+            doubleweightTwo = oneWeight * intpcTwo;
+            weightTwo = df.format(doubleweightTwo);
+            weightTwoEt.setText(weightTwo);
+            doublevolumeTwo = oneVolume * intpcTwo;
+            volumeTwo = df.format(doublevolumeTwo);
+            volumeTwoEt.setText(volumeTwo);
+        } else {
+            Toast.makeText(AppIntSplitSubLineArrivalActivity.this, "件数不能为空", Toast.LENGTH_SHORT).show();
+        }
+        pcOne = pcOneEt.getText().toString().trim();
+        weightOne = weightOneEt.getText().toString().trim();
+        volumeOne = volumeOneEt.getText().toString().trim();
+    }
+
+    private class SpliteAsynck extends AsyncTask<Void, Void, String> {
+        String result = null;
+        String xml;
+        public SpliteAsynck (String xml) {
+            this.xml = xml;
+        }
+        @Override
+        protected String doInBackground(Void... voids) {
+            SoapObject object = HttpCGOSplitSubLineArrival.cGOSplitSubLineArrival(userBumen, userName, userPass, loginFlag, xml);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntSplitSubLineArrivalActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("false") && !ErrString.equals("") ) {
+                Toast.makeText(AppIntSplitSubLineArrivalActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("true")) {
+                Toast.makeText(AppIntSplitSubLineArrivalActivity.this, "成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntSplitSubLineArrivalActivity.this, AppIntExpOneKeyDeclareActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }
