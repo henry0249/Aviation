@@ -123,8 +123,14 @@
                     android:id="@+id/goods_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:textSize="@dimen/awb_detail_size"/>
+                <Spinner
+                    android:id="@+id/update_awb_goods_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

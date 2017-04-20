@@ -75,6 +75,7 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
     private String loginFlag;
     private String ErrString;
     private ArrayAdapter<String> businessTypeAdapter;
+    private ArrayAdapter<String> goodsAdapter;
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +148,40 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 cnbusinessType = businessTypeAdapter.getItem(0);
                 businessType = AviationNoteConvert.cNtoEn(cnbusinessType);
+            }
+        });
+
+        Spinner goodsSpinner = (Spinner) findViewById(R.id.awb_goods_spinner);
+        List<String> goodsList = new ArrayList<>();
+        goodsList.add("再生木托");
+        goodsList.add("塑料编织袋");
+        goodsList.add("夹板箱");
+        goodsList.add("托盘");
+        goodsList.add("木托");
+        goodsList.add("木箱");
+        goodsList.add("桶");
+        goodsList.add("真空包装");
+        goodsList.add("箱柜");
+        goodsList.add("纸箱");
+        goodsList.add("纸袋");
+        goodsList.add("薄膜包装");
+        goodsList.add("金属桶");
+        goodsList.add("金属罐");
+        goodsList.add("麻包");
+        goodsList.add("其他");
+        goodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, goodsList);
+        goodsAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        goodsSpinner.setAdapter(goodsAdapter);
+        goodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                goods = goodsAdapter.getItem(position);
+                goodsTv.setText(goods);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+//                goods = goodsAdapter.getItem(0);
+                goodsTv.setText("");
             }
         });
 

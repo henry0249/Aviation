@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -105,6 +106,11 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private List<String> businessTypeList;
     private int businessTypeSpinnerPosition;
 
+    private ArrayAdapter<String> goodsAdapter;
+    private Spinner goodsSpinner;
+    private List<String> goodsList;
+    private int goodsSpinnerPosition;
+
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,12 +142,15 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         mawbTv = (EditText) findViewById(R.id.mawb_detail_tv);
         pcTv = (EditText) findViewById(R.id.pc_detail_tv);
         weightTv = (EditText) findViewById(R.id.weight_detail_tv);
+        weightTv.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         volumeTv = (EditText) findViewById(R.id.volume_detail_tv);
+        volumeTv.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         spcodeTv = (EditText) findViewById(R.id.spcode_detail_tv);
         spcodeTv.setTransformationMethod(new AllCapTransformationMethod());
         goodsTv = (EditText) findViewById(R.id.goods_detail_tv);
         goodsTv.setTransformationMethod(new AllCapTransformationMethod());
         businessTypeTv = (EditText) findViewById(R.id.businesstype_detail_tv);
+        businessTypeTv.setTransformationMethod(new AllCapTransformationMethod());
         packageTv = (EditText) findViewById(R.id.package_detail_tv);
         packageTv.setTransformationMethod(new AllCapTransformationMethod());
         byTv = (EditText) findViewById(R.id.by_detail_tv);
@@ -183,13 +192,33 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
 
         setEditTextInvisible();
 
+        // 品名
+        goodsSpinner = (Spinner) findViewById(R.id.update_awb_goods_spinner);
+        goodsList = new ArrayList<>();
+        goodsList.add("再生木托");
+        goodsList.add("塑料编织袋");
+        goodsList.add("夹板箱");
+        goodsList.add("托盘");
+        goodsList.add("木托");
+        goodsList.add("木箱");
+        goodsList.add("桶");
+        goodsList.add("真空包装");
+        goodsList.add("箱柜");
+        goodsList.add("纸箱");
+        goodsList.add("纸袋");
+        goodsList.add("薄膜包装");
+        goodsList.add("金属桶");
+        goodsList.add("金属罐");
+        goodsList.add("麻包");
+        goodsList.add("其他");
+        goodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, goodsList);
+        goodsSpinner.setAdapter(goodsAdapter);
+
+
         // 下拉选择数据
         businessTypeSpinner = (Spinner) findViewById(R.id.update_awb_businesstype_spinner);
         businessTypeList = new ArrayList<>();
         businessTypeList.add("普通货物运输");
-        businessTypeList.add("国际快件");
-        businessTypeList.add("D类快件");
-        businessTypeList.add("国际邮包");
         businessTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, businessTypeList);
         businessTypeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         businessTypeSpinner.setAdapter(businessTypeAdapter);
@@ -316,7 +345,20 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 changeTimeBtn.setVisibility(View.VISIBLE);
                 dest2Layout.setVisibility(View.VISIBLE);
                 businessTypeTv.setVisibility(View.GONE);
+                goodsSpinner.setVisibility(View.VISIBLE);
                 businessTypeSpinner.setVisibility(View.VISIBLE);
+                goodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                        goods = goodsAdapter.getItem(position);
+                        goodsTv.setText(goods);
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+                goodsSpinner.setSelection(goodsSpinnerPosition);
                 businessTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
