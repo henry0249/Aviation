@@ -29,73 +29,110 @@
         <activity
             android:name=".ui.activity.UserHomePageActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.VersionUpdateActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.SettingPasswordActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.ResetPasswordActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.activity.domprepareawb.AppDomExpPrePareAWBActivity"
+        <activity
+            android:name=".ui.activity.domprepareawb.AppDomExpPrePareAWBActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.domprepareawb.AwbDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.domprepareawb.AwbAddActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.activity.domexphouse.AppDomExpWareHouseActivity" />
+        <activity android:name=".ui.activity.domexphouse.AppDomExpWareHouseActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.domexphouse.AppDomExpWareHouseItemActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.domexphouse.AppDomExpWareHouseDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpGroupActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpGroupAddActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpChildActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpChildAddActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.intexpawbhousemanage.AppIntExpAwbHouseItemActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
         <!--预配与运抵界面-->
         <activity
             android:name=".ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".ui.activity.intexponekeydeclare.AppIntSplitSubLineArrivalActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemDetailActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.intexponekeydeclare.AppIntSplitSubLineArrivalActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
     </application>
 

@@ -4,33 +4,38 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical">
+
     <include
         android:id="@+id/declare_title"
-        layout="@layout/navbar"/>
+        layout="@layout/navbar" />
+
     <LinearLayout
         android:id="@+id/declare_biaoti_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
         <CheckBox
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="invisible"
-            android:checked="false"/>
+            android:checked="false"
+            android:visibility="invisible" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
             android:text="主单"
-            android:textSize="@dimen/declare_size"/>
+            android:textSize="@dimen/declare_size" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
             android:text="分单"
-            android:textSize="@dimen/declare_size"/>
+            android:textSize="@dimen/declare_size" />
 
         <TextView
             android:layout_width="0dp"
@@ -38,7 +43,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/declare_zhiling"
-            android:textSize="@dimen/declare_size"/>
+            android:textSize="@dimen/declare_size" />
 
         <TextView
             android:layout_width="0dp"
@@ -46,7 +51,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/declare_MftStatus"
-            android:textSize="@dimen/declare_size"/>
+            android:textSize="@dimen/declare_size" />
 
         <TextView
             android:layout_width="0dp"
@@ -54,35 +59,47 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/declare_ArrivalStatus"
-            android:textSize="@dimen/declare_size"/>
+            android:textSize="@dimen/declare_size" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="0.5"
             android:src="@drawable/dayuhao"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/int_declare_nodata_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/not_data"
-        android:visibility="gone"
-        android:textSize="@dimen/awb_size"/>
+        android:textSize="@dimen/awb_size"
+        android:visibility="gone" />
 
-    <ListView
-        android:id="@+id/declare_lv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:divider="@null">
-    </ListView>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ListView
+            android:id="@+id/declare_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"/>
+        <ProgressBar
+            android:id="@+id/zhixian_pb"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
 
         <Button
             android:id="@+id/shenbai_btn"
@@ -99,5 +116,4 @@
             android:text="@string/declare_hebing" />
 
     </LinearLayout>
-
 </LinearLayout>

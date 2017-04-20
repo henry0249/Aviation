@@ -212,6 +212,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         goodsList.add("麻包");
         goodsList.add("其他");
         goodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, goodsList);
+        goodsAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         goodsSpinner.setAdapter(goodsAdapter);
 
 

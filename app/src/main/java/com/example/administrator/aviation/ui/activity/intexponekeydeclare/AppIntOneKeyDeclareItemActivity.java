@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,13 +50,16 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
     private List<Declare> declareList;
     private List<String> mawbList;
     private String mawb;
+    private String rearchId;
 
     private DeclareAdapter declareAdapter;
 
     private ListView declareLv;
     private TextView nodateTv;
+    private ProgressBar zhixianPb;
 
     private Map<String, Declare> checkedDeclareMap;
+    private Map<Integer, Declare> rearchIdMap;
 
     // 一键申报
     private Button shenbaoBtn;
@@ -69,6 +73,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         setContentView(R.layout.activity_appintexponekeydeclareitem);
         initView();
         checkedDeclareMap = new HashMap<>();
+        rearchIdMap = new HashMap<>();
 
         // 初始化xml的list
         mawbList = new ArrayList<>();
@@ -88,6 +93,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         // 申报
         shenbaoBtn = (Button) findViewById(R.id.shenbai_btn);
         zhixianHebingBtn = (Button) findViewById(R.id.zhixian_hebing_btn);
+        zhixianPb = (ProgressBar) findViewById(R.id.zhixian_pb);
 
         declareLv = (ListView) findViewById(R.id.declare_lv);
         nodateTv = (TextView) findViewById(R.id.int_declare_nodata_tv);
@@ -131,7 +137,22 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         zhixianHebingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                zhixianPb.setVisibility(View.VISIBLE);
+                mawbList.clear();
+                String xml = null;
+                Set<Map.Entry<Integer, Declare>> entries = rearchIdMap.entrySet();
+                for (Map.Entry<Integer, Declare> entry : entries) {
+                    Declare declare = rearchIdMap.get(entry.getKey());
+                    rearchId = declare.getRearchID();
+                    mawbList.add(rearchId);
+                    xml = getRearchID(mawbList);
+                }
+                if (xml ==  null ) {
+                    Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "请选择合并项",Toast.LENGTH_LONG).show();
+                    zhixianPb.setVisibility(View.GONE);
+                } else {
+                    new ZhixianAsynck(xml).execute();
+                }
             }
         });
 
@@ -204,10 +225,12 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             checkedDeclareMap.put(declare.getMawb(), declare);
+                            rearchIdMap.put(position, declare);
                         } else {
                             if (checkedDeclareMap.get(declare.getMawb()) != null) {
                                 checkedDeclareMap.remove(declare.getMawb());
                             }
+                            rearchIdMap.remove(position);
                         }
                     }
                 });
@@ -324,9 +347,30 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             super.onPostExecute(s);
             if (result == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                zhixianPb.setVisibility(View.GONE);
             } else if (result.equals("false") && !ErrString.equals("") ) {
                 Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                zhixianPb.setVisibility(View.GONE);
+            } else if (result.equals("true")) {
+                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "合并成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntOneKeyDeclareItemActivity.this, AppIntExpOneKeyDeclareActivity.class);
+                startActivity(intent);
+                finish();
             }
         }
     }
+
+
+    // 支线合并的xml
+    private String getRearchID(List<String> rearchId) {
+        String pre = "<RearchInfo>";
+        String after ="</RearchInfo>";
+        String result = pre;
+        for (String rearch :rearchId) {
+            result += "<Rearch>"+ "<RearchID>"+rearch+"</RearchID>" + "</Rearch>";
+        }
+        result = result+after;
+        return result;
+    }
+
 }
