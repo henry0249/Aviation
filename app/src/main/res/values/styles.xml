@@ -8,4 +8,8 @@
         <item name="colorAccent">#4B4B4B</item>
     </style>
 
+    <style name="MyCheckBox">
+        <item name="android:button">@drawable/checkbox</item>
+    </style>
+
 </resources>

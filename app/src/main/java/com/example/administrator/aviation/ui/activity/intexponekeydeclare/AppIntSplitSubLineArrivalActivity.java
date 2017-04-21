@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -93,11 +94,15 @@ public class AppIntSplitSubLineArrivalActivity extends Activity implements View.
 
         pcOneEt = (EditText) findViewById(R.id.splite_pcone_et);
         weightOneEt = (EditText) findViewById(R.id.splite_weightone_et);
+        weightOneEt.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         volumeOneEt = (EditText) findViewById(R.id.splite_volumeone_et);
+        volumeOneEt.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         pcTwoEt = (EditText) findViewById(R.id.splite_pctwo_et);
         weightTwoEt = (EditText) findViewById(R.id.splite_weighttwo_et);
+        weightTwoEt.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         volumeTwoEt = (EditText) findViewById(R.id.splite_volumetwo_et);
+        volumeTwoEt.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         sureBtn = (Button) findViewById(R.id.splite_sure_btn);
         sureBtn.setOnClickListener(this);
@@ -113,6 +118,9 @@ public class AppIntSplitSubLineArrivalActivity extends Activity implements View.
                 break;
 
             case R.id.splite_submit_btn:
+                pcOne = pcOneEt.getText().toString().trim();
+                weightOne = weightOneEt.getText().toString().trim();
+                volumeOne = volumeOneEt.getText().toString().trim();
                 xml = HttpCGOSplitSubLineArrival.getSpilteXml(rechid, pcOne, weightOne, volumeOne);
                 new SpliteAsynck(xml).execute();
                 break;

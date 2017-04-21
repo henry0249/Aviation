@@ -57,9 +57,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private Button changeTimeBtn;
     private EditText fnoTv;
     private EditText shipperTv;
-    private EditText shipperTELTv;
     private EditText consigneeTv;
-    private EditText cNEETELTv;
     private EditText transportNOTv;
     private EditText allowTransNOTv;
     private EditText cIQNumberTv;
@@ -171,12 +169,8 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         fnoTv.setTransformationMethod(new AllCapTransformationMethod());
         shipperTv = (EditText) findViewById(R.id.shipper_detail_tv);
         shipperTv.setTransformationMethod(new AllCapTransformationMethod());
-        shipperTELTv = (EditText) findViewById(R.id.shippertel_detail_tv);
-        shipperTELTv.setTransformationMethod(new AllCapTransformationMethod());
         consigneeTv = (EditText) findViewById(R.id.consignee_detail_tv);
         consigneeTv.setTransformationMethod(new AllCapTransformationMethod());
-        cNEETELTv = (EditText) findViewById(R.id.cneetel_detail_tv);
-        cNEETELTv.setTransformationMethod(new AllCapTransformationMethod());
         transportNOTv = (EditText) findViewById(R.id.transportno_detail_tv);
         allowTransNOTv = (EditText) findViewById(R.id.allowtransno_detail_tv);
         allowTransNOTv.setTransformationMethod(new AllCapTransformationMethod());
@@ -271,11 +265,9 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         shipper = mawbInfo.getMawbm().getShipper();
         shipperTv.setText(shipper);
         shipperTEL = mawbInfo.getMawbm().getShipperTEL();
-        shipperTELTv.setText(shipperTEL);
         consignee = mawbInfo.getMawbm().getConsignee();
         consigneeTv.setText(consignee);
         cNEETEL = mawbInfo.getMawbm().getCNEETEL();
-        cNEETELTv.setText(cNEETEL);
         transportNO = mawbInfo.getMawbm().getTransportNO();
         transportNOTv.setText(transportNO);
         allowTransNO = mawbInfo.getMawbm().getAllowTransNO();
@@ -302,9 +294,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         fDateTv.setEnabled(false);
         fnoTv.setEnabled(false);
         shipperTv.setEnabled(false);
-        shipperTELTv.setEnabled(false);
         consigneeTv.setEnabled(false);
-        cNEETELTv.setEnabled(false);
         transportNOTv.setEnabled(false);
         allowTransNOTv.setEnabled(false);
         cIQNumberTv.setEnabled(false);
@@ -328,9 +318,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         fDateTv.setEnabled(true);
         fnoTv.setEnabled(true);
         shipperTv.setEnabled(true);
-        shipperTELTv.setEnabled(true);
         consigneeTv.setEnabled(true);
-        cNEETELTv.setEnabled(true);
         transportNOTv.setEnabled(true);
         allowTransNOTv.setEnabled(true);
         cIQNumberTv.setEnabled(true);
@@ -425,12 +413,8 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         fNo = fNo.toUpperCase();
         shipper = shipperTv.getText().toString();
         shipper = shipper.toUpperCase();
-        shipperTEL = shipperTELTv.getText().toString();
-        shipperTEL = shipperTEL.toUpperCase();
         consignee = consigneeTv.getText().toString();
         consignee = consignee.toUpperCase();
-        cNEETEL = cNEETELTv.getText().toString();
-        cNEETEL = cNEETEL.toUpperCase();
         transportNO = transportNOTv.getText().toString();
         transportNO = transportNO.toUpperCase();
         allowTransNO = allowTransNOTv.getText().toString();

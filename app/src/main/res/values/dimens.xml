@@ -15,5 +15,7 @@
     <dimen name="house_size">20sp</dimen>
     <dimen name="declare_size">15sp</dimen>
 
+    <dimen name="login_size">17sp</dimen>
+
 
 </resources>
