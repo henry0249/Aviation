@@ -16,7 +16,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.LoginActivity;
@@ -43,13 +43,13 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
     private View view;
 
     // 设置锁屏
-    private LinearLayout seetingPassLayout;
+    private RelativeLayout seetingPassLayout;
 
     // 版本更新
-    private LinearLayout versionUpdateLayout;
+    private RelativeLayout versionUpdateLayout;
 
     // 退出登录
-    private LinearLayout exitLoginLayout;
+    private RelativeLayout exitLoginLayout;
 
     // 版本更新（版本号 提示消息 下载地址）
     private ProgressDialog pBar;
@@ -69,13 +69,13 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
         navBar.setTitle("我的");
         navBar.hideRight();
         navBar.hideLeft();
-        seetingPassLayout = (LinearLayout) view.findViewById(R.id.setting_pass_layout);
+        seetingPassLayout = (RelativeLayout) view.findViewById(R.id.setting_pass_layout);
         seetingPassLayout.setOnClickListener(this);
 
-        versionUpdateLayout = (LinearLayout) view.findViewById(R.id.version_update_layout);
+        versionUpdateLayout = (RelativeLayout) view.findViewById(R.id.version_update_layout);
         versionUpdateLayout.setOnClickListener(this);
 
-        exitLoginLayout = (LinearLayout) view.findViewById(R.id.exit_login_layout);
+        exitLoginLayout = (RelativeLayout) view.findViewById(R.id.exit_login_layout);
         exitLoginLayout.setOnClickListener(this);
 
         // 获取版本更新信息

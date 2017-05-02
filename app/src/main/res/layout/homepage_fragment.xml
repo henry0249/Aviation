@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/colorWhite">
+    android:background="#f4f4f4">
 
     <GridView
         android:id="@+id/home_gridView"
@@ -14,5 +14,6 @@
         android:layout_alignParentTop="true"
         android:numColumns="4">
     </GridView>
+
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -93,8 +94,8 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
         destEt.setTransformationMethod(new AllCapTransformationMethod());
         wareHousePb = (ProgressBar) findViewById(R.id.ware_house_pb);
         houseSearchBtn = (Button) findViewById(R.id.house_search_btn);
-        Button beginTime = (Button) findViewById(R.id.house_begin_time_btn);
-        Button endTime = (Button) findViewById(R.id.house_end_time_btn);
+        ImageView beginTime = (ImageView) findViewById(R.id.house_begin_time_btn);
+        ImageView endTime = (ImageView) findViewById(R.id.house_end_time_btn);
         currentTime = DateUtils.getTodayDateTime();
         begainTimeEt.setText(currentTime);
         endTimeEt.setText(currentTime);

@@ -12,7 +12,7 @@
 
     <dimen name="house_small_size">12sp</dimen>
 
-    <dimen name="house_size">20sp</dimen>
+    <dimen name="house_size">18sp</dimen>
     <dimen name="declare_size">15sp</dimen>
 
     <dimen name="login_size">17sp</dimen>

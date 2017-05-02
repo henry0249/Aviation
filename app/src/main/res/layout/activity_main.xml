@@ -170,7 +170,7 @@
                 android:background="@drawable/button_selector"
                 android:text="@string/login"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/small_size" />
+                android:textSize="19sp" />
         </LinearLayout>
 
         <LinearLayout

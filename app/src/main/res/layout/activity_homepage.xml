@@ -11,92 +11,122 @@
       android:id="@+id/content_frame"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:background="#f4f4f4"
       android:layout_below="@+id/home_include">
   </FrameLayout>
+
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="60dp"
+      android:layout_height="48dp"
       android:layout_alignParentBottom="true"
-      android:orientation="horizontal"
-      android:background="@color/colorTitle">
+      android:background="#ffffff"
+      android:orientation="horizontal">
+
     <LinearLayout
         android:id="@+id/home_page_layout"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
         android:orientation="vertical"
         android:gravity="center">
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#a3a3a3"/>
       <ImageView
           android:id="@+id/home_page_iv"
-          android:layout_width="30dp"
-          android:layout_height="30dp"
-          android:src="@drawable/first_page"/>
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="6dp"
+          android:src="@drawable/zhuye2"/>
       <TextView
           android:id="@+id/home_page_tv"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginTop="3dp"
           android:text="@string/userhome_title"
-          android:textSize="18sp"
-          android:textColor="@color/colorWhite"/>
+          android:textSize="12sp"
+          android:textColor="@color/home_color"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="invisible">
+        android:visibility="visible">
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#a3a3a3" />
+
       <ImageView
           android:layout_width="30dp"
           android:layout_height="30dp"
-          android:src="@drawable/first_page"/>
+          android:src="@drawable/first_page"
+          android:visibility="invisible"/>
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="首页"
           android:textSize="18sp"
-          android:textColor="@color/colorWhite"/>
+          android:textColor="@color/home_color"
+          android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="invisible">
+        android:visibility="visible">
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#a3a3a3"/>
       <ImageView
           android:layout_width="30dp"
           android:layout_height="30dp"
-          android:src="@drawable/first_page"/>
+          android:src="@drawable/first_page"
+          android:visibility="invisible"/>
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="首页"
           android:textSize="18sp"
-          android:textColor="@color/colorWhite"/>
+          android:textColor="@color/colorWhite"
+          android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/person_layout"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
         android:orientation="vertical"
         android:gravity="center">
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#a3a3a3"/>
+
       <ImageView
           android:id="@+id/person_iv"
-          android:layout_width="30dp"
-          android:layout_height="30dp"
-          android:src="@drawable/person"/>
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="6dp"
+          android:src="@drawable/wode2"/>
+
       <TextView
           android:id="@+id/person_tv"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginTop="3dp"
           android:text="@string/person"
-          android:textSize="18sp"
-          android:textColor="@color/colorWhite"/>
+          android:textSize="12sp"
+          android:textColor="@color/home_color"/>
     </LinearLayout>
 
   </LinearLayout>

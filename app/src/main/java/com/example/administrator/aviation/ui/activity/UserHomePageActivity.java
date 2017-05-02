@@ -96,8 +96,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
         personLayout.setOnClickListener(this);
 
         // 首次进入
-        homePageTv.setTextColor(0xff1B940A);
-        homePageIv.setImageResource(R.drawable.first_page_select);
+        homePageTv.setTextColor(0xff1d2089);
+        homePageIv.setImageResource(R.drawable.zhuy1e);
 
     }
 
@@ -128,8 +128,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
                 navBar.hideLeft();
 
                 // 设置点击效果
-                homePageTv.setTextColor(0xff1B940A);
-                homePageIv.setImageResource(R.drawable.first_page_select);
+                homePageTv.setTextColor(0xff1d2089);
+                homePageIv.setImageResource(R.drawable.zhuy1e);
 
                 initFragment(0);
                 break;
@@ -142,8 +142,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
                 navBar.hideLeft();
 
                 // 设置点击效果
-                personTv.setTextColor(0xff1B940A);
-                personIv.setImageResource(R.drawable.persons_select);
+                personTv.setTextColor(0xff1d2089);
+                personIv.setImageResource(R.drawable.wode1);
 
                 initFragment(3);
                 break;
@@ -203,10 +203,10 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
 
     // 重置底部
     private void restartBottom() {
-        homePageIv.setImageResource(R.drawable.first_page);
-        homePageTv.setTextColor(0xffffffff);
+        homePageIv.setImageResource(R.drawable.zhuye2);
+        homePageTv.setTextColor(0xff666666);
 
-        personIv.setImageResource(R.drawable.person);
-        personTv.setTextColor(0xffffffff);
+        personIv.setImageResource(R.drawable.wode2);
+        personTv.setTextColor(0xff666666);
     }
 }

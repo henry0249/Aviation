@@ -151,8 +151,9 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
             }
         });
 
-        Spinner goodsSpinner = (Spinner) findViewById(R.id.awb_goods_spinner);
+        Spinner goodsSpinner = (Spinner) findViewById(R.id.awb_package_spinner);
         List<String> goodsList = new ArrayList<>();
+        goodsList.add("");
         goodsList.add("再生木托");
         goodsList.add("塑料编织袋");
         goodsList.add("夹板箱");
@@ -175,13 +176,12 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
         goodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                goods = goodsAdapter.getItem(position);
-                goodsTv.setText(goods);
+                packg = goodsAdapter.getItem(position);
+                packageTv.setText(packg);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-//                goods = goodsAdapter.getItem(0);
-                goodsTv.setText("");
+                packageTv.setText("");
             }
         });
 

@@ -120,13 +120,8 @@
                     android:id="@+id/goods_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:textSize="@dimen/awb_detail_size"/>
-                <Spinner
-                    android:id="@+id/awb_goods_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -165,8 +160,13 @@
                     android:id="@+id/package_add_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:textSize="@dimen/awb_detail_size"/>
+                <Spinner
+                    android:id="@+id/awb_package_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
