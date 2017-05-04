@@ -451,12 +451,18 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 Toast.makeText(AwbDetailActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (request.equals("true")){
                 Toast.makeText(AwbDetailActivity.this, "修改成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AwbDetailActivity.this, AppDomExpPrePareAWBActivity.class);
-                startActivityForResult(intent, AviationCommons.AWB_UPDATA);
-                finish();
+                onBackPressed();
             }
             super.onPostExecute(request);
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AwbDetailActivity.this, AppDomExpPrePareAWBActivity.class);
+//                startActivityForResult(intent, AviationCommons.AWB_UPDATA);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
+
+    }
 }

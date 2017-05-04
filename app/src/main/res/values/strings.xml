@@ -73,6 +73,7 @@
     <string name="house_guonei_ruku_detail">国内出港入库列表</string>
     <string name="house_shuruyundanhao">请输入运单号</string>
     <string name="house_shurumudigang">请输入目的港</string>
+    <string name="house_mudigang">目的港:</string>
 
     <!--int界面 国际出港预录入-->
     <string name="int_prepare_title">国际出港预录入</string>

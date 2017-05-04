@@ -233,19 +233,23 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String request) {
+            super.onPostExecute(request);
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AwbAddActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (request.equals("false") && !ErrString.equals("") ) {
                 Toast.makeText(AwbAddActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (request.equals("true")){
                 Toast.makeText(AwbAddActivity.this, "上传成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AwbAddActivity.this, AppDomExpPrePareAWBActivity.class);
-                startActivityForResult(intent, AviationCommons.AWB_ADD);
-                // 上传成功后finish掉当前的activity
-                finish();
+                onBackPressed();
             }
-            super.onPostExecute(request);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AwbAddActivity.this, AppDomExpPrePareAWBActivity.class);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
     // 获取EditText值

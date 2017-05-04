@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorWhite">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f4f4"
+    android:orientation="vertical">
 
-    <include layout="@layout/navbar"/>
+    <include layout="@layout/navbar" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/housedetail_yuanjiao">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
@@ -32,14 +39,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:inputType="number"/>
+                    android:text="1234667895"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -52,14 +68,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -72,13 +97,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -91,14 +125,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center"
                 android:visibility="gone">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -111,13 +154,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color" />
+                    android:background="@color/awb_detail_color"
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -131,31 +182,49 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Goods"
                     android:textSize="@dimen/awb_detail_size" />
+
                 <TextView
                     android:id="@+id/house_goods_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -168,32 +237,50 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Dest1"
                     android:textSize="@dimen/awb_detail_size" />
+
                 <TextView
                     android:id="@+id/house_dest_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -206,13 +293,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -225,31 +321,50 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="接单时间:"
                     android:textSize="@dimen/awb_detail_size" />
+
                 <TextView
                     android:id="@+id/house_papertime_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -262,13 +377,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -281,8 +405,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="@color/awb_detail_color"/>
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
 
         </LinearLayout>

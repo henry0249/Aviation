@@ -73,13 +73,15 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.showRight();
-        navBar.setRight(R.drawable.add);
+        navBar.setRight(R.drawable.jia);
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent intent = new Intent(AppDomExpPrePareAWBActivity.this, AwbAddActivity.class);
+//                startActivity(intent);
+//                finish();
                 Intent intent = new Intent(AppDomExpPrePareAWBActivity.this, AwbAddActivity.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent, AviationCommons.AWB_ADD);
             }
         });
         navBar.setTitle(R.string.awb_detail);
@@ -102,11 +104,35 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
     }
 
     // 回传参数(接收更新和添加订单传递过来的值更新列表)
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == AviationCommons.AWB_ADD || requestCode == AviationCommons.AWB_UPDATA) {
+//            awbAdapter.notifyDataSetChanged();
+//        }
+//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AviationCommons.AWB_ADD || requestCode == AviationCommons.AWB_UPDATA) {
-            awbAdapter.notifyDataSetChanged();
+        switch (requestCode) {
+            case AviationCommons.AWB_ADD:
+                if(resultCode == RESULT_OK) {
+//                    awbAdapter.notifyDataSetChanged();
+                    getPrepareAWBAsync = new GetPrepareAWBAsync();
+                    getPrepareAWBAsync.execute();
+                }
+                break;
+
+            case AviationCommons.AWB_UPDATA:
+                if(resultCode == RESULT_OK) {
+//                    awbAdapter.notifyDataSetChanged();
+                    getPrepareAWBAsync = new GetPrepareAWBAsync();
+                    getPrepareAWBAsync.execute();
+                }
+                break;
+            default:
+                break;
+
         }
     }
 
@@ -118,8 +144,9 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         Bundle bundle = new Bundle();
         bundle.putSerializable(AviationCommons.AWB_ITEM_INFO, mawbInfo);
         intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
+//        startActivity(intent);
+        startActivityForResult(intent, AviationCommons.AWB_UPDATA);
+//        finish();
     }
 
     // 长按每一项实现删除
