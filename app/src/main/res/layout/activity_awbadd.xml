@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#FFFFFFFF"
+              android:background="#f4f4f4"
               android:orientation="vertical">
 
     <include layout="@layout/navbar"/>
@@ -10,7 +10,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,12 +21,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_Mawb"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -36,18 +40,28 @@
                     android:layout_weight="2"
                     android:inputType="number"
                     android:maxLength="11"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/danhao"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_pc"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -58,18 +72,28 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/jianshu"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_weight"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -79,18 +103,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/zhongliang"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_volume"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -100,18 +134,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:background="#ffffff"
+                    android:hint="@string/tiji"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_Goods"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -121,18 +165,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/pinming"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_businessType"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -143,16 +197,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:text="@string/awb_detail_Package"
                     android:textSize="@dimen/awb_detail_size"/>
 
@@ -161,23 +223,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/leixing"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
                 <Spinner
                     android:id="@+id/awb_package_spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:text="@string/awb_detail_Dest1"
                     android:textSize="@dimen/awb_detail_size"/>
 
@@ -186,19 +259,30 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:hint="@string/hangcheng"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:id="@+id/dest2_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:text="@string/awb_detail_Dest2"
                     android:textSize="@dimen/awb_detail_size"/>
 
@@ -207,18 +291,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:hint="@string/hangcheng"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:text="@string/awb_detail_Remark"
                     android:textSize="@dimen/awb_detail_size"/>
 
@@ -227,18 +322,27 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_FDate"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -249,27 +353,36 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/awb_detail_size"/>
-                <Button
+                    android:background="#ffffff"
+                    android:hint="@string/riqi"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
+
+                <ImageView
                     android:id="@+id/date_chose_btn"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="30dp"
-                    android:background="@drawable/button_circle"
-                    android:text="选择日期"
-                    android:textSize="12dp"/>
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/xuanzeshijian"/>
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_Fno"
                     android:textSize="@dimen/awb_detail_size"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -279,18 +392,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/hangbanhao"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:text="@string/awb_detail_Shipper"
                     android:textSize="@dimen/awb_detail_size"/>
 
@@ -299,18 +417,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/tuoyunren"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:text="@string/awb_detail_Consignee"
                     android:textSize="@dimen/awb_detail_size"/>
 
@@ -319,8 +448,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:background="#ffffff"
+                    android:hint="@string/shouhuoren"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
         </LinearLayout>
 
@@ -334,7 +472,9 @@
             android:id="@+id/sure_add_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/awb_detail_sure" />
+            android:background="@drawable/button_circle"
+            android:textColor="#ffffff"
+            android:text="提    交" />
     </LinearLayout>
 
 </LinearLayout>

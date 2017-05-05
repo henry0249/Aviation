@@ -63,6 +63,25 @@
     <string name="awb_detail_update">更新订单</string>
     <string name="awb_detail_sure">提交</string>
 
+    <string name="danhao">请输入单号</string>
+    <string name="jianshu">请输入数量</string>
+    <string name="zhongliang">请输入重量</string>
+    <string name="tiji">请输入体积</string>
+    <string name="pinming">请输入名称</string>
+    <string name="leixing">请选择类型</string>
+    <string name="mingzi">请输入名字</string>
+    <string name="qiyungang">请输入启运港</string>
+    <string name="hangcheng">请输入航程</string>
+    <string name="hangbanhao">请输入航班号</string>
+    <string name="tuoyunren">请输入名字和手机号</string>
+    <string name="shouhuoren">请输入名字和手机号</string>
+    <string name="yunshuzheng">请输入运输证</string>
+    <string name="zhunyunzheng">请输入准运证</string>
+    <string name="shangjianhao">请出入商检号</string>
+    <string name="beizhu">请输入备注信息</string>
+    <string name="riqi">请选择日期</string>
+
+
     <!--house界面 国内-->
     <string name="house_sure">提交</string>
     <string name="house_begin_time">开始时间:</string>

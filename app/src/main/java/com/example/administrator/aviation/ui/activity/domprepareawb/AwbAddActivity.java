@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
     private EditText dest1Tv;
     private EditText dest2Tv;
     private EditText remarkTv;
-    private Button choseDateBtn;
+    private ImageView choseDateBtn;
     private EditText fDateTv;
     private EditText fnoTv;
     private EditText shipperTv;
@@ -117,7 +118,7 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
         dest2Tv.setTransformationMethod(new AllCapTransformationMethod());
         remarkTv = (EditText) findViewById(R.id.remake_add_tv);
         remarkTv.setTransformationMethod(new AllCapTransformationMethod());
-        choseDateBtn = (Button) findViewById(R.id.date_chose_btn);
+        choseDateBtn = (ImageView) findViewById(R.id.date_chose_btn);
         fDateTv = (EditText) findViewById(R.id.fdate_add_tv);
         fnoTv = (EditText) findViewById(R.id.fno_add_tv);
         fnoTv.setTransformationMethod(new AllCapTransformationMethod());

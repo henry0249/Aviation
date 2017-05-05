@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -54,7 +55,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private EditText remarkTv;
     private EditText flightCheckedTv;
     private EditText fDateTv;
-    private Button changeTimeBtn;
+    private ImageView changeTimeBtn;
     private EditText fnoTv;
     private EditText shipperTv;
     private EditText consigneeTv;
@@ -164,7 +165,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         flightCheckedTv = (EditText) findViewById(R.id.flightchecked_detail_tv);
         flightCheckedTv.setTransformationMethod(new AllCapTransformationMethod());
         fDateTv = (EditText) findViewById(R.id.fdate_detail_tv);
-        changeTimeBtn = (Button) findViewById(R.id.change_awb_time);
+        changeTimeBtn = (ImageView) findViewById(R.id.change_awb_time);
         fnoTv = (EditText) findViewById(R.id.fno_detail_tv);
         fnoTv.setTransformationMethod(new AllCapTransformationMethod());
         shipperTv = (EditText) findViewById(R.id.shipper_detail_tv);
@@ -172,6 +173,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         consigneeTv = (EditText) findViewById(R.id.consignee_detail_tv);
         consigneeTv.setTransformationMethod(new AllCapTransformationMethod());
         transportNOTv = (EditText) findViewById(R.id.transportno_detail_tv);
+        transportNOTv.setTransformationMethod(new AllCapTransformationMethod());
         allowTransNOTv = (EditText) findViewById(R.id.allowtransno_detail_tv);
         allowTransNOTv.setTransformationMethod(new AllCapTransformationMethod());
         cIQNumberTv = (EditText) findViewById(R.id.ciqnumber_detail_tv);
