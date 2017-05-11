@@ -92,13 +92,13 @@ public class HomePageFragment extends Fragment{
                 if (obj.getName().equals(AviationCommons.APP_DOM_EXP_PREPARE_AWB)) {
                     holder.setImageResource(R.id.image_iv,  R.drawable.domawb);
                 }else if (obj.getName().equals(AviationCommons.APP_DOM_EXP_WARE_HOUSE)){
-                    holder.setImageResource(R.id.image_iv,  R.drawable.domhouses);
+                    holder.setImageResource(R.id.image_iv,  R.drawable.domhouse);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXP_AWB_MANAGE)) {
-                    holder.setImageResource(R.id.image_iv, R.drawable.awb);
+                    holder.setImageResource(R.id.image_iv, R.drawable.intmanage);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXP_PREPARE_AWB)) {
-                    holder.setImageResource(R.id.image_iv, R.drawable.awb);
+                    holder.setImageResource(R.id.image_iv, R.drawable.intawb);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE)) {
-                    holder.setImageResource(R.id.image_iv, R.drawable.awb);
+                    holder.setImageResource(R.id.image_iv, R.drawable.intdecleare);
                 }
                 Log.d("guoji", obj.getName());
                 holder.setText(R.id.image_tv, obj.getNameCN());

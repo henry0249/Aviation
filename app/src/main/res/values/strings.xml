@@ -81,6 +81,12 @@
     <string name="beizhu">请输入备注信息</string>
     <string name="riqi">请选择日期</string>
 
+    <string name="fendanhao">请输入单号</string>
+    <string name="fendanjianshu">请输入件数</string>
+    <string name="fendanzhongliang">请输入重量</string>
+    <string name="fendantiji">请输入体积</string>
+    <string name="fendanpinming">请输入品名</string>
+
 
     <!--house界面 国内-->
     <string name="house_sure">提交</string>
@@ -102,8 +108,8 @@
     <string name="int_child_pc">分单件数:</string>
     <string name="int_child_weight">分单重量:</string>
     <string name="int_child_volume">分单体积:</string>
-    <string name="int_child_goods_en">品名（英文）:</string>
-    <string name="int_child_goods_cn">品名（中文）:</string>
+    <string name="int_child_goods_en">品名（英文):</string>
+    <string name="int_child_goods_cn">品名（中文):</string>
     <string name="int_child_mftstatus">预配状态:</string>
     <string name="int_child_updata">修改分单</string>
     <string name="int_group_pc">主单件数:</string>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -87,8 +88,8 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
         endTimeEt = (EditText) findViewById(R.id.int_house_end_time_et);
         wareHousePb = (ProgressBar) findViewById(R.id.int_ware_house_pb);
         houseSearchBtn = (Button) findViewById(R.id.int_house_search_btn);
-        Button beginTime = (Button) findViewById(R.id.int_house_begin_time_btn);
-        Button endTime = (Button) findViewById(R.id.int_house_end_time_btn);
+        ImageView beginTime = (ImageView) findViewById(R.id.int_house_begin_time_btn);
+        ImageView endTime = (ImageView) findViewById(R.id.int_house_end_time_btn);
         currentTime = DateUtils.getTodayDateTime();
         begainTimeEt.setText(currentTime);
         endTimeEt.setText(currentTime);

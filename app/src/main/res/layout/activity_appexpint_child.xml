@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#FFFFFFFF"
+              android:background="#f4f4f4"
               android:orientation="vertical">
 
     <include layout="@layout/navbar"/>
@@ -14,17 +14,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="40dp"
+                android:gravity="center">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_hno"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
@@ -32,19 +36,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_pc"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
@@ -52,39 +65,58 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_weight"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:id="@+id/textView6" />
 
                 <EditText
                     android:id="@+id/weight_int_child_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_volume"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
@@ -92,19 +124,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_goods_en"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
@@ -112,19 +153,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_goods_cn"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
@@ -132,19 +182,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="40dp"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_mftstatus"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"/>
 
                 <EditText
@@ -152,36 +211,53 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginLeft="21dp">
             <Button
                 android:id="@+id/int_update_child_btn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/int_child_updata"/>
+                android:text="@string/int_child_updata"
+                android:background="@drawable/button_selector"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/house_size"/>
 
             <Button
                 android:id="@+id/int_sure_child_btn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/awb_detail_sure"
-                android:visibility="gone"/>
+                android:text="提    交"
+                android:visibility="gone"
+                android:background="@drawable/button_selector"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/house_size"/>
             <Button
                 android:id="@+id/int_delete_child_btn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/int_child_delete"/>
+                android:text="@string/int_child_delete"
+                android:background="@drawable/button_selector"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/house_size"/>
             </LinearLayout>
 
         </LinearLayout>

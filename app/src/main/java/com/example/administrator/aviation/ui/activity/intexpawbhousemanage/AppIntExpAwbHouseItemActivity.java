@@ -30,6 +30,8 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.List;
 
+import static com.example.administrator.aviation.R.id.int_group_detail_tev;
+
 /**
  * 国际出港入库管理it
  */
@@ -166,13 +168,14 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
                 convertView = LayoutInflater.from(activity).inflate(R.layout.int_group_item, parent, false);
                 groupViewHolder = new ExpandableAdapter.GroupViewHolder();
                 groupViewHolder.groupMawbIdTv = (TextView) convertView.findViewById(R.id.int_group_mawb_tv);
+                groupViewHolder.groupDetailTv = (TextView) convertView.findViewById(int_group_detail_tev);
                 groupViewHolder.groupImage = (ImageView) convertView.findViewById(R.id.int_group_imageview);
                 convertView.setTag(groupViewHolder);
             } else {
                 groupViewHolder = (ExpandableAdapter.GroupViewHolder) convertView.getTag();
             }
             groupViewHolder.groupMawbIdTv.setText(groupList.get(groupPosition).getMawb());
-            groupViewHolder.groupMawbIdTv.setOnClickListener(new View.OnClickListener() {
+            groupViewHolder.groupDetailTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpGroupActivity.class);
@@ -247,6 +250,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         }
         class GroupViewHolder{
             TextView groupMawbIdTv;
+            TextView groupDetailTv;
             ImageView groupImage;
         }
         class ChildViewHolder{

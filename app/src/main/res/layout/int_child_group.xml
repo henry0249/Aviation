@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/int_child_layout"
-              android:orientation="horizontal"
+              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginTop="5dp"
-              android:layout_marginBottom="5dp"
               android:gravity="center">
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="75dp"
-        android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:text="分运单号："/>
-    <TextView
-        android:id="@+id/int_child_hawbid_tv"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:text="11111111"/>
-    <ImageView
-        android:id="@+id/int_group_im"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_weight="0.2"
-        android:src="@drawable/dayuhaotwo"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="分运单号："
+            android:textSize="@dimen/house_size"
+            android:layout_marginLeft="40dp"
+            android:textColor="#666666"/>
+
+        <TextView
+            android:id="@+id/int_child_hawbid_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="11111111"
+            android:textSize="@dimen/house_size"
+            android:layout_marginLeft="11dp"
+            android:textColor="#666666"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="详情"
+            android:textSize="@dimen/house_size"
+            android:layout_marginLeft="40dp"
+            android:textColor="#1d2089"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/jiantou" />
+    </LinearLayout>
 
 </LinearLayout>
