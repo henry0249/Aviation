@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,23 +27,23 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Mawb"
                     android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/awb_detail_size"
+                    android:layout_marginLeft="21dp"/>
 
                 <EditText
                     android:id="@+id/int_group_mawb_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:background="#ffffff"
                     android:hint="@string/danhao"
                     android:inputType="number"
                     android:maxLength="11"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/awb_detail_size"
+                    android:background="#ffffff"/>
             </LinearLayout>
 
             <View
@@ -405,15 +406,17 @@
             <LinearLayout
                 android:id="@+id/group_dest2_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
+                android:gravity="center"
                 android:visibility="gone">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
                     android:text="@string/awb_detail_Dest2"
+                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size" />
 
                 <EditText
@@ -951,47 +954,58 @@
                 android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
 
-            <LinearLayout
-                android:id="@+id/hide_int_house_sure_linearlayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/update_int_group_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/int_group_update" />
-
-                <Button
-                    android:id="@+id/sure_int_group_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/awb_detail_sure"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/delete_int_group_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/int_group_delete" />
-
-                <Button
-                    android:id="@+id/declare_mawb_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/int_declare_mawb" />
-            </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
+    <LinearLayout
+        android:id="@+id/hide_int_house_sure_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/update_int_group_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="21dp"
+            android:text="@string/int_group_update"
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:textSize="19sp"/>
+
+        <Button
+            android:id="@+id/sure_int_group_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/awb_detail_sure"
+            android:visibility="gone"
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:textSize="19sp"
+            android:layout_marginLeft="21dp"/>
+
+        <Button
+            android:id="@+id/delete_int_group_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/int_group_delete"
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:textSize="19sp"
+            android:layout_marginLeft="9dp"/>
+
+        <Button
+            android:id="@+id/declare_mawb_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/int_declare_mawb"
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:textSize="19sp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="21dp"/>
+    </LinearLayout>
 </LinearLayout>

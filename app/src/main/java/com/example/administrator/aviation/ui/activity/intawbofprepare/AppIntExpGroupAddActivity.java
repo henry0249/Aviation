@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 新增主单界面
+ * 国际出港预录入新增主单界面
  */
 
 public class AppIntExpGroupAddActivity extends Activity implements View.OnClickListener{

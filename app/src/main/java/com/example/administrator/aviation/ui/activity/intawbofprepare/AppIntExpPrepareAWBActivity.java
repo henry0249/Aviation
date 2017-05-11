@@ -186,12 +186,13 @@ public class AppIntExpPrepareAWBActivity extends Activity{
                 groupViewHolder = new GroupViewHolder();
                 groupViewHolder.groupMawbIdTv = (TextView) convertView.findViewById(R.id.int_group_mawb_tv);
                 groupViewHolder.groupImage = (ImageView) convertView.findViewById(R.id.int_group_imageview);
+                groupViewHolder.groupDeatilTv = (TextView) convertView.findViewById(R.id.int_group_detail_tev);
                 convertView.setTag(groupViewHolder);
             } else {
                 groupViewHolder = (GroupViewHolder) convertView.getTag();
             }
             groupViewHolder.groupMawbIdTv.setText(groupList.get(groupPosition).getMawb());
-            groupViewHolder.groupMawbIdTv.setOnClickListener(new View.OnClickListener() {
+            groupViewHolder.groupDeatilTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(AppIntExpPrepareAWBActivity.this, AppIntExpGroupActivity.class);
@@ -265,6 +266,7 @@ public class AppIntExpPrepareAWBActivity extends Activity{
         class GroupViewHolder{
             TextView groupMawbIdTv;
             ImageView groupImage;
+            TextView groupDeatilTv;
         }
         class ChildViewHolder{
             TextView childText;
