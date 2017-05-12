@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbAdd;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
+import com.example.administrator.aviation.ui.activity.domprepareawb.AwbAddActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationNoteConvert;
+import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
@@ -105,6 +108,8 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
     private EditText cIQStatusEt;
     private EditText cIQNumberEt;
     private Button sureBtn;
+    private ImageView imageChoseTime;
+    ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
 
     private ArrayAdapter<String> businessTypeAdapter;
 
@@ -174,6 +179,9 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         gpriceEt = (EditText) findViewById(R.id.int_group_add_gprice_detail_tv);
         cIQStatusEt = (EditText) findViewById(R.id.int_group_add_cIQStatus_detail_tv);
         cIQNumberEt = (EditText) findViewById(R.id.int_group_add_cIQNumber_detail_tv);
+
+        imageChoseTime = (ImageView) findViewById(R.id.int_group_date_chose_btn);
+        imageChoseTime.setOnClickListener(this);
 
         sureBtn = (Button) findViewById(R.id.add_int_group_btn);
         sureBtn.setOnClickListener(this);
@@ -313,6 +321,9 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
                 new AddGroupAsyncTask().execute();
                 break;
 
+            case R.id.int_group_date_chose_btn:
+                choseTimeMethod.getCurrentTime(AppIntExpGroupAddActivity.this, fDateEt);
+                break;
             default:
                 break;
         }

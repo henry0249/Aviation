@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -87,8 +88,8 @@ public class AppIntExpOneKeyDeclareActivity extends Activity implements View.OnC
         endTimeEt = (EditText) findViewById(R.id.declare_end_time_et);
         wareHousePb = (ProgressBar) findViewById(R.id.declare_pb);
         houseSearchBtn = (Button) findViewById(R.id.declare_search_btn);
-        Button beginTime = (Button) findViewById(R.id.declare_begin_time_btn);
-        Button endTime = (Button) findViewById(R.id.declare_end_time_btn);
+        ImageView beginTime = (ImageView) findViewById(R.id.declare_begin_time_btn);
+        ImageView endTime = (ImageView) findViewById(R.id.declare_end_time_btn);
         currentTime = DateUtils.getTodayDateTime();
         begainTimeEt.setText(currentTime);
         endTimeEt.setText(currentTime);

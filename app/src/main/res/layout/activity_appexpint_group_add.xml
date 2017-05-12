@@ -279,7 +279,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff"/>
+                    android:background="#ffffff"
+                    android:hint="@string/baozhuangleixing"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -308,7 +309,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/huoyuandi"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -337,7 +339,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/qiyungang"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -428,7 +431,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/chengyunren"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -513,10 +517,17 @@
                     android:id="@+id/int_group_add_fdate_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/riqi"/>
+                <ImageView
+                    android:id="@+id/int_group_date_chose_btn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/xuanzeshijian"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -545,7 +556,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/jihuahangbanhao"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -631,7 +643,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff"/>
+                    android:background="#ffffff"
+                    android:hint="@string/zhifufangshi"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -660,7 +673,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff"/>
+                    android:background="#ffffff"
+                    android:hint="@string/shouhuochengshi"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -689,7 +703,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/shouhuoguojia"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -807,7 +822,8 @@
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:hint="@string/huozhi"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

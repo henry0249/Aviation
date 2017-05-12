@@ -87,7 +87,6 @@
     <string name="fendantiji">请输入体积</string>
     <string name="fendanpinming">请输入品名</string>
 
-
     <!--house界面 国内-->
     <string name="house_sure">提交</string>
     <string name="house_begin_time">开始时间:</string>
@@ -136,6 +135,17 @@
     <string name="int_awb_house_item_title">国际出港入库信息</string>
     <string name="int_awb_house_search">查询</string>
     <string name="int_declare_title">预配/运抵申报查询</string>
+
+    <!--国际新增主单提示-->
+    <string name="jihuahangbanhao">请输入计划航班号</string>
+    <string name="baozhuangleixing">请输入包装类型</string>
+    <string name="huoyuandi">请输入货源地</string>
+    <string name="chengyunren">请输入承运人</string>
+    <string name="jihuariqi">请选择计划航班日期</string>
+    <string name="zhifufangshi">请输入支付方式</string>
+    <string name="shouhuoguojia">请输入收货国家</string>
+    <string name="shouhuochengshi">请输入收货城市</string>
+    <string name="huozhi">请输入货值</string>
     
     <!--运抵与申报界面-->
     <string name="declare_rearchid">运抵编号:</string>
