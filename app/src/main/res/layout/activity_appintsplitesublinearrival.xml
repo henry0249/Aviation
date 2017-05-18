@@ -2,29 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#e8e8e8">
     <include layout="@layout/navbar"
         android:id="@+id/splite_title_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_below="@+id/splite_title_layout"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
     <LinearLayout
         android:id="@+id/splite_first_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/splite_title_layout"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:layout_marginRight="21dp"
+        android:layout_marginLeft="21dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/awb_size"
+            android:textSize="18sp"
+            android:textColor="#666666"
             android:text="@string/declare_pc"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:id="@+id/textView9" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/awb_size"
+            android:textSize="18sp"
+            android:textColor="#666666"
             android:text="@string/awb_detail_weight"
             android:gravity="center"/>
 
@@ -32,7 +47,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/awb_size"
+            android:textSize="18sp"
+            android:textColor="#666666"
             android:text="@string/awb_detail_volume"
             android:gravity="center"/>
 
@@ -44,12 +60,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/splite_first_layout"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp">
 
         <EditText
             android:id="@+id/splite_pcone_et"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textSize="@dimen/awb_size"
             android:gravity="center"
@@ -60,7 +78,7 @@
         <EditText
             android:id="@+id/splite_weightone_et"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textSize="@dimen/awb_size"
             android:gravity="center"
@@ -71,7 +89,7 @@
         <EditText
             android:id="@+id/splite_volumeone_et"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textSize="@dimen/awb_size"
             android:gravity="center"
@@ -87,12 +105,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/splite_second_layout"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp">
 
         <EditText
             android:id="@+id/splite_pctwo_et"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textSize="@dimen/awb_size"
             android:gravity="center"
@@ -103,7 +123,7 @@
         <EditText
             android:id="@+id/splite_weighttwo_et"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textSize="@dimen/awb_size"
             android:gravity="center"
@@ -114,7 +134,7 @@
         <EditText
             android:id="@+id/splite_volumetwo_et"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textSize="@dimen/awb_size"
             android:gravity="center"
@@ -129,7 +149,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/splite_third_layout"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp">
 
         <Button
             android:id="@+id/splite_sure_btn"
@@ -138,7 +160,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/splite_sure"
-            android:layout_marginLeft="5dp" />
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:textSize="19sp"/>
 
         <Button
             android:id="@+id/splite_submit_btn"
@@ -147,9 +171,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/house_sure"
-            android:layout_marginLeft="5dp"/>
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dp"
+            android:textSize="19sp"/>
 
     </LinearLayout>
-
+</LinearLayout>
 
 </RelativeLayout>
