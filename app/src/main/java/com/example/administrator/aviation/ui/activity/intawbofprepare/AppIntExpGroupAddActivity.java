@@ -61,6 +61,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
     private String transPortMode;
     private String cntransPortMode;
     private String freightPayment;
+    private String cnPay;
     private String cNEECity;
     private String cNEECountry;
     private String mftStatus;
@@ -84,21 +85,16 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
     private EditText spCodeEt;
     private EditText goodsEt;
     private EditText goodsCNEt;
-    private TextView businessTypeEt;
     private EditText packAgeEt;
     private EditText originEt;
     private EditText depEt;
     private EditText dest1Et;
     private EditText dest2Et;
-    private LinearLayout dest2Layout;
     private EditText by1Et;
-    private TextView tranFlagEt;
     private EditText remarkEt;
     private EditText fDateEt;
     private EditText fnoEt;
     private EditText customsCodeEt;
-    private TextView transPortModeEt;
-    private EditText freightPaymentEt;
     private EditText cNEECityEt;
     private EditText cNEECountryEt;
     private EditText mftStatusEt;
@@ -107,8 +103,6 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
     private EditText gpriceEt;
     private EditText cIQStatusEt;
     private EditText cIQNumberEt;
-    private Button sureBtn;
-    private ImageView imageChoseTime;
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
 
     private ArrayAdapter<String> businessTypeAdapter;
@@ -116,6 +110,8 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
     private ArrayAdapter<String> tranFlagAdapter;
 
     private ArrayAdapter<String> transPortModeAdapter;
+
+    private ArrayAdapter<String> payAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,8 +145,8 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         goodsEt = (EditText) findViewById(R.id.int_group_add_goods_detail_tv);
         goodsEt.setTransformationMethod(new AllCapTransformationMethod());
         goodsCNEt = (EditText) findViewById(R.id.int_group_add_goodscn_detail_tv);
-        businessTypeEt = (TextView) findViewById(R.id.int_group_add_businesstype_detail_tv);
         packAgeEt = (EditText) findViewById(R.id.int_group_add_package_detail_tv);
+        packAgeEt.setTransformationMethod(new AllCapTransformationMethod());
         originEt = (EditText) findViewById(R.id.int_group_add_origin_detail_tv);
         originEt.setTransformationMethod(new AllCapTransformationMethod());
         depEt = (EditText) findViewById(R.id.int_group_add_dep_detail_tv);
@@ -159,31 +155,31 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         dest1Et.setTransformationMethod(new AllCapTransformationMethod());
         dest2Et = (EditText) findViewById(R.id.int_group_add_dest2_detail_tv);
         dest2Et.setTransformationMethod(new AllCapTransformationMethod());
-        dest2Layout = (LinearLayout) findViewById(R.id.group_add_dest2_layout);
         by1Et = (EditText) findViewById(R.id.int_group_add_by_detail_tv);
         by1Et.setTransformationMethod(new AllCapTransformationMethod());
-        tranFlagEt = (TextView) findViewById(R.id.int_group_add_tranFlag_detail_tv);
         remarkEt = (EditText) findViewById(R.id.int_group_add_remake_detail_tv);
+        remarkEt.setTransformationMethod(new AllCapTransformationMethod());
         fDateEt = (EditText) findViewById(R.id.int_group_add_fdate_detail_tv);
         fnoEt = (EditText) findViewById(R.id.int_group_add_fno_detail_tv);
+        fnoEt.setTransformationMethod(new AllCapTransformationMethod());
         customsCodeEt = (EditText) findViewById(R.id.int_group_add_customsCode_detail_tv);
-        transPortModeEt = (TextView) findViewById(R.id.int_group_add_transPortMode_detail_tv);
-        freightPaymentEt = (EditText) findViewById(R.id.int_group_add_freightPayment_detail_tv);
-        freightPaymentEt.setTransformationMethod(new AllCapTransformationMethod());
         cNEECityEt = (EditText) findViewById(R.id.int_group_add_cNEECity_detail_tv);
+        cNEECityEt.setTransformationMethod(new AllCapTransformationMethod());
         cNEECountryEt = (EditText) findViewById(R.id.int_group_add_cNEECountry_detail_tv);
         cNEECountryEt.setTransformationMethod(new AllCapTransformationMethod());
         mftStatusEt = (EditText) findViewById(R.id.int_group_add_mftStatus_detail_tv);
         shipperEt = (EditText) findViewById(R.id.int_group_add_shipper_detail_tv);
+        shipperEt.setTransformationMethod(new AllCapTransformationMethod());
         consigneeEt = (EditText) findViewById(R.id.int_group_add_consignee_detail_tv);
+        consigneeEt.setTransformationMethod(new AllCapTransformationMethod());
         gpriceEt = (EditText) findViewById(R.id.int_group_add_gprice_detail_tv);
         cIQStatusEt = (EditText) findViewById(R.id.int_group_add_cIQStatus_detail_tv);
         cIQNumberEt = (EditText) findViewById(R.id.int_group_add_cIQNumber_detail_tv);
 
-        imageChoseTime = (ImageView) findViewById(R.id.int_group_date_chose_btn);
+        ImageView imageChoseTime = (ImageView) findViewById(R.id.int_group_date_chose_btn);
         imageChoseTime.setOnClickListener(this);
 
-        sureBtn = (Button) findViewById(R.id.add_int_group_btn);
+        Button sureBtn = (Button) findViewById(R.id.add_int_group_btn);
         sureBtn.setOnClickListener(this);
 
         userBumen = PreferenceUtils.getUserBumen(this);
@@ -263,6 +259,30 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
             transPortModeSpinner.setSelection(0);
         }
 
+        // 支付方式
+        Spinner paySpinner = (Spinner) findViewById(R.id.intgroup_pay_spinner);
+        List<String> payList = new ArrayList<>();
+        payList.add("预付");
+        payList.add("到付");
+        payAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, payList);
+        payAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        paySpinner.setAdapter(payAdapter);
+        paySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                cnPay = payAdapter.getItem(position);
+                freightPayment = AviationNoteConvert.cNtoEn(cnPay);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                cnPay = payAdapter.getItem(0);
+                freightPayment = AviationNoteConvert.cNtoEn(cnPay);
+            }
+        });
+        if (paySpinner.getCount() > 0) {
+            paySpinner.setSelection(0);
+        }
+
     }
 
     // 获得EditText值
@@ -278,6 +298,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         goods = goods.toUpperCase();
         goodsCN = goodsCNEt.getText().toString();
         packAge = packAgeEt.getText().toString();
+        packAge = packAge.toUpperCase();
         origin = originEt.getText().toString();
         origin = origin.toUpperCase();
         dep = depEt.getText().toString();
@@ -288,22 +309,21 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         dest2 = dest2.toUpperCase();
         by1 = by1Et.getText().toString();
         by1 = by1.toUpperCase();
-//        String cntranFlag = tranFlagEt.getText().toString();
-//        tranFlag = AviationNoteConvert.cNtoEn(cntranFlag);
         remark = remarkEt.getText().toString();
+        remark = remark.toUpperCase();
         fDate = fDateEt.getText().toString();
         fno = fnoEt.getText().toString();
+        fno = fno.toUpperCase();
         customsCode = customsCodeEt.getText().toString();
-//        String cntransPortMode = transPortModeEt.getText().toString();
-//        transPortMode = AviationNoteConvert.cNtoEn(cntransPortMode);
-        freightPayment = freightPaymentEt.getText().toString();
-        freightPayment = freightPayment.toUpperCase();
         cNEECity = cNEECityEt.getText().toString();
+        cNEECity = cNEECity.toUpperCase();
         cNEECountry = cNEECountryEt.getText().toString();
         cNEECountry = cNEECountry.toUpperCase();
         mftStatus = mftStatusEt.getText().toString();
         shipper = shipperEt.getText().toString();
+        shipper = shipper.toUpperCase();
         consignee = consigneeEt.getText().toString();
+        consignee = consignee.toUpperCase();
         gprice = gpriceEt.getText().toString();
         cIQStatus = cIQStatusEt.getText().toString();
         cIQNumber = cIQNumberEt.getText().toString();

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,9 +25,11 @@ import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbDel
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbUpdate;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
+import com.example.administrator.aviation.ui.activity.domprepareawb.AwbDetailActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
+import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
@@ -117,6 +120,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private Button deleteBtn;
     private Button declareBtn;
     private LinearLayout hideLayout;
+    private ImageView changeTimeIv;
 
     private ArrayAdapter<String> businessTypeAdapter;
     private Spinner businessTypeSpinner;
@@ -138,6 +142,8 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private int transPortModeSpinnerPosition;
     private int tranFlagSpinnerPosition;
     private int freightPaymentPosition;
+
+    ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +224,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         deleteBtn = (Button) findViewById(R.id.delete_int_group_btn);
         declareBtn = (Button) findViewById(R.id.declare_mawb_btn);
         hideLayout = (LinearLayout) findViewById(R.id.hide_int_house_sure_linearlayout);
+        changeTimeIv = (ImageView) findViewById(R.id.change_group_time);
 
         // 国际出港入库管理进入主单界面不能修改和删除还有增加主单
         if (getIntent().getStringExtra(AviationCommons.HIDE_INT_AWB_UPDATE) != null && getIntent().getStringExtra(AviationCommons.HIDE_INT_AWB_UPDATE).equals("hide")) {
@@ -235,6 +242,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         sureBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
         declareBtn.setOnClickListener(this);
+        changeTimeIv.setOnClickListener(this);
         setGroupEdiText();
         setEditTextInvisible();
 
@@ -436,6 +444,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            // 更新主单按钮
             case R.id.update_int_group_btn:
                 setEditTextVisible();
                 sureBtn.setVisibility(View.VISIBLE);
@@ -449,6 +458,7 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
                 transPortModeSpinner.setVisibility(View.VISIBLE);
                 freightPaymentEt.setVisibility(View.GONE);
                 freightPaymentSpinner.setVisibility(View.VISIBLE);
+                changeTimeIv.setVisibility(View.VISIBLE);
 
                 businessTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -541,6 +551,10 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
             case R.id.declare_mawb_btn:
                 new DeclareMawbAsyncTask().execute();
                 break;
+
+            // 更新时间
+            case R.id.change_group_time:
+                choseTimeMethod.getCurrentTime(AppIntExpGroupActivity.this, fDateEt);
             default:
                 break;
         }

@@ -166,8 +166,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -315,8 +313,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -496,8 +492,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -636,21 +630,15 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
-                <EditText
-                    android:id="@+id/int_group_add_freightPayment_detail_tv"
+                <Spinner
+                    android:id="@+id/intgroup_pay_spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff"
-                    android:hint="@string/zhifufangshi"/>
+                    android:layout_weight="1" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -798,8 +786,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"

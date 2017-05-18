@@ -4,75 +4,172 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:descendantFocusability="blocksDescendants">
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@color/bg_control_center_switch"/>
 
     <LinearLayout
+        android:id="@+id/awb_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <CheckBox
-            android:id="@+id/declare_checkbox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="false"/>
-        <TextView
-            android:id="@+id/declare_mawb_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="11111111111"
-            android:textSize="@dimen/declare_size" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp"
+        android:orientation="vertical"
+        android:background="@drawable/housedetail_yuanjiao">
 
-        <TextView
-            android:id="@+id/declare_hno_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="1111112"
-            android:textSize="@dimen/declare_size" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <CheckBox
+                android:id="@+id/declare_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:layout_gravity="center"
+                android:layout_marginLeft="9dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="运单号："
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:textColor="#a3a3a3"/>
+            <TextView
+                android:id="@+id/declare_mawb_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12345678945"
+                android:layout_marginLeft="11dp"
+                android:layout_gravity="center"
+                android:textColor="#2e2d33"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_gravity="center"
+                android:text="详情"
+                android:textColor="#1d2089"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_gravity="center"
+                android:src="@drawable/xiangqingjinru"/>
 
-        <TextView
-            android:id="@+id/declare_cmdstatus_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="指令"
-            android:textSize="@dimen/declare_size" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="40dp"
+            android:background="#e8e8e8"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
 
-        <TextView
-            android:id="@+id/declare_mftstatus_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="预配状态"
-            android:textSize="@dimen/declare_size" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="分单号："
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:textColor="#a3a3a3"
+                android:id="@+id/textView8" />
 
-        <TextView
-            android:id="@+id/declare_arrivalstatus_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="运抵状态"
-            android:textSize="@dimen/declare_size" />
+            <TextView
+                android:id="@+id/declare_hno_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12345678945"
+                android:layout_marginLeft="11dp"
+                android:layout_gravity="center"
+                android:textColor="#2e2d33"
+                android:textSize="18sp"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="0.5"
-            android:src="@drawable/dayuhao"
-            android:id="@+id/imageView"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@color/bg_control_center_switch"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="40dp"
+            android:background="#e8e8e8"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:text="@string/declare_zhiling"
+                    android:textSize="16sp"
+                    android:textColor="#a3a3a3"/>
+                <TextView
+                    android:id="@+id/declare_cmdstatus_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:text="PEK"
+                    android:textSize="16sp"
+                    android:textColor="#2e2d33" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="预配状态"
+                    android:textSize="16sp"
+                    android:textColor="#a3a3a3"
+                    android:id="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/declare_mftstatus_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="#2e2d33"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="运抵状态"
+                    android:textSize="16sp"
+                    android:textColor="#a3a3a3"/>
+                <TextView
+                    android:id="@+id/declare_arrivalstatus_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="2"
+                    android:textSize="16sp"
+                    android:textColor="#2e2d33"/>
+
+            </LinearLayout>
+          </LinearLayout>
+
+        </LinearLayout>
+
+
 </LinearLayout>

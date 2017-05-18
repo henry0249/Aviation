@@ -43,7 +43,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -68,7 +73,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -91,7 +101,12 @@
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:id="@+id/new_declare_layout"
                 android:layout_width="match_parent"
@@ -117,7 +132,12 @@
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -142,7 +162,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -167,7 +192,10 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -192,7 +220,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -215,8 +248,14 @@
                     android:maxLength="11"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"/>
-            </LinearLayout>
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -240,7 +279,12 @@
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -265,7 +309,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -290,7 +339,10 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -315,7 +367,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -346,7 +403,12 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -377,7 +439,12 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -401,7 +468,12 @@
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -425,6 +497,12 @@
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4"
+                android:id="@+id/view" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -450,7 +528,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -475,7 +558,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -500,7 +588,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -525,7 +618,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -550,7 +648,10 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -575,7 +676,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -600,7 +706,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -625,7 +736,12 @@
                     android:textSize="@dimen/awb_detail_size"
                     android:background="#ffffff" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
         </LinearLayout>
 
     </ScrollView>
