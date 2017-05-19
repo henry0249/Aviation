@@ -65,6 +65,9 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private Button updateBtn;
     private Button sureBtn;
     private LinearLayout dest2Layout;
+    private LinearLayout yunshuzhengLayout;
+    private LinearLayout zhunyunzhengLayout;
+    private LinearLayout shangjianhaoLayout;
 
     private MawbInfo mawbInfo;
 
@@ -179,6 +182,11 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         cIQNumberTv = (EditText) findViewById(R.id.ciqnumber_detail_tv);
         cIQNumberTv.setTransformationMethod(new AllCapTransformationMethod());
 
+        // 更新不显示的
+        yunshuzhengLayout = (LinearLayout) findViewById(R.id.int_transportno_layout);
+        zhunyunzhengLayout = (LinearLayout) findViewById(R.id.int_allowtransno_layout);
+        shangjianhaoLayout = (LinearLayout) findViewById(R.id.int_ciqnumber_layout);
+
         updateBtn = (Button) findViewById(R.id.update_detail_btn);
         updateBtn.setOnClickListener(this);
         sureBtn = (Button) findViewById(R.id.sure_detail_btn);
@@ -251,10 +259,12 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         depTv.setText(dep);
         dest1 = mawbInfo.getDest1();
         dest2 = mawbInfo.getDest2();
-        if (!dest2.equals("")) {
+        if (!dest2.equals("") && dest1.equals("")) {
             dest1Tv.setText(dest2);
         } else {
+            dest2Layout.setVisibility(View.VISIBLE);
             dest1Tv.setText(dest1);
+            dest2Tv.setText(dest2);
         }
         remark = mawbInfo.getRemark();
         remarkTv.setText(remark);
@@ -276,6 +286,10 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         allowTransNOTv.setText(allowTransNO);
         cIQNumber = mawbInfo.getMawbm().getCIQNumber();
         cIQNumberTv.setText(cIQNumber);
+        // 修改不赋值
+//        transportNOTv.setVisibility(View.GONE);
+//        allowTransNOTv.setVisibility(View.GONE);
+//        cIQNumberTv.setVisibility(View.GONE);
     }
 
     // 设置EditText不可编辑
@@ -337,6 +351,10 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 dest2Layout.setVisibility(View.VISIBLE);
                 businessTypeTv.setVisibility(View.GONE);
                 goodsSpinner.setVisibility(View.VISIBLE);
+                yunshuzhengLayout.setVisibility(View.GONE);
+                zhunyunzhengLayout.setVisibility(View.GONE);
+                shangjianhaoLayout.setVisibility(View.GONE);
+
                 businessTypeSpinner.setVisibility(View.VISIBLE);
                 goodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override

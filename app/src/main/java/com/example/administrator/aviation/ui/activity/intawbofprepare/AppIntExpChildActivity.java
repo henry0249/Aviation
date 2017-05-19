@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
@@ -38,6 +39,7 @@ public class AppIntExpChildActivity extends Activity implements View.OnClickList
     private EditText goodsEt;
     private EditText goodsCNEt;
     private EditText mftstatusEt;
+    private LinearLayout mftstatusLayout;
     private Button updataBtn;
     private Button sureBtn;
     private Button deleteBtn;
@@ -94,6 +96,7 @@ public class AppIntExpChildActivity extends Activity implements View.OnClickList
         updataBtn = (Button) findViewById(R.id.int_update_child_btn);
         sureBtn = (Button) findViewById(R.id.int_sure_child_btn);
         deleteBtn = (Button) findViewById(R.id.int_delete_child_btn);
+        mftstatusLayout = (LinearLayout) findViewById(R.id.child_mftstatus_layout);
 
         userBumen = PreferenceUtils.getUserBumen(this);
         userName = PreferenceUtils.getUserName(this);
@@ -159,6 +162,7 @@ public class AppIntExpChildActivity extends Activity implements View.OnClickList
                 setEditTextVisible();
                 updataBtn.setVisibility(View.GONE);
                 sureBtn.setVisibility(View.VISIBLE);
+                mftstatusLayout.setVisibility(View.GONE);
                 break;
 
             // 更新分单

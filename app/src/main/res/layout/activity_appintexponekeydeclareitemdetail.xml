@@ -244,10 +244,16 @@
                     android:id="@+id/declare_fdate_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:maxLength="11"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size"/>
+                <ImageView
+                    android:id="@+id/declare_fdate_detail_btn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/xuanzeshijian"/>
 
             </LinearLayout>
             <View
@@ -364,8 +370,7 @@
                     android:layout_weight="2"
                     android:maxLength="11"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:background="#ffffff"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

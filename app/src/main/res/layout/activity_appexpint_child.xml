@@ -191,6 +191,7 @@
                 android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
             <LinearLayout
+                android:id="@+id/child_mftstatus_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">

@@ -338,7 +338,14 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         depEt.setText(dep);
         dest1 = mawbInfo.getDest1();
         dest2 = mawbInfo.getDest2();
-        dest1Et.setText(dest1);
+        if (dest1.equals("") && !dest2.equals("")) {
+            dest1Et.setText(dest2);
+        } else {
+            dest2Layout.setVisibility(View.VISIBLE);
+            dest1Et.setText(dest1);
+            dest2Et.setText(dest2);
+        }
+
         by1 = mawbInfo.getBy1();
         by1Et.setText(by1);
         tranFlag = mawbInfo.getTranFlag();

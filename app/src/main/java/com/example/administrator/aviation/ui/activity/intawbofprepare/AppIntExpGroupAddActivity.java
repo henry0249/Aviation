@@ -103,6 +103,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
     private EditText gpriceEt;
     private EditText cIQStatusEt;
     private EditText cIQNumberEt;
+
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
 
     private ArrayAdapter<String> businessTypeAdapter;
@@ -176,6 +177,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         cIQStatusEt = (EditText) findViewById(R.id.int_group_add_cIQStatus_detail_tv);
         cIQNumberEt = (EditText) findViewById(R.id.int_group_add_cIQNumber_detail_tv);
 
+
         ImageView imageChoseTime = (ImageView) findViewById(R.id.int_group_date_chose_btn);
         imageChoseTime.setOnClickListener(this);
 
@@ -238,8 +240,8 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         // 离境方式
         Spinner transPortModeSpinner = (Spinner) findViewById(R.id.transPortMode_spinner);
         List<String> transPortModeList = new ArrayList<>();
-        transPortModeList.add("陆运");
         transPortModeList.add("空运");
+        transPortModeList.add("陆运");
         transPortModeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, transPortModeList);
         transPortModeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         transPortModeSpinner.setAdapter(transPortModeAdapter);
@@ -344,6 +346,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
             case R.id.int_group_date_chose_btn:
                 choseTimeMethod.getCurrentTime(AppIntExpGroupAddActivity.this, fDateEt);
                 break;
+
             default:
                 break;
         }

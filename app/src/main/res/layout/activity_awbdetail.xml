@@ -616,6 +616,7 @@
                 android:background="#f4f4f4" />
 
             <LinearLayout
+                android:id="@+id/int_transportno_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">
@@ -635,7 +636,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="#ffffff"
-                    android:hint="@string/yunshuzheng"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
@@ -648,6 +648,7 @@
                 android:background="#f4f4f4" />
 
             <LinearLayout
+                android:id="@+id/int_allowtransno_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">
@@ -667,7 +668,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="#ffffff"
-                    android:hint="@string/zhunyunzheng"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
@@ -680,6 +680,7 @@
                 android:background="#f4f4f4" />
 
             <LinearLayout
+                android:id="@+id/int_ciqnumber_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">
@@ -699,7 +700,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="#ffffff"
-                    android:hint="@string/shangjianhao"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>

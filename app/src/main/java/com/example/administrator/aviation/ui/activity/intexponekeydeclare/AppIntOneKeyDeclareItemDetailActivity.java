@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,9 +19,11 @@ import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOResetExportDeclareInfo;
 import com.example.administrator.aviation.model.intonekeydeclare.Declare;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
+import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpGroupAddActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
+import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
@@ -80,6 +83,11 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
     private TextView arrivalStatusTv;
     private TextView arrMSGIDTv;
     private TextView responseTv;
+
+    // 选择时间
+    private ImageView chouseImage;
+
+    ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
 
     // 离境方式
     private ArrayAdapter<String> transPortModeAdapter;
@@ -147,6 +155,10 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
         arrMSGIDTv = (TextView) findViewById(R.id.declare_ArrMSGID_detail_tv);
         responseTv = (TextView) findViewById(R.id.declare_Response_detail_tv);
 
+        // 选择日期
+        chouseImage = (ImageView) findViewById(R.id.declare_fdate_detail_btn);
+        chouseImage.setOnClickListener(this);
+
         // 重置申报按钮
         resrtBtn = (Button) findViewById(R.id.resert_btn);
         resrtBtn.setOnClickListener(this);
@@ -165,8 +177,8 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
         // 离境方式
         transPortModeSpinner = (Spinner) findViewById(R.id.declare_transPortMode_spinner);
         transPortModeList = new ArrayList<>();
-        transPortModeList.add("陆运");
         transPortModeList.add("空运");
+        transPortModeList.add("陆运");
         transPortModeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, transPortModeList);
         transPortModeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         transPortModeSpinner.setAdapter(transPortModeAdapter);
@@ -263,6 +275,10 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
                     intent.putExtra(AviationCommons.SPLITE_VOLUME, volume);
                     startActivity(intent);
                 }
+                break;
+
+            case R.id.declare_fdate_detail_btn:
+                choseTimeMethod.getCurrentTime(AppIntOneKeyDeclareItemDetailActivity.this, fDateTv);
                 break;
 
             default:
