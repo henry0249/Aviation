@@ -770,6 +770,7 @@
                 android:background="#f4f4f4" />
 
             <LinearLayout
+                android:id="@+id/int_group_mftStatus_detail_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">
@@ -892,6 +893,7 @@
                 android:background="#f4f4f4" />
 
             <LinearLayout
+                android:id="@+id/int_group_cIQStatus_detail_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">
@@ -923,6 +925,7 @@
                 android:background="#f4f4f4" />
 
             <LinearLayout
+                android:id="@+id/int_group_cIQNumber_detail_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">

@@ -152,6 +152,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
         originEt.setTransformationMethod(new AllCapTransformationMethod());
         depEt = (EditText) findViewById(R.id.int_group_add_dep_detail_tv);
         depEt.setTransformationMethod(new AllCapTransformationMethod());
+        depEt.setText("NKG");
         dest1Et = (EditText) findViewById(R.id.int_group_add_dest_detail_tv);
         dest1Et.setTransformationMethod(new AllCapTransformationMethod());
         dest2Et = (EditText) findViewById(R.id.int_group_add_dest2_detail_tv);

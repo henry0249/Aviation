@@ -121,6 +121,9 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
     private Button declareBtn;
     private LinearLayout hideLayout;
     private ImageView changeTimeIv;
+    private LinearLayout yupeiLayout;
+    private LinearLayout shangjianLayout;
+    private LinearLayout shangjianhaoLayout;
 
     private ArrayAdapter<String> businessTypeAdapter;
     private Spinner businessTypeSpinner;
@@ -226,6 +229,10 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         hideLayout = (LinearLayout) findViewById(R.id.hide_int_house_sure_linearlayout);
         changeTimeIv = (ImageView) findViewById(R.id.change_group_time);
 
+        yupeiLayout = (LinearLayout) findViewById(R.id.int_group_mftStatus_detail_layout);
+        shangjianLayout = (LinearLayout) findViewById(R.id.int_group_cIQStatus_detail_layout);
+        shangjianhaoLayout = (LinearLayout) findViewById(R.id.int_group_cIQNumber_detail_layout);
+
         // 国际出港入库管理进入主单界面不能修改和删除还有增加主单
         if (getIntent().getStringExtra(AviationCommons.HIDE_INT_AWB_UPDATE) != null && getIntent().getStringExtra(AviationCommons.HIDE_INT_AWB_UPDATE).equals("hide")) {
             hideLayout.setVisibility(View.GONE);
@@ -270,8 +277,8 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
         // 离境方式
         transPortModeSpinner = (Spinner) findViewById(R.id.update_group_transPortMode_spinner);
         transPortModeList = new ArrayList<>();
-        transPortModeList.add("陆运");
         transPortModeList.add("空运");
+        transPortModeList.add("陆运");
         transPortModeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, transPortModeList);
         transPortModeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         transPortModeSpinner.setAdapter(transPortModeAdapter);
@@ -466,6 +473,11 @@ public class AppIntExpGroupActivity extends Activity implements View.OnClickList
                 freightPaymentEt.setVisibility(View.GONE);
                 freightPaymentSpinner.setVisibility(View.VISIBLE);
                 changeTimeIv.setVisibility(View.VISIBLE);
+
+                // 隐藏不更新项
+                yupeiLayout.setVisibility(View.GONE);
+                shangjianhaoLayout.setVisibility(View.GONE);
+                shangjianLayout.setVisibility(View.GONE);
 
                 businessTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override

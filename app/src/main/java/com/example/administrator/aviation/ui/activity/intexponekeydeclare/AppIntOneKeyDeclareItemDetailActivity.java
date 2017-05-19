@@ -2,6 +2,7 @@ package com.example.administrator.aviation.ui.activity.intexponekeydeclare;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -203,6 +204,14 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
                 freightPaymentPosition =  i;
             }
         }
+
+        rearchID = getIntent().getStringExtra(AviationCommons.DECLARE_REARCHID);
+        if (rearchID.equals("")) {
+            spliteBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
+            spliteBtn.setEnabled(Boolean.FALSE);
+        } else {
+            spliteBtn.setEnabled(Boolean.TRUE);
+        }
     }
 
     // 点击事件
@@ -214,6 +223,7 @@ public class AppIntOneKeyDeclareItemDetailActivity extends Activity implements V
                 setEditTextVisable();
                 resrtBtn.setVisibility(View.GONE);
                 sureResrtBtn.setVisibility(View.VISIBLE);
+                chouseImage.setVisibility(View.VISIBLE);
                 rearchID = getIntent().getStringExtra(AviationCommons.DECLARE_REARCHID);
                 // 判断原始编号不为空
                 if (!rearchID.equals("")) {
