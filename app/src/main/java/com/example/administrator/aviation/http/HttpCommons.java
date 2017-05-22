@@ -96,4 +96,8 @@ public class HttpCommons {
     // 支线合并
     public static final String CGO_MERGER_SUB_LINE_ARRIVAL_NAME = "CGOMergerSubLineArrival";
     public static final String CGO_MERGER_SUB_LINE_ARRIVAL_ACTION = "http://58.213.128.130/CGOMergerSubLineArrival";
+
+    // 联检状态查询
+    public static final String CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_NAME = "CGOGetExportDeclareInfoOfALL";
+    public static final String CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_ACTION = "http://58.213.128.130/CGOGetExportDeclareInfoOfALL";
 }

@@ -19,9 +19,11 @@ import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
+import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
 import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
 import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity;
+import com.example.administrator.aviation.ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -99,6 +101,10 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.intawb);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE)) {
                     holder.setImageResource(R.id.image_iv, R.drawable.intdecleare);
+                } else if (obj.getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE_INFO)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.declareinfo);
+                } else if (obj.getName().equals(AviationCommons.APP_INT_IMP_CARGO_INFO)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.impcargoinfo);
                 }
                 Log.d("guoji", obj.getName());
                 holder.setText(R.id.image_tv, obj.getNameCN());
@@ -131,6 +137,12 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE)) {
                     Intent intentDeclare = new Intent(getActivity(), AppIntExpOneKeyDeclareActivity.class);
                     startActivity(intentDeclare);
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE_INFO)) {
+                    Intent intentDeclareInfo = new Intent(getActivity(), AppIntDeclareInfoSearchActivity.class);
+                    startActivity(intentDeclareInfo);
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_IMP_CARGO_INFO)) {
+                    Intent intentCargoInfo = new Intent(getActivity(), AppIntimpCargoInfoActivity.class);
+                    startActivity(intentCargoInfo);
                 }else {
                     Toast.makeText(getActivity(), "过了使用期", Toast.LENGTH_LONG).show();
                 }

@@ -167,4 +167,14 @@
     <string name="declare_zhiling">指令</string>
     <string name="splite_sure">确定</string>
     <string name="splite_update">修改</string>
+    
+    <!--联检申报-->
+    <string name="declareshanjianhao">商检号:</string>
+    <string name="shanjianzhiling">商检指令:</string>
+    <string name="haiguanzhiling">海关指令:</string>
+    <string name="yuliu">预留:</string>
+    <string name="yundi">运抵:</string>
+    <string name="zhuanghuo">装货:</string>
+    <string name="lihuo">理货:</string>
+    <string name="declare_huozhi">货值:</string>
 </resources>

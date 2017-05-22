@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/navbar"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/yundanhao"/>
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center"
+                    android:textColor="#666666"
+                    android:text="@string/house_yundanhao"
+                    android:textSize="@dimen/house_size" />
+
+                <EditText
+                    android:id="@+id/declare_info_mawb_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_gravity="center"
+                    android:background="#ffffff"
+                    android:hint="@string/house_shuruyundanhao"
+                    android:textColor="#a3a3a3"
+                    android:textSize="@dimen/house_size"
+                    android:maxLength="11" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/kaishi"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center"
+                    android:text="@string/house_begin_time"
+                    android:textSize="@dimen/house_size" />
+
+                <EditText
+                    android:id="@+id/declare_info_begin_time_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:layout_marginLeft="27dp"
+                    android:textSize="@dimen/house_size"/>
+
+                <ImageView
+                    android:id="@+id/declare_info_begin_time_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="21dp"
+                    android:src="@drawable/shijianxuanze"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/jieshu"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center"
+                    android:text="@string/house_end_time"
+                    android:textSize="@dimen/house_size" />
+
+                <EditText
+                    android:id="@+id/declare_info_end_time_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="27dp"
+                    android:textSize="@dimen/house_size"/>
+
+                <ImageView
+                    android:id="@+id/declare_info_end_time_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="21dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/shijianxuanze"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp">
+
+                <Button
+                    android:id="@+id/declare_info_search_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:text="查    询"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/declare_info_pb"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>
