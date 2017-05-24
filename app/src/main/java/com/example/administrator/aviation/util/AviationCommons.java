@@ -26,6 +26,10 @@ public class AviationCommons {
     public static final String DECLARE_REARCHID = "rearchID";
     public static final String DECLARE_INFO_DEATIL = "declareinfoxml";
     public static final String DECLAREINFO_DEATIL = "declareinfo";
+    public static final String IMP_CARGO_INFO = "cargoinfoxml";
+    public static final String IMP_CARGO_INFO_ITEM = "cargoInfoMessage";
+    public static final String IMP_CARGO_INFO_BUSINESSTYPE = "businessType";
+    public static final String IMP_CARGO_INFO_HAWBID = "hawbID";
 
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";
@@ -37,6 +41,9 @@ public class AviationCommons {
     public static final String SPLITE_PC = "pc";
     public static final String SPLITE_WEIGHT = "weight";
     public static final String SPLITE_VOLUME = "volume";
+    public static final String IMP_HAWBID = "hawbid";
+    public static final String IMP_MAWB = "mawb";
+    public static final String IMP_TYPE = "businessType";
 
     // HomePageFragment内容
     public static final String APP_DOM_EXP_PREPARE_AWB = "appDomExpPrepareAWB";

@@ -100,4 +100,13 @@ public class HttpCommons {
     // 联检状态查询
     public static final String CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_NAME = "CGOGetExportDeclareInfoOfALL";
     public static final String CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_ACTION = "http://58.213.128.130/CGOGetExportDeclareInfoOfALL";
+
+    // 进港货站信息
+    public static final String CGO_GET_INT_IMPORT_CARGO_INFOMATION_NAME = "CGOGetIntImportCargoInfomation";
+    public static final String CGO_GET_INT_IMPORT_CARGO_INFOMATION_ACTION = "http://58.213.128.130/CGOGetIntImportCargoInfomation";
+
+    // 进港货站信息增加分单
+    public static final String CGO_ADD_INT_IMPORT_HAWB_NAME = "CGOAddIntImportHawb";
+    public static final String CGO_ADD_INT_IMPORT_HAWB_ACTION = "http://58.213.128.130/CGOAddIntImportHawb";
+
 }

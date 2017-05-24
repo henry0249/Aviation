@@ -177,4 +177,28 @@
     <string name="zhuanghuo">装货:</string>
     <string name="lihuo">理货:</string>
     <string name="declare_huozhi">货值:</string>
+
+    <!--到达物信息-->
+    <string name="cangdanzhuangtai">舱单状态</string>
+    <string name="lihuozhuangtai">理货状态</string>
+    <string name="zhixianshenbao">支线申报</string>
+
+    <string name="imphangbanri">航班日期:</string>
+    <string name="imphangbanhao">航班号:</string>
+    <string name="impzhudanhao">主单号:</string>
+    <string name="impfendanhao">分单号:</string>
+    <string name="impzongjianshu">总件数:</string>
+    <string name="implihuojianshu">理货件数:</string>
+    <string name="impqiyungang">启运港:</string>
+    <string name="impshifagang">始发港:</string>
+    <string name="impmudigang">目的港:</string>
+    <string name="impyunshuleixing">运输类型:</string>
+    <string name="impdianziyundan">电子运单：</string>
+    <string name="impcangdanzhuangtai">舱单状态:</string>
+    <string name="impcangdanhuizhi">舱单回执:</string>
+    <string name="implihuozhuangtai">理货状态:</string>
+    <string name="implihuohuizhi">理货回执:</string>
+
+    <string name="xiugaifendan">修改分单</string>
+    <string name="shanchufendan">删除分单</string>
 </resources>

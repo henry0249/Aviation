@@ -153,6 +153,22 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoItemActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoItemDetailActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+
+        <!--进港货站信息新增界面-->
+        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCargoInfoAddActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

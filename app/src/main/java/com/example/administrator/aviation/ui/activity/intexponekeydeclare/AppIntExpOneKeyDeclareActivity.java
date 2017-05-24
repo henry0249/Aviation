@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpGetIntOneKeyDeclare;
-import com.example.administrator.aviation.http.intExportawbofwarehouse.HttpIntawbPrepareHouse;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -25,7 +24,8 @@ import org.ksoap2.serialization.SoapObject;
 import java.text.ParseException;
 
 /**
- * 预配及运抵界面
+ * 预配及运抵查询界面
+ * 查询xml
  */
 
 public class AppIntExpOneKeyDeclareActivity extends Activity implements View.OnClickListener{

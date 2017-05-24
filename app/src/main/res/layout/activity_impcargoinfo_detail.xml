@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/navbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/imphangbanri"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_fdate_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/imphangbanhao"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_fno_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impzhudanhao"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_mawb_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:layout_weight="2"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:id="@+id/new_declare_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/declare_new_rearchid"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/declare_new_rearchid_detail_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impfendanhao"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_hno_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impzongjianshu"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_awbpc_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/implihuojianshu"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_pc_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_weight"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_weight_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:background="#ffffff"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_volume"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_volume_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="品名:"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_goods_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impqiyungang"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_origin_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impshifagang"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:id="@+id/textView12" />
+
+                <EditText
+                    android:id="@+id/imp_dep_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/house_mudigang"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_dest_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impyunshuleixing"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_awbTypeName_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="业务类型:"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_BusinessName_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impdianziyundan"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_isEDIAWB_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/impcangdanzhuangtai"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_mftstatus_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="@string/implihuozhuangtai"
+                    android:textColor="@color/guoneidingdan_color"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <EditText
+                    android:id="@+id/imp_tallystatus_detail_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#ffffff"
+                    android:maxLength="11"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/awb_detail_size" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/imp_change_fendan_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="@string/xiugaifendan"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+
+        <Button
+            android:id="@+id/imp_fendan_sure_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="@string/house_sure"
+            android:textColor="#ffffff"
+            android:textSize="19sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/imp_delete_fendan_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="21dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="@string/shanchufendan"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+    </LinearLayout>
+
+</LinearLayout>
