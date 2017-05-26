@@ -378,6 +378,32 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#f4f4f4"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="29dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/awb_detail_Shipper"
+                    android:textSize="@dimen/awb_detail_size" />
+
+                <TextView
+                    android:id="@+id/declareinfo_ship_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/awb_detail_color"
+                    android:textSize="@dimen/awb_detail_size"
+                    android:textColor="#2e2d33"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#f4f4f4"
                 android:layout_marginLeft="18dp"

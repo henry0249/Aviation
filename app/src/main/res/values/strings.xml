@@ -173,15 +173,15 @@
     <string name="shanjianzhiling">商检指令:</string>
     <string name="haiguanzhiling">海关指令:</string>
     <string name="yuliu">预留:</string>
-    <string name="yundi">运抵:</string>
-    <string name="zhuanghuo">装货:</string>
-    <string name="lihuo">理货:</string>
+    <string name="yundi">运抵状态:</string>
+    <string name="zhuanghuo">装货状态:</string>
+    <string name="lihuo">理货状态:</string>
     <string name="declare_huozhi">货值:</string>
 
     <!--到达物信息-->
     <string name="cangdanzhuangtai">舱单状态</string>
     <string name="lihuozhuangtai">理货状态</string>
-    <string name="zhixianshenbao">支线申报</string>
+    <string name="zhixianshenbao">分单申报</string>
 
     <string name="imphangbanri">航班日期:</string>
     <string name="imphangbanhao">航班号:</string>

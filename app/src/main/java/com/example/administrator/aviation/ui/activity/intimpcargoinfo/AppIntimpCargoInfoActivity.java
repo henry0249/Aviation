@@ -24,7 +24,7 @@ import org.ksoap2.serialization.SoapObject;
 import java.text.ParseException;
 
 /**
- * 进港.货站信息
+ * 进港.货站信息查询界面
  */
 
 public class AppIntimpCargoInfoActivity extends Activity implements View.OnClickListener{

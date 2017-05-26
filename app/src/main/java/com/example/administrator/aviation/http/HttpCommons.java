@@ -109,4 +109,16 @@ public class HttpCommons {
     public static final String CGO_ADD_INT_IMPORT_HAWB_NAME = "CGOAddIntImportHawb";
     public static final String CGO_ADD_INT_IMPORT_HAWB_ACTION = "http://58.213.128.130/CGOAddIntImportHawb";
 
+    // 进港货站信息修改分单
+    public static final String CGO_UPDATE_INT_IMPORT_HAWB_NAME = "CGOUpdateIntImportHawb";
+    public static final String CGO_UPDATE_INT_IMPORT_HAWB_ACTION = "http://58.213.128.130/CGOUpdateIntImportHawb";
+
+    // 进港货站信息删除分单
+    public static final String CGO_DELETE_INT_IMPORT_HAWB_NAME = "CGODeleteIntImportHawb";
+    public static final String CGO_DELETE_INT_IMPORT_HAWB_ACTION = "http://58.213.128.130/CGODeleteIntImportHawb";
+
+    // 进港货站信息申报分单
+    public static final String CGO_DECLERE_INT_IMPORT_HAWB_NAME = "CGOImportDeclareHawb";
+    public static final String CGO_DECLERE_INT_IMPORT_HAWB_ACTION = "http://58.213.128.130/CGOImportDeclareHawb";
+
 }

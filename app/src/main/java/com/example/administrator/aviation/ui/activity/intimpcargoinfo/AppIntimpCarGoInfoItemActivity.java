@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -18,20 +19,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOExportOneKeyDeclare;
+import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoShenBao;
 import com.example.administrator.aviation.model.intimpcargoinfo.CargoInfoMessage;
 import com.example.administrator.aviation.model.intimpcargoinfo.PrepareCargoInfoMessage;
+import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
+import org.ksoap2.serialization.SoapObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 进港货站信息主界面
  */
 
-public class AppIntimpCarGoInfoItemActivity extends Activity{
+public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnClickListener{
     // 用户信息
     private String ErrString = "";
     private String userBumen;
@@ -41,16 +50,30 @@ public class AppIntimpCarGoInfoItemActivity extends Activity{
 
     private ListView impCarGoLv;
 
+    private List<String> mawbList;
     private List<CargoInfoMessage> cargoInfoMessageList;
+    private String mawb;
+
     private ImpCargoAdapter impCargoAdapter;
     private TextView nodateTv;
     private ProgressBar carGoPb;
+    private Button shenbaoBtn;
+
+
+    private Map<String, CargoInfoMessage> checkedDeclareMap;
+    private Map<Integer, CargoInfoMessage> rearchIdMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intimpcargoinfoitem);
         initView();
+
+        checkedDeclareMap = new HashMap<>();
+        rearchIdMap = new HashMap<>();
+
+        // 初始化xml的list
+        mawbList = new ArrayList<>();
 
         cargoInfoMessageList = new ArrayList<>();
     }
@@ -71,6 +94,9 @@ public class AppIntimpCarGoInfoItemActivity extends Activity{
         nodateTv = (TextView) findViewById(R.id.impcargoinfo_nodata_tv);
         carGoPb = (ProgressBar) findViewById(R.id.impcargoinfo_pb);
 
+        shenbaoBtn = (Button) findViewById(R.id.impcargoinfo_zhixian_shenbao_btn);
+        shenbaoBtn.setOnClickListener(this);
+
         // 进港货站信息列表进入详情页
         impCarGoLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,6 +116,31 @@ public class AppIntimpCarGoInfoItemActivity extends Activity{
 
         // 得到数据
         new GetImpCargoListAsyTask().execute();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            // 分单申报
+            case R.id.impcargoinfo_zhixian_shenbao_btn:
+                mawbList.clear();
+                Set<Map.Entry<String, CargoInfoMessage>> entries = checkedDeclareMap.entrySet();
+                for (Map.Entry<String, CargoInfoMessage> entry : entries) {
+                    CargoInfoMessage cargoInfoMessage = checkedDeclareMap.get(entry.getKey());
+                    mawb = cargoInfoMessage.getMawb();
+                    mawbList.add(mawb);
+                    new CarGoInfoAsyTask(mawb).execute();
+                }
+                if (mawbList.size() <= 0 ) {
+                    Toast.makeText(AppIntimpCarGoInfoItemActivity.this, "没有申报项",Toast.LENGTH_LONG).show();
+                } else {
+                    finish();
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     // 得到进港货站信息
@@ -138,7 +189,8 @@ public class AppIntimpCarGoInfoItemActivity extends Activity{
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            final CargoInfoMessage cargoInfoMessage = (CargoInfoMessage) getItem(position);
             ViewHolder viewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.impcargoinfo_item, parent, false);
@@ -152,9 +204,13 @@ public class AppIntimpCarGoInfoItemActivity extends Activity{
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                         if (isChecked) {
-                            Toast.makeText(AppIntimpCarGoInfoItemActivity.this, "选中了", Toast.LENGTH_SHORT).show();
+                            checkedDeclareMap.put(cargoInfoMessage.getMawb(), cargoInfoMessage);
+                            rearchIdMap.put(position, cargoInfoMessage);
                         } else {
-                            Toast.makeText(AppIntimpCarGoInfoItemActivity.this, "微操作", Toast.LENGTH_SHORT).show();
+                            if (checkedDeclareMap.get(cargoInfoMessage.getMawb()) != null) {
+                                checkedDeclareMap.remove(cargoInfoMessage.getMawb());
+                            }
+                            rearchIdMap.remove(position);
                         }
                     }
                 });
@@ -198,6 +254,42 @@ public class AppIntimpCarGoInfoItemActivity extends Activity{
             TextView hnoTv;
             TextView mftStatusTv;
             TextView tallyStatusTv;
+        }
+    }
+
+    // 分单申报异步任务
+    private class CarGoInfoAsyTask extends AsyncTask<Void, Void, String> {
+        String result = null;
+        String mawb = null;
+
+        public CarGoInfoAsyTask(String mawb) {
+            this.mawb = mawb;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            SoapObject object = HttpPrepareImpCargoShenBao.shenBaoCargo(userBumen, userName, userPass, loginFlag, mawb);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntimpCarGoInfoItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("false") && !ErrString.equals("")) {
+                Toast.makeText(AppIntimpCarGoInfoItemActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

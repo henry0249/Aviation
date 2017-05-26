@@ -27,6 +27,7 @@ public class AppIntDeclareInfoDetailActivity extends Activity{
     private TextView weightTv;
     private TextView destTv;
     private TextView gPriceTv;
+    private TextView shippter;
     private TextView opDateTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class AppIntDeclareInfoDetailActivity extends Activity{
         weightTv = (TextView) findViewById(R.id.declareinfo_weight_detail_tv);
         destTv = (TextView) findViewById(R.id.declareinfo_dest_detail_tv);
         gPriceTv = (TextView) findViewById(R.id.declareinfo_gprice_detail_tv);
+        shippter = (TextView) findViewById(R.id.declareinfo_ship_tv);
         opDateTv = (TextView) findViewById(R.id.declareinfo_opdate_detail_tv);
         declareInfoMessage = (DeclareInfoMessage) getIntent().getSerializableExtra(AviationCommons.DECLAREINFO_DEATIL);
         setTextView();
@@ -69,6 +71,7 @@ public class AppIntDeclareInfoDetailActivity extends Activity{
         weightTv.setText(declareInfoMessage.getWeight());
         destTv.setText(declareInfoMessage.getDest());
         gPriceTv.setText(declareInfoMessage.getGPrice());
+        shippter.setText(declareInfoMessage.getShipper());
         opDateTv.setText(declareInfoMessage.getOPDate());
     }
 }

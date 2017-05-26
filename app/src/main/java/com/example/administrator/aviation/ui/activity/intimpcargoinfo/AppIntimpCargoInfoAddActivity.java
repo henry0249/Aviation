@@ -1,6 +1,7 @@
 package com.example.administrator.aviation.ui.activity.intimpcargoinfo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoADD;
 import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoInfo;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
@@ -68,6 +70,7 @@ public class AppIntimpCargoInfoAddActivity extends Activity implements View.OnCl
         weightEt = (EditText) findViewById(R.id.imp_weight_add_tv);
         volumeEt = (EditText) findViewById(R.id.imp_volume_add_tv);
         goodsEt = (EditText) findViewById(R.id.imp_goods_add_tv);
+        goodsEt.setTransformationMethod(new AllCapTransformationMethod());
 
         hawbID = getIntent().getStringExtra(AviationCommons.IMP_HAWBID);
         mawb = getIntent().getStringExtra(AviationCommons.IMP_MAWB);
@@ -103,6 +106,8 @@ public class AppIntimpCargoInfoAddActivity extends Activity implements View.OnCl
         weight = weightEt.getText().toString().trim();
         volume = volumeEt.getText().toString().trim();
         goods = goodsEt.getText().toString().trim();
+        // 将输入框的内容转换成大写
+        goods = goods.toUpperCase();
     }
 
     // 上传xml到服务器
@@ -134,6 +139,8 @@ public class AppIntimpCargoInfoAddActivity extends Activity implements View.OnCl
                 Toast.makeText(AppIntimpCargoInfoAddActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (request.equals("true")){
                 Toast.makeText(AppIntimpCargoInfoAddActivity.this, "上传成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntimpCargoInfoAddActivity.this, AppIntimpCargoInfoActivity.class);
+                startActivity(intent);
             }
         }
     }

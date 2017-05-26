@@ -1,23 +1,42 @@
 package com.example.administrator.aviation.ui.activity.intimpcargoinfo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
+import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOResetExportDeclareInfo;
+import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoChangeHno;
+import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoDeleteHno;
+import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoInfo;
 import com.example.administrator.aviation.model.intimpcargoinfo.CargoInfoMessage;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
+import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpChildActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PreferenceUtils;
+
+import org.ksoap2.serialization.SoapObject;
 
 /**
  * 进港货站信息详情界面
  */
 
 public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements View.OnClickListener{
+    private String ErrString = "";
+    private String userBumen;
+    private String userName;
+    private String userPass;
+    private String loginFlag;
+
     private EditText fdateEt;
     private EditText fnoEt;
     private EditText mawbEt;
@@ -45,6 +64,13 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
     private String mawb;
     private String hawbID;
     private String businessType;
+    private String hno;
+
+    private String type;
+    private String pc;
+    private String weight;
+    private String volume;
+    private String goods;
 
 
     @Override
@@ -75,6 +101,12 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
             }
         });
 
+        // 获得用户信息
+        userBumen = PreferenceUtils.getUserBumen(this);
+        userName = PreferenceUtils.getUserName(this);
+        userPass = PreferenceUtils.getUserPass(this);
+        loginFlag = PreferenceUtils.getLoginFlag(this);
+
         fdateEt = (EditText) findViewById(R.id.imp_fdate_detail_et);
         fnoEt = (EditText) findViewById(R.id.imp_fno_detail_et);
         mawbEt = (EditText) findViewById(R.id.imp_mawb_detail_et);
@@ -84,6 +116,7 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
         weightEt = (EditText) findViewById(R.id.imp_weight_detail_et);
         volumeEt = (EditText) findViewById(R.id.imp_volume_detail_et);
         goodsEt = (EditText) findViewById(R.id.imp_goods_detail_et);
+        goodsEt.setTransformationMethod(new AllCapTransformationMethod());
         origenEt = (EditText) findViewById(R.id.imp_origin_detail_et);
         depEt = (EditText) findViewById(R.id.imp_dep_detail_et);
         destEt = (EditText) findViewById(R.id.imp_dest_detail_et);
@@ -103,6 +136,19 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
 
         setEditextValues();
         setEditextInvisbale();
+
+        cargoInfoMessage = (CargoInfoMessage) getIntent().getSerializableExtra(AviationCommons.IMP_CARGO_INFO_ITEM);
+        hno = cargoInfoMessage.getHno();
+        // 设置button不可点击
+        if (hno.equals("")) {
+            updataBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
+            updataBtn.setEnabled(Boolean.FALSE);
+            deleteBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
+            deleteBtn.setEnabled(Boolean.FALSE);
+        } else {
+            updataBtn.setEnabled(Boolean.TRUE);
+            deleteBtn.setEnabled(Boolean.TRUE);
+        }
     }
 
     // 点击事件
@@ -111,14 +157,38 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
         switch (view.getId()) {
             // 修改分单按钮
             case R.id.imp_change_fendan_btn:
+                setEditextVisable();
+                updataBtn.setVisibility(View.GONE);
+                sureBtn.setVisibility(View.VISIBLE);
                 break;
 
             // 确定修改按钮
             case R.id.imp_fendan_sure_btn:
+                getEditTextVolues();
+                String xml = HttpPrepareImpCargoInfo.getAddUpdataDeleteXml(hawbID, mawb, hno, type, pc,weight, volume, goods, "");
+                new ChangeHonAsyTask(xml).execute();
                 break;
 
             // 删除分单按钮
             case R.id.imp_delete_fendan_btn:
+                getEditTextVolues();
+                final String deleteXml = HttpPrepareImpCargoInfo.getAddUpdataDeleteXml(hawbID, mawb, hno, type, pc,weight, volume, goods, "");
+                AlertDialog.Builder builder = new AlertDialog.Builder(AppIntimpCarGoInfoItemDetailActivity.this);
+                builder.setTitle("删除订单")
+                        .setMessage("确定删除分单号为:"+hno+"订单吗?")
+                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                new DeleteHonAsyTask(deleteXml).execute();
+                            }
+                        })
+                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                builder.create().show();
                 break;
 
             default:
@@ -152,13 +222,13 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
         hnoEt.setText(hno);
         String awbPc = cargoInfoMessage.getAwbPC();
         awbPcEt.setText(awbPc);
-        String pc = cargoInfoMessage.getPC();
+        pc = cargoInfoMessage.getPC();
         pcEt.setText(pc);
-        String weight = cargoInfoMessage.getWeight();
+        weight = cargoInfoMessage.getWeight();
         weightEt.setText(weight);
-        String volume = cargoInfoMessage.getVolume();
+        volume = cargoInfoMessage.getVolume();
         volumeEt.setText(volume);
-        String goods = cargoInfoMessage.getGoods();
+        goods = cargoInfoMessage.getGoods();
         goodsEt.setText(goods);
         String origen = cargoInfoMessage.getOrigin();
         origenEt.setText(origen);
@@ -176,6 +246,20 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
         mftStatusEt.setText(mftStatus);
         String tallyStatus = cargoInfoMessage.getTallyStatus();
         tallyStatusEt.setText(tallyStatus);
+    }
+
+    // 获取editext值
+    private void getEditTextVolues() {
+        cargoInfoMessage = (CargoInfoMessage) getIntent().getSerializableExtra(AviationCommons.IMP_CARGO_INFO_ITEM);
+        type = cargoInfoMessage.getBusinessType();
+        hawbID = cargoInfoMessage.getAwbID();
+        mawb = cargoInfoMessage.getMawb();
+        volume = volumeEt.getText().toString().trim();
+        weight = weightEt.getText().toString().trim();
+        pc = pcEt.getText().toString().trim();
+        goods = goodsEt.getText().toString().trim();
+        goods = goods.toUpperCase();
+
     }
 
     // 设置EditText不可修改
@@ -201,12 +285,90 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
 
     // 设置EditText可以修改
     private void setEditextVisable() {
-        mawbEt.setEnabled(true);
-        hnoEt.setEnabled(true);
+//        mawbEt.setEnabled(true);
+//        hnoEt.setEnabled(true);
         pcEt.setEnabled(true);
         weightEt.setEnabled(true);
         volumeEt.setEnabled(true);
         goodsEt.setEnabled(true);
-        businessNameEt.setEnabled(true);
+//        businessNameEt.setEnabled(true);
+    }
+
+    // 修改分单
+    private class ChangeHonAsyTask extends AsyncTask<Void, Void, String> {
+        String xml = null;
+        String result = null;
+        public ChangeHonAsyTask(String xml) {
+            this.xml = xml;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            SoapObject object = HttpPrepareImpCargoChangeHno.changeHno(userBumen, userName, userPass, loginFlag,xml);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntimpCarGoInfoItemDetailActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("false") && !ErrString.equals("") ) {
+                Toast.makeText(AppIntimpCarGoInfoItemDetailActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("true")) {
+                Toast.makeText(AppIntimpCarGoInfoItemDetailActivity.this, "成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntimpCarGoInfoItemDetailActivity.this, AppIntimpCargoInfoActivity.class);
+                startActivity(intent);
+            }
+        }
+    }
+
+    // 删除分单
+    private class DeleteHonAsyTask extends AsyncTask<Void, Void, String> {
+        String xml = null;
+        String result = null;
+        public DeleteHonAsyTask(String xml) {
+            this.xml = xml;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            SoapObject object = HttpPrepareImpCargoDeleteHno.deleteCargodetail(userBumen, userName, userPass, loginFlag, xml);
+            if (object == null) {
+                ErrString = "服务器响应失败";
+                return null;
+            } else {
+                result = object.getProperty(0).toString();
+                if (result.equals("false")) {
+                    ErrString = object.getProperty(1).toString();
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (result == null && !ErrString.equals("")) {
+                Toast.makeText(AppIntimpCarGoInfoItemDetailActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("false") && !ErrString.equals("") ) {
+                Toast.makeText(AppIntimpCarGoInfoItemDetailActivity.this, ErrString, Toast.LENGTH_LONG).show();
+            } else if (result.equals("true")) {
+                Toast.makeText(AppIntimpCarGoInfoItemDetailActivity.this, "成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntimpCarGoInfoItemDetailActivity.this, AppIntimpCargoInfoActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 }
