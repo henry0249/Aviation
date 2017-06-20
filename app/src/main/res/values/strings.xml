@@ -172,9 +172,9 @@
     <string name="declareshanjianhao">商检号:</string>
     <string name="shanjianzhiling">商检指令:</string>
     <string name="haiguanzhiling">海关指令:</string>
-    <string name="yuliu">预留:</string>
+    <string name="yuliu">预配状态:</string>
     <string name="yundi">运抵状态:</string>
-    <string name="zhuanghuo">装货状态:</string>
+    <string name="zhuanghuo">装载状态:</string>
     <string name="lihuo">理货状态:</string>
     <string name="declare_huozhi">货值:</string>
 

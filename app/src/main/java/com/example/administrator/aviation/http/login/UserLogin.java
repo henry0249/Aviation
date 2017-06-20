@@ -42,10 +42,11 @@ public class UserLogin extends AsyncTask<Object, Object, String> {
             return null;
         } else {
             String result = object.getProperty(0).toString();
-            if (result.equals("False")) {
+            ErrString = object.getProperty(2).toString();
+            if (result.equals("anyType{}") || result.equals("False")) {
                 ErrString = object.getProperty(2).toString();
-                return result;
-            } else {
+                return ErrString;
+            }else {
                 // 得到每次请求传回的ID值（此ID时每次登录都不一样）并保存
                 AviationCommons.LoginFlag = object.getProperty(1).toString();
                 PreferenceUtils.saveLoginFlag(activity, AviationCommons.LoginFlag);
@@ -63,11 +64,11 @@ public class UserLogin extends AsyncTask<Object, Object, String> {
         if (activity instanceof LoginActivity) {
             ((LoginActivity)activity).dismissProgressBar();
         }
-        if (request == null && !ErrString.equals("")) {
+        if (!ErrString.equals("anyType{}") ) {
             Toast.makeText(activity, ErrString, Toast.LENGTH_LONG).show();
-        } else if (request.equals("False") && !ErrString.equals("") ) {
+        } else if ( request.equals("anyType{}")) {
             Toast.makeText(activity, ErrString, Toast.LENGTH_LONG).show();
-        } else {
+        }  else {
             PreferenceUtils.saveUser(activity, userBumen, userName, userPass);
             PreferenceUtils.saveIsFirst(activity);
             Intent intent = new Intent(activity, UserHomePageActivity.class);
