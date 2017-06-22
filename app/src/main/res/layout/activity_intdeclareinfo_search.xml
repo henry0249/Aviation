@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="21dp"
-                    android:src="@drawable/shijianxuanze"
+                    android:src="@drawable/xuanzeshijian1"
                     android:layout_weight="1"/>
             </LinearLayout>
 
@@ -131,7 +131,7 @@
                     android:layout_weight="1"
                     android:layout_marginRight="21dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/shijianxuanze"/>
+                    android:src="@drawable/xuanzeshijian1"/>
             </LinearLayout>
 
             <LinearLayout

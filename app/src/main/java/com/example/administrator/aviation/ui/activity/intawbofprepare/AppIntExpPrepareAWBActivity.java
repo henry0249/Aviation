@@ -133,6 +133,7 @@ public class AppIntExpPrepareAWBActivity extends Activity{
                     listView.setAdapter(expandableAdapter);
                     intawbProgressBar.setVisibility(View.GONE);
                     intawbLoadTv.setVisibility(View.GONE);
+                    intawbNoneDataTv.setVisibility(View.GONE);
                 }
             }
         }

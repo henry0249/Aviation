@@ -117,6 +117,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
                     listView.setAdapter(expandableAdapter);
                     intawbProgressBar.setVisibility(View.GONE);
                     intawbLoadTv.setVisibility(View.GONE);
+                    showDataTv.setVisibility(View.GONE);
                 }
         }
     }

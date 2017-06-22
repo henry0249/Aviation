@@ -10,6 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:id="@+id/declare_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            style="?android:attr/progressBarStyleLarge"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -85,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="21dp"
-                    android:src="@drawable/shijianxuanze"
+                    android:src="@drawable/xuanzeshijian1"
                     android:layout_weight="1"/>
 
             </LinearLayout>
@@ -132,7 +140,7 @@
                     android:layout_weight="1"
                     android:layout_marginRight="21dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/shijianxuanze"/>
+                    android:src="@drawable/xuanzeshijian1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -153,13 +161,6 @@
             </LinearLayout>
 
         </LinearLayout>
-        <ProgressBar
-            android:id="@+id/declare_pb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            style="?android:attr/progressBarStyleLarge"/>
     </FrameLayout>
 
 </LinearLayout>

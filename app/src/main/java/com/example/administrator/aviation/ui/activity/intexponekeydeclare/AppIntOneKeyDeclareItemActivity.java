@@ -3,6 +3,7 @@ package com.example.administrator.aviation.ui.activity.intexponekeydeclare;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -179,6 +180,12 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             declareLv.setAdapter(declareAdapter);
             if (declareList.size() <= 0) {
                 nodateTv.setVisibility(View.VISIBLE);
+
+                // 没有数据显示，两个按钮不可点击并且变灰色
+                shenbaoBtn.setEnabled(false);
+                shenbaoBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
+                zhixianHebingBtn.setEnabled(false);
+                zhixianHebingBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
             }
         }
     }
