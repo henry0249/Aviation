@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoInfo;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -85,6 +86,7 @@ public class AppIntimpCargoInfoActivity extends Activity implements View.OnClick
         navBar.hideRight();
         mawbEt = (EditText) findViewById(R.id.cargoinfo_mawb_et);
         fnoEt = (EditText) findViewById(R.id.cargoinfo_hno_et);
+        fnoEt.setTransformationMethod(new AllCapTransformationMethod());
         begainTimeEt = (EditText) findViewById(R.id.cargoinfo_begin_time_et);
         endtimeEt = (EditText) findViewById(R.id.cargoinfo_end_time_et);
         begainTimeIv = (ImageView) findViewById(R.id.cargoinfo_begin_time_iv);
@@ -143,6 +145,7 @@ public class AppIntimpCargoInfoActivity extends Activity implements View.OnClick
     private void getEditextValue() throws ParseException {
         mawb = mawbEt.getText().toString().trim();
         fno = fnoEt.getText().toString().trim();
+        fno = fno.toUpperCase();
         begainTime = begainTimeEt.getText().toString().trim();
         endTime = endtimeEt.getText().toString().trim();
         countTime = DateUtils.daysBetween(begainTime, endTime);
