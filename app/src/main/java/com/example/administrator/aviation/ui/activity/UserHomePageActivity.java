@@ -3,13 +3,10 @@ package com.example.administrator.aviation.ui.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,10 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
-
+import com.example.administrator.aviation.model.homemessge.HomeMessage;
+import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.fragment.HomePageFragment;
 import com.example.administrator.aviation.ui.fragment.PersonFragment;
+import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.apache.http.HttpEntity;
@@ -42,6 +41,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * 所有用户首页
@@ -60,6 +60,10 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
     private TextView personTv;
     private ImageView homePageIv;
     private ImageView personIv;
+
+    private String xml = "";
+
+    private List<HomeMessage> list;
 
     // 4个Fragment
     private Fragment homePageFragment;
@@ -97,6 +101,11 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+
+        // 得到登录传递过来的xml数据（有疑问此方法执行两次）
+        xml = this.getIntent().getStringExtra(AviationCommons.LOGIN_XML);
+        list = PrefereceHomeMessage.pullXml(xml,this);
+
         // 获取版本更新信息
         version = PreferenceUtils.getAPPVersion(UserHomePageActivity.this);
         describe = PreferenceUtils.getAPPDescribe(UserHomePageActivity.this);
