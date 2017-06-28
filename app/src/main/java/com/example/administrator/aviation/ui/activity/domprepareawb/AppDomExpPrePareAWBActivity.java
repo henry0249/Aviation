@@ -267,8 +267,8 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
                 return null;
             } else {
                 String result = object.getProperty(0).toString();
-                if (result.equals("False")) {
-                    ErrString = object.getProperty(2).toString();
+                if (result.equals("anyType{}")) {
+                    ErrString = object.getProperty(1).toString();
                     return result;
                 } else {
                     result = object.getProperty(0).toString();
@@ -286,8 +286,12 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
             }
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else if (request.equals("false") && !ErrString.equals("") ) {
+                awbProgressBar.setVisibility(View.GONE);
+                awbLoadTv.setVisibility(View.GONE);
+            } else if (request.equals("anyType{}") && !ErrString.equals("") ) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                awbProgressBar.setVisibility(View.GONE);
+                awbLoadTv.setVisibility(View.GONE);
             } else {
                 if (list.size() <= 0) {
                     noDataTv.setVisibility(View.VISIBLE);

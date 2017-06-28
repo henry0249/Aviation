@@ -79,7 +79,7 @@ public class AppIntExpOneKeyDeclareActivity extends Activity implements View.OnC
         navBar.setTitle(R.string.int_declare_title);
 
         userBumen = PreferenceUtils.getUserBumen(this);
-        userName = PreferenceUtils.getUserName(this);
+        userName =  PreferenceUtils.getUserName(this);
         userPass = PreferenceUtils.getUserPass(this);
         loginFlag = PreferenceUtils.getLoginFlag(this);
 
@@ -152,7 +152,7 @@ public class AppIntExpOneKeyDeclareActivity extends Activity implements View.OnC
                 return null;
             } else {
                 String result = object.getProperty(0).toString();
-                if (result.equals("false")) {
+                if (result.equals("anyType{}")) {
                     ErrString = object.getProperty(1).toString();
                     return result;
                 } else {
@@ -166,8 +166,10 @@ public class AppIntExpOneKeyDeclareActivity extends Activity implements View.OnC
         protected void onPostExecute(String request) {
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntExpOneKeyDeclareActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else if (request.equals("false") && !ErrString.equals("") ) {
+            } else if (request.equals("anyType{}") && !ErrString.equals("") ) {
+                // 提示用户帐号别处登录并取消等待
                 Toast.makeText(AppIntExpOneKeyDeclareActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                wareHousePb.setVisibility(View.GONE);
             } else{
                 Intent intent = new Intent(AppIntExpOneKeyDeclareActivity.this, AppIntOneKeyDeclareItemActivity.class);
                 Bundle bundle = new Bundle();

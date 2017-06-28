@@ -152,7 +152,7 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
                 return null;
             } else {
                 String result = object.getProperty(0).toString();
-                if (result.equals("false")) {
+                if (result.equals("anyType{}")) {
                     ErrString = object.getProperty(1).toString();
                     return result;
                 } else {
@@ -166,8 +166,10 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
         protected void onPostExecute(String request) {
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntExpAWBHouseManageActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else if (request.equals("false") && !ErrString.equals("") ) {
+                wareHousePb.setVisibility(View.GONE);
+            } else if (request.equals("anyType{}") && !ErrString.equals("") ) {
                 Toast.makeText(AppIntExpAWBHouseManageActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                wareHousePb.setVisibility(View.GONE);
             } else{
                 Intent intent = new Intent(AppIntExpAWBHouseManageActivity.this, AppIntExpAwbHouseItemActivity.class);
                 Bundle bundle = new Bundle();

@@ -107,8 +107,8 @@ public class AppIntExpPrepareAWBActivity extends Activity{
                 return null;
             } else {
                 String result = object.getProperty(0).toString();
-                if (result.equals("false")) {
-                    ErrString = object.getProperty(2).toString();
+                if (result.equals("anyType{}")) {
+                    ErrString = object.getProperty(1).toString();
                     return result;
                 } else {
                     result = object.getProperty(0).toString();
@@ -123,7 +123,15 @@ public class AppIntExpPrepareAWBActivity extends Activity{
             super.onPostExecute(result);
             if (result == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntExpPrepareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else {
+                intawbProgressBar.setVisibility(View.GONE);
+                intawbLoadTv.setVisibility(View.GONE);
+                intawbNoneDataTv.setVisibility(View.GONE);
+            } else if (result.equals("anyType{}") && !ErrString.equals("")) {
+                Toast.makeText(AppIntExpPrepareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                intawbProgressBar.setVisibility(View.GONE);
+                intawbLoadTv.setVisibility(View.GONE);
+                intawbNoneDataTv.setVisibility(View.GONE);
+            }else {
                 if (groupList == null || groupList.size()<=0) {
                     intawbNoneDataTv.setVisibility(View.VISIBLE);
                     intawbProgressBar.setVisibility(View.GONE);

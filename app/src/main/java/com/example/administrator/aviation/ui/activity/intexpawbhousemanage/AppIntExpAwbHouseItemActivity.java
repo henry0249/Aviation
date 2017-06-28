@@ -275,7 +275,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
                 return null;
             } else {
                 String result = object.getProperty(0).toString();
-                if (result.equals("false")) {
+                if (result.equals("anyType{}")) {
                     ErrString = object.getProperty(1).toString();
                     return result;
                 } else {
@@ -291,7 +291,13 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
             super.onPostExecute(result);
             if (result == null && !ErrString.equals("")) {
                 Toast.makeText(AppIntExpAwbHouseItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else {
+                intawbProgressBar.setVisibility(View.GONE);
+                intawbLoadTv.setVisibility(View.GONE);
+            } else if (result.equals("anyType{}") && !ErrString.equals("")) {
+                Toast.makeText(AppIntExpAwbHouseItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                intawbProgressBar.setVisibility(View.GONE);
+                intawbLoadTv.setVisibility(View.GONE);
+            }else {
                 if (groupList == null || groupList.size() <= 0) {
                     showDataTv.setVisibility(View.VISIBLE);
                     intawbProgressBar.setVisibility(View.GONE);
