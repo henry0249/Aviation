@@ -22,6 +22,10 @@ public class HttpCommons {
     public static final String LOGIN_METHOD_NAME = "APPUserLogin";
     public static final String LOGIN_SOAP_ACTION = "http://58.213.128.130/APPUserLogin";
 
+    // 修改密码
+    public static final String CHANGE_PASS_NAME = "";
+    public static final String CHANGE_PASS_ACTION = "";
+
     // 国内
     // 获取订单列表
     public static final String AWB_METHOD_NAME = "CGOGetDomExportAWBofPrepare";

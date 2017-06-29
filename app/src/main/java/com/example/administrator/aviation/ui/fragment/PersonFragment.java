@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.administrator.aviation.LoginActivity;
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.ui.activity.ChangePassActivity;
 import com.example.administrator.aviation.ui.activity.SettingPasswordActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -44,6 +45,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
 
     // 设置锁屏
     private RelativeLayout seetingPassLayout;
+
+    // 修改密码
+    private RelativeLayout changePassLayout;
 
     // 版本更新
     private RelativeLayout versionUpdateLayout;
@@ -71,6 +75,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
         navBar.hideLeft();
         seetingPassLayout = (RelativeLayout) view.findViewById(R.id.setting_pass_layout);
         seetingPassLayout.setOnClickListener(this);
+
+        changePassLayout = (RelativeLayout) view.findViewById(R.id.change_pass_layout);
+        changePassLayout.setOnClickListener(this);
 
         versionUpdateLayout = (RelativeLayout) view.findViewById(R.id.version_update_layout);
         versionUpdateLayout.setOnClickListener(this);
@@ -107,6 +114,12 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
                 Intent intent = new Intent(getActivity(), SettingPasswordActivity.class);
                 intent.putExtra(SettingPasswordActivity.ARG_TYPE,SettingPasswordActivity.TYPE_SETTING);
                 startActivity(intent);
+                break;
+
+            // 修改密码
+            case R.id.change_pass_layout:
+                Intent intentChangePass = new Intent(getActivity(), ChangePassActivity.class);
+                startActivity(intentChangePass);
                 break;
 
             // 版本更新

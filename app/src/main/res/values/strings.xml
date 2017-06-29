@@ -25,6 +25,7 @@
     <string name="person">我的</string>
 
     <string name="setting_pass">设置锁屏</string>
+    <string name="change_pass">修改密码</string>
     <string name="reset_pass">重置密码锁</string>
     <string name="version_update">检查版本</string>
     <string name="exit_login">退出登录</string>
