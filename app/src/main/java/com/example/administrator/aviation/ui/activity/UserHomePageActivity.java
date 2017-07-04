@@ -91,9 +91,10 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
             super.handleMessage(msg);
             if (isNeedUpdate()) {
                 showUpdateDialog();
-            } else {
-                Toast.makeText(UserHomePageActivity.this, "当前是最新版本", Toast.LENGTH_LONG).show();
             }
+//            else {
+//                Toast.makeText(UserHomePageActivity.this, "当前是最新版本", Toast.LENGTH_LONG).show();
+//            }
         }
     };
 

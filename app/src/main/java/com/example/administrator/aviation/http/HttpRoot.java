@@ -51,6 +51,7 @@ public class HttpRoot {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
+                                Toast.makeText(context, "请检查网络状态", Toast.LENGTH_SHORT).show();
                                 callBack.onError();
                             }
                         });
@@ -81,6 +82,7 @@ public class HttpRoot {
             }
         }.execute();
     }
+
 
     private SoapObject callService(Context context, String methodName, String methodAction, Map<String, String> params) {
         // 定义SoapHeader，加入4个节点

@@ -194,7 +194,7 @@
     <string name="impshifagang">始发港:</string>
     <string name="impmudigang">目的港:</string>
     <string name="impyunshuleixing">运输类型:</string>
-    <string name="impdianziyundan">电子运单：</string>
+    <string name="impdianziyundan">电子运单:</string>
     <string name="impcangdanzhuangtai">舱单状态:</string>
     <string name="impcangdanhuizhi">舱单回执:</string>
     <string name="implihuozhuangtai">理货状态:</string>
@@ -202,4 +202,19 @@
 
     <string name="xiugaifendan">修改分单</string>
     <string name="shanchufendan">删除分单</string>
+    
+    <!--航班动态-->
+    <string name="impjingtinggang">经停港:</string>
+    <string name="impleixing">类型:</string>
+    <string name="impdiqu">地区:</string>
+    <string name="impyujiqifei">预计起飞:</string>
+    <string name="impshijiqifei">实际起飞:</string>
+    <string name="impyujidaoda">预计到达:</string>
+    <string name="impshijidaoda">实际到达:</string>
+    <string name="impjixing">机型:</string>
+    <string name="impjihao">机号:</string>
+    <string name="impjiwei">机位:</string>
+    <string name="impzhuangtai">状态:</string>
+    <string name="imphangzhanlou">航站楼:</string>
+    <string name="impyanwuyuanyi">延误原因:</string>
 </resources>

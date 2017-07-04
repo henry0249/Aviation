@@ -62,4 +62,5 @@ public class AviationCommons {
     // intent传值需要返回
     public static final int AWB_ADD = 3;
     public static final int AWB_UPDATA = 2;
+    public static final int CHANGE_PASS = 114;
 }

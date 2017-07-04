@@ -1,5 +1,6 @@
 package com.example.administrator.aviation.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.administrator.aviation.LoginActivity;
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
+
+import org.ksoap2.serialization.SoapObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 修改密码界面
@@ -83,7 +93,29 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
                 } else if (!newPass.equals(newPassTwo)) {
                     Toast.makeText(this, "两次输入密码不一致！", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(this, "可修改", Toast.LENGTH_SHORT).show();
+                    Map<String, String> params = new HashMap<>();
+                    params.put("newPassWord", newPass);
+                    HttpRoot.getInstance().requstAync(this, HttpCommons.CHANGE_PASS_NAME, HttpCommons.CHANGE_PASS_ACTION, params,
+                            new HttpRoot.CallBack() {
+                                @Override
+                                public void onSucess(Object result) {
+                                    Toast.makeText(ChangePassActivity.this, "修改成功！", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ChangePassActivity.this, LoginActivity.class);
+                                    intent.putExtra("change","change");
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailed(String message) {
+
+                                }
+
+                                @Override
+                                public void onError() {
+
+                                }
+                            });
                 }
                 break;
 

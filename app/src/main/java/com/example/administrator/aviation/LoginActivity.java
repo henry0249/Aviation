@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.administrator.aviation.http.login.UserLogin;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.activity.SettingPasswordActivity;
+import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
@@ -85,6 +86,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         userNameEt = (EditText) findViewById(R.id.userName_et);
         userPassEt = (EditText) findViewById(R.id.userPass_et);
 
+
         // 设置输入字段变成大写
         userBumenEt.setTransformationMethod(new AllCapTransformationMethod());
         userNameEt.setTransformationMethod(new AllCapTransformationMethod());
@@ -133,7 +135,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             userPass = PreferenceUtils.getUserPass(LoginActivity.this);
             userBumenEt.setText(userBumen);
             userNameEt.setText(userName);
-            userPassEt.setText(userPass);
+
+            // 修改密码成功后输入框内容置空
+            String a = getIntent().getStringExtra("change");
+            if (a != null && a.equals("change") && !a.equals("")) {
+                userPassEt.setText("");
+            } else {
+                userPassEt.setText(userPass);
+            }
 
             // 判断自动登录多选框状态
             if (sp.getBoolean("AUTO_ISCHECK", false)) {

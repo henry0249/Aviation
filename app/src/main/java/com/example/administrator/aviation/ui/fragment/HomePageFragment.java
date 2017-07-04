@@ -144,7 +144,7 @@ public class HomePageFragment extends Fragment{
                     Intent intentCargoInfo = new Intent(getActivity(), AppIntimpCargoInfoActivity.class);
                     startActivity(intentCargoInfo);
                 }else {
-                    Toast.makeText(getActivity(), "过了使用期", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
             }
         });
