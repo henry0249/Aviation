@@ -41,6 +41,8 @@ public class AppIntDeclareInfoActivity extends Activity{
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == AviationCommons.INT_DECLARE_INFO) {
+                declareInfoAdapter = new DeclareInfoAdapter(AppIntDeclareInfoActivity.this, declareInfoMessageList);
+                declareInfoLv.setAdapter(declareInfoAdapter);
                 progressBar.setVisibility(View.GONE);
                 if (declareInfoMessageList.size() >= 1) {
                     showTv.setVisibility(View.GONE);
@@ -69,8 +71,6 @@ public class AppIntDeclareInfoActivity extends Activity{
                 super.run();
                 xml = getIntent().getStringExtra(AviationCommons.DECLARE_INFO_DEATIL);
                 declareInfoMessageList = PrepareDeclareInfoMessage.pullDeclareInfoXml(xml);
-                declareInfoAdapter = new DeclareInfoAdapter(AppIntDeclareInfoActivity.this, declareInfoMessageList);
-                declareInfoLv.setAdapter(declareInfoAdapter);
                 mHandler.sendEmptyMessage(AviationCommons.INT_DECLARE_INFO);
             }
         }.start();

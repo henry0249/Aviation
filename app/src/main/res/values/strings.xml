@@ -217,4 +217,13 @@
     <string name="impzhuangtai">状态:</string>
     <string name="imphangzhanlou">航站楼:</string>
     <string name="impyanwuyuanyi">延误原因:</string>
+    
+    <!--航班动态-->
+    <string name="flight_date">航班日期:</string>
+    <string name="flight_hangbanhao">航班号:</string>
+    <string name="flight_tishihangbanhao">请输入航班号</string>
+    <string name="flight_qiyungang">启运港:</string>
+    <string name="flight_tishiqiyungang">请输入启运港</string>
+    <string name="flight_jinchugangleixing">进出港类型:</string>
+    <string name="flight_tishijinchugangleixing">请选择类型</string>
 </resources>

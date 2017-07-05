@@ -80,7 +80,21 @@ public class AviationNoteConvert {
             return "PP";
         } else if (name.equals("到付")) {
             return "CC";
-        }else {
+        } else if (name.equals("货机")) {
+            return "C";
+        } else if (name.equals("客机")) {
+            return "P";
+        } else if (name.equals("卡车")) {
+            return "T";
+        } else if (name.equals("国内")) {
+            return "D";
+        } else if (name.equals("国际")) {
+            return "I";
+        } else if (name.equals("进港")) {
+            return "I";
+        } else if (name.equals("出港")) {
+            return "E";
+        } else {
             return "未知";
         }
     }

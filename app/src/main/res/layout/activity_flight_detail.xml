@@ -33,8 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -62,8 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -85,14 +83,14 @@
                     android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:text="@string/impshifagang"/>
+
                 <TextView
                     android:id="@+id/flight_fdep"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -114,8 +112,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
-                    android:text="@string/impjingtinggang"
-                    android:id="@+id/textView17" />
+                    android:text="@string/impjingtinggang"/>
 
                 <TextView
                     android:id="@+id/flight_jtg"
@@ -123,8 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -152,12 +148,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
@@ -181,8 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -210,8 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -239,8 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -268,8 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -297,12 +288,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
@@ -320,14 +310,14 @@
                     android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:text="@string/impshijidaoda"/>
+
                 <TextView
                     android:id="@+id/flight_ata"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -355,8 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -384,8 +373,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -412,8 +400,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -440,12 +427,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:background="#f4f4f4" />
@@ -468,8 +454,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="2012-03-03"/>
+                    android:textSize="@dimen/awb_detail_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -490,15 +475,21 @@
                     android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:text="@string/impyanwuyuanyi"/>
+
                 <TextView
                     android:id="@+id/flight_delayfreetext"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="下雨"/>
+                    android:textSize="@dimen/awb_detail_size"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
 
         </LinearLayout>
     </ScrollView>

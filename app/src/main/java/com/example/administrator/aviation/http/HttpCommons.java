@@ -125,4 +125,8 @@ public class HttpCommons {
     public static final String CGO_DECLERE_INT_IMPORT_HAWB_NAME = "CGOImportDeclareHawb";
     public static final String CGO_DECLERE_INT_IMPORT_HAWB_ACTION = "http://58.213.128.130/CGOImportDeclareHawb";
 
+    // 航班动态
+    public static final String CGO_GET_FLIGHT_NAME = "CGOGetFlight";
+    public static final String CGO_GET_FLIGHT_ACTION = "http://58.213.128.130/CGOGetFlight";
+
 }

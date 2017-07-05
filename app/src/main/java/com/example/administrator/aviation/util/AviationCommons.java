@@ -30,6 +30,8 @@ public class AviationCommons {
     public static final String IMP_CARGO_INFO_ITEM = "cargoInfoMessage";
     public static final String IMP_CARGO_INFO_BUSINESSTYPE = "businessType";
     public static final String IMP_CARGO_INFO_HAWBID = "hawbID";
+    public static final String FLIGHT_INFO = "flightinfo";
+    public static final String FLIGHT_DETAIL = "flightdetail";
 
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";
@@ -53,11 +55,13 @@ public class AviationCommons {
     public static final String APP_INT_EXPONEKEY_DECLARE = "appIntExpOneKeyDeclare";
     public static final String APP_INT_EXPONEKEY_DECLARE_INFO = "appIntExpDeclareInfo";
     public static final String APP_INT_IMP_CARGO_INFO = "appIntImpCargoInfo";
+    public static final String APP_FLIGHT_MESSAGE = "appFlightMessage";
 
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int INT_AWB_HANDLER = 0x222;
     public static final int INT_DECLARE_INFO = 0x333;
+    public static final int FLIGHT_INFO_RQQUEST = 0x444;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;

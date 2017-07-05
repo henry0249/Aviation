@@ -17,6 +17,7 @@ import com.example.administrator.aviation.model.adapter.HomePageAdapter;
 import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
+import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
 import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity;
@@ -143,6 +144,9 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_IMP_CARGO_INFO)) {
                     Intent intentCargoInfo = new Intent(getActivity(), AppIntimpCargoInfoActivity.class);
                     startActivity(intentCargoInfo);
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_FLIGHT_MESSAGE)) {
+                    Intent intentFlight = new Intent(getActivity(), FlightActivity.class);
+                    startActivity(intentFlight);
                 }else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
