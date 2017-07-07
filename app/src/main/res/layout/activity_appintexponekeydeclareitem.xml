@@ -8,9 +8,6 @@
     <include
         android:id="@+id/declare_title"
         layout="@layout/navbar" />
-
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -18,8 +18,10 @@ import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightActivity;
+import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
+import com.example.administrator.aviation.ui.activity.intcgrbb.IntExportDayActivity;
 import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
 import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
@@ -106,6 +108,28 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.declareinfo);
                 } else if (obj.getName().equals(AviationCommons.APP_INT_IMP_CARGO_INFO)) {
                     holder.setImageResource(R.id.image_iv, R.drawable.impcargoinfo);
+                } else if (obj.getName().equals(AviationCommons.APP_FLIGHT_MESSAGE)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.hangbandongtai);
+                } else if (obj.getName().equals(AviationCommons.APP_EDECLARE_INFO)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gjcglj);
+                } else if (obj.getName().equals(AviationCommons.APP_IntExportDayReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gjcgrbb);
+                } else if (obj.getName().equals(AviationCommons.APP_IntExportReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gjcgywl);
+                } else if (obj.getName().equals(AviationCommons.APP_IntImportDayReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gjjgrbb);
+                } else if (obj.getName().equals(AviationCommons.APP_IntImportReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gjjgywl);
+                } else if (obj.getName().equals(AviationCommons.APP_DomExport0FlightPlanChecked)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gndcjh);
+                } else if (obj.getName().equals(AviationCommons.APP_DomExportDayReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gncgrbb);
+                } else if (obj.getName().equals(AviationCommons.APP_DomExportReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gncgywl);
+                } else if (obj.getName().equals(AviationCommons.APP_DomImportDayReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gnjgrbb);
+                } else if (obj.getName().equals(AviationCommons.APP_DomImportReportOfCarrier)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gnjgywl);
                 }
                 Log.d("guoji", obj.getName());
                 holder.setText(R.id.image_tv, obj.getNameCN());
@@ -147,7 +171,13 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_FLIGHT_MESSAGE)) {
                     Intent intentFlight = new Intent(getActivity(), FlightActivity.class);
                     startActivity(intentFlight);
-                }else {
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_EDECLARE_INFO)) {
+                    Intent intentFlight = new Intent(getActivity(), AppEDeclareInfoSearchActivity.class);
+                    startActivity(intentFlight);
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportDayReportOfCarrier)) {
+                    Intent intentFlight = new Intent(getActivity(), IntExportDayActivity.class);
+                    startActivity(intentFlight);
+                } else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
             }

@@ -129,4 +129,12 @@ public class HttpCommons {
     public static final String CGO_GET_FLIGHT_NAME = "CGOGetFlight";
     public static final String CGO_GET_FLIGHT_ACTION = "http://58.213.128.130/CGOGetFlight";
 
+    // 国际承运人联检状态
+    public static final String CGO_GET_EDECLARE_NAME = "CGOGetEWarehouseDeclareInfo";
+    public static final String CGO_GET_EDECLARE_ACTION = "http://58.213.128.130/CGOGetEWarehouseDeclareInfo";
+
+    // 国际承运人出港日报表
+    public static final String CGO_GET_INT_EXPORT_REPORT_NAME = "CGOGetIntExportReportOfCarrier";
+    public static final String CGO_GET_INT_EXPORT_REPORT_ACTION = "http://58.213.128.130/CGOGetIntExportReportOfCarrier";
+
 }

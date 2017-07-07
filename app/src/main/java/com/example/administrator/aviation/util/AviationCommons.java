@@ -32,6 +32,7 @@ public class AviationCommons {
     public static final String IMP_CARGO_INFO_HAWBID = "hawbID";
     public static final String FLIGHT_INFO = "flightinfo";
     public static final String FLIGHT_DETAIL = "flightdetail";
+    public static final String EDECLARE_INFO = "edeclareinfo";
 
     // Intent传值
     public static final String INT_GROUP_MAWB = "mawb";
@@ -56,12 +57,27 @@ public class AviationCommons {
     public static final String APP_INT_EXPONEKEY_DECLARE_INFO = "appIntExpDeclareInfo";
     public static final String APP_INT_IMP_CARGO_INFO = "appIntImpCargoInfo";
     public static final String APP_FLIGHT_MESSAGE = "appFlightMessage";
+    public static final String APP_EDECLARE_INFO = "appExportDeclareInfoForCarrier";
+
+    public static final String APP_IntExportDayReportOfCarrier = "appIntExportDayReportOfCarrier";
+    public static final String APP_IntExportReportOfCarrier = "appIntExportReportOfCarrier";
+    public static final String APP_IntImportDayReportOfCarrier = "appIntImportDayReportOfCarrier";
+    public static final String APP_IntImportReportOfCarrier = "appIntImportReportOfCarrier";
+
+    // 国内承运人
+    public static final String APP_DomExport0FlightPlanChecked = "appDomExport0FlightPlanChecked";
+    public static final String APP_DomExportDayReportOfCarrier = "appDomExportDayReportOfCarrier";
+    public static final String APP_DomExportReportOfCarrier = "appDomExportReportOfCarrier";
+    public static final String APP_DomImportDayReportOfCarrier = "appDomImportDayReportOfCarrier";
+    public static final String APP_DomImportReportOfCarrier = "appDomImportReportOfCarrier";
 
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int INT_AWB_HANDLER = 0x222;
     public static final int INT_DECLARE_INFO = 0x333;
     public static final int FLIGHT_INFO_RQQUEST = 0x444;
+    public static final int EDECLARE_INFO_H = 0x555;
+    public static final int INT_EXPORT_DAY = 0x666;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;

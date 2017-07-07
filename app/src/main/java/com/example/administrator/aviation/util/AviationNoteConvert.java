@@ -56,8 +56,37 @@ public class AviationNoteConvert {
 
     }
 
+    // 将英文转换为中文
+    public static String enTocn (String name) {
+        if (name.equals("C") && !name.equals("")) {
+            return "货机";
+        } else if (name.equals("P") && !name.equals("")) {
+            return "客机";
+        } else if (name.equals("T") && !name.equals("")) {
+            return "卡车";
+        } else if (name.equals("D") && !name.equals("")) {
+            return "国内";
+        } else if (name.equals("I") && !name.equals("")) {
+            return "国际";
+        } else if (name.equals("S") || name.equals("N") || name.equals("F")) {
+            return "计划";
+        } else if (name.equals("P") || name.equals("T")) {
+            return "起飞";
+        } else if (name.equals("+") || name.equals("Z")) {
+            return "结束";
+        } else if (name.equals("L")) {
+            return "到达";
+        } else if (name.equals("D")) {
+            return "延误";
+        } else if (name.equals("X")) {
+            return "取消";
+        }else {
+            return "未知";
+        }
+    }
+
     // 将中文转换成英文
-    public static String  cNtoEn(String name) {
+    public static String cNtoEn(String name) {
         if (name.equals("普通货物运输") && !name.equals("")) {
             return "ANR";
         } else if (name.equals("国际快件") && !name.equals("")) {
@@ -76,23 +105,23 @@ public class AviationNoteConvert {
             return "3";
         } else if (name.equals("空运") && !name.equals("")) {
             return "4";
-        } else if (name.equals("预付")) {
+        } else if (name.equals("预付") && !name.equals("")) {
             return "PP";
-        } else if (name.equals("到付")) {
+        } else if (name.equals("到付") && !name.equals("")) {
             return "CC";
-        } else if (name.equals("货机")) {
+        } else if (name.equals("货机") && !name.equals("")) {
             return "C";
-        } else if (name.equals("客机")) {
+        } else if (name.equals("客机") && !name.equals("")) {
             return "P";
-        } else if (name.equals("卡车")) {
+        } else if (name.equals("卡车") && !name.equals("")) {
             return "T";
-        } else if (name.equals("国内")) {
+        } else if (name.equals("国内") && !name.equals("")) {
             return "D";
-        } else if (name.equals("国际")) {
+        } else if (name.equals("国际") && !name.equals("")) {
             return "I";
-        } else if (name.equals("进港")) {
+        } else if (name.equals("进港") && !name.equals("")) {
             return "I";
-        } else if (name.equals("出港")) {
+        } else if (name.equals("出港") && !name.equals("")) {
             return "E";
         } else {
             return "未知";

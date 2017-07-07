@@ -8,6 +8,7 @@ import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.model.intanddomflight.FlightMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.AviationNoteConvert;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,8 +77,17 @@ public class FlightDetailActivity extends Activity {
         flightFdep.setText(flightMessage.getfDep());
         flightJtg.setText(flightMessage.getJtz());
         fdest.setText(flightMessage.getfDest());
-        flightType.setText(flightMessage.getServiceType());
-        flightCountry.setText(flightMessage.getCountryType());
+
+        // 类型
+        String flightTypes = flightMessage.getServiceType();
+        flightTypes = AviationNoteConvert.enTocn(flightTypes);
+        flightType.setText(flightTypes);
+
+        // 地区
+        String flightdq = flightMessage.getCountryType();
+        flightdq = AviationNoteConvert.enTocn(flightdq);
+        flightCountry.setText(flightdq);
+
         flightEtd.setText(flightMessage.getEstimatedTakeOff());
         flightAtd.setText(flightMessage.getActualTakeOff());
         flightEta.setText(flightMessage.getEstimatedArrival());
@@ -85,7 +95,11 @@ public class FlightDetailActivity extends Activity {
         flightRegisteration.setText(flightMessage.getRegisteration());
         flightAircraftcode.setText(flightMessage.getAircraftCode());
         flightStandid.setText(flightMessage.getStandID());
-        flightStatus.setText(flightMessage.getFlightStatus());
+
+        String flightStau = flightMessage.getFlightStatus();
+        flightStau = AviationNoteConvert.enTocn(flightStau);
+        flightStatus.setText(flightStau);
+
         flightFlightterminalid.setText(flightMessage.getFlightTerminalID());
         flightDelayfreetext.setText(flightMessage.getDelayFreeText());
     }

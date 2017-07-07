@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
@@ -88,6 +89,9 @@ public class FlightActivity extends Activity implements View.OnClickListener{
     private ArrayAdapter<String> flightJinchugangleixingSpAdapter;
     private List<String> flightJinchugangleixingSpList;
 
+    // 获取当前时间
+    private String currentTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,11 +111,17 @@ public class FlightActivity extends Activity implements View.OnClickListener{
         // 查询按钮点击事件
         flightSearchBtn.setOnClickListener(this);
 
+        // 给默认值
+        currentTime = DateUtils.getTodayDateTime();
+        flightTimeEt.setText(currentTime);
+
+
         flighthangbanleixingSpList = new ArrayList<>();
-        flighthangbanleixingSpList.add("");
-        flighthangbanleixingSpList.add("货机");
+
         flighthangbanleixingSpList.add("客机");
+        flighthangbanleixingSpList.add("货机");
         flighthangbanleixingSpList.add("卡车");
+        flighthangbanleixingSpList.add("");
         flighthangbanleixingSpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, flighthangbanleixingSpList);
         flighthangbanleixingSpAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         flighthangbanleixingSp.setAdapter(flighthangbanleixingSpAdapter);
@@ -128,9 +138,9 @@ public class FlightActivity extends Activity implements View.OnClickListener{
         });
 
         flightQuyuleixingSpList = new ArrayList<>();
-        flightQuyuleixingSpList.add("");
         flightQuyuleixingSpList.add("国内");
         flightQuyuleixingSpList.add("国际");
+        flightQuyuleixingSpList.add("");
         flightQuyuleixingSpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, flightQuyuleixingSpList);
         flightQuyuleixingSpAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         flightQuyuleixingSp.setAdapter(flightQuyuleixingSpAdapter);
@@ -147,9 +157,9 @@ public class FlightActivity extends Activity implements View.OnClickListener{
         });
 
         flightJinchugangleixingSpList = new ArrayList<>();
-        flightJinchugangleixingSpList.add("");
-        flightJinchugangleixingSpList.add("进港");
         flightJinchugangleixingSpList.add("出港");
+        flightJinchugangleixingSpList.add("进港");
+        flightJinchugangleixingSpList.add("");
         flightJinchugangleixingSpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, flightJinchugangleixingSpList);
         flightJinchugangleixingSpAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         flightJinchugangleixingSp.setAdapter(flightJinchugangleixingSpAdapter);
@@ -164,6 +174,10 @@ public class FlightActivity extends Activity implements View.OnClickListener{
 
             }
         });
+//
+//        flightHangbanleixingEt.setText("客机");
+//        flightQuyuleixingEt.setText("国内");
+//        flightJinchuganget.setText("出港");
 
     }
 
