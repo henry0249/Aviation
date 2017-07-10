@@ -123,7 +123,15 @@ public class AviationNoteConvert {
             return "I";
         } else if (name.equals("出港") && !name.equals("")) {
             return "E";
-        } else {
+        } else if (name.equals("业务量")) {
+            return "";
+        } else if (name.equals("目的港")) {
+            return "DEST";
+        } else if (name.equals("航班号")) {
+            return "FNO";
+        } else if (name.equals("日")) {
+            return "DAY";
+        }else {
             return "未知";
         }
     }

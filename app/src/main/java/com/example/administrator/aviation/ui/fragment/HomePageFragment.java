@@ -21,12 +21,13 @@ import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightA
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
-import com.example.administrator.aviation.ui.activity.intcgrbb.IntExportDayActivity;
+import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
 import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
 import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity;
 import com.example.administrator.aviation.ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity;
+import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -174,10 +175,13 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_EDECLARE_INFO)) {
                     Intent intentFlight = new Intent(getActivity(), AppEDeclareInfoSearchActivity.class);
                     startActivity(intentFlight);
-                } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportDayReportOfCarrier)) {
-                    Intent intentFlight = new Intent(getActivity(), IntExportDayActivity.class);
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportReportOfCarrier)) {
+                    Intent intentFlight = new Intent(getActivity(), IntExportCarrierActivity.class);
                     startActivity(intentFlight);
-                } else {
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntImportReportOfCarrier)) {
+                    Intent intentFlight = new Intent(getActivity(), IntImportCarrierActivity.class);
+                    startActivity(intentFlight);
+                }else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
             }

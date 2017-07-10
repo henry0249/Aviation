@@ -1,17 +1,36 @@
-package com.example.administrator.aviation.model.intcgrbb;
+package com.example.administrator.aviation.model.intjcgywl;
 
 import java.io.Serializable;
 
 /**
- * 国际出港日报表信息
+ * 国际进港业务量信息
  */
 
-public class IntExportDayInfo implements Serializable{
+public class IntImportCarrierInfo implements Serializable{
     private String Carrier;
     private String FDate;
+    private String dest;
+    private String fno;
     private String pc;
     private String weight;
     private String volume;
+
+
+    public String getFno() {
+        return fno;
+    }
+
+    public void setFno(String fno) {
+        this.fno = fno;
+    }
+
+    public String getDest() {
+        return dest;
+    }
+
+    public void setDest(String dest) {
+        this.dest = dest;
+    }
 
     public String getVolume() {
         return volume;

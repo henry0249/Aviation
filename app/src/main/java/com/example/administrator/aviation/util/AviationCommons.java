@@ -59,6 +59,7 @@ public class AviationCommons {
     public static final String APP_FLIGHT_MESSAGE = "appFlightMessage";
     public static final String APP_EDECLARE_INFO = "appExportDeclareInfoForCarrier";
 
+    // 国际承运人
     public static final String APP_IntExportDayReportOfCarrier = "appIntExportDayReportOfCarrier";
     public static final String APP_IntExportReportOfCarrier = "appIntExportReportOfCarrier";
     public static final String APP_IntImportDayReportOfCarrier = "appIntImportDayReportOfCarrier";

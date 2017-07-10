@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.intcgrbb;
+package com.example.administrator.aviation.ui.activity.intjcgywl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
-import com.example.administrator.aviation.model.intcgrbb.IntExportDayInfo;
-import com.example.administrator.aviation.model.intcgrbb.PrepareIntExportDayInfo;
+import com.example.administrator.aviation.model.intjcgywl.IntImportCarrierInfo;
+import com.example.administrator.aviation.model.intjcgywl.PrepareIntImportCarrierInfo;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 
@@ -27,10 +28,10 @@ import butterknife.ButterKnife;
 import static com.example.administrator.aviation.R.id.edeclare_info_volume_tv;
 
 /**
- * 国际出港日报表详情页
+ * 国际进港业务量详情页
  */
 
-public class IntExportDayDetailActivity extends Activity {
+public class IntImportCarrierDetailActivity extends Activity {
     @BindView(R.id.int_edeclare_nodata_tv)
     TextView intEdeclareNodataTv;
     @BindView(R.id.edeclare_lv)
@@ -38,8 +39,10 @@ public class IntExportDayDetailActivity extends Activity {
     @BindView(R.id.edeclare_pb)
     ProgressBar edeclarePb;
 
+    private String type;
+
     private String xml;
-    private List<IntExportDayInfo> intExportDayInfoList;
+    private List<IntImportCarrierInfo> intExportCarrierInfoList;
     private IntDayAdapter intDayAdapter;
 
     private Handler handler = new Handler(){
@@ -47,10 +50,10 @@ public class IntExportDayDetailActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == AviationCommons.INT_EXPORT_DAY) {
-                intDayAdapter = new IntDayAdapter(IntExportDayDetailActivity.this, intExportDayInfoList);
+                intDayAdapter = new IntDayAdapter(IntImportCarrierDetailActivity.this, intExportCarrierInfoList);
                 edeclareLv.setAdapter(intDayAdapter);
                 edeclarePb.setVisibility(View.GONE);
-                if (intExportDayInfoList.size() >= 1) {
+                if (intExportCarrierInfoList.size() >= 1) {
                     intEdeclareNodataTv.setVisibility(View.GONE);
                 }
             }
@@ -60,22 +63,23 @@ public class IntExportDayDetailActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intexportday_detail);
+        setContentView(R.layout.activity_intexportcarrier_detail);
         ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle("国际出港日报表详情");
+        navBar.setTitle("国际进港业务量详情");
         navBar.hideRight();
 
-        xml = getIntent().getStringExtra("intexportdayxml");
+        xml = getIntent().getStringExtra("intimportdayxml");
+        type = getIntent().getStringExtra("jgtype");
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                intExportDayInfoList = PrepareIntExportDayInfo.pullExportDayInfoXml(xml);
+                intExportCarrierInfoList = PrepareIntImportCarrierInfo.pullImportCarrierInfoXml(xml);
                 handler.sendEmptyMessage(AviationCommons.INT_EXPORT_DAY);
             }
         }.start();
@@ -83,20 +87,20 @@ public class IntExportDayDetailActivity extends Activity {
 
     private class IntDayAdapter extends BaseAdapter {
         private Context context;
-        private List<IntExportDayInfo> intExportDayInfoList;
-        public IntDayAdapter(Context context, List<IntExportDayInfo> intExportDayInfoList) {
+        private List<IntImportCarrierInfo> intExportCarrierInfoList;
+        public IntDayAdapter(Context context, List<IntImportCarrierInfo> intExportCarrierInfoList) {
             this.context = context;
-            this.intExportDayInfoList = intExportDayInfoList;
+            this.intExportCarrierInfoList = intExportCarrierInfoList;
         }
 
         @Override
         public int getCount() {
-            return intExportDayInfoList.size();
+            return intExportCarrierInfoList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return intExportDayInfoList.get(position);
+            return intExportCarrierInfoList.get(position);
         }
 
         @Override
@@ -112,38 +116,69 @@ public class IntExportDayDetailActivity extends Activity {
                 viewHolder = new ViewHolder();
                 viewHolder.carrierTv = (TextView) convertView.findViewById(R.id.edeclare_info_carrier_tv);
                 viewHolder.fdateTv = (TextView) convertView.findViewById(R.id.edeclare_info_papertime_tv);
+                viewHolder.fnoTv = (TextView) convertView.findViewById(R.id.edeclare_fno_tv);
+                viewHolder.detTv = (TextView) convertView.findViewById(R.id.edeclare_info_dest_tv);
                 viewHolder.pcTv = (TextView) convertView.findViewById(R.id.edeclare_info_pc_tv);
                 viewHolder.weightTv = (TextView) convertView.findViewById(R.id.edeclare_info_weight_tv);
                 viewHolder.volumeTv = (TextView) convertView.findViewById(edeclare_info_volume_tv);
+                viewHolder.destLayout = (LinearLayout) convertView.findViewById(R.id.carrier_dest_layout);
+                viewHolder.fnoLayout = (LinearLayout) convertView.findViewById(R.id.carrier_fno_layout);
+                viewHolder.fdateLayout = (LinearLayout) convertView.findViewById(R.id.carrier_fdate_layout);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            String carrier = intExportDayInfoList.get(position).getCarrier();
+            if (type!=null && type.equals("")) {
+                viewHolder.destLayout.setVisibility(View.GONE);
+                viewHolder.fdateLayout.setVisibility(View.GONE);
+                viewHolder.fnoLayout.setVisibility(View.GONE);
+            } else if (type != null && type.equals("DEST")) {
+                viewHolder.fnoLayout.setVisibility(View.GONE);
+                viewHolder.fdateLayout.setVisibility(View.GONE);
+            } else if (type != null && type.equals("FNO")) {
+                viewHolder.fdateLayout.setVisibility(View.GONE);
+                viewHolder.destLayout.setVisibility(View.GONE);
+            } else if (type != null && type.equals("DAY")) {
+                viewHolder.fnoLayout.setVisibility(View.GONE);
+                viewHolder.destLayout.setVisibility(View.GONE);
+            }
+            String carrier = intExportCarrierInfoList.get(position).getCarrier();
             if (carrier!=null && !carrier.equals("")) {
                 viewHolder.carrierTv.setText(carrier);
             } else {
                 viewHolder.carrierTv.setText("");
             }
-            String fdate = intExportDayInfoList.get(position).getFDate();
+            String fno = intExportCarrierInfoList.get(position).getFno();
+            if (fno != null && !fno.equals("")) {
+                viewHolder.fnoTv.setText(fno);
+            } else {
+                viewHolder.detTv.setText("");
+            }
+            String dest = intExportCarrierInfoList.get(position).getDest();
+            if (dest != null && !dest.equals("")) {
+                viewHolder.detTv.setText(dest);
+            } else {
+                viewHolder.detTv.setText("");
+            }
+            String fdate = intExportCarrierInfoList.get(position).getFDate();
             if (fdate != null && !fdate.equals("")) {
                 viewHolder.fdateTv.setText(fdate);
             } else {
                 viewHolder.fdateTv.setText("");
             }
-            String pc = intExportDayInfoList.get(position).getPc();
+            String pc = intExportCarrierInfoList.get(position).getPc();
             if (pc!=null && !pc.equals("")) {
                 viewHolder.pcTv.setText(pc);
             } else {
                 viewHolder.pcTv.setText("");
             }
-            String weight = intExportDayInfoList.get(position).getWeight();
+            String weight = intExportCarrierInfoList.get(position).getWeight();
             if (weight != null && !weight.equals("")) {
-                viewHolder.weightTv.setText("");
+                viewHolder.weightTv.setText(weight);
             } else {
                 viewHolder.weightTv.setText("");
             }
-            String volume = intExportDayInfoList.get(position).getVolume();
+            String volume = intExportCarrierInfoList.get(position).getVolume();
             if (volume != null && !volume.equals("")) {
                 viewHolder.volumeTv.setText(volume);
             } else {
@@ -155,6 +190,11 @@ public class IntExportDayDetailActivity extends Activity {
         class ViewHolder {
             TextView carrierTv;
             TextView fdateTv;
+            TextView fnoTv;
+            TextView detTv;
+            LinearLayout fdateLayout;
+            LinearLayout fnoLayout;
+            LinearLayout destLayout;
             TextView pcTv;
             TextView weightTv;
             TextView volumeTv;

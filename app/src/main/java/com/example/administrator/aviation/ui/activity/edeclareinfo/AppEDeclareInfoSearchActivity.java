@@ -82,12 +82,12 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
 
                             @Override
                             public void onFailed(String message) {
-
+                                edeclarePb.setVisibility(View.GONE);
                             }
 
                             @Override
                             public void onError() {
-
+                                edeclarePb.setVisibility(View.GONE);
                             }
                         });
                 break;
