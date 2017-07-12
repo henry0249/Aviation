@@ -79,6 +79,8 @@ public class AviationCommons {
     public static final int FLIGHT_INFO_RQQUEST = 0x444;
     public static final int EDECLARE_INFO_H = 0x555;
     public static final int INT_EXPORT_DAY = 0x666;
+    public static final int INT_E_DAT = 0x777;
+    public static final int INT_E_DAY_MANIFEST = 0x888;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;

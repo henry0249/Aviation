@@ -131,6 +131,8 @@ public class AviationNoteConvert {
             return "FNO";
         } else if (name.equals("日")) {
             return "DAY";
+        } else if (name.equals("始发港")) {
+            return "ORIGIN";
         }else {
             return "未知";
         }

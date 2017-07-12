@@ -10,11 +10,19 @@ public class IntImportCarrierInfo implements Serializable{
     private String Carrier;
     private String FDate;
     private String dest;
+    private String origin;
     private String fno;
     private String pc;
     private String weight;
     private String volume;
 
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
 
     public String getFno() {
         return fno;

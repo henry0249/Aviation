@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.model.intjcgywl;
+package com.example.administrator.aviation.model.intjcgrbb;
 
 import android.util.Xml;
 
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 解析国际进港日报表
+ * 解析国际出港舱单信息
  */
 
-public class PrepareIntImportCarrierInfo {
+public class PrepareIntExportDayMainfestInfo {
     // 经典的pull解析方法
-    public static List<IntImportCarrierInfo> pullImportCarrierInfoXml(String xml) {
-        List<IntImportCarrierInfo> xmlList = null;
-        IntImportCarrierInfo intImportCarrierInfo = null;
+    public static List<IntExportDayManifestInfo> pullExportDayManifetInfoXml(String xml) {
+        List<IntExportDayManifestInfo> xmlList = null;
+        IntExportDayManifestInfo intExportDayManifestInfo = null;
         ByteArrayInputStream tInputStringStream = null;
         try {
             if (xml != null && !xml.trim().equals("")) {
@@ -36,30 +36,36 @@ public class PrepareIntImportCarrierInfo {
                 switch (evenType) {
                     // 判断当前是不是文档开始的事件
                     case XmlPullParser.START_DOCUMENT:
-                        xmlList = new ArrayList<IntImportCarrierInfo>();
+                        xmlList = new ArrayList<IntExportDayManifestInfo>();
                         break;
 
                     // 判断当前事件是不是标签元素的开始事件
                     case XmlPullParser.START_TAG:
                         String name = parser.getName();
                         if (name.equalsIgnoreCase("ReportInfo")) {
-                            intImportCarrierInfo = new IntImportCarrierInfo();
-                        } else if (name.equalsIgnoreCase("Carrier")) {
-                            intImportCarrierInfo.setCarrier(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Dest")) {
-                            intImportCarrierInfo.setDest(parser.nextText());
+                            intExportDayManifestInfo = new IntExportDayManifestInfo();
+                        } else if (name.equalsIgnoreCase("Mawb")) {
+                            intExportDayManifestInfo.setMawb(parser.nextText());
+                        } else if (name.equalsIgnoreCase("AgentCode")) {
+                            intExportDayManifestInfo.setAgentCode(parser.nextText());
+                        } else if (name.equalsIgnoreCase("AgentName")) {
+                            intExportDayManifestInfo.setAgentName(parser.nextText());
+                        } else if (name.equalsIgnoreCase("Dep")) {
+                            intExportDayManifestInfo.setDep(parser.nextText());
                         } else if (name.equalsIgnoreCase("Origin")) {
-                            intImportCarrierInfo.setOrigin(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Fno")) {
-                            intImportCarrierInfo.setFno(parser.nextText());
-                        }else if (name.equalsIgnoreCase("FDate")) {
-                            intImportCarrierInfo.setFDate(parser.nextText());
+                            intExportDayManifestInfo.setOrigin(parser.nextText());
+                        }else if (name.equalsIgnoreCase("Dest")) {
+                            intExportDayManifestInfo.setDest(parser.nextText());
+                        } else if (name.equalsIgnoreCase("TotalPC")) {
+                            intExportDayManifestInfo.setTotalPC(parser.nextText());
                         } else if (name.equalsIgnoreCase("PC")) {
-                            intImportCarrierInfo.setPc(parser.nextText());
+                            intExportDayManifestInfo.setPC(parser.nextText());
                         } else if (name.equalsIgnoreCase("Weight")) {
-                            intImportCarrierInfo.setWeight(parser.nextText());
+                            intExportDayManifestInfo.setWeight(parser.nextText());
                         } else if (name.equalsIgnoreCase("Volume")) {
-                            intImportCarrierInfo.setVolume(parser.nextText());
+                            intExportDayManifestInfo.setVolume(parser.nextText());
+                        } else if (name.equalsIgnoreCase("Goods")) {
+                            intExportDayManifestInfo.setGoods(parser.nextText());
                         }
                         break;
 
@@ -67,7 +73,7 @@ public class PrepareIntImportCarrierInfo {
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equalsIgnoreCase("ReportInfo")) {
                             assert xmlList != null;
-                            xmlList.add(intImportCarrierInfo);
+                            xmlList.add(intExportDayManifestInfo);
                         }
 
                         break;

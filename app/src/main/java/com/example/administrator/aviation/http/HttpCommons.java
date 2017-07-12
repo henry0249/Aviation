@@ -140,4 +140,16 @@ public class HttpCommons {
     // 国际承运人进港业务量
     public static final String CGO_GET_INT_IMPORT_REPORT_NAME = "CGOGetIntImportReportOfCarrier";
     public static final String CGO_GET_INT_IMPORT_REPORT_ACTION = "http://58.213.128.130/CGOGetIntImportReportOfCarrier";
+
+    // 国际承运人出港日报表
+    public static final String CGO_GET_INT_EXPORT_DAY_REPORT_NAME = "CGOGetIntExportDayReportOfCarrier";
+    public static final String CGO_GET_INT_EXPORT_DAY_REPORT_ACTION = "http://58.213.128.130/CGOGetIntExportDayReportOfCarrier";
+    public static final String CGO_GET_INT_EXPORT_MANIFEST_NAME = "CGOGetIntExportManifest";
+    public static final String CGO_GET_INT_EXPORT_MANIFEST_ACTION = "http://58.213.128.130/CGOGetIntExportManifest";
+
+    // 国际承运人进港日报表
+    public static final String CGO_GET_INT_IMPORT_DAY_REPORT_NAME = "CGOGetIntImportDayReportOfCarrier";
+    public static final String CGO_GET_INT_IMPORT_DAY_REPORT_ACTION = "http://58.213.128.130/CGOGetIntImportDayReportOfCarrier";
+    public static final String CGO_GET_INT_IMPORT_MANIFEST_NAME = "CGOGetIntImportManifest";
+    public static final String CGO_GET_INT_IMPORT_MANIFEST_ACTION = "http://58.213.128.130/CGOGetIntImportManifest";
 }

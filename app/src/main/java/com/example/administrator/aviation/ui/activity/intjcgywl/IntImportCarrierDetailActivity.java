@@ -114,6 +114,7 @@ public class IntImportCarrierDetailActivity extends Activity {
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.intexportday_item, viewGroup, false);
                 viewHolder = new ViewHolder();
+                viewHolder.sfgTv = (TextView) convertView.findViewById(R.id.sfg_tv);
                 viewHolder.carrierTv = (TextView) convertView.findViewById(R.id.edeclare_info_carrier_tv);
                 viewHolder.fdateTv = (TextView) convertView.findViewById(R.id.edeclare_info_papertime_tv);
                 viewHolder.fnoTv = (TextView) convertView.findViewById(R.id.edeclare_fno_tv);
@@ -128,11 +129,13 @@ public class IntImportCarrierDetailActivity extends Activity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
+
+            viewHolder.sfgTv.setText("始发港:");
             if (type!=null && type.equals("")) {
                 viewHolder.destLayout.setVisibility(View.GONE);
                 viewHolder.fdateLayout.setVisibility(View.GONE);
                 viewHolder.fnoLayout.setVisibility(View.GONE);
-            } else if (type != null && type.equals("DEST")) {
+            } else if (type != null && type.equals("ORIGIN")) {
                 viewHolder.fnoLayout.setVisibility(View.GONE);
                 viewHolder.fdateLayout.setVisibility(View.GONE);
             } else if (type != null && type.equals("FNO")) {
@@ -154,7 +157,7 @@ public class IntImportCarrierDetailActivity extends Activity {
             } else {
                 viewHolder.detTv.setText("");
             }
-            String dest = intExportCarrierInfoList.get(position).getDest();
+            String dest = intExportCarrierInfoList.get(position).getOrigin();
             if (dest != null && !dest.equals("")) {
                 viewHolder.detTv.setText(dest);
             } else {
@@ -188,6 +191,7 @@ public class IntImportCarrierDetailActivity extends Activity {
         }
 
         class ViewHolder {
+            TextView sfgTv;
             TextView carrierTv;
             TextView fdateTv;
             TextView fnoTv;
