@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="12dp"
-                    android:text="@string/house_begin_time"
+                    android:text="查询日期:"
                     android:textSize="@dimen/house_size" />
 
                 <EditText

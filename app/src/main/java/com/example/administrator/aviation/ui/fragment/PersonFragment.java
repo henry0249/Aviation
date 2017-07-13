@@ -120,7 +120,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
             case R.id.change_pass_layout:
                 Intent intentChangePass = new Intent(getActivity(), ChangePassActivity.class);
                 startActivity(intentChangePass);
-                getActivity().finish();
+//                getActivity().finish();
                 break;
 
             // 版本更新

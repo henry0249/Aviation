@@ -103,7 +103,6 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
                                     Intent intent = new Intent(ChangePassActivity.this, LoginActivity.class);
                                     intent.putExtra("change","change");
                                     startActivity(intent);
-//                                    finish();
                                 }
 
                                 @Override
