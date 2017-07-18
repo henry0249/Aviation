@@ -244,6 +244,16 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
 
+        // 国内承运人进出港
+        <activity android:name=".ui.activity.domjcgywl.DomExportCarrierActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.domjcgywl.DomExportCarrierDetailActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

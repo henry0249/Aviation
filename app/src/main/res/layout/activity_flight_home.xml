@@ -22,12 +22,18 @@
                 android:textSize="20sp"/>
         </LinearLayout>
 
+        <com.example.administrator.aviation.util.PullToRefreshView
+            android:id="@+id/pull_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <ListView
             android:id="@+id/flight_home_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null">
         </ListView>
+        </com.example.administrator.aviation.util.PullToRefreshView>
         <ProgressBar
             android:id="@+id/flight_home_pb"
             android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.administrator.aviation.ui.activity.intjcgywl;
+package com.example.administrator.aviation.ui.activity.domjcgywl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,10 +28,10 @@ import butterknife.ButterKnife;
 import static com.example.administrator.aviation.R.id.edeclare_info_volume_tv;
 
 /**
- * 国际出港业务量详情页
+ * 国内出港业务量详情页
  */
 
-public class IntExportCarrierDetailActivity extends Activity {
+public class DomExportCarrierDetailActivity extends Activity {
     @BindView(R.id.int_edeclare_nodata_tv)
     TextView intEdeclareNodataTv;
     @BindView(R.id.edeclare_lv)
@@ -50,7 +50,7 @@ public class IntExportCarrierDetailActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == AviationCommons.INT_EXPORT_DAY) {
-                intDayAdapter = new IntDayAdapter(IntExportCarrierDetailActivity.this, intExportCarrierInfoList);
+                intDayAdapter = new IntDayAdapter(DomExportCarrierDetailActivity.this, intExportCarrierInfoList);
                 edeclareLv.setAdapter(intDayAdapter);
                 edeclarePb.setVisibility(View.GONE);
                 if (intExportCarrierInfoList.size() >= 1) {
@@ -70,7 +70,7 @@ public class IntExportCarrierDetailActivity extends Activity {
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle("国际出港业务量详情");
+        navBar.setTitle("国内出港业务量详情");
         navBar.hideRight();
 
         xml = getIntent().getStringExtra("intexportdayxml");

@@ -34,7 +34,7 @@
                     android:text="@string/house_yundanhao"
                     android:textSize="@dimen/house_size" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/edeclare_mawb_et"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

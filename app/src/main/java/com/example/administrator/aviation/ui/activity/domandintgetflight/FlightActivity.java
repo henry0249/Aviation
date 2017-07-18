@@ -215,7 +215,7 @@ public class FlightActivity extends Activity implements View.OnClickListener{
 //                if (hbHao.equals("")) {
 //                    Toast.makeText(FlightActivity.this, "请输入航班号", Toast.LENGTH_SHORT).show();
 //                } else {
-                    String xml = getXml(hbTime,hbHao, hbLexing, qyLexing, qyGang, mdGang, jcgLexing);
+                    final String xml = getXml(hbTime,hbHao, hbLexing, qyLexing, qyGang, mdGang, jcgLexing);
                     Map<String, String> params = new HashMap<>();
                     params.put("fltXml", xml);
                     params.put("ErrString", "");
@@ -230,6 +230,7 @@ public class FlightActivity extends Activity implements View.OnClickListener{
                                     Intent intent = new Intent(FlightActivity.this, FlightHomeActivity.class);
                                     Bundle bundle = new Bundle();
                                     bundle.putString(AviationCommons.FLIGHT_INFO, a);
+                                    bundle.putString(AviationCommons.FLIGHT_XML, xml);
                                     intent.putExtras(bundle);
                                     intent.putExtra("jcgleixing", jcgLexing);
                                     startActivity(intent);

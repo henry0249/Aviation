@@ -11,4 +11,5 @@
     <color name="awb_detail_color">#FFFFFFFF</color>
     <color name="splite_color">#979797</color>
     <color name="guoneidingdan_color">#2e2d33</color>
+    <color name="dark_gray">#555</color>
 </resources>

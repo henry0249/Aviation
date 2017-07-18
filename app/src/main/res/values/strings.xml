@@ -8,6 +8,15 @@
     <string name="updated_just_now">刚刚更新</string>
     <string name="time_error">时间有问题</string>
 
+    <!--刷新控件-->
+    <string name="pull_to_refresh_pull_label">刷新数据</string>
+    <string name="pull_to_refresh_release_label">松开刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中\u2026</string>
+    <string name="pull_to_refresh_footer_release_label">松开加载</string>
+    <string name="pull_to_refresh_footer_pull_label">加载数据</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+    <string name="pull_to_refresh_latest_time_label">最近更新</string>
+
     <string name="app_name">南京禄口国际机场</string>
     <string name="company_name">南京禄口国际机场</string>
     <string name="user_bumen">请输入部门名称</string>

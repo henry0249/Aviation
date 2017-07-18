@@ -17,12 +17,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.intanddomflight.FlightMessage;
 import com.example.administrator.aviation.model.intanddomflight.PrepareFlightMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PullToRefreshView;
 
+import org.ksoap2.serialization.SoapObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +46,12 @@ public class FlightHomeActivity extends Activity {
     ListView flightHomeLv;
     @BindView(R.id.flight_home_pb)
     ProgressBar flightHomePb;
+    @BindView(R.id.pull_refresh)
+    PullToRefreshView pullRefresh;
 
     private String xml;
+    // 查询界面传递来的刷新xml
+    private String refreshXml;
     private String jcgLeixing;
     private List<FlightMessage> flightMessages;
     private FlightAdapter flightAdapter;
@@ -49,6 +61,13 @@ public class FlightHomeActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == AviationCommons.FLIGHT_INFO_RQQUEST) {
+                flightAdapter = new FlightAdapter(FlightHomeActivity.this, flightMessages);
+                flightHomeLv.setAdapter(flightAdapter);
+                flightHomePb.setVisibility(View.GONE);
+                if (flightMessages.size() >= 1) {
+                    flightNodataTv.setVisibility(View.GONE);
+                }
+            } else if (msg.what == AviationCommons.FLIGHT_REFERCH) {
                 flightAdapter = new FlightAdapter(FlightHomeActivity.this, flightMessages);
                 flightHomeLv.setAdapter(flightAdapter);
                 flightHomePb.setVisibility(View.GONE);
@@ -71,7 +90,11 @@ public class FlightHomeActivity extends Activity {
         NavBar navBar = new NavBar(this);
         navBar.setTitle("航班动态列表");
         navBar.hideRight();
+
+        pullRefresh.disableScroolUp();
+
         xml = getIntent().getStringExtra(AviationCommons.FLIGHT_INFO);
+        refreshXml = getIntent().getStringExtra(AviationCommons.FLIGHT_XML);
         jcgLeixing = getIntent().getStringExtra("jcgleixing");
 
         new Thread() {
@@ -94,12 +117,45 @@ public class FlightHomeActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+
+        // 下拉刷新
+        pullRefresh.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                Map<String, String> params = new HashMap<>();
+                params.put("fltXml", refreshXml);
+                params.put("ErrString", "");
+                HttpRoot.getInstance().requstAync(FlightHomeActivity.this, HttpCommons.CGO_GET_FLIGHT_NAME, HttpCommons.CGO_GET_FLIGHT_ACTION, params,
+                        new HttpRoot.CallBack() {
+                            @Override
+                            public void onSucess(Object result) {
+                                SoapObject object = (SoapObject) result;
+                                String a = object.getProperty(0).toString();
+                                flightMessages = PrepareFlightMessage.pullFlightXml(a);
+                                handler.sendEmptyMessage(AviationCommons.FLIGHT_REFERCH);
+                                pullRefresh.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onFailed(String message) {
+                                flightHomePb.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError() {
+                                flightHomePb.setVisibility(View.GONE);
+                            }
+                        });
+            }
+        });
     }
 
-    private class FlightAdapter extends BaseAdapter{
+    private class FlightAdapter extends BaseAdapter {
         private List<FlightMessage> list;
         private Context context;
-        public FlightAdapter( Context context, List<FlightMessage> list) {
+
+        public FlightAdapter(Context context, List<FlightMessage> list) {
             this.list = list;
             this.context = context;
         }
@@ -197,7 +253,7 @@ public class FlightHomeActivity extends Activity {
             return convertView;
         }
 
-        class ViewHolder{
+        class ViewHolder {
             TextView dateTv;
             TextView fnoTv;
             TextView sfgTv;

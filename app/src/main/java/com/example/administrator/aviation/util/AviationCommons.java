@@ -31,6 +31,7 @@ public class AviationCommons {
     public static final String IMP_CARGO_INFO_BUSINESSTYPE = "businessType";
     public static final String IMP_CARGO_INFO_HAWBID = "hawbID";
     public static final String FLIGHT_INFO = "flightinfo";
+    public static final String FLIGHT_XML="xml";
     public static final String FLIGHT_DETAIL = "flightdetail";
     public static final String EDECLARE_INFO = "edeclareinfo";
 
@@ -74,7 +75,7 @@ public class AviationCommons {
 
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
-    public static final int INT_AWB_HANDLER = 0x222;
+    public static final int FLIGHT_REFERCH = 0x222;
     public static final int INT_DECLARE_INFO = 0x333;
     public static final int FLIGHT_INFO_RQQUEST = 0x444;
     public static final int EDECLARE_INFO_H = 0x555;

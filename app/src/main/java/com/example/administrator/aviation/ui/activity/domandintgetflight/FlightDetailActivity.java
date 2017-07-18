@@ -97,7 +97,7 @@ public class FlightDetailActivity extends Activity {
         flightStandid.setText(flightMessage.getStandID());
 
         String flightStau = flightMessage.getFlightStatus();
-        flightStau = AviationNoteConvert.enTocn(flightStau);
+        flightStau = AviationNoteConvert.statusCntoEn(flightStau);
         flightStatus.setText(flightStau);
 
         flightFlightterminalid.setText(flightMessage.getFlightTerminalID());

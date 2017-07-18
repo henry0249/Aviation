@@ -68,7 +68,14 @@ public class AviationNoteConvert {
             return "国内";
         } else if (name.equals("I") && !name.equals("")) {
             return "国际";
-        } else if (name.equals("S") || name.equals("N") || name.equals("F")) {
+        }else {
+            return "未知";
+        }
+    }
+
+    // 状态
+    public static String statusCntoEn(String name) {
+         if (name.equals("S") || name.equals("N") || name.equals("F")) {
             return "计划";
         } else if (name.equals("P") || name.equals("T")) {
             return "起飞";
