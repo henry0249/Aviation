@@ -145,4 +145,16 @@ public class AviationNoteConvert {
         }
     }
 
+    public static String sffangxingToEn(String name) {
+        if (name.equals("全部") && !name.equals("")) {
+            return "0";
+        } else if (name.equals("仅放行") && !name.equals("")) {
+            return "1";
+        } else if (name.equals("仅未放行") && !name.equals("")) {
+            return "2";
+        } else {
+            return "未知";
+        }
+    }
+
 }

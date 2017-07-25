@@ -82,6 +82,8 @@ public class AviationCommons {
     public static final int INT_EXPORT_DAY = 0x666;
     public static final int INT_E_DAT = 0x777;
     public static final int INT_E_DAY_MANIFEST = 0x888;
+    public static final int INT_ES_DAT = 0x999;
+    public static final int DOM_CHECK_INFO = 0x1111;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;

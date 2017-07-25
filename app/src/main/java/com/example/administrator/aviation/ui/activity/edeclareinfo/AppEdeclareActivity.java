@@ -16,12 +16,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.edeclareinfo.EdeclareInfo;
 import com.example.administrator.aviation.model.edeclareinfo.PrepareEdeclareInfo;
+import com.example.administrator.aviation.model.intanddomflight.PrepareFlightMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PullToRefreshView;
 
+import org.ksoap2.serialization.SoapObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,8 +46,11 @@ public class AppEdeclareActivity extends Activity {
     ListView edeclareLv;
     @BindView(R.id.edeclare_pb)
     ProgressBar edeclarePb;
+    @BindView(R.id.pull_refresh_lj)
+    PullToRefreshView pullRefreshLj;
 
     private String xml;
+    private String fxml;
     private List<EdeclareInfo> edeclareInfoList;
     private EdeclareAdapter edeclareAdapter;
 
@@ -47,6 +59,13 @@ public class AppEdeclareActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == AviationCommons.EDECLARE_INFO_H) {
+                edeclareAdapter = new EdeclareAdapter(AppEdeclareActivity.this, edeclareInfoList);
+                edeclareLv.setAdapter(edeclareAdapter);
+                edeclarePb.setVisibility(View.GONE);
+                if (edeclareInfoList.size() >= 1) {
+                    intEdeclareNodataTv.setVisibility(View.GONE);
+                }
+            } else if (msg.what == AviationCommons.INT_ES_DAT) {
                 edeclareAdapter = new EdeclareAdapter(AppEdeclareActivity.this, edeclareInfoList);
                 edeclareLv.setAdapter(edeclareAdapter);
                 edeclarePb.setVisibility(View.GONE);
@@ -70,7 +89,10 @@ public class AppEdeclareActivity extends Activity {
         navBar.setTitle("联检状态列表");
         navBar.hideRight();
 
+        pullRefreshLj.disableScroolUp();
+
         xml = getIntent().getStringExtra(AviationCommons.EDECLARE_INFO);
+        fxml = getIntent().getStringExtra("fxml");
         new Thread() {
             @Override
             public void run() {
@@ -91,11 +113,45 @@ public class AppEdeclareActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        // 下拉刷新
+        pullRefreshLj.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                Map<String, String> params = new HashMap<>();
+                params.put("awbXml", fxml);
+                params.put("ErrString", "");
+                HttpRoot.getInstance().requstAync(AppEdeclareActivity.this, HttpCommons.CGO_GET_EDECLARE_NAME, HttpCommons.CGO_GET_EDECLARE_ACTION, params,
+                        new HttpRoot.CallBack() {
+                            @Override
+                            public void onSucess(Object result) {
+                                SoapObject object = (SoapObject) result;
+                                String a = object.getProperty(0).toString();
+                                edeclareInfoList = PrepareEdeclareInfo.pullEDeclareInfoXml(a);
+                                handler.sendEmptyMessage(AviationCommons.INT_ES_DAT);
+                                pullRefreshLj.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onFailed(String message) {
+                                edeclarePb.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError() {
+                                edeclarePb.setVisibility(View.GONE);
+                            }
+                        });
+
+            }
+        });
+
     }
 
-    private class EdeclareAdapter extends BaseAdapter{
+    private class EdeclareAdapter extends BaseAdapter {
         private Context context;
         private List<EdeclareInfo> edeclareInfos;
+
         public EdeclareAdapter(Context context, List<EdeclareInfo> edeclareInfos) {
             this.context = context;
             this.edeclareInfos = edeclareInfos;
@@ -161,6 +217,7 @@ public class AppEdeclareActivity extends Activity {
             return convertView;
         }
     }
+
     class ViewHolder {
         // 主单号
         TextView mawbTv;

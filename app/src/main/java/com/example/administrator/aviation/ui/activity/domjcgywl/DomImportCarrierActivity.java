@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.tool.DateUtils;
+import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierDetailActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
@@ -31,10 +33,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 国内出港业务量查询界面
+ * 国内进港业务量查询界面
  */
 
-public class DomExportCarrierActivity extends Activity implements View.OnClickListener {
+public class DomImportCarrierActivity extends Activity implements View.OnClickListener {
     @BindView(R.id.declare_info_begin_time_et)
     EditText declareInfoBeginTimeEt;
     @BindView(R.id.declare_info_begin_time_btn)
@@ -51,6 +53,8 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
     EditText exportCarrierEt;
     @BindView(R.id.export_carrier_sp)
     Spinner exportCarrierSp;
+    @BindView(R.id.jcgtype_tv)
+    TextView jcgtypeTv;
 
     // 获取当前时间
     private String reportType;
@@ -74,8 +78,10 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle("国内出港业务量查询");
+        navBar.setTitle("进港业务量查询");
         navBar.hideRight();
+
+        jcgtypeTv.setText("报表类型");
 
         currentTime = DateUtils.getTodayDateTime();
         declareInfoBeginTimeEt.setText(currentTime);
@@ -86,7 +92,7 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
 
         reportTypeSpList = new ArrayList<>();
         reportTypeSpList.add("业务量");
-        reportTypeSpList.add("目的港");
+        reportTypeSpList.add("始发港");
         reportTypeSpList.add("航班号");
         reportTypeSpList.add("日");
         reportTypeSpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, reportTypeSpList);
@@ -109,11 +115,11 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.declare_info_begin_time_btn:
-                choseTimeMethod.getCurrentTime(DomExportCarrierActivity.this, declareInfoBeginTimeEt);
+                choseTimeMethod.getCurrentTime(DomImportCarrierActivity.this, declareInfoBeginTimeEt);
                 break;
 
             case R.id.declare_info_end_time_btn:
-                choseTimeMethod.getCurrentTime(DomExportCarrierActivity.this, declareInfoEndTimeEt);
+                choseTimeMethod.getCurrentTime(DomImportCarrierActivity.this, declareInfoEndTimeEt);
                 break;
 
             case R.id.declare_info_search_btn:
@@ -123,18 +129,18 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
                 Map<String, String> params = new HashMap<>();
                 params.put("awbXml", xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(DomExportCarrierActivity.this, HttpCommons.CGO_GET_DOM_EXPORT_REPORT_NAME,
-                        HttpCommons.CGO_GET_DOM_EXPORT_REPORT_ACTION, params,
+                HttpRoot.getInstance().requstAync(DomImportCarrierActivity.this, HttpCommons.CGO_GET_DOM_IMPORT_REPORT_NAME,
+                        HttpCommons.CGO_GET_DOM_IMPORT_REPORT_ACTION, params,
                         new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
                                 String xml = object.getProperty(0).toString();
 //                                Toast.makeText(IntExportCarrierActivity.this, xml, Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DomExportCarrierActivity.this, DomExportCarrierDetailActivity.class);
+                                Intent intent = new Intent(DomImportCarrierActivity.this, DomImportCarrierDetailActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("intexportdayxml", xml);
-                                bundle.putString("type", reportType);
+                                bundle.putString("intimportdayxml", xml);
+                                bundle.putString("jgtype", reportType);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                                 declareInfoPb.setVisibility(View.GONE);
@@ -165,11 +171,11 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
     }
 
     private String getXml(String begainTime, String endTime, String reportType) {
-        String xml = new String("<GNCCarrierReport>"
-                +"<ReportType>" + reportType + "</ReportType>"
+        String xml = new String("<GNJCarrierReport>"
+                + "<ReportType>" + reportType + "</ReportType>"
                 + "<StartDay>" + begainTime + "</StartDay>"
                 + "<EndDay>" + endTime + "</EndDay>"
-                + "</GNCCarrierReport>");
+                + "</GNJCarrierReport>");
         return xml;
     }
 }

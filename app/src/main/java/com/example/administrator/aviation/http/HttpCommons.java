@@ -162,15 +162,23 @@ public class HttpCommons {
     public static final String CGO_GET_DOM_IMPORT_REPORT_ACTION = "http://58.213.128.130/CGOGetDomImportReportOfCarrier";
 
     // 国内承运人出港日报表
-    public static final String CGO_GET_DOM_EXPORT_DAY_REPORT_NAME = "CGOGetIntExportDayReportOfCarrier";
-    public static final String CGO_GET_DOM_EXPORT_DAY_REPORT_ACTION = "http://58.213.128.130/CGOGetIntExportDayReportOfCarrier";
-    public static final String CGO_GET_DOM_EXPORT_MANIFEST_NAME = "CGOGetIntExportManifest";
-    public static final String CGO_GET_DOM_EXPORT_MANIFEST_ACTION = "http://58.213.128.130/CGOGetIntExportManifest";
+    public static final String CGO_GET_DOM_EXPORT_DAY_REPORT_NAME = "CGOGetDomExportDayReportOfCarrier";
+    public static final String CGO_GET_DOM_EXPORT_DAY_REPORT_ACTION = "http://58.213.128.130/CGOGetDomExportDayReportOfCarrier";
+    public static final String CGO_GET_DOM_EXPORT_MANIFEST_NAME = "CGOGetDomExportManifest";
+    public static final String CGO_GET_DOM_EXPORT_MANIFEST_ACTION = "http://58.213.128.130/CGOGetDomExportManifest";
 
     // 国内承运人进港日报表
-    public static final String CGO_GET_DOM_IMPORT_DAY_REPORT_NAME = "CGOGetIntImportDayReportOfCarrier";
-    public static final String CGO_GET_DOM_IMPORT_DAY_REPORT_ACTION = "http://58.213.128.130/CGOGetIntImportDayReportOfCarrier";
-    public static final String CGO_GET_DOM_IMPORT_MANIFEST_NAME = "CGOGetIntImportManifest";
-    public static final String CGO_GET_DOM_IMPORT_MANIFEST_ACTION = "http://58.213.128.130/CGOGetIntImportManifest";
+    public static final String CGO_GET_DOM_IMPORT_DAY_REPORT_NAME = "CGOGetDomImportDayReportOfCarrier";
+    public static final String CGO_GET_DOM_IMPORT_DAY_REPORT_ACTION = "http://58.213.128.130/CGOGetDomImportDayReportOfCarrier";
+    public static final String CGO_GET_DOM_IMPORT_MANIFEST_NAME = "CGOGetDomImportManifest";
+    public static final String CGO_GET_DOM_IMPORT_MANIFEST_ACTION = "http://58.213.128.130/CGOGetDomImportManifest";
+
+    // 国内承运人舱单计划
+    public static final String CGO_GET_DOM_FLIGHT_CHECK_IN_NAME = "CGOGetDomExportFlightForCheckIn";
+    public static final String CGO_GET_DOM_FLIGHT_CHECK_IN_ACTION = "http://58.213.128.130/CGOGetDomExportFlightForCheckIn";
+    public static final String CGO_GET_DOM_FLIGHT_AWB_PLAN_NAME = "CGOGetDomExportFlightAWBPlan";
+    public static final String CGO_GET_DOM_FLIGHT_AWB_PLAN_NACTION= "http://58.213.128.130/CGOGetDomExportFlightAWBPlan";
+    public static final String CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME = "CGODomExportFlightPlanChecked";
+    public static final String CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION= "http://58.213.128.130/CGODomExportFlightPlanChecked";
 
 }

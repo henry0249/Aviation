@@ -147,6 +147,7 @@ public class FlightHomeActivity extends Activity {
                                 flightHomePb.setVisibility(View.GONE);
                             }
                         });
+
             }
         });
     }

@@ -16,11 +16,17 @@
             android:text="@string/not_data"
             android:textSize="@dimen/awb_size"
             android:visibility="visible" />
+        <com.example.administrator.aviation.util.PullToRefreshView
+            android:id="@+id/pull_refresh_lj"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <ListView
             android:id="@+id/edeclare_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"/>
+        </com.example.administrator.aviation.util.PullToRefreshView>
         <ProgressBar
             android:id="@+id/edeclare_pb"
             style="?android:attr/progressBarStyleLarge"

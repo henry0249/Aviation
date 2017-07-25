@@ -5,20 +5,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.AviationNoteConvert;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -36,9 +42,18 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
     Button edeclareSearchBtn;
     @BindView(R.id.edeclare_pb)
     ProgressBar edeclarePb;
+    @BindView(R.id.flight_hangbanleixinget)
+    EditText flightHangbanleixinget;
+    @BindView(R.id.flighthangbanleixing_sp)
+    Spinner flighthangbanleixingSp;
 
     private String mawb;
+    private String sffangxing;
     private ArrayAdapter<String> arr_adapter;
+
+    // 是否放行类型
+    private ArrayAdapter<String> flighthangbanleixingSpAdapter;
+    private List<String> flighthangbanleixingSpList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +106,27 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
                 }
             }
         });
+
+        flighthangbanleixingSpList = new ArrayList<>();
+
+        flighthangbanleixingSpList.add("全部");
+        flighthangbanleixingSpList.add("仅放行");
+        flighthangbanleixingSpList.add("仅未放行");
+        flighthangbanleixingSpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, flighthangbanleixingSpList);
+        flighthangbanleixingSpAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        flighthangbanleixingSp.setAdapter(flighthangbanleixingSpAdapter);
+        flighthangbanleixingSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                flightHangbanleixinget.setText(flighthangbanleixingSpAdapter.getItem(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     @Override
@@ -100,7 +136,11 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
                 save();
                 edeclarePb.setVisibility(View.VISIBLE);
                 mawb = edeclareMawbEt.getText().toString().trim();
-                String xml = getXml(mawb);
+                sffangxing = flightHangbanleixinget.getText().toString().trim();
+                if (null != sffangxing && !sffangxing.equals("")) {
+                    sffangxing = AviationNoteConvert.sffangxingToEn(sffangxing);
+                }
+                final String xml = getXml(mawb, sffangxing);
                 Map<String, String> params = new HashMap<>();
                 params.put("awbXml", xml);
                 params.put("ErrString", "");
@@ -115,6 +155,7 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
                                 Intent intent = new Intent(AppEDeclareInfoSearchActivity.this, AppEdeclareActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString(AviationCommons.EDECLARE_INFO, edeclare);
+                                bundle.putString("fxml", xml);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                                 edeclarePb.setVisibility(View.GONE);
@@ -137,12 +178,14 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
         }
     }
 
-    private String getXml(String mawb) {
+    private String getXml(String mawb, String sffangxing) {
         String xml = new String("<GJCCarrierReport>"
                 + "<Mawb>" + mawb + "</Mawb>"
+                +"<RELStatus>" +sffangxing + "</RELStatus>"
                 + "</GJCCarrierReport>");
         return xml;
     }
+
     public void save() {
         // 获取搜索框信息
         String text = edeclareMawbEt.getText().toString();
