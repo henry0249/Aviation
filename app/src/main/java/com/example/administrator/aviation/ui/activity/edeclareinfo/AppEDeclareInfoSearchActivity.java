@@ -72,7 +72,7 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
 
 
         // 获取搜索记录文件内容
-        SharedPreferences sp = getSharedPreferences("search_history", 0);
+        SharedPreferences sp = getSharedPreferences(" ", 0);
         String history = sp.getString("history", "");
 
         // 用逗号分割内容返回数组

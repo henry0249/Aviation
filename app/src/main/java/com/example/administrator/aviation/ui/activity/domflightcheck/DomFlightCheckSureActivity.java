@@ -58,6 +58,8 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
 
     private Map<Integer, FlightPlanInfo> choseMap;
 
+    private String xml;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,65 +102,81 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
         switch (view.getId()) {
             // 订舱确认
             case R.id.flight_check_sure_btn:
-                String xml = getsureCancelXml(choseMap);
-                if (choseMap.isEmpty()) {
-                    Toast.makeText(this, "没有选择", Toast.LENGTH_SHORT).show();
-                } else {
-                    Map<String, String> checkSureMap = new HashMap<>();
-                    checkSureMap.put("awbXml", xml);
-                    checkSureMap.put("ErrString", "");
-                    HttpRoot.getInstance().requstAync(DomFlightCheckSureActivity.this, HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME,
-                            HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION, checkSureMap, new HttpRoot.CallBack() {
-                                @Override
-                                public void onSucess(Object result) {
-                                    SoapObject soapObject = (SoapObject) result;
-                                    String a = soapObject.getProperty(0).toString();
-                                    Toast.makeText(DomFlightCheckSureActivity.this, a, Toast.LENGTH_SHORT).show();
-                                    showData();
-                                }
+                Set<Integer> keys = choseMap.keySet();
+                for (Integer key:keys) {
+                    FlightPlanInfo flightPlanInfo = choseMap.get(key);
+                    String fdate = flightCheckInfo.getFDate();
+                    String fno = flightCheckInfo.getFno();
+                    String istrue = "1";
+                    xml = getsureCancelXml(flightPlanInfo, fdate, fno, istrue);
+                    if (choseMap.isEmpty()) {
+                        Toast.makeText(this, "没有选择", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Map<String, String> checkSureMap = new HashMap<>();
+                        checkSureMap.put("awbXml", xml);
+                        checkSureMap.put("ErrString", "");
+                        HttpRoot.getInstance().requstAync(DomFlightCheckSureActivity.this, HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME,
+                                HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION, checkSureMap, new HttpRoot.CallBack() {
+                                    @Override
+                                    public void onSucess(Object result) {
+                                        SoapObject soapObject = (SoapObject) result;
+                                        String a = soapObject.getProperty(0).toString();
+                                        Toast.makeText(DomFlightCheckSureActivity.this, a, Toast.LENGTH_SHORT).show();
+                                        showData();
+                                    }
 
-                                @Override
-                                public void onFailed(String message) {
+                                    @Override
+                                    public void onFailed(String message) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onError() {
+                                    @Override
+                                    public void onError() {
 
-                                }
-                            });
+                                    }
+                                });
+                    }
                 }
+
 
                 break;
 
             // 订舱取消
             case R.id.flight_check_cancel_btn:
-                xml = getsureCancelXml(choseMap);
-                if (choseMap.isEmpty()) {
-                    Toast.makeText(this, "没有选择", Toast.LENGTH_SHORT).show();
-                } else {
-                    Map<String, String> checkSureMap = new HashMap<>();
-                    checkSureMap.put("awbXml", xml);
-                    checkSureMap.put("ErrString", "");
-                    HttpRoot.getInstance().requstAync(DomFlightCheckSureActivity.this, HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME,
-                            HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION, checkSureMap, new HttpRoot.CallBack() {
-                                @Override
-                                public void onSucess(Object result) {
-                                    SoapObject soapObject = (SoapObject) result;
-                                    String a = soapObject.getProperty(0).toString();
-                                    Toast.makeText(DomFlightCheckSureActivity.this, a, Toast.LENGTH_SHORT).show();
-                                }
+                Set<Integer> keyes = choseMap.keySet();
+                for (Integer key:keyes) {
+                    FlightPlanInfo flightPlanInfo = choseMap.get(key);
+                    String fdate = flightCheckInfo.getFDate();
+                    String fno = flightCheckInfo.getFno();
+                    String isTru = "0";
+                    xml = getsureCancelXml(flightPlanInfo, fdate, fno, isTru);
+                    if (choseMap.isEmpty()) {
+                        Toast.makeText(this, "没有选择", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Map<String, String> checkSureMap = new HashMap<>();
+                        checkSureMap.put("awbXml", xml);
+                        checkSureMap.put("ErrString", "");
+                        HttpRoot.getInstance().requstAync(DomFlightCheckSureActivity.this, HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME,
+                                HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION, checkSureMap, new HttpRoot.CallBack() {
+                                    @Override
+                                    public void onSucess(Object result) {
+                                        SoapObject soapObject = (SoapObject) result;
+                                        String a = soapObject.getProperty(0).toString();
+                                        Toast.makeText(DomFlightCheckSureActivity.this, a, Toast.LENGTH_SHORT).show();
+                                        showData();
+                                    }
 
-                                @Override
-                                public void onFailed(String message) {
+                                    @Override
+                                    public void onFailed(String message) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onError() {
+                                    @Override
+                                    public void onError() {
 
-                                }
-                            });
+                                    }
+                                });
+                    }
                 }
                 break;
 
@@ -201,8 +219,12 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                 viewHolder.planCb = (CheckBox) convertView.findViewById(R.id.flight_plan_checkbox);
                 viewHolder.mawbTv = (TextView) convertView.findViewById(R.id.flight_plan_mawb_tv);
                 viewHolder.nameTv = (TextView) convertView.findViewById(R.id.flight_plan_name_tv);
+                viewHolder.pcTv = (TextView) convertView.findViewById(R.id.flight_plan_pc_tv);
+                viewHolder.weightTv = (TextView) convertView.findViewById(R.id.flight_plan_weight_tv);
+                viewHolder.volumeTv = (TextView) convertView.findViewById(R.id.flight_plan_volume_tv);
                 viewHolder.userTv = (TextView) convertView.findViewById(R.id.flight_plan_user_tv);
                 viewHolder.timeTv = (TextView) convertView.findViewById(R.id.flight_plan_time_tv);
+                viewHolder.sureStateTv = (TextView) convertView.findViewById(R.id.flight_plan_surestate_tv);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -219,6 +241,24 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
             } else {
                 viewHolder.nameTv.setText("");
             }
+            String pc = flightAWBPlanInfoList.get(position).getPC();
+            if (pc != null && !pc.equals("")) {
+                viewHolder.pcTv.setText(pc);
+            } else {
+                viewHolder.pcTv.setText("");
+            }
+            String weight = flightAWBPlanInfoList.get(position).getWeight();
+            if (weight != null && !weight.equals("")) {
+                viewHolder.weightTv.setText(weight);
+            } else {
+                viewHolder.weightTv.setText("");
+            }
+            String volume = flightAWBPlanInfoList.get(position).getVolume();
+            if (volume != null && !volume.equals("")) {
+                viewHolder.volumeTv.setText(volume);
+            } else {
+                viewHolder.volumeTv.setText("");
+            }
             String user = flightAWBPlanInfoList.get(position).getCheckID();
             if (user != null && !user.equals("")) {
                 viewHolder.userTv.setText(user);
@@ -230,6 +270,12 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                 viewHolder.timeTv.setText(time);
             } else {
                 viewHolder.timeTv.setText("");
+            }
+            String sureState = flightAWBPlanInfoList.get(position).getFlightChecked();
+            if (sureState != null && !sureState.equals("")) {
+                viewHolder.sureStateTv.setText(sureState);
+            } else {
+                viewHolder.sureStateTv.setText("");
             }
 
             viewHolder.planCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -250,9 +296,12 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
             CheckBox planCb;
             TextView mawbTv;
             TextView nameTv;
+            TextView pcTv;
+            TextView weightTv;
+            TextView volumeTv;
             TextView userTv;
             TextView timeTv;
-
+            TextView sureStateTv;
         }
     }
 
@@ -267,19 +316,17 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
     }
 
     // 订舱确认与取消订舱xml
-    private String getsureCancelXml(Map<Integer,FlightPlanInfo> checkedMap) {
+    private String getsureCancelXml(FlightPlanInfo flightPlanInfo, String fdate, String fno, String isTrue) {
         String pre = "<GNCAWBPlan>";
         String after ="</GNCAWBPlan>";
         String result = pre;
-        Set<Integer> keys = checkedMap.keySet();
-        for (Integer key:keys) {
-            FlightPlanInfo flightPlanInfo = checkedMap.get(key);
 
-            result += "<FDate>"+flightPlanInfo.getFDate()+"</FDate>"
-                    +"<Fno>" + flightPlanInfo.getFno() + "</Fno>"
-                    + "<FlightChecked>"+flightPlanInfo.getFlightChecked()+"</FlightChecked>"
+
+            result += "<FDate>"+fdate+"</FDate>"
+                    +"<Fno>" + fno + "</Fno>"
+                    + "<FlightChecked>"+isTrue+"</FlightChecked>"
                     +"<Mawb>" + flightPlanInfo.getMawb() + "</Mawb>";
-        }
+//        }
         result = result+after;
         return result;
     }

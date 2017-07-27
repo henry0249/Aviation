@@ -18,6 +18,7 @@ import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightActivity;
+import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightHomeDetailActivity;
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightCheckInSearchActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierActivity;
@@ -177,7 +178,7 @@ public class HomePageFragment extends Fragment{
                     Intent intentCargoInfo = new Intent(getActivity(), AppIntimpCargoInfoActivity.class);
                     startActivity(intentCargoInfo);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_FLIGHT_MESSAGE)) {
-                    Intent intentFlight = new Intent(getActivity(), FlightActivity.class);
+                    Intent intentFlight = new Intent(getActivity(), FlightHomeDetailActivity.class);
                     startActivity(intentFlight);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_EDECLARE_INFO)) {
                     Intent intentEdeclare = new Intent(getActivity(), AppEDeclareInfoSearchActivity.class);

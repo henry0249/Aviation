@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/navbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -47,6 +47,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="始发港"
@@ -75,17 +76,8 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/yjqf_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="预计起飞"
-                android:textColor="#fff"
-                android:textSize="13sp" />
-            <TextView
-                android:id="@+id/yjdd_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:text="预计到达"
                 android:textColor="#fff"
                 android:textSize="13sp" />
@@ -98,19 +90,11 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/sjqf_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="实际起飞"
-                android:textColor="#fff"
-                android:textSize="13sp" />
-            <TextView
-                android:id="@+id/sjdd_tv"
+                android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="实际到达"
                 android:textColor="#fff"
-                android:visibility="gone"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -133,36 +117,19 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <TextView
-                android:id="@+id/flight_nodata_tv"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:text="@string/not_data"
-                android:textSize="20sp"/>
-        </LinearLayout>
 
         <com.example.administrator.aviation.util.PullToRefreshView
-            android:id="@+id/pull_refresh"
+            android:id="@+id/flight_in_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        <ListView
-            android:id="@+id/flight_home_lv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
-        </com.example.administrator.aviation.util.PullToRefreshView>
-        <ProgressBar
-            android:id="@+id/flight_home_pb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="?android:attr/progressBarStyleLarge"/>
 
+            <ListView
+                android:id="@+id/fragment_flight_in_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </com.example.administrator.aviation.util.PullToRefreshView>
     </FrameLayout>
 </LinearLayout>

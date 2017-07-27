@@ -102,8 +102,10 @@
                     android:layout_marginLeft="21dp"
                     android:layout_gravity="center"
                     android:textSize="12sp"
+                    android:checked="true"
                     android:text="仅显示待批航班"
                     android:textColor="#FF4224DA"/>
+
                 <CheckBox
                     android:id="@+id/check_gl_cb"
                     android:layout_width="0dp"
@@ -112,6 +114,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
                     android:textSize="12sp"
+                    android:checked="true"
                     android:text="过滤收运截止航班"
                     android:textColor="#FF4224DA"/>
             </LinearLayout>

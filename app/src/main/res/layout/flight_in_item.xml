@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f4f4f4"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent">
     <LinearLayout
-        android:id="@+id/flight_home_layout"
+        android:id="@+id/flight_in_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#ebf5fe">
@@ -16,7 +14,7 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/flight_home_fno_tv"
+                android:id="@+id/flight_home_in_fno_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ZH986"
@@ -31,7 +29,7 @@
             android:layout_weight="1.5">
 
             <TextView
-                android:id="@+id/flight_home_date_tv"
+                android:id="@+id/flight_home_in_date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2015-12-21"
@@ -46,7 +44,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/flight_home_sfg_tv"
+                android:id="@+id/flight_home_in_sfg_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NDK"
@@ -60,7 +58,7 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/flight_home_mdg_tv"
+                android:id="@+id/flight_home_in_mdg_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NKD"
@@ -68,25 +66,15 @@
                 android:textSize="12sp"/>
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:gravity="center"
             android:layout_weight="1.5">
             <TextView
-                android:id="@+id/flight_home_yjqf_tv"
+                android:id="@+id/flight_home_in_yjqf_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="2015-12-21 05:05"
-                android:textColor="#3c3c3b"
-                android:textSize="12sp"/>
-            <TextView
-                android:id="@+id/flight_home_yjdd_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:gravity="center"
                 android:text="2015-12-21 05:05"
                 android:textColor="#3c3c3b"
@@ -99,19 +87,10 @@
             android:gravity="center"
             android:layout_weight="1.5">
             <TextView
-                android:id="@+id/flight_home_sjqf_tv"
+                android:id="@+id/flight_home_in_sjqf_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="2015-12-21 05:05"
-                android:textColor="#3c3c3b"
-                android:textSize="12sp"/>
-            <TextView
-                android:id="@+id/flight_home_sjdd_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:visibility="gone"
                 android:text="2015-12-21 05:05"
                 android:textColor="#3c3c3b"
                 android:textSize="12sp"/>
@@ -123,7 +102,7 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/flight_home_out_state_tv"
+                android:id="@+id/flight_home_in_state_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="起飞"
@@ -132,4 +111,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

@@ -122,6 +122,7 @@ public class DomFlightCheckInActivity extends Activity {
                 viewHolder.yjqfTv = (TextView) convertView.findViewById(R.id.check_yjqf_tv);
                 viewHolder.rukuTv = (TextView) convertView.findViewById(R.id.check_ruku_tv);
                 viewHolder.lahuoTv = (TextView) convertView.findViewById(R.id.check_lahuo_tv);
+                viewHolder.restWeightTv = (TextView) convertView.findViewById(R.id.check_rest_weight_tv);
                 viewHolder.detailBtn = (Button) convertView.findViewById(R.id.check_detail_btn);
                 viewHolder.sureBtn = (Button) convertView.findViewById(R.id.check_sure_btn);
                 convertView.setTag(viewHolder);
@@ -159,6 +160,12 @@ public class DomFlightCheckInActivity extends Activity {
             } else {
                 viewHolder.lahuoTv.setText("");
             }
+            String restWeight = flightCheckInfoList.get(position).getUseableWeight();
+            if (restWeight != null && !restWeight.equals("")) {
+                viewHolder.restWeightTv.setText(restWeight);
+            } else {
+                viewHolder.restWeightTv.setText("");
+            }
 
             // 详情点击事件
             viewHolder.detailBtn.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +180,7 @@ public class DomFlightCheckInActivity extends Activity {
                 }
             });
 
-            // 订舱确认
+            // 订舱管理
             viewHolder.sureBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -194,6 +201,7 @@ public class DomFlightCheckInActivity extends Activity {
             TextView yjqfTv;
             TextView rukuTv;
             TextView lahuoTv;
+            TextView restWeightTv;
             Button detailBtn;
             Button sureBtn;
         }

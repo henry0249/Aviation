@@ -34,6 +34,12 @@
                     android:text="@string/house_yundanhao"
                     android:textSize="@dimen/house_size" />
 
+                <LinearLayout android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+                </LinearLayout>
+
                 <AutoCompleteTextView
                     android:id="@+id/edeclare_mawb_et"
                     android:layout_width="wrap_content"

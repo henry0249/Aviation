@@ -3,6 +3,7 @@ package com.example.administrator.aviation.ui.activity.domandintgetflight;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +24,7 @@ import com.example.administrator.aviation.model.intanddomflight.FlightMessage;
 import com.example.administrator.aviation.model.intanddomflight.PrepareFlightMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.PullToRefreshView;
 
 import org.ksoap2.serialization.SoapObject;
@@ -48,6 +50,14 @@ public class FlightHomeActivity extends Activity {
     ProgressBar flightHomePb;
     @BindView(R.id.pull_refresh)
     PullToRefreshView pullRefresh;
+    @BindView(R.id.yjqf_tv)
+    TextView yjqfTv;
+    @BindView(R.id.yjdd_tv)
+    TextView yjddTv;
+    @BindView(R.id.sjqf_tv)
+    TextView sjqfTv;
+    @BindView(R.id.sjdd_tv)
+    TextView sjddTv;
 
     private String xml;
     // 查询界面传递来的刷新xml
@@ -96,6 +106,19 @@ public class FlightHomeActivity extends Activity {
         xml = getIntent().getStringExtra(AviationCommons.FLIGHT_INFO);
         refreshXml = getIntent().getStringExtra(AviationCommons.FLIGHT_XML);
         jcgLeixing = getIntent().getStringExtra("jcgleixing");
+
+        // 判断进出港
+        if (jcgLeixing.equals("I")) {
+            yjddTv.setVisibility(View.VISIBLE);
+            sjddTv.setVisibility(View.VISIBLE);
+            yjqfTv.setVisibility(View.GONE);
+            sjqfTv.setVisibility(View.GONE);
+        } else if (jcgLeixing.equals("E")) {
+            yjddTv.setVisibility(View.GONE);
+            sjddTv.setVisibility(View.GONE);
+            yjqfTv.setVisibility(View.VISIBLE);
+            sjqfTv.setVisibility(View.VISIBLE);
+        }
 
         new Thread() {
             @Override
@@ -182,6 +205,7 @@ public class FlightHomeActivity extends Activity {
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.flight_home_item, viewGroup, false);
                 viewHolder = new ViewHolder();
+                viewHolder.mLayout = (LinearLayout) convertView.findViewById(R.id.flight_home_layout);
                 viewHolder.dateTv = (TextView) convertView.findViewById(R.id.flight_home_date_tv);
                 viewHolder.fnoTv = (TextView) convertView.findViewById(R.id.flight_home_fno_tv);
                 viewHolder.sfgTv = (TextView) convertView.findViewById(R.id.flight_home_sfg_tv);
@@ -190,12 +214,25 @@ public class FlightHomeActivity extends Activity {
                 viewHolder.yjddTv = (TextView) convertView.findViewById(R.id.flight_home_yjdd_tv);
                 viewHolder.sjqfTv = (TextView) convertView.findViewById(R.id.flight_home_sjqf_tv);
                 viewHolder.sjddTv = (TextView) convertView.findViewById(R.id.flight_home_sjdd_tv);
-                viewHolder.chugangLayout = (LinearLayout) convertView.findViewById(R.id.flight_home_chugang_layout);
-                viewHolder.jingangLayout = (LinearLayout) convertView.findViewById(R.id.flight_home_jingang_layout);
+                viewHolder.stateTv = (TextView) convertView.findViewById(R.id.flight_home_out_state_tv);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
+
+            // 判断进出港
+            if (jcgLeixing.equals("I")) {
+                viewHolder.yjddTv.setVisibility(View.VISIBLE);
+                viewHolder.sjddTv.setVisibility(View.VISIBLE);
+                viewHolder.yjqfTv.setVisibility(View.GONE);
+                viewHolder.sjqfTv.setVisibility(View.GONE);
+            } else if (jcgLeixing.equals("E")) {
+                viewHolder.yjddTv.setVisibility(View.GONE);
+                viewHolder.sjddTv.setVisibility(View.GONE);
+                viewHolder.yjqfTv.setVisibility(View.VISIBLE);
+                viewHolder.sjqfTv.setVisibility(View.VISIBLE);
+            }
+
             String fdate = list.get(position).getfDate();
             if (!fdate.equals("")) {
                 viewHolder.dateTv.setText(fdate);
@@ -244,17 +281,30 @@ public class FlightHomeActivity extends Activity {
             } else {
                 viewHolder.sjddTv.setText("");
             }
-
-            // 判断进出港
-            if (jcgLeixing.equals("I")) {
-                viewHolder.chugangLayout.setVisibility(View.GONE);
-            } else if (jcgLeixing.equals("E")) {
-                viewHolder.jingangLayout.setVisibility(View.GONE);
+            String state = list.get(position).getFlightStatus();
+            if (state != null && !state.equals("")) {
+                if (state.equals("D") || state.equals("X")) {
+                    viewHolder.stateTv.setTextColor(Color.parseColor("#fe3500"));
+                } else {
+                    viewHolder.stateTv.setTextColor(Color.parseColor("#26c219"));
+                }
+                state = AviationNoteConvert.statusCntoEn(state);
+                viewHolder.stateTv.setText(state);
+            } else {
+                viewHolder.stateTv.setText("");
             }
+
+            if (position % 2 == 0) {
+                viewHolder.mLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            } else {
+                viewHolder.mLayout.setBackgroundColor(Color.parseColor("#ebf5fe"));
+            }
+
             return convertView;
         }
 
         class ViewHolder {
+            LinearLayout mLayout;
             TextView dateTv;
             TextView fnoTv;
             TextView sfgTv;
@@ -263,8 +313,7 @@ public class FlightHomeActivity extends Activity {
             TextView sjqfTv;
             TextView yjddTv;
             TextView sjddTv;
-            LinearLayout jingangLayout;
-            LinearLayout chugangLayout;
+            TextView stateTv;
         }
     }
 }

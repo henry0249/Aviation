@@ -19,6 +19,7 @@
 
     <string name="app_name">南京禄口国际机场</string>
     <string name="company_name">南京禄口国际机场</string>
+    <string name="company_little_name">空港科技有限公司</string>
     <string name="user_bumen">请输入部门名称</string>
     <string name="user_name">请输入用户名</string>
     <string name="user_pass">请输入密码</string>
