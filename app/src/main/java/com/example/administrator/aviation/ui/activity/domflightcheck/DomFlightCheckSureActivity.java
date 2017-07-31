@@ -3,6 +3,7 @@ package com.example.administrator.aviation.ui.activity.domflightcheck;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -225,6 +227,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                 viewHolder.userTv = (TextView) convertView.findViewById(R.id.flight_plan_user_tv);
                 viewHolder.timeTv = (TextView) convertView.findViewById(R.id.flight_plan_time_tv);
                 viewHolder.sureStateTv = (TextView) convertView.findViewById(R.id.flight_plan_surestate_tv);
+                viewHolder.showLy = (LinearLayout) convertView.findViewById(R.id.awb_linear_layout);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -274,6 +277,9 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
             String sureState = flightAWBPlanInfoList.get(position).getFlightChecked();
             if (sureState != null && !sureState.equals("")) {
                 viewHolder.sureStateTv.setText(sureState);
+                if (sureState.equals("1")) {
+                    viewHolder.showLy.setBackgroundColor(Color.parseColor("#fbd0cf"));
+                }
             } else {
                 viewHolder.sureStateTv.setText("");
             }
@@ -302,6 +308,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
             TextView userTv;
             TextView timeTv;
             TextView sureStateTv;
+            LinearLayout showLy;
         }
     }
 

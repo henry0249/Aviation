@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f4f4f4"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/flight_in_layout"
         android:layout_width="match_parent"
@@ -17,7 +15,7 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/check_fno_tv"
+                android:id="@+id/flight_in_home_fno_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ZH986"
@@ -32,7 +30,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/check_mudigang_tv"
+                android:id="@+id/flight_in_home_dest_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NKG"
@@ -47,7 +45,7 @@
             android:layout_weight="1.5">
 
             <TextView
-                android:id="@+id/check_yjqf_tv"
+                android:id="@+id/flight_in_home_yjqf_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2012/7/28 17：50：00"
@@ -62,7 +60,7 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/check_ruku_tv"
+                android:id="@+id/flight_in_home_ruku_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -76,7 +74,7 @@
             android:gravity="center"
             android:layout_weight="1.3">
             <TextView
-                android:id="@+id/check_lahuo_tv"
+                android:id="@+id/flight_in_home_lahuo_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -91,7 +89,7 @@
             android:gravity="center"
             android:layout_weight="1.2">
             <TextView
-                android:id="@+id/check_rest_weight_tv"
+                android:id="@+id/flight_in_home_shengyu_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -106,7 +104,7 @@
             android:gravity="center"
             android:layout_weight="1.2">
             <Button
-                android:id="@+id/check_sure_btn"
+                android:id="@+id/flight_in_home_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订舱管理"

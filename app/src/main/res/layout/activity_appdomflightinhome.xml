@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/navbar"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/navbar" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -115,60 +118,20 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <com.example.administrator.aviation.util.PullToRefreshView
+            android:id="@+id/flight_in_home_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/flight_check_nodata_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                android:textSize="@dimen/small_size"
-                android:text="@string/not_data"/>
-            <ProgressBar
-                android:id="@+id/flight_check_deatil_pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="visible"
-                style="?android:attr/progressBarStyleLarge"/>
 
-            <TextView
-                android:id="@+id/flight_check_load_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/awb_load"
-                android:visibility="gone"
-                android:textSize="@dimen/awb_size"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:background="@color/bg_control_center_switch"
-            android:layout_height="1dp"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.example.administrator.aviation.util.PullToRefreshView
-                android:id="@+id/search_flight_refresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
             <ListView
-                android:id="@+id/dflight_check_listview"
+                android:id="@+id/flight_in_home_lv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@null"/>
-            </com.example.administrator.aviation.util.PullToRefreshView>
-        </FrameLayout>
+                android:divider="@null">
 
+            </ListView>
+        </com.example.administrator.aviation.util.PullToRefreshView>
     </FrameLayout>
-
-
 </LinearLayout>

@@ -46,6 +46,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         initView();
 
+        // 避免从桌面启动程序后，会重新实例化入口类的activity
+        if (!this.isTaskRoot()) {
+            Intent intent = getIntent();
+            if (intent != null) {
+                String action = intent.getAction();
+                if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(action)) {
+                    finish();
+                    return;
+                }
+            }
+        }
+
         // 得到自动登录判断标识
         isFirst = sp.getBoolean("ISFIRST", true);
 

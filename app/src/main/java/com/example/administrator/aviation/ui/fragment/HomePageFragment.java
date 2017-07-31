@@ -20,6 +20,7 @@ import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightActivity;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightHomeDetailActivity;
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightCheckInSearchActivity;
+import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightInHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierActivity;
@@ -208,7 +209,7 @@ public class HomePageFragment extends Fragment{
                     Intent intentDomRDI = new Intent(getActivity(), DomImportDayCarrierActivity.class);
                     startActivity(intentDomRDI);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExport0FlightPlanChecked)) {
-                    Intent intentDomRDI = new Intent(getActivity(), DomFlightCheckInSearchActivity.class);
+                    Intent intentDomRDI = new Intent(getActivity(), DomFlightInHomeActivity.class);
                     startActivity(intentDomRDI);
                 } else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();

@@ -99,7 +99,7 @@ public class DomFlightCheckInSearchActivity extends Activity implements View.OnC
                 fdate = checkTimeEt.getText().toString().trim();
                 fno = checkMawbEt.getText().toString().trim();
                 fno = fno.toUpperCase();
-                String xml = getXml(fdate, fno, showCheck, guolvCheck);
+                final String xml = getXml(fdate, fno, showCheck, guolvCheck);
                 Map<String, String> params = new HashMap<>();
                 params.put("fltXml", xml);
                 params.put("ErrString", "");
@@ -112,6 +112,7 @@ public class DomFlightCheckInSearchActivity extends Activity implements View.OnC
                                 Intent intent = new Intent(DomFlightCheckInSearchActivity.this, DomFlightCheckInActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("checkXml", a);
+                                bundle.putString("searchXml", xml);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                                 checkPb.setVisibility(View.GONE);

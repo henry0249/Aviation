@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -105,6 +106,9 @@ public class FlightActivity extends Activity implements View.OnClickListener{
         navBar.setTitle("航班动态查询");
         navBar.hideRight();
 
+        // 航班号改成大写
+        flightHangbanhaoEt.setTransformationMethod(new AllCapTransformationMethod());
+
         // 选择时间点击事件
         flightchosetimeBtn.setOnClickListener(this);
 
@@ -184,7 +188,11 @@ public class FlightActivity extends Activity implements View.OnClickListener{
     // 获取输入框的值并且拼接xml
     private void getEditTextValues() {
         hbTime = flightTimeEt.getText().toString().trim();
+
+        // 将航班号改成大写
         hbHao = flightHangbanhaoEt.getText().toString().trim();
+        hbHao = hbHao.toUpperCase();
+
         hbLexing = flightHangbanleixingEt.getText().toString().trim();
         if (!hbLexing.equals("")) {
             hbLexing = AviationNoteConvert.cNtoEn(hbLexing);

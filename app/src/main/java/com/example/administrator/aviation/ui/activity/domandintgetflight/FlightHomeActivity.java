@@ -162,12 +162,12 @@ public class FlightHomeActivity extends Activity {
 
                             @Override
                             public void onFailed(String message) {
-                                flightHomePb.setVisibility(View.GONE);
+                                pullRefresh.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onError() {
-                                flightHomePb.setVisibility(View.GONE);
+                                pullRefresh.onHeaderRefreshComplete();
                             }
                         });
 

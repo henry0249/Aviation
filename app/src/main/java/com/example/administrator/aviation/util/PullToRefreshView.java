@@ -385,6 +385,7 @@ public class PullToRefreshView extends LinearLayout{
      */
     public void enableScroolUp() {
         canScroolUp = true;
+//        mFooterView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -392,6 +393,7 @@ public class PullToRefreshView extends LinearLayout{
      */
     public void disableScroolUp() {
         canScroolUp = false;
+//        mFooterView.setVisibility(View.GONE);
     }
 
     /**

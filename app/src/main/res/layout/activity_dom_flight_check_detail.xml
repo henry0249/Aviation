@@ -224,6 +224,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -253,6 +255,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -288,6 +292,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="最大体积MC:"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:textSize="@dimen/awb_detail_size" />
 
                 <TextView
@@ -308,6 +314,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -337,6 +345,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -364,6 +374,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -394,6 +406,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -422,6 +436,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -450,6 +466,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -479,6 +497,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:gravity="center">
 
                 <TextView
@@ -508,6 +528,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
                 android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp">
 
