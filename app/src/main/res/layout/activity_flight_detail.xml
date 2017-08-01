@@ -16,7 +16,7 @@
             android:background="#ffffff">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -24,8 +24,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/imphangbanri"/>
                 <TextView
                     android:id="@+id/flight_date"
@@ -33,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -44,7 +43,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -52,16 +51,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/imphangbanhao"/>
+
                 <TextView
                     android:id="@+id/flight_fno"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -72,7 +71,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -80,8 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impshifagang"/>
 
                 <TextView
@@ -90,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -101,7 +99,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -110,8 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impjingtinggang"/>
 
                 <TextView
@@ -120,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -131,7 +128,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -139,8 +136,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impmudigang"/>
                 <TextView
                     android:id="@+id/fdest"
@@ -148,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -159,7 +155,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -167,8 +163,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impleixing"/>
                 <TextView
                     android:id="@+id/flight_type"
@@ -176,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -187,7 +182,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -195,8 +190,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impdiqu"/>
                 <TextView
                     android:id="@+id/flight_country"
@@ -204,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -215,7 +209,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -223,8 +217,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impyujiqifei"/>
                 <TextView
                     android:id="@+id/flight_etd"
@@ -232,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -243,7 +236,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -251,8 +244,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impshijiqifei"/>
                 <TextView
                     android:id="@+id/flight_atd"
@@ -260,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -271,7 +263,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -279,8 +271,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impyujidaoda"/>
                 <TextView
                     android:id="@+id/flight_eta"
@@ -288,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -299,7 +290,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -307,8 +298,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impshijidaoda"/>
 
                 <TextView
@@ -317,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -328,7 +318,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -336,8 +326,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impjihao"/>
                 <TextView
                     android:id="@+id/flight_registeration"
@@ -345,7 +334,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -356,24 +345,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:text="@string/impjixing"/>
+                    android:textSize="@dimen/declare_size"
+                    android:text="@string/impjixing"
+                    android:id="@+id/textView19" />
+
                 <TextView
                     android:id="@+id/flight_aircraftcode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -383,7 +374,7 @@
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -391,8 +382,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impjiwei"/>
                 <TextView
                     android:id="@+id/flight_standid"
@@ -400,7 +390,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -410,7 +400,7 @@
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -418,8 +408,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impzhuangtai"/>
                 <TextView
                     android:id="@+id/flight_status"
@@ -427,7 +416,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -437,7 +426,7 @@
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -445,8 +434,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/imphangzhanlou"/>
                 <TextView
                     android:id="@+id/flight_flightterminalid"
@@ -454,7 +442,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -464,7 +452,7 @@
                 android:background="#f4f4f4" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
                 android:layout_marginRight="21dp">
@@ -472,8 +460,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:text="@string/impyanwuyuanyi"/>
 
                 <TextView
@@ -482,7 +469,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

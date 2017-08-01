@@ -8,8 +8,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="21dp"
-        android:layout_marginRight="21dp"
         android:layout_marginTop="10dp">
 
         <LinearLayout
@@ -20,7 +18,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -29,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Mawb"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_mawb_detail_tv"
@@ -39,7 +37,7 @@
                     android:background="@color/awb_detail_color"
                     android:text="1234667895"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -50,7 +48,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -59,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="承运人:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/edeclareinfo_carrier_detail_tv"
@@ -67,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -79,7 +77,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
                 <TextView
@@ -87,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="业务类型:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_businessName_detail_tv"
@@ -95,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -106,7 +104,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -115,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="商检指令:"
-                    android:textSize="@dimen/awb_detail_size"/>
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_ciqstatus_detail_tv"
@@ -123,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -134,7 +132,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -143,8 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/haiguanzhiling"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:id="@+id/textView10" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_cmdstatus_detail_tv"
@@ -152,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
 
@@ -164,7 +161,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -173,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="代理:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/edeclareinfo_agentcode_detail_tv"
@@ -181,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
 
@@ -196,8 +193,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                style="@style/longPage"
                 android:gravity="center">
 
                 <TextView
@@ -205,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="名称:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/declareinfo_agentname_detail_tv"
@@ -213,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
 
@@ -225,7 +221,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -234,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="交单日期:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_papertime_detail_tv"
@@ -242,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -253,7 +249,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -262,7 +258,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="航班日期:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/edeclareinfo_fDate_detail_tv"
@@ -270,7 +266,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -281,7 +277,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -290,7 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="航班号:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_fno_detail_tv"
@@ -298,7 +294,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -309,7 +305,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -318,7 +314,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="单证件数:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/declareinfo_totalpc_detail_tv"
@@ -326,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -337,7 +333,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -346,7 +342,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_pc"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_pc_detail_tv"
@@ -354,7 +350,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -365,7 +361,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -374,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_weight"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:id="@+id/textView11" />
 
                 <TextView
@@ -383,7 +379,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -394,7 +390,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -403,7 +399,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="体积:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_volume_detail_tv"
@@ -411,7 +407,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -422,7 +418,7 @@
                 android:layout_marginRight="18dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                style="@style/height"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
 
@@ -431,7 +427,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="目的港:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclareinfo_dest_detail_tv"
@@ -439,7 +435,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -452,8 +448,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="29dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                style="@style/longPage"
                 android:gravity="center">
 
                 <TextView
@@ -461,8 +456,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="品名:"
-                    android:textSize="@dimen/awb_detail_size"
-                    android:id="@+id/textView25" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/edeclareinfo_goodscn_tv"
@@ -470,9 +464,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"/>
 
         </LinearLayout>
 

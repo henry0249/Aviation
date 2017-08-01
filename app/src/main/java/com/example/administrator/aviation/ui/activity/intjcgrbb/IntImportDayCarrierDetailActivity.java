@@ -3,6 +3,7 @@ package com.example.administrator.aviation.ui.activity.intjcgrbb;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,17 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.intjcgrbb.IntExportDayInfo;
 import com.example.administrator.aviation.model.intjcgrbb.PrepareIntExportDayInfo;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PullToRefreshView;
 
+import org.ksoap2.serialization.SoapObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,8 +47,15 @@ public class IntImportDayCarrierDetailActivity extends Activity {
     ListView edeclareLv;
     @BindView(R.id.edeclare_pb)
     ProgressBar edeclarePb;
+    @BindView(R.id.yjTv)
+    TextView yjTv;
+    @BindView(R.id.sj_tv)
+    TextView sjTv;
+    @BindView(R.id.jcg_refresh)
+    PullToRefreshView jcgRefresh;
 
     private String xml;
+    private String refreshXml;
 
     private List<IntExportDayInfo> intExportDayInfoList;
     private ExportDayAdapter exportDayAdapter;
@@ -71,7 +88,14 @@ public class IntImportDayCarrierDetailActivity extends Activity {
         navBar.setTitle("进港日报表列表");
         navBar.hideRight();
 
+        yjTv.setText("预计到达");
+        sjTv.setText("实际到达");
+
         xml = getIntent().getStringExtra("intimportdaydetailxml");
+        refreshXml = getIntent().getStringExtra("xml");
+
+        // 关闭上拉刷新
+        jcgRefresh.disableScroolUp();
 
         new Thread() {
             @Override
@@ -81,6 +105,39 @@ public class IntImportDayCarrierDetailActivity extends Activity {
                 handler.sendEmptyMessage(AviationCommons.INT_E_DAT);
             }
         }.start();
+
+        // 下拉刷新
+        jcgRefresh.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                Map<String, String> params = new HashMap<>();
+                params.put("awbXml", refreshXml);
+                params.put("ErrString", "");
+                HttpRoot.getInstance().requstAync(IntImportDayCarrierDetailActivity.this, HttpCommons.CGO_GET_INT_IMPORT_DAY_REPORT_NAME,
+                        HttpCommons.CGO_GET_INT_IMPORT_DAY_REPORT_ACTION, params,
+                        new HttpRoot.CallBack() {
+                            @Override
+                            public void onSucess(Object result) {
+                                SoapObject object = (SoapObject) result;
+                                String xmls = object.getProperty(0).toString();
+                                intExportDayInfoList = PrepareIntExportDayInfo.pullExportDayInfoXml(xmls);
+                                exportDayAdapter = new ExportDayAdapter(IntImportDayCarrierDetailActivity.this, intExportDayInfoList);
+                                edeclareLv.setAdapter(exportDayAdapter);
+                                jcgRefresh.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onFailed(String message) {
+                                jcgRefresh.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onError() {
+                                jcgRefresh.onHeaderRefreshComplete();
+                            }
+                        });
+            }
+        });
 
         edeclareLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,6 +156,7 @@ public class IntImportDayCarrierDetailActivity extends Activity {
     private class ExportDayAdapter extends BaseAdapter {
         private Context context;
         private List<IntExportDayInfo> intExportDayInfoList;
+
         public ExportDayAdapter(Context context, List<IntExportDayInfo> intExportDayInfoList) {
             this.context = context;
             this.intExportDayInfoList = intExportDayInfoList;
@@ -134,14 +192,12 @@ public class IntImportDayCarrierDetailActivity extends Activity {
                 viewHolder.volumeTv = (TextView) convertView.findViewById(R.id.edeclare_info_volume_tv);
                 viewHolder.yjddTv = (TextView) convertView.findViewById(R.id.edeclare_info_yj_tv);
                 viewHolder.sjddTv = (TextView) convertView.findViewById(R.id.edeclare_sj_tv);
-                viewHolder.yjTv = (TextView) convertView.findViewById(R.id.yj_tv);
-                viewHolder.sjTv = (TextView) convertView.findViewById(R.id.sj_tv);
+                viewHolder.showLy = (LinearLayout) convertView.findViewById(R.id.flight_in_layout);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.yjTv.setText("预计到达:");
-            viewHolder.sjTv.setText("实际到达:");
+
             String fno = intExportDayInfoList.get(position).getFno();
             if (fno != null && !fno.equals("")) {
                 viewHolder.fnoTv.setText(fno);
@@ -196,10 +252,15 @@ public class IntImportDayCarrierDetailActivity extends Activity {
             } else {
                 viewHolder.sjddTv.setText("");
             }
+            if (position % 2 == 0) {
+                viewHolder.showLy.setBackgroundColor(Color.parseColor("#ffffff"));
+            } else {
+                viewHolder.showLy.setBackgroundColor(Color.parseColor("#ebf5fe"));
+            }
             return convertView;
         }
 
-        class ViewHolder{
+        class ViewHolder {
             TextView fnoTv;
             TextView sfgTv;
             TextView mdgTv;
@@ -209,9 +270,7 @@ public class IntImportDayCarrierDetailActivity extends Activity {
             TextView volumeTv;
             TextView yjddTv;
             TextView sjddTv;
-
-            TextView yjTv;
-            TextView sjTv;
+            LinearLayout showLy;
         }
     }
 }

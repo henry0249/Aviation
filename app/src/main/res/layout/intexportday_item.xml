@@ -15,27 +15,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="承运人："
-                android:textColor="#666666"
-                android:textSize="18sp" />
+                android:gravity="center"
+                android:text="承运人:"
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/edeclare_info_carrier_tv"
                 android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="CA"
-                android:textSize="18sp"
-                android:textColor="#2e2d33" />
+                android:textSize="@dimen/declare_size"
+                android:textColor="@color/gonggongcolor" />
 
 
         </LinearLayout>
@@ -48,27 +48,28 @@
             android:id="@+id/carrier_dest_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/sfg_tv"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="目的港:"
-                android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/edeclare_info_dest_tv"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="2017-03-05 10:20"
-                android:textColor="#2e2d33" />
+                android:textColor="@color/gonggongcolor"
+                android:textSize="@dimen/declare_size"/>
 
         </LinearLayout>
 
@@ -76,26 +77,27 @@
             android:id="@+id/carrier_fno_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="航班号:"
-                android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/edeclare_fno_tv"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="2017-03-05 10:20"
-                android:textColor="#2e2d33" />
+                android:textColor="@color/gonggongcolor"
+                android:textSize="@dimen/declare_size"/>
 
         </LinearLayout>
 
@@ -103,26 +105,28 @@
             android:id="@+id/carrier_fdate_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="航班日期:"
-                android:textColor="#666666"
-                android:textSize="16sp" />
+                android:textSize="@dimen/declare_size"
+                android:id="@+id/textView17" />
 
             <TextView
                 android:id="@+id/edeclare_info_papertime_tv"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="2017-03-05 10:20"
-                android:textColor="#2e2d33" />
+                android:textColor="@color/gonggongcolor"
+                android:textSize="@dimen/declare_size"/>
 
         </LinearLayout>
         <View
@@ -140,15 +144,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="30dp">
-
+                android:gravity="center">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:text="件数"
-                    android:textColor="#666666"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclare_info_pc_tv"
@@ -156,16 +158,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/declare_size"
                     android:text="01"
-                    android:textColor="#2e2d33" />
+                    android:textColor="@color/gonggongcolor"  />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -173,8 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:text="重量"
-                    android:textColor="#666666"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/edeclare_info_weight_tv"
@@ -182,24 +183,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/declare_size"
                     android:text="01"
-                    android:textColor="#2e2d33" />
+                    android:textColor="@color/gonggongcolor" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:text="体积"
-                    android:textColor="#666666"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/edeclare_info_volume_tv"
@@ -208,13 +209,11 @@
                     android:layout_marginTop="8dp"
                     android:text="02"
                     android:gravity="center"
-                    android:textSize="14sp"
-                    android:textColor="#2e2d33" />
+                    android:textSize="@dimen/declare_size"
+                    android:textColor="@color/gonggongcolor"  />
             </LinearLayout>
 
-
         </LinearLayout>
-
 
     </LinearLayout>
 

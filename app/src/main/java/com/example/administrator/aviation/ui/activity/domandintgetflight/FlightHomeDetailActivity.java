@@ -27,8 +27,6 @@ public class FlightHomeDetailActivity extends FragmentActivity implements View.O
     Button flightOutBtn;
     @BindView(R.id.framelayout)
     FrameLayout framelayout;
-    @BindView(R.id.flight_search_tv)
-    TextView flightSearchTv;
 
     // 初始化fragment
     private FlightHomeInFragment flightHomeInFragment;
@@ -46,11 +44,17 @@ public class FlightHomeDetailActivity extends FragmentActivity implements View.O
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.hideRight();
         navBar.setTitle("航班动态");
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FlightHomeDetailActivity.this, FlightActivity.class);
+                startActivity(intent);
+            }
+        });
         flightInBtn.setOnClickListener(this);
         flightOutBtn.setOnClickListener(this);
-        flightSearchTv.setOnClickListener(this);
     }
 
     private void initFragment(int index) {
@@ -113,11 +117,6 @@ public class FlightHomeDetailActivity extends FragmentActivity implements View.O
                 flightOutBtn.setBackground(getResources().getDrawable(R.drawable.button_selector));
                 flightOutBtn.setTextColor(getResources().getColor(R.color.colorGray));
                 initFragment(1);
-                break;
-
-            case R.id.flight_search_tv:
-                Intent intent = new Intent(FlightHomeDetailActivity.this, FlightActivity.class);
-                startActivity(intent);
                 break;
 
             default:

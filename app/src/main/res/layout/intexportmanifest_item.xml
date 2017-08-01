@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/awb_detail_Mawb"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/mawb_tv"
@@ -32,9 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:text=""
                 android:textColor="#2e2d33"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -45,7 +44,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -54,8 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="代理代码:"
-                android:textSize="@dimen/awb_detail_size"
-                android:id="@+id/textView17" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/daili_daima_tv"
@@ -63,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
         <View
@@ -83,16 +81,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/longPage"
                 android:text="代理名称:"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size"/>
 
             <TextView
                 android:id="@+id/dailimingcheng_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/longPage"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
         <View
@@ -103,17 +103,17 @@
             android:layout_marginRight="18dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
             <TextView
+                android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="启运港:"
-                android:textSize="@dimen/awb_detail_size"
-                android:id="@+id/textView10" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/qiyungang_tv"
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
         <View
@@ -132,7 +132,7 @@
             android:layout_marginRight="18dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="目的港:"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/mudigang_tv"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
 
@@ -162,7 +162,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="总件数:"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size"/>
 
             <TextView
                 android:id="@+id/zongjianshu_tv"
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
 
@@ -191,7 +191,7 @@
             android:layout_marginRight="18dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -200,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="件数:"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/pc_tv"
@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
         <View
@@ -219,7 +219,7 @@
             android:layout_marginRight="18dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -228,8 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="重量:"
-                android:textSize="@dimen/awb_detail_size"
-                android:id="@+id/textView18" />
+                android:textSize="@dimen/declare_size"/>
 
             <TextView
                 android:id="@+id/weiight_tv"
@@ -237,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
         <View
@@ -248,7 +247,7 @@
             android:layout_marginRight="18dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -257,7 +256,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="体积:"
-                android:textSize="@dimen/awb_detail_size" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/volume_tv"
@@ -265,7 +264,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
         <View
@@ -276,7 +275,7 @@
             android:layout_marginRight="18dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/height"
             android:layout_marginLeft="29dp"
             android:gravity="center">
 
@@ -285,8 +284,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="品名:"
-                android:textSize="@dimen/awb_detail_size"
-                android:id="@+id/textView11" />
+                android:textSize="@dimen/declare_size" />
 
             <TextView
                 android:id="@+id/goods_tv"
@@ -294,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/awb_detail_color"
-                android:textSize="@dimen/awb_detail_size"
+                android:textSize="@dimen/declare_size"
                 android:textColor="#2e2d33"/>
         </LinearLayout>
 

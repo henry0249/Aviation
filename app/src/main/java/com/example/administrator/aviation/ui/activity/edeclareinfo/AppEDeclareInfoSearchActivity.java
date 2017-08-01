@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
@@ -67,12 +68,11 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
         NavBar navBar = new NavBar(this);
         navBar.setTitle("联检状态查询");
         navBar.hideRight();
-
+        edeclareMawbEt.setTransformationMethod(new AllCapTransformationMethod());
         edeclareSearchBtn.setOnClickListener(this);
 
-
         // 获取搜索记录文件内容
-        SharedPreferences sp = getSharedPreferences(" ", 0);
+        SharedPreferences sp = getSharedPreferences("search_history", 0);
         String history = sp.getString("history", "");
 
         // 用逗号分割内容返回数组
@@ -136,6 +136,7 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
                 save();
                 edeclarePb.setVisibility(View.VISIBLE);
                 mawb = edeclareMawbEt.getText().toString().trim();
+                mawb = mawb.toUpperCase();
                 sffangxing = flightHangbanleixinget.getText().toString().trim();
                 if (null != sffangxing && !sffangxing.equals("")) {
                     sffangxing = AviationNoteConvert.sffangxingToEn(sffangxing);

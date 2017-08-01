@@ -3,6 +3,7 @@ package com.example.administrator.aviation.ui.activity.domjcgrbb;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,18 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.intjcgrbb.IntExportDayInfo;
 import com.example.administrator.aviation.model.intjcgrbb.PrepareIntExportDayInfo;
-import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayManifestActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PullToRefreshView;
 
+import org.ksoap2.serialization.SoapObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +47,11 @@ public class DomExportDayCarrierDetailActivity extends Activity {
     ListView edeclareLv;
     @BindView(R.id.edeclare_pb)
     ProgressBar edeclarePb;
+    @BindView(R.id.jcg_refresh)
+    PullToRefreshView jcgRefresh;
 
     private String xml;
+    private String refreshXml;
 
     private List<IntExportDayInfo> intExportDayInfoList;
     private ExportDayAdapter exportDayAdapter;
@@ -72,7 +84,10 @@ public class DomExportDayCarrierDetailActivity extends Activity {
         navBar.setTitle("出港日报表列表");
         navBar.hideRight();
 
+        jcgRefresh.disableScroolUp();
+
         xml = getIntent().getStringExtra("intexportdaydetailxml");
+        refreshXml = getIntent().getStringExtra("xml");
 
         new Thread() {
             @Override
@@ -82,6 +97,38 @@ public class DomExportDayCarrierDetailActivity extends Activity {
                 handler.sendEmptyMessage(AviationCommons.INT_E_DAT);
             }
         }.start();
+
+        jcgRefresh.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                Map<String, String> params = new HashMap<>();
+                params.put("awbXml", refreshXml);
+                params.put("ErrString", "");
+                HttpRoot.getInstance().requstAync(DomExportDayCarrierDetailActivity.this, HttpCommons.CGO_GET_DOM_EXPORT_DAY_REPORT_NAME,
+                        HttpCommons.CGO_GET_DOM_EXPORT_DAY_REPORT_ACTION, params,
+                        new HttpRoot.CallBack() {
+                            @Override
+                            public void onSucess(Object result) {
+                                SoapObject object = (SoapObject) result;
+                                String xml = object.getProperty(0).toString();
+                                intExportDayInfoList = PrepareIntExportDayInfo.pullExportDayInfoXml(xml);
+                                exportDayAdapter = new ExportDayAdapter(DomExportDayCarrierDetailActivity.this, intExportDayInfoList);
+                                edeclareLv.setAdapter(exportDayAdapter);
+                                jcgRefresh.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onFailed(String message) {
+                                jcgRefresh.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onError() {
+                                jcgRefresh.onHeaderRefreshComplete();
+                            }
+                        });
+            }
+        });
 
         edeclareLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,6 +147,7 @@ public class DomExportDayCarrierDetailActivity extends Activity {
     private class ExportDayAdapter extends BaseAdapter {
         private Context context;
         private List<IntExportDayInfo> intExportDayInfoList;
+
         public ExportDayAdapter(Context context, List<IntExportDayInfo> intExportDayInfoList) {
             this.context = context;
             this.intExportDayInfoList = intExportDayInfoList;
@@ -135,6 +183,7 @@ public class DomExportDayCarrierDetailActivity extends Activity {
                 viewHolder.volumeTv = (TextView) convertView.findViewById(R.id.edeclare_info_volume_tv);
                 viewHolder.yjqfTv = (TextView) convertView.findViewById(R.id.edeclare_info_yj_tv);
                 viewHolder.sjqfTv = (TextView) convertView.findViewById(R.id.edeclare_sj_tv);
+                viewHolder.showLy = (LinearLayout) convertView.findViewById(R.id.flight_in_layout);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -193,10 +242,15 @@ public class DomExportDayCarrierDetailActivity extends Activity {
             } else {
                 viewHolder.sjqfTv.setText("");
             }
+            if (position % 2 == 0) {
+                viewHolder.showLy.setBackgroundColor(Color.parseColor("#ffffff"));
+            } else {
+                viewHolder.showLy.setBackgroundColor(Color.parseColor("#ebf5fe"));
+            }
             return convertView;
         }
 
-        class ViewHolder{
+        class ViewHolder {
             TextView fnoTv;
             TextView sfgTv;
             TextView mdgTv;
@@ -206,6 +260,7 @@ public class DomExportDayCarrierDetailActivity extends Activity {
             TextView volumeTv;
             TextView yjqfTv;
             TextView sjqfTv;
+            LinearLayout showLy;
         }
     }
 }

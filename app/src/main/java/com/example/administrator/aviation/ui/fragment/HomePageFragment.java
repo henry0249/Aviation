@@ -26,6 +26,7 @@ import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarr
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity;
+import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEdeclareHomeActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierActivity;
@@ -182,7 +183,7 @@ public class HomePageFragment extends Fragment{
                     Intent intentFlight = new Intent(getActivity(), FlightHomeDetailActivity.class);
                     startActivity(intentFlight);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_EDECLARE_INFO)) {
-                    Intent intentEdeclare = new Intent(getActivity(), AppEDeclareInfoSearchActivity.class);
+                    Intent intentEdeclare = new Intent(getActivity(), AppEdeclareHomeActivity.class);
                     startActivity(intentEdeclare);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportReportOfCarrier)) {
                     Intent intentECA = new Intent(getActivity(), IntExportCarrierActivity.class);

@@ -13,4 +13,9 @@
     <color name="guoneidingdan_color">#2e2d33</color>
     <color name="dark_gray">#555</color>
     <color name="chose_color">#3371ae</color>
+
+    <color name="gonggong">#3371ae</color>
+
+    <!--表单字体颜色突出-->
+    <color name="gonggongcolor">#2e2d33</color>
 </resources>

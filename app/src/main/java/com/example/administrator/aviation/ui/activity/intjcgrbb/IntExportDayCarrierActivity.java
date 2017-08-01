@@ -88,12 +88,13 @@ public class IntExportDayCarrierActivity extends Activity implements View.OnClic
                             @Override
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
-                                String xml = object.getProperty(0).toString();
+                                String xmls = object.getProperty(0).toString();
 //                                Toast.makeText(IntExportDayCarrierActivity.this, xml, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(IntExportDayCarrierActivity.this, IntExportDayCarrierDetailActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("intexportdaydetailxml", xml);
+                                bundle.putString("intexportdaydetailxml", xmls);
                                 intent.putExtras(bundle);
+                                intent.putExtra("xml", xml);
                                 startActivity(intent);
                                 declareInfoPb.setVisibility(View.GONE);
                             }

@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +20,8 @@ import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.edeclareinfo.EdeclareInfo;
 import com.example.administrator.aviation.model.edeclareinfo.PrepareEdeclareInfo;
-import com.example.administrator.aviation.model.intanddomflight.PrepareFlightMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
-import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.PullToRefreshView;
 
 import org.ksoap2.serialization.SoapObject;
@@ -38,45 +35,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 国际承运人联检状态列表
+ * 首次进入国际承运人联检状态查询界面显示页面
  */
 
-public class AppEdeclareActivity extends Activity {
+public class AppEdeclareHomeActivity extends Activity {
     @BindView(R.id.int_edeclare_nodata_tv)
     TextView intEdeclareNodataTv;
     @BindView(R.id.edeclare_lv)
     ListView edeclareLv;
-    @BindView(R.id.edeclare_pb)
-    ProgressBar edeclarePb;
     @BindView(R.id.pull_refresh_lj)
     PullToRefreshView pullRefreshLj;
+    @BindView(R.id.edeclare_pb)
+    ProgressBar edeclarePb;
 
-    private String xml;
-    private String fxml;
     private List<EdeclareInfo> edeclareInfoList;
     private EdeclareAdapter edeclareAdapter;
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == AviationCommons.EDECLARE_INFO_H) {
-                edeclareAdapter = new EdeclareAdapter(AppEdeclareActivity.this, edeclareInfoList);
-                edeclareLv.setAdapter(edeclareAdapter);
-                edeclarePb.setVisibility(View.GONE);
-                if (edeclareInfoList.size() >= 1) {
-                    intEdeclareNodataTv.setVisibility(View.GONE);
-                }
-            } else if (msg.what == AviationCommons.INT_ES_DAT) {
-                edeclareAdapter = new EdeclareAdapter(AppEdeclareActivity.this, edeclareInfoList);
-                edeclareLv.setAdapter(edeclareAdapter);
-                edeclarePb.setVisibility(View.GONE);
-                if (edeclareInfoList.size() >= 1) {
-                    intEdeclareNodataTv.setVisibility(View.GONE);
-                }
-            }
-        }
-    };
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,26 +64,61 @@ public class AppEdeclareActivity extends Activity {
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.setTitle("联检状态列表");
-        navBar.hideRight();
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AppEdeclareHomeActivity.this, AppEDeclareInfoSearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        // 关闭上拉刷新
         pullRefreshLj.disableScroolUp();
 
-        xml = getIntent().getStringExtra(AviationCommons.EDECLARE_INFO);
-        fxml = getIntent().getStringExtra("fxml");
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                edeclareInfoList = PrepareEdeclareInfo.pullEDeclareInfoXml(xml);
-                handler.sendEmptyMessage(AviationCommons.EDECLARE_INFO_H);
-            }
-        }.start();
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.show();
 
+        // 不显示pb和没有数据
+        edeclarePb.setVisibility(View.GONE);
+        intEdeclareNodataTv.setVisibility(View.GONE);
+        String xml = getXml("", "0");
+        Map<String, String> params = new HashMap<>();
+        params.put("awbXml", xml);
+        params.put("ErrString", "");
+        HttpRoot.getInstance().requstAync(AppEdeclareHomeActivity.this, HttpCommons.CGO_GET_EDECLARE_NAME,
+                HttpCommons.CGO_GET_EDECLARE_ACTION, params,
+                new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String edeclare = object.getProperty(0).toString();
+                        edeclareInfoList = PrepareEdeclareInfo.pullEDeclareInfoXml(edeclare);
+                        edeclareAdapter = new EdeclareAdapter(AppEdeclareHomeActivity.this, edeclareInfoList);
+                        edeclareLv.setAdapter(edeclareAdapter);
+                        if (edeclareInfoList.size() >= 1) {
+                            intEdeclareNodataTv.setVisibility(View.GONE);
+                        }
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
+
+        // 列表项点击事件
         edeclareLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 EdeclareInfo edeclareInfo = (EdeclareInfo) edeclareAdapter.getItem(position);
-                Intent intent = new Intent(AppEdeclareActivity.this, AppEdeclareDetailActivity.class);
+                Intent intent = new Intent(AppEdeclareHomeActivity.this, AppEdeclareDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("edeclareInfo", edeclareInfo);
                 intent.putExtras(bundle);
@@ -120,34 +130,38 @@ public class AppEdeclareActivity extends Activity {
         pullRefreshLj.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                String xml = getXml("", "0");
                 Map<String, String> params = new HashMap<>();
-                params.put("awbXml", fxml);
+                params.put("awbXml", xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(AppEdeclareActivity.this, HttpCommons.CGO_GET_EDECLARE_NAME, HttpCommons.CGO_GET_EDECLARE_ACTION, params,
+                HttpRoot.getInstance().requstAync(AppEdeclareHomeActivity.this, HttpCommons.CGO_GET_EDECLARE_NAME,
+                        HttpCommons.CGO_GET_EDECLARE_ACTION, params,
                         new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
-                                String a = object.getProperty(0).toString();
-                                edeclareInfoList = PrepareEdeclareInfo.pullEDeclareInfoXml(a);
-                                handler.sendEmptyMessage(AviationCommons.INT_ES_DAT);
+                                String edeclare = object.getProperty(0).toString();
+                                edeclareInfoList = PrepareEdeclareInfo.pullEDeclareInfoXml(edeclare);
+                                edeclareAdapter = new EdeclareAdapter(AppEdeclareHomeActivity.this, edeclareInfoList);
+                                edeclareLv.setAdapter(edeclareAdapter);
+                                if (edeclareInfoList.size() >= 1) {
+                                    intEdeclareNodataTv.setVisibility(View.GONE);
+                                }
                                 pullRefreshLj.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onFailed(String message) {
-                                edeclarePb.setVisibility(View.GONE);
+                                pullRefreshLj.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onError() {
-                                edeclarePb.setVisibility(View.GONE);
+                                pullRefreshLj.onHeaderRefreshComplete();
                             }
                         });
-
             }
         });
-
     }
 
     private class EdeclareAdapter extends BaseAdapter {
@@ -253,5 +267,13 @@ public class AppEdeclareActivity extends Activity {
 
         LinearLayout showLy;
 
+    }
+
+    // 获取查询的xml
+    private String getXml(String mawb, String sffangxing) {
+        return "<GJCCarrierReport>"
+                + "<Mawb>" + mawb + "</Mawb>"
+                + "<RELStatus>" + sffangxing + "</RELStatus>"
+                + "</GJCCarrierReport>";
     }
 }
