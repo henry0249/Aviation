@@ -22,7 +22,9 @@ import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightH
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightCheckInSearchActivity;
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightInHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierActivity;
+import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierActivity;
+import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity;
@@ -30,7 +32,9 @@ import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEdeclareHo
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierActivity;
+import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntImportDayCarrierActivity;
+import com.example.administrator.aviation.ui.activity.intjcgrbb.IntImportDayCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
@@ -192,10 +196,10 @@ public class HomePageFragment extends Fragment{
                     Intent intentIRC = new Intent(getActivity(), IntImportCarrierActivity.class);
                     startActivity(intentIRC);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportDayReportOfCarrier)) {
-                    Intent intentIEDO = new Intent(getActivity(), IntExportDayCarrierActivity.class);
+                    Intent intentIEDO = new Intent(getActivity(), IntExportDayCarrierHomeActivity.class);
                     startActivity(intentIEDO);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntImportDayReportOfCarrier)) {
-                    Intent intentIDRC = new Intent(getActivity(), IntImportDayCarrierActivity.class);
+                    Intent intentIDRC = new Intent(getActivity(), IntImportDayCarrierHomeActivity.class);
                     startActivity(intentIDRC);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExportReportOfCarrier)) {
                     Intent intentDomR = new Intent(getActivity(), DomExportCarrierActivity.class);
@@ -204,10 +208,10 @@ public class HomePageFragment extends Fragment{
                     Intent intentDomRI = new Intent(getActivity(), DomImportCarrierActivity.class);
                     startActivity(intentDomRI);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExportDayReportOfCarrier)) {
-                    Intent intentDomRDE = new Intent(getActivity(), DomExportDayCarrierActivity.class);
+                    Intent intentDomRDE = new Intent(getActivity(), DomExportDayCarrierHomeActivity.class);
                     startActivity(intentDomRDE);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DomImportDayReportOfCarrier)) {
-                    Intent intentDomRDI = new Intent(getActivity(), DomImportDayCarrierActivity.class);
+                    Intent intentDomRDI = new Intent(getActivity(), DomImportDayCarrierHomeActivity.class);
                     startActivity(intentDomRDI);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExport0FlightPlanChecked)) {
                     Intent intentDomRDI = new Intent(getActivity(), DomFlightInHomeActivity.class);

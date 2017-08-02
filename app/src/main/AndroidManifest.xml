@@ -227,6 +227,10 @@
             android:screenOrientation="portrait"/>
 
         <!--国际进出港日报表-->
+        <activity android:name=".ui.activity.intjcgrbb.IntExportDayCarrierHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.intjcgrbb.IntExportDayCarrierActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
@@ -236,6 +240,10 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.intjcgrbb.IntExportDayManifestActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.intjcgrbb.IntImportDayCarrierHomeActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
@@ -271,6 +279,10 @@
             android:screenOrientation="portrait"/>
 
         // 国内出港日报表
+        <activity android:name=".ui.activity.domjcgrbb.DomExportDayCarrierHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.domjcgrbb.DomExportDayCarrierActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
@@ -285,6 +297,10 @@
             android:screenOrientation="portrait"/>
 
         // 国内进港日报表
+        <activity android:name=".ui.activity.domjcgrbb.DomImportDayCarrierHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.domjcgrbb.DomImportDayCarrierActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"

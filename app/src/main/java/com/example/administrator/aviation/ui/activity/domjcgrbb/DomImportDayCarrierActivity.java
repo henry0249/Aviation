@@ -119,9 +119,8 @@ public class DomImportDayCarrierActivity extends Activity implements View.OnClic
     }
 
     private String getXml(String begainTime) {
-        String xml = new String("<GNJCarrierReport>"
+        return "<GNJCarrierReport>"
                 + "<StartDay>" + begainTime + "</StartDay>"
-                + "</GNJCarrierReport>");
-        return xml;
+                + "</GNJCarrierReport>";
     }
 }
