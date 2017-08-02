@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -157,8 +158,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
         personLayout.setOnClickListener(this);
 
         // 首次进入
-        homePageTv.setTextColor(0xff1d2089);
-        homePageIv.setImageResource(R.drawable.zhuy1e);
+        homePageTv.setTextColor(Color.parseColor("#3371ae"));
+        homePageIv.setImageResource(R.drawable.zhuyedianji);
 
     }
 
@@ -189,8 +190,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
                 navBar.hideLeft();
 
                 // 设置点击效果
-                homePageTv.setTextColor(0xff1d2089);
-                homePageIv.setImageResource(R.drawable.zhuy1e);
+                homePageTv.setTextColor(Color.parseColor("#3371ae"));
+                homePageIv.setImageResource(R.drawable.zhuyedianji);
 
                 initFragment(0);
                 break;
@@ -203,8 +204,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
                 navBar.hideLeft();
 
                 // 设置点击效果
-                personTv.setTextColor(0xff1d2089);
-                personIv.setImageResource(R.drawable.wode1);
+                personTv.setTextColor(Color.parseColor("#3371ae"));
+                personIv.setImageResource(R.drawable.wodedianji);
 
                 initFragment(3);
                 break;

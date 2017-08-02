@@ -98,7 +98,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         userNameEt = (EditText) findViewById(R.id.userName_et);
         userPassEt = (EditText) findViewById(R.id.userPass_et);
 
-
         // 设置输入字段变成大写
         userBumenEt.setTransformationMethod(new AllCapTransformationMethod());
         userNameEt.setTransformationMethod(new AllCapTransformationMethod());
@@ -147,6 +146,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             userPass = PreferenceUtils.getUserPass(LoginActivity.this);
             userBumenEt.setText(userBumen);
             userNameEt.setText(userName);
+
+            // 记住密码后光标位于最后
+            userBumenEt.setSelection(userBumenEt.getText().toString().trim().length());
 
             // 修改密码成功后输入框内容置空
             String a = getIntent().getStringExtra("change");
