@@ -134,13 +134,14 @@ public class IntImportCarrierActivity extends Activity implements View.OnClickLi
                             @Override
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
-                                String xml = object.getProperty(0).toString();
+                                String xmls = object.getProperty(0).toString();
 //                                Toast.makeText(IntExportCarrierActivity.this, xml, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(IntImportCarrierActivity.this, IntImportCarrierDetailActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("intimportdayxml", xml);
+                                bundle.putString("intimportdayxml", xmls);
                                 bundle.putString("jgtype", reportType);
                                 intent.putExtras(bundle);
+                                intent.putExtra("xml", xml);
                                 startActivity(intent);
                                 declareInfoPb.setVisibility(View.GONE);
                             }

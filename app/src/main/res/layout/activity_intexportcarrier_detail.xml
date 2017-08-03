@@ -4,6 +4,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/navbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3371ae"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="承运人"
+                android:textColor="#fff"
+                android:textSize="13sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/show_d_ly"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/gnjcg_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="航班日期"
+                android:textColor="#fff"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="件数"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="重量"
+                android:textColor="#fff"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="体积"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:id="@+id/textView4" />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,11 +101,17 @@
             android:text="@string/not_data"
             android:textSize="@dimen/awb_size"
             android:visibility="visible" />
+        <com.example.administrator.aviation.util.PullToRefreshView
+            android:id="@+id/refresh_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <ListView
             android:id="@+id/edeclare_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"/>
+        </com.example.administrator.aviation.util.PullToRefreshView>
         <ProgressBar
             android:id="@+id/edeclare_pb"
             style="?android:attr/progressBarStyleLarge"

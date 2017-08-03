@@ -129,13 +129,14 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
                             @Override
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
-                                String xml = object.getProperty(0).toString();
+                                String xmls = object.getProperty(0).toString();
 //                                Toast.makeText(IntExportCarrierActivity.this, xml, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(DomExportCarrierActivity.this, DomExportCarrierDetailActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putString("intexportdayxml", xml);
+                                bundle.putString("intexportdayxml", xmls);
                                 bundle.putString("type", reportType);
                                 intent.putExtras(bundle);
+                                intent.putExtra("xml", xml);
                                 startActivity(intent);
                                 declareInfoPb.setVisibility(View.GONE);
                             }
