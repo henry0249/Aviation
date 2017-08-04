@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,9 +27,11 @@ import com.example.administrator.aviation.model.prepareawb.PrepareceAwbInfo;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.example.administrator.aviation.util.PullToRefreshView;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -47,6 +50,9 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
     private TextView awbLoadTv;
     private TextView noDataTv;
     private AwbAdapter awbAdapter;
+
+    // 下拉刷新
+    private PullToRefreshView pullToRefreshView;
 
     private GetPrepareAWBAsync getPrepareAWBAsync;
 
@@ -77,9 +83,6 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(AppDomExpPrePareAWBActivity.this, AwbAddActivity.class);
-//                startActivity(intent);
-//                finish();
                 Intent intent = new Intent(AppDomExpPrePareAWBActivity.this, AwbAddActivity.class);
                 startActivityForResult(intent, AviationCommons.AWB_ADD);
             }
@@ -89,6 +92,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         awbProgressBar = (ProgressBar) findViewById(R.id.awb_pb);
         awbLoadTv = (TextView) findViewById(R.id.awb_load_tv);
         noDataTv = (TextView) findViewById(R.id.awb_nodate_tv);
+        pullToRefreshView = (PullToRefreshView) findViewById(R.id.refresh);
         awbListView.setOnItemClickListener(this);
 
         // 长按点击删除
@@ -101,23 +105,26 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         getPrepareAWBAsync = new GetPrepareAWBAsync();
 
         getPrepareAWBAsync.execute();
+
+        // 关闭上拉加载
+        pullToRefreshView.disableScroolUp();
+        pullToRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                getPrepareAWBAsync = new GetPrepareAWBAsync();
+
+                getPrepareAWBAsync.execute();
+
+            }
+        });
     }
 
-    // 回传参数(接收更新和添加订单传递过来的值更新列表)
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == AviationCommons.AWB_ADD || requestCode == AviationCommons.AWB_UPDATA) {
-//            awbAdapter.notifyDataSetChanged();
-//        }
-//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case AviationCommons.AWB_ADD:
                 if(resultCode == RESULT_OK) {
-//                    awbAdapter.notifyDataSetChanged();
                     getPrepareAWBAsync = new GetPrepareAWBAsync();
                     getPrepareAWBAsync.execute();
                 }
@@ -125,7 +132,6 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
 
             case AviationCommons.AWB_UPDATA:
                 if(resultCode == RESULT_OK) {
-//                    awbAdapter.notifyDataSetChanged();
                     getPrepareAWBAsync = new GetPrepareAWBAsync();
                     getPrepareAWBAsync.execute();
                 }
@@ -144,9 +150,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         Bundle bundle = new Bundle();
         bundle.putSerializable(AviationCommons.AWB_ITEM_INFO, mawbInfo);
         intent.putExtras(bundle);
-//        startActivity(intent);
         startActivityForResult(intent, AviationCommons.AWB_UPDATA);
-//        finish();
     }
 
     // 长按每一项实现删除
@@ -206,13 +210,14 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
                 viewHolder.destTv = (TextView) convertView.findViewById(R.id.awb_dest_tv);
                 viewHolder.pcTv = (TextView) convertView.findViewById(R.id.awb_pc_tv);
                 viewHolder.weightTv = (TextView) convertView.findViewById(R.id.awb_weight_tv);
+                viewHolder.volumeTv = (TextView) convertView.findViewById(R.id.awb_volume_tv);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
             String mawb = awbInfoList.get(position).getMawb();
-            if (!mawb.equals("")) {
+            if (mawb != null && !mawb.equals("")) {
                 viewHolder.mavbTv.setText(mawb);
             } else {
                 viewHolder.mavbTv.setText("");
@@ -229,7 +234,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
 
             // 件数
             String pc = awbInfoList.get(position).getPC();
-            if (!pc.equals("")) {
+            if (pc != null && !pc.equals("")) {
                 viewHolder.pcTv.setText(pc);
             } else {
                 viewHolder.pcTv.setText("");
@@ -237,10 +242,24 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
 
             // 重量
             String weight = awbInfoList.get(position).getWeight();
-            if (!weight.equals("")) {
+            if (weight != null && !weight.equals("")) {
                 viewHolder.weightTv.setText(weight);
             } else {
                 viewHolder.weightTv.setText("");
+            }
+
+            // 体积
+            String volume = awbInfoList.get(position).getVolume();
+            if (volume != null && !volume.equals("")) {
+                viewHolder.volumeTv.setText(volume);
+            } else {
+                viewHolder.volumeTv.setText("");
+            }
+
+            if (position % 2 == 0) {
+                viewHolder.awbLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            } else {
+                viewHolder.awbLayout.setBackgroundColor(Color.parseColor("#ebf5fe"));
             }
             return convertView;
         }
@@ -250,6 +269,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
             TextView mavbTv;
             TextView destTv;
             TextView pcTv;
+            TextView volumeTv;
             TextView weightTv;
         }
     }
@@ -281,6 +301,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         @Override
         protected void onPostExecute(String request) {
             super.onPostExecute(request);
+            pullToRefreshView.onHeaderRefreshComplete();
             if (isCancelled()) {
                 return;
             }
@@ -339,7 +360,7 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
             super.onPostExecute(request);
             if (request == null && !ErrString.equals("")) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
-            } else if (request.equals("false") && !ErrString.equals("") ) {
+            } else if (request!= null && request.equals("false") && !ErrString.equals("") ) {
                 Toast.makeText(AppDomExpPrePareAWBActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else {
                 list.remove(position);

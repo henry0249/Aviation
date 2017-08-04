@@ -19,6 +19,7 @@ import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightActivity;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightHomeDetailActivity;
+import com.example.administrator.aviation.ui.activity.domexphouse.AppDomWareHouseHomeActivity;
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightCheckInSearchActivity;
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightInHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierActivity;
@@ -26,7 +27,9 @@ import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarr
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierActivity;
+import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomImportCarrierActivity;
+import com.example.administrator.aviation.ui.activity.domjcgywl.DomImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEdeclareHomeActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
@@ -41,7 +44,9 @@ import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIn
 import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
 import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity;
 import com.example.administrator.aviation.ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity;
+import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
+import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -166,7 +171,7 @@ public class HomePageFragment extends Fragment{
                     Intent intentAWB = new Intent(getActivity(), AppDomExpPrePareAWBActivity.class);
                     startActivity(intentAWB);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DOM_EXP_WARE_HOUSE)) {
-                    Intent intentHouse = new Intent(getActivity(), AppDomExpWareHouseActivity.class);
+                    Intent intentHouse = new Intent(getActivity(), AppDomWareHouseHomeActivity.class);
                     startActivity(intentHouse);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXP_AWB_MANAGE)) {
                     Intent intentIntManage = new Intent(getActivity(), AppIntExpAWBHouseManageActivity.class);
@@ -190,10 +195,10 @@ public class HomePageFragment extends Fragment{
                     Intent intentEdeclare = new Intent(getActivity(), AppEdeclareHomeActivity.class);
                     startActivity(intentEdeclare);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportReportOfCarrier)) {
-                    Intent intentECA = new Intent(getActivity(), IntExportCarrierActivity.class);
+                    Intent intentECA = new Intent(getActivity(), IntExportCarrierHomeActivity.class);
                     startActivity(intentECA);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntImportReportOfCarrier)) {
-                    Intent intentIRC = new Intent(getActivity(), IntImportCarrierActivity.class);
+                    Intent intentIRC = new Intent(getActivity(), IntImportCarrierHomeActivity.class);
                     startActivity(intentIRC);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_IntExportDayReportOfCarrier)) {
                     Intent intentIEDO = new Intent(getActivity(), IntExportDayCarrierHomeActivity.class);
@@ -202,10 +207,10 @@ public class HomePageFragment extends Fragment{
                     Intent intentIDRC = new Intent(getActivity(), IntImportDayCarrierHomeActivity.class);
                     startActivity(intentIDRC);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExportReportOfCarrier)) {
-                    Intent intentDomR = new Intent(getActivity(), DomExportCarrierActivity.class);
+                    Intent intentDomR = new Intent(getActivity(), DomExportCarrierHomeActivity.class);
                     startActivity(intentDomR);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DomImportReportOfCarrier)) {
-                    Intent intentDomRI = new Intent(getActivity(), DomImportCarrierActivity.class);
+                    Intent intentDomRI = new Intent(getActivity(), DomImportCarrierHomeActivity.class);
                     startActivity(intentDomRI);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExportDayReportOfCarrier)) {
                     Intent intentDomRDE = new Intent(getActivity(), DomExportDayCarrierHomeActivity.class);

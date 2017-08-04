@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +18,12 @@ import android.widget.TextView;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.http.house.HttpPrepareHouse;
 import com.example.administrator.aviation.model.house.PrepareceWhsInfo;
 import com.example.administrator.aviation.model.house.WhsInfo;
+import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PullToRefreshView;
 
@@ -33,73 +34,100 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
- * 显示house订单列表
+ * 国内货代出港入库查询
  */
 
-public class AppDomExpWareHouseItemActivity extends Activity{
-    private String xml;
-    private String searchXml;
-    private ListView houseLv;
-    private ProgressBar housePb;
-    private TextView showTv;
+public class AppDomWareHouseHomeActivity extends Activity {
+    @BindView(R.id.gnjcg_tv)
+    TextView gnjcgTv;
+    @BindView(R.id.show_d_ly)
+    LinearLayout showDLy;
+    @BindView(R.id.house_pb)
+    ProgressBar housePb;
+    @BindView(R.id.house_show_tv)
+    TextView houseShowTv;
+    @BindView(R.id.awb_load_tv)
+    TextView awbLoadTv;
+    @BindView(R.id.house_listview)
+    ListView houseListview;
+    @BindView(R.id.refresh_apphouse)
+    PullToRefreshView refreshApphouse;
+
 
     private List<WhsInfo> list;
     private HouseAdapter mHouseAdapter;
-
-    private PullToRefreshView pullToRefreshView;
-
-
-    // 接收消息隐藏加载图标
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == AviationCommons.HOUSE_HANDLER) {
-                housePb.setVisibility(View.GONE);
-                if (list.size() >= 1) {
-                    showTv.setVisibility(View.GONE);
-                }
-            }
-        }
-    };
+    private String currentTime;
+    private String xml;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apphouseitem);
+        ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.hideRight();
-        navBar.setTitle(R.string.house_guonei_ruku_detail);
-        houseLv = (ListView) findViewById(R.id.house_listview);
-        housePb = (ProgressBar) findViewById(R.id.house_pb);
-        showTv = (TextView) findViewById(R.id.house_show_tv);
-        pullToRefreshView = (PullToRefreshView) findViewById(R.id.refresh_apphouse);
-
-        // 下拉刷新
-        pullToRefreshView.disableScroolUp();
-
-        // 解析house的xml数据
-        new Thread() {
+        navBar.setTitle("国内出港当天入库列表");
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                xml = getIntent().getStringExtra("houseXml");
-                list = PrepareceWhsInfo.parseWhsInfoXml(xml);
-                mHouseAdapter = new HouseAdapter(list, AppDomExpWareHouseItemActivity.this);
-                houseLv.setAdapter(mHouseAdapter);
-                mHandler.sendEmptyMessage(AviationCommons.HOUSE_HANDLER);
+            public void onClick(View v) {
+                Intent intent = new Intent(AppDomWareHouseHomeActivity.this, AppDomExpWareHouseActivity.class);
+                startActivity(intent);
             }
-        }.start();
+        });
+        housePb.setVisibility(View.GONE);
+        houseShowTv.setVisibility(View.GONE);
+        loadingDialog = new LoadingDialog(this);
+
+        refreshApphouse.disableScroolUp();
+
+        currentTime = DateUtils.getTodayDateTime();
+        xml = HttpPrepareHouse.getHouseXml("", currentTime, currentTime, "");
+        Map<String, String> params = new HashMap<>();
+        params.put("whsXml",xml);
+        params.put("ErrString", "");
+        loadingDialog.show();
+        HttpRoot.getInstance().requstAync(AppDomWareHouseHomeActivity.this, HttpCommons.HOUSE_SEARCH_METHOD_NAME,
+                HttpCommons.HOUSE_SEARCH_METHOD_ACTION, params, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xmls = object.getProperty(0).toString();
+                        list = PrepareceWhsInfo.parseWhsInfoXml(xmls);
+                        if (list != null && list.size() >= 1) {
+                            mHouseAdapter = new HouseAdapter(list, AppDomWareHouseHomeActivity.this);
+                            houseListview.setAdapter(mHouseAdapter);
+                        } else {
+                            houseShowTv.setVisibility(View.VISIBLE);
+                        }
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
 
         // listView单机跳转到详情界面
-        houseLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        houseListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 WhsInfo whsInfo = mHouseAdapter.getItem(position);
-                Intent intent = new Intent(AppDomExpWareHouseItemActivity.this, AppDomExpWareHouseDetailActivity.class);
+                Intent intent = new Intent(AppDomWareHouseHomeActivity.this, AppDomExpWareHouseDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(AviationCommons.HOUSE_ITEM_INFO, whsInfo);
                 intent.putExtras(bundle);
@@ -107,15 +135,14 @@ public class AppDomExpWareHouseItemActivity extends Activity{
             }
         });
 
-        // 下拉刷新
-        searchXml = getIntent().getStringExtra("xml");
-        pullToRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+        refreshApphouse.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                xml = HttpPrepareHouse.getHouseXml("", currentTime, currentTime, "");
                 Map<String, String> params = new HashMap<>();
-                params.put("whsXml",searchXml);
+                params.put("whsXml",xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(AppDomExpWareHouseItemActivity.this, HttpCommons.HOUSE_SEARCH_METHOD_NAME,
+                HttpRoot.getInstance().requstAync(AppDomWareHouseHomeActivity.this, HttpCommons.HOUSE_SEARCH_METHOD_NAME,
                         HttpCommons.HOUSE_SEARCH_METHOD_ACTION, params, new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
@@ -123,26 +150,24 @@ public class AppDomExpWareHouseItemActivity extends Activity{
                                 String xmls = object.getProperty(0).toString();
                                 list = PrepareceWhsInfo.parseWhsInfoXml(xmls);
                                 if (list != null && list.size() >= 1) {
-                                    mHouseAdapter = new HouseAdapter(list, AppDomExpWareHouseItemActivity.this);
-                                    houseLv.setAdapter(mHouseAdapter);
+                                    mHouseAdapter = new HouseAdapter(list, AppDomWareHouseHomeActivity.this);
+                                    houseListview.setAdapter(mHouseAdapter);
                                 } else {
-                                    showTv.setVisibility(View.VISIBLE);
+                                    houseShowTv.setVisibility(View.VISIBLE);
                                 }
-                                pullToRefreshView.onHeaderRefreshComplete();
-
+                                refreshApphouse.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onFailed(String message) {
-                                pullToRefreshView.onHeaderRefreshComplete();
+                                refreshApphouse.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onError() {
-                                pullToRefreshView.onHeaderRefreshComplete();
+                                refreshApphouse.onHeaderRefreshComplete();
                             }
                         });
-
             }
         });
 
@@ -222,13 +247,12 @@ public class AppDomExpWareHouseItemActivity extends Activity{
             return convertView;
         }
 
-         class ViewHolder{
-             TextView mavbTv;
-             TextView fdateTv;
-             TextView fnoTv;
-             TextView opdateTv;
-             LinearLayout showLy;
+        class ViewHolder{
+            TextView mavbTv;
+            TextView fdateTv;
+            TextView fnoTv;
+            TextView opdateTv;
+            LinearLayout showLy;
         }
     }
-
 }

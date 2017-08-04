@@ -172,11 +172,10 @@ public class DomImportCarrierActivity extends Activity implements View.OnClickLi
     }
 
     private String getXml(String begainTime, String endTime, String reportType) {
-        String xml = new String("<GNJCarrierReport>"
+        return "<GNJCarrierReport>"
                 + "<ReportType>" + reportType + "</ReportType>"
                 + "<StartDay>" + begainTime + "</StartDay>"
                 + "<EndDay>" + endTime + "</EndDay>"
-                + "</GNJCarrierReport>");
-        return xml;
+                + "</GNJCarrierReport>";
     }
 }

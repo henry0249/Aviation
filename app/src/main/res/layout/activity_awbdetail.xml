@@ -30,8 +30,7 @@
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Mawb"
                     android:layout_marginLeft="21dp"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/mawb_detail_tv"
@@ -43,7 +42,7 @@
                     android:inputType="number"
                     android:maxLength="11"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -64,8 +63,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_pc"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/pc_detail_tv"
@@ -76,7 +74,7 @@
                     android:hint="@string/jianshu"
                     android:inputType="number"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -97,8 +95,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_weight"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <EditText
                     android:id="@+id/weight_detail_tv"
@@ -108,7 +105,7 @@
                     android:background="#ffffff"
                     android:hint="@string/zhongliang"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -129,8 +126,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_volume"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <EditText
                     android:id="@+id/volume_detail_tv"
@@ -140,7 +136,7 @@
                     android:background="#ffffff"
                     android:hint="@string/tiji"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -161,8 +157,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_SpCode"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/spcode_detail_tv"
@@ -171,7 +166,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -190,8 +185,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Goods"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/goods_detail_tv"
@@ -201,7 +195,7 @@
                     android:background="#ffffff"
                     android:hint="@string/pinming"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <Spinner
                     android:id="@+id/update_awb_goods_spinner"
@@ -229,8 +223,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_businessType"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/businesstype_detail_tv"
@@ -239,7 +232,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <Spinner
                     android:id="@+id/update_awb_businesstype_spinner"
@@ -267,8 +260,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Package"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/package_detail_tv"
@@ -278,7 +270,7 @@
                     android:background="#ffffff"
                     android:hint="@string/leixing"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -299,8 +291,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_By"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/by_detail_tv"
@@ -310,7 +301,7 @@
                     android:background="#ffffff"
                     android:hint="@string/mingzi"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -329,8 +320,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Dep"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <EditText
                     android:id="@+id/dep_detail_tv"
@@ -340,7 +330,7 @@
                     android:background="#ffffff"
                     android:hint="@string/qiyungang"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -361,8 +351,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Dest1"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/dest_detail_tv"
@@ -372,7 +361,7 @@
                     android:background="#ffffff"
                     android:hint="@string/hangcheng"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -396,7 +385,7 @@
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Dest2"
                     android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <EditText
                     android:id="@+id/dest2_detail_tv"
@@ -405,7 +394,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:hint="@string/hangcheng"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -426,8 +415,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Remark"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/remake_detail_tv"
@@ -437,7 +425,7 @@
                     android:background="#ffffff"
                     android:hint="@string/beizhu"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -458,8 +446,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_FlightChecked"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/flightchecked_detail_tv"
@@ -468,7 +455,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -489,8 +476,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_FDate"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/fdate_detail_tv"
@@ -501,7 +487,7 @@
                     android:gravity="center"
                     android:hint="@string/riqi"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <ImageView
                     android:id="@+id/change_awb_time"
@@ -530,8 +516,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Fno"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/fno_detail_tv"
@@ -541,7 +526,7 @@
                     android:background="#ffffff"
                     android:hint="@string/hangbanhao"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -562,8 +547,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Shipper"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/shipper_detail_tv"
@@ -573,7 +557,7 @@
                     android:background="#ffffff"
                     android:hint="@string/tuoyunren"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -594,8 +578,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Consignee"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/consignee_detail_tv"
@@ -605,7 +588,7 @@
                     android:background="#ffffff"
                     android:hint="@string/shouhuoren"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -627,8 +610,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_TransportNO"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <EditText
                     android:id="@+id/transportno_detail_tv"
@@ -637,7 +619,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
             <View
@@ -659,8 +641,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_AllowTransNO"
-                    android:textColor="@color/guoneidingdan_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/allowtransno_detail_tv"
@@ -669,7 +650,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -691,8 +672,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_CIQNumber"
-                    android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <EditText
                     android:id="@+id/ciqnumber_detail_tv"
@@ -701,7 +681,7 @@
                     android:layout_weight="2"
                     android:background="#ffffff"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
 
             <View
@@ -728,7 +708,7 @@
             android:background="@drawable/button_circle"
             android:text="@string/awb_detail_update"
             android:textColor="#ffffff"
-            android:textSize="19sp" />
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/sure_detail_btn"
@@ -737,7 +717,7 @@
             android:background="@drawable/button_circle"
             android:text="提    交"
             android:textColor="#ffffff"
-            android:textSize="19sp"
+            android:textSize="17sp"
             android:visibility="gone" />
     </LinearLayout>
 

@@ -40,7 +40,7 @@ public class AppDomExpWareHouseDetailActivity extends Activity{
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.hideRight();
-        navBar.setTitle("列表详情");
+        navBar.setTitle("国内出港入库列表详情");
 
         mawbTv = (TextView) findViewById(R.id.house_mawb_detail_tv);
         awbPcTv = (TextView) findViewById(R.id.house_awb_pc_detail_tv);

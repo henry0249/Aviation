@@ -166,11 +166,10 @@ public class IntExportCarrierActivity extends Activity implements View.OnClickLi
     }
 
     private String getXml(String begainTime, String endTime, String reportType) {
-        String xml = new String("<GJCCarrierReport>"
-                +"<ReportType>" + reportType + "</ReportType>"
+        return "<GJCCarrierReport>"
+                + "<ReportType>" + reportType + "</ReportType>"
                 + "<StartDay>" + begainTime + "</StartDay>"
                 + "<EndDay>" + endTime + "</EndDay>"
-                + "</GJCCarrierReport>");
-        return xml;
+                + "</GJCCarrierReport>";
     }
 }

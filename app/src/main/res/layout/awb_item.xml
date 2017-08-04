@@ -8,129 +8,95 @@
     <LinearLayout
         android:id="@+id/awb_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginRight="21dp"
-        android:orientation="vertical"
-        android:background="@drawable/housedetail_yuanjiao">
+        android:layout_height="wrap_content"
+        android:background="#ebf5fe">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="运单号："
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:textColor="#a3a3a3"/>
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="3">
+
             <TextView
                 android:id="@+id/awb_mavb_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12345678945"
-                android:layout_marginLeft="11dp"
-                android:layout_gravity="center"
-                android:textColor="#2e2d33"
-                android:textSize="18sp"/>
+                android:gravity="center"
+                android:text="83312548340"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/show_ly"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="1.5">
+
             <TextView
+                android:id="@+id/awb_dest_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="11dp"
-                android:layout_gravity="center"
-                android:text="详情"
-                android:textColor="#1d2089"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_gravity="center"
-                android:src="@drawable/xiangqingjinru"/>
+                android:gravity="center"
+                android:text="PEK"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:background="#e8e8e8"/>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <LinearLayout
-                android:layout_width="0dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="1.5">
+
+            <TextView
+                android:id="@+id/awb_pc_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:text="目的港"
-                    android:textSize="16sp"
-                    android:textColor="#a3a3a3"/>
-                <TextView
-                    android:id="@+id/awb_dest_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:text="PEK"
-                    android:textSize="16sp"
-                    android:textColor="#2e2d33" />
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="5555555"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="1.5">
+
+            <TextView
+                android:id="@+id/awb_weight_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:text="件数"
-                    android:textSize="16sp"
-                    android:textColor="#a3a3a3"/>
-                <TextView
-                    android:id="@+id/awb_pc_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:text="123465"
-                    android:textSize="16sp"
-                    android:textColor="#2e2d33"/>
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="5565655"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/awb_volume_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:text="重量"
-                    android:textSize="16sp"
-                    android:textColor="#a3a3a3"/>
-                <TextView
-                    android:id="@+id/awb_weight_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:text="234656"
-                    android:textSize="16sp"
-                    android:textColor="#2e2d33"/>
-
-            </LinearLayout>
-
-
+                android:gravity="center"
+                android:text="65652"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

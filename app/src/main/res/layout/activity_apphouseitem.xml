@@ -4,6 +4,75 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <include layout="@layout/navbar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3371ae"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="运单号"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:id="@+id/textView3" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/show_d_ly"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/gnjcg_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="航班日期"
+                android:textColor="#fff"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="航班号"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="入库时间"
+                android:textColor="#fff"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -13,6 +82,12 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/house_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="?android:attr/progressBarStyleLarge"/>
             <TextView
                 android:id="@+id/house_show_tv"
                 android:layout_width="wrap_content"
@@ -20,6 +95,7 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/small_size"
                 android:text="@string/not_data"/>
+
             <TextView
                 android:id="@+id/awb_load_tv"
                 android:layout_width="wrap_content"
@@ -28,6 +104,7 @@
                 android:text="@string/awb_load"
                 android:visibility="gone"
                 android:textSize="@dimen/awb_size"/>
+
         </LinearLayout>
 
         <View
@@ -37,20 +114,19 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ProgressBar
-                android:id="@+id/house_pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="?android:attr/progressBarStyleLarge"/>
+            android:layout_height="match_parent">
 
-
+            <com.example.administrator.aviation.util.PullToRefreshView
+                android:id="@+id/refresh_apphouse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             <ListView
                 android:id="@+id/house_listview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:divider="@null"/>
+            </com.example.administrator.aviation.util.PullToRefreshView>
 
         </FrameLayout>
 
