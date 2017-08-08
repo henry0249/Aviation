@@ -184,10 +184,8 @@ public class AppIntDeclareInfoSearchActivity extends Activity implements View.On
                 Intent intent = new Intent(AppIntDeclareInfoSearchActivity.this, AppIntDeclareInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(AviationCommons.DECLARE_INFO_DEATIL, request);
-//                bundle.putString(AviationCommons.MANAGE_HOUSE_MAWAB, mawb);
-//                bundle.putString(AviationCommons.MANAGE_HOUSE_BEGAIN_TIME, begainTime);
-//                bundle.putString(AviationCommons.MANAGE_HOUSE_END_TIME, endTime);
                 intent.putExtras(bundle);
+                intent.putExtra("xml", xml);
                 startActivity(intent);
                 // 上传成功后finish掉当前的activity
 //                finish();

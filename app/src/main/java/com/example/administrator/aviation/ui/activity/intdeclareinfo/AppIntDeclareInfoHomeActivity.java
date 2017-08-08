@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +18,12 @@ import android.widget.TextView;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.http.getIntdeclareinfo.HttpIntDeclareInfo;
 import com.example.administrator.aviation.model.intdeclareinfo.DeclareInfoMessage;
 import com.example.administrator.aviation.model.intdeclareinfo.PrepareDeclareInfoMessage;
+import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PullToRefreshView;
 
@@ -33,72 +34,105 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.example.administrator.aviation.R.id.progressBar;
+
 /**
- * 联检状态主页显示
+ * 国际货代联检查询
  */
 
-public class AppIntDeclareInfoActivity extends Activity{
-    private List<DeclareInfoMessage> declareInfoMessageList;
-    private ListView declareInfoLv;
-    private TextView showTv;
-    private ProgressBar progressBar;
-    private PullToRefreshView pullToRefreshView;
+public class AppIntDeclareInfoHomeActivity extends Activity {
+    @BindView(R.id.gnjcg_tv)
+    TextView gnjcgTv;
+    @BindView(R.id.show_d_ly)
+    LinearLayout showDLy;
+    @BindView(R.id.declare_info_deatil_pb)
+    ProgressBar declareInfoDeatilPb;
+    @BindView(R.id.declare_info_show_tv)
+    TextView declareInfoShowTv;
+    @BindView(R.id.declare_info_load_tv)
+    TextView declareInfoLoadTv;
+    @BindView(R.id.declare_info_listview)
+    ListView declareInfoListview;
+    @BindView(R.id.declare_refresh)
+    PullToRefreshView declareRefresh;
+
+    // 获取当前时间
+    private String currentTime;
 
     private String xml;
-    private String searchXml;
     private DeclareInfoAdapter declareInfoAdapter;
+    private List<DeclareInfoMessage> declareInfoMessageList;
+    private LoadingDialog loadingDialog;
 
-    // 接收消息隐藏加载图标
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == AviationCommons.INT_DECLARE_INFO) {
-                declareInfoAdapter = new DeclareInfoAdapter(AppIntDeclareInfoActivity.this, declareInfoMessageList);
-                declareInfoLv.setAdapter(declareInfoAdapter);
-                progressBar.setVisibility(View.GONE);
-                if (declareInfoMessageList.size() >= 1) {
-                    showTv.setVisibility(View.GONE);
-                }
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appintdeclareinfo);
+        ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle("联检状态信息");
-        navBar.hideRight();
-        declareInfoLv = (ListView) findViewById(R.id.declare_info_listview);
-        showTv = (TextView) findViewById(R.id.declare_info_show_tv);
-        progressBar = (ProgressBar) findViewById(R.id.declare_info_deatil_pb);
-        pullToRefreshView = (PullToRefreshView) findViewById(R.id.declare_refresh);
-
-        // 得到查询界面传递过来的xml信息
-        searchXml = getIntent().getStringExtra("xml");
-
-        // 关闭上拉刷新
-        pullToRefreshView.disableScroolUp();
-
-        new Thread() {
+        navBar.setTitle("当天联检状态信息");
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                super.run();
-                xml = getIntent().getStringExtra(AviationCommons.DECLARE_INFO_DEATIL);
-                declareInfoMessageList = PrepareDeclareInfoMessage.pullDeclareInfoXml(xml);
-                mHandler.sendEmptyMessage(AviationCommons.INT_DECLARE_INFO);
+            public void onClick(View v) {
+                Intent intent = new Intent(AppIntDeclareInfoHomeActivity.this, AppIntDeclareInfoSearchActivity.class);
+                startActivity(intent);
             }
-        }.start();
+        });
 
-        declareInfoLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // 隐藏PB和没有数据信息
+        declareInfoDeatilPb.setVisibility(View.GONE);
+        declareInfoShowTv.setVisibility(View.GONE);
+
+        loadingDialog = new LoadingDialog(this);
+
+        declareRefresh.disableScroolUp();
+
+        currentTime = DateUtils.getTodayDateTime();
+        xml = HttpIntDeclareInfo.getIntDeclareInfoXml("", currentTime, currentTime);
+        Map<String, String> params = new HashMap<>();
+        params.put("dXml", xml);
+        params.put("ErrString", "");
+        loadingDialog.show();
+        HttpRoot.getInstance().requstAync(AppIntDeclareInfoHomeActivity.this, HttpCommons.CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_NAME,
+                HttpCommons.CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_ACTION, params, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xmls = object.getProperty(0).toString();
+                        declareInfoMessageList = PrepareDeclareInfoMessage.pullDeclareInfoXml(xmls);
+                        if (declareInfoMessageList != null && declareInfoMessageList.size() >= 1) {
+                            declareInfoAdapter = new DeclareInfoAdapter(AppIntDeclareInfoHomeActivity.this, declareInfoMessageList);
+                            declareInfoListview.setAdapter(declareInfoAdapter);
+                        } else {
+                            declareInfoShowTv.setVisibility(View.VISIBLE);
+                        }
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
+
+        declareInfoListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 DeclareInfoMessage declareInfoMessage = (DeclareInfoMessage) declareInfoAdapter.getItem(position);
-                Intent intent = new Intent(AppIntDeclareInfoActivity.this, AppIntDeclareInfoDetailActivity.class);
+                Intent intent = new Intent(AppIntDeclareInfoHomeActivity.this, AppIntDeclareInfoDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(AviationCommons.DECLAREINFO_DEATIL, declareInfoMessage);
                 intent.putExtras(bundle);
@@ -107,13 +141,13 @@ public class AppIntDeclareInfoActivity extends Activity{
         });
 
         // 下拉刷新
-        pullToRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+        declareRefresh.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
                 Map<String, String> params = new HashMap<>();
-                params.put("dXml", searchXml);
+                params.put("dXml", xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(AppIntDeclareInfoActivity.this, HttpCommons.CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_NAME,
+                HttpRoot.getInstance().requstAync(AppIntDeclareInfoHomeActivity.this, HttpCommons.CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_NAME,
                         HttpCommons.CGO_GET_EXPORT_DECLARE_INFO_OF_ALL_ACTION, params, new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
@@ -121,29 +155,29 @@ public class AppIntDeclareInfoActivity extends Activity{
                                 String xmls = object.getProperty(0).toString();
                                 declareInfoMessageList = PrepareDeclareInfoMessage.pullDeclareInfoXml(xmls);
                                 if (declareInfoMessageList != null && declareInfoMessageList.size() >= 1) {
-                                    declareInfoAdapter = new DeclareInfoAdapter(AppIntDeclareInfoActivity.this, declareInfoMessageList);
-                                    declareInfoLv.setAdapter(declareInfoAdapter);
-                                    progressBar.setVisibility(View.GONE);
+                                    declareInfoAdapter = new DeclareInfoAdapter(AppIntDeclareInfoHomeActivity.this, declareInfoMessageList);
+                                    declareInfoListview.setAdapter(declareInfoAdapter);
                                 } else {
-                                    showTv.setVisibility(View.VISIBLE);
+                                    declareInfoShowTv.setVisibility(View.VISIBLE);
                                 }
-                                pullToRefreshView.onHeaderRefreshComplete();
+                                declareRefresh.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onFailed(String message) {
-                                pullToRefreshView.onHeaderRefreshComplete();
+                                declareRefresh.onHeaderRefreshComplete();
                             }
 
                             @Override
                             public void onError() {
-                                pullToRefreshView.onHeaderRefreshComplete();
+                                declareRefresh.onHeaderRefreshComplete();
                             }
                         });
             }
         });
 
     }
+
 
     private class DeclareInfoAdapter extends BaseAdapter {
         private Context context;

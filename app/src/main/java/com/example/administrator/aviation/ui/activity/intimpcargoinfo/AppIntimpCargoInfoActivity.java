@@ -187,6 +187,7 @@ public class AppIntimpCargoInfoActivity extends Activity implements View.OnClick
                 Bundle bundle = new Bundle();
                 bundle.putString(AviationCommons.IMP_CARGO_INFO, request);
                 intent.putExtras(bundle);
+                intent.putExtra("xml", xml);
                 startActivity(intent);
                 // 上传成功后finish掉当前的activity
 //                finish();

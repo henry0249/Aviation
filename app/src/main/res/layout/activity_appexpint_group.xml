@@ -973,7 +973,7 @@
             android:text="@string/int_group_update"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"/>
+            android:textSize="@dimen/declare_size"/>
 
         <Button
             android:id="@+id/sure_int_group_btn"
@@ -984,7 +984,7 @@
             android:visibility="gone"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"
+            android:textSize="@dimen/declare_size"
             android:layout_marginLeft="21dp"/>
 
         <Button
@@ -995,7 +995,7 @@
             android:text="@string/int_group_delete"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"
+            android:textSize="@dimen/declare_size"
             android:layout_marginLeft="9dp"/>
 
         <Button
@@ -1006,7 +1006,7 @@
             android:text="@string/int_declare_mawb"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"
+            android:textSize="@dimen/declare_size"
             android:layout_marginLeft="9dp"
             android:layout_marginRight="21dp"/>
     </LinearLayout>

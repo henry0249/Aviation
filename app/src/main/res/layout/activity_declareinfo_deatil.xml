@@ -7,8 +7,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="21dp"
-        android:layout_marginRight="21dp"
         android:layout_marginTop="10dp">
 
         <LinearLayout
@@ -28,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Mawb"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/declareinfo_mawb_detail_tv"
@@ -38,7 +36,7 @@
                     android:background="@color/awb_detail_color"
                     android:text="1234667895"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -58,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declareshanjianhao"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_ciqnumber_detail_tv"
@@ -66,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -87,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/shanjianzhiling"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_ciqstatus_detail_tv"
@@ -95,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -109,13 +107,12 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="29dp"
                 android:gravity="center">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/haiguanzhiling"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:id="@+id/textView10" />
 
                 <TextView
@@ -124,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -132,7 +129,8 @@
                 android:layout_height="1dp"
                 android:background="#f4f4f4"
                 android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"/>
+                android:layout_marginRight="18dp"
+                android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -145,15 +143,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_volume"
-                    android:textSize="@dimen/awb_detail_size" />
-
+                    android:textSize="@dimen/declare_size"/>
                 <TextView
                     android:id="@+id/house_volume_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -172,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/yuliu"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_mftstatus_detail_tv"
@@ -180,14 +177,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="1dp"
                 android:background="#f4f4f4"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:id="@+id/view2" />
 
             <LinearLayout
@@ -201,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/yundi"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_arrivalstatus_detail_tv"
@@ -209,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
 
@@ -230,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/zhuanghuo"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_tallystatus_detail_tv"
@@ -238,7 +237,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -258,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/lihuo"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_loadstatus_detail_tv"
@@ -266,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -286,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_pc"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/declareinfo_pc_detail_tv"
@@ -294,12 +293,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:background="#f4f4f4"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -312,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_weight"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:id="@+id/textView11" />
 
                 <TextView
@@ -321,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -341,7 +342,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/house_mudigang"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_dest_detail_tv"
@@ -349,7 +350,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -369,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_huozhi"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/declareinfo_gprice_detail_tv"
@@ -377,12 +378,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:background="#f4f4f4"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -395,7 +398,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Shipper"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size" />
 
                 <TextView
                     android:id="@+id/declareinfo_ship_tv"
@@ -403,7 +406,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
             <View
@@ -423,7 +426,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="入库时间:"
-                    android:textSize="@dimen/awb_detail_size" />
+                    android:textSize="@dimen/declare_size"/>
 
                 <TextView
                     android:id="@+id/declareinfo_opdate_detail_tv"
@@ -431,7 +434,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/awb_detail_color"
-                    android:textSize="@dimen/awb_detail_size"
+                    android:textSize="@dimen/declare_size"
                     android:textColor="#2e2d33"/>
             </LinearLayout>
 

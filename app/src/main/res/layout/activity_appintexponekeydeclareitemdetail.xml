@@ -22,14 +22,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center">
-
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Mawb"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -59,7 +57,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_child_hno"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -89,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_rearchid"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -148,7 +144,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_cmdstatus"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -178,7 +173,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_SpCode"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp"/>
 
@@ -206,7 +200,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Goods"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp"/>
 
@@ -236,7 +229,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_FDate"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -273,7 +265,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Fno"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -302,7 +293,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_dest1"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -332,7 +322,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_Dest1"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -360,7 +349,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_CustomsCode"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -389,7 +377,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_group_transPortMode"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -425,7 +412,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_group_freightPayment"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -461,7 +447,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_group_cNEECity"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -490,7 +475,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/int_group_cNEECountry"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -520,7 +504,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_MftStatus"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -550,7 +533,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_MftMSGID"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -580,7 +562,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_pc"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -610,7 +591,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_weight"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -640,7 +620,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_volume"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -668,7 +647,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_ArrivalStatus"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -698,7 +676,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_ArrMSGID"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -728,7 +705,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/declare_Response"
-                    android:textColor="@color/guoneidingdan_color"
                     android:textSize="@dimen/awb_detail_size"
                     android:layout_marginLeft="21dp" />
 
@@ -765,7 +741,7 @@
             android:layout_marginLeft="21dp"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"/>
+            android:textSize="@dimen/declare_size"/>
         <Button
             android:id="@+id/resert_sure_btn"
             android:layout_width="0dp"
@@ -776,7 +752,7 @@
             android:layout_marginLeft="21dp"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"/>
+            android:textSize="@dimen/declare_size"/>
         <Button
             android:id="@+id/splite_btn"
             android:layout_width="0dp"
@@ -787,6 +763,6 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/button_selector"
             android:textColor="#ffffff"
-            android:textSize="19sp"/>
+            android:textSize="@dimen/declare_size"/>
     </LinearLayout>
 </LinearLayout>

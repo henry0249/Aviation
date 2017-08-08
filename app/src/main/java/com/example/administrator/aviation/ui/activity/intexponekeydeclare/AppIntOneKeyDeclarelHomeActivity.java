@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +25,12 @@ import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOExportOneKeyDeclare;
 import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOMergerSubLineArrival;
+import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpGetIntOneKeyDeclare;
 import com.example.administrator.aviation.model.intonekeydeclare.Declare;
 import com.example.administrator.aviation.model.intonekeydeclare.PrepareIntDeclare;
+import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 import com.example.administrator.aviation.util.PullToRefreshView;
@@ -46,7 +48,7 @@ import java.util.Set;
  * 预配及运抵列表界面
  */
 
-public class AppIntOneKeyDeclareItemActivity extends Activity {
+public class AppIntOneKeyDeclarelHomeActivity extends Activity {
     private String ErrString = "";
     private String userBumen;
     private String userName;
@@ -76,8 +78,12 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
     // 支线合并
     private Button zhixianHebingBtn;
 
-    // 查询界面返回的xml信息
-    private String searchXml;
+    private String xml;
+
+    // 获取当前时间
+    private String currentTime;
+
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +100,14 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.setTitle("预配与运抵信息");
-        navBar.hideRight();
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AppIntOneKeyDeclarelHomeActivity.this, AppIntExpOneKeyDeclareActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 获得用户信息
         userBumen = PreferenceUtils.getUserBumen(this);
@@ -102,12 +115,16 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         userPass = PreferenceUtils.getUserPass(this);
         loginFlag = PreferenceUtils.getLoginFlag(this);
 
-        searchXml = getIntent().getStringExtra("xml");
+        loadingDialog = new LoadingDialog(this);
 
         // 申报
         shenbaoBtn = (Button) findViewById(R.id.shenbai_btn);
         zhixianHebingBtn = (Button) findViewById(R.id.zhixian_hebing_btn);
         zhixianPb = (ProgressBar) findViewById(R.id.zhixian_pb);
+
+        // 得到查询的xml
+        currentTime = DateUtils.getTodayDateTime();
+        xml = HttpGetIntOneKeyDeclare.getDeclareDetailXml("", currentTime, currentTime);
 
         pullToRefreshView = (PullToRefreshView) findViewById(R.id.onkey_refresh);
         pullToRefreshView.disableScroolUp();
@@ -120,7 +137,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                 Declare declare = (Declare) declareAdapter.getItem(position);
                 String mawb = ((Declare) declareAdapter.getItem(position)).getMawb();
                 String rearchID = ((Declare) declareAdapter.getItem(position)).getRearchID();
-                Intent intent = new Intent(AppIntOneKeyDeclareItemActivity.this, AppIntOneKeyDeclareItemDetailActivity.class);
+                Intent intent = new Intent(AppIntOneKeyDeclarelHomeActivity.this, AppIntOneKeyDeclareItemDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(AviationCommons.DECLARE_INFO, declare);
                 bundle.putString(AviationCommons.DECLARE_MAWB, mawb);
@@ -135,9 +152,9 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
                 Map<String, String> params = new HashMap<>();
-                params.put("dXml", searchXml);
+                params.put("dXml", xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(AppIntOneKeyDeclareItemActivity.this, HttpCommons.GET_INT_EXPORT_ONE_KEY_DECLARE_NAME,
+                HttpRoot.getInstance().requstAync(AppIntOneKeyDeclarelHomeActivity.this, HttpCommons.GET_INT_EXPORT_ONE_KEY_DECLARE_NAME,
                         HttpCommons.GET_INT_EXPORT_ONE_KEY_DECLARE_ACTION, params, new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
@@ -145,7 +162,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                                 String xmls = object.getProperty(0).toString();
                                 declareList = PrepareIntDeclare.parseIntDeclareXml(xmls);
                                 if (declareList != null && declareList.size() >= 1) {
-                                    declareAdapter = new DeclareAdapter(declareList, AppIntOneKeyDeclareItemActivity.this);
+                                    declareAdapter = new DeclareAdapter(declareList, AppIntOneKeyDeclarelHomeActivity.this);
                                     declareLv.setAdapter(declareAdapter);
                                 } else {
                                     nodateTv.setVisibility(View.VISIBLE);
@@ -179,7 +196,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                     new CgoExportOneKeyDeclareAsyTask(mawb).execute();
                 }
                 if (mawbList.size() <= 0 ) {
-                    Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "没有申报项",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, "没有申报项",Toast.LENGTH_LONG).show();
                 } else {
                     finish();
                 }
@@ -201,7 +218,7 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
                     xml = getRearchID(mawbList);
                 }
                 if (xml ==  null ) {
-                    Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "请选择合并项",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, "请选择合并项",Toast.LENGTH_LONG).show();
                     zhixianPb.setVisibility(View.GONE);
                 } else {
                     new ZhixianAsynck(xml).execute();
@@ -209,37 +226,46 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
             }
         });
 
-        // 得到list数据
-        new GetDeclarListAsyTask().execute();
+        // 首次进入加载数据
+        loadingDialog.show();
 
-    }
+        Map<String, String> params = new HashMap<>();
+        params.put("dXml", xml);
+        params.put("ErrString", "");
+        HttpRoot.getInstance().requstAync(AppIntOneKeyDeclarelHomeActivity.this, HttpCommons.GET_INT_EXPORT_ONE_KEY_DECLARE_NAME,
+                HttpCommons.GET_INT_EXPORT_ONE_KEY_DECLARE_ACTION, params, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xmls = object.getProperty(0).toString();
+                        declareList = PrepareIntDeclare.parseIntDeclareXml(xmls);
+                        if (declareList != null && declareList.size() >= 1) {
+                            declareAdapter = new DeclareAdapter(declareList, AppIntOneKeyDeclarelHomeActivity.this);
+                            declareLv.setAdapter(declareAdapter);
+                        } else {
+                            nodateTv.setVisibility(View.VISIBLE);
+                            // 没有数据显示，两个按钮不可点击并且变灰色
+                            shenbaoBtn.setEnabled(false);
+                            shenbaoBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
+                            zhixianHebingBtn.setEnabled(false);
+                            zhixianHebingBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
+                        }
+                        loadingDialog.dismiss();
 
-    // 得到预配与运抵信息
-    private class GetDeclarListAsyTask extends AsyncTask<Void, Void, String> {
+                    }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            // 预配与运抵界面传回的xml
-            String declareXml = getIntent().getStringExtra(AviationCommons.INT_ONEKEY_DECLARE);
-            declareList = PrepareIntDeclare.parseIntDeclareXml(declareXml);
-            return declareXml;
-        }
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            declareAdapter = new DeclareAdapter(declareList, AppIntOneKeyDeclareItemActivity.this);
-            declareLv.setAdapter(declareAdapter);
-            if (declareList.size() <= 0) {
-                nodateTv.setVisibility(View.VISIBLE);
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
 
-                // 没有数据显示，两个按钮不可点击并且变灰色
-                shenbaoBtn.setEnabled(false);
-                shenbaoBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
-                zhixianHebingBtn.setEnabled(false);
-                zhixianHebingBtn.setBackgroundColor(Color.parseColor("#e3e3e3"));
-            }
-        }
+
     }
 
     private class DeclareAdapter extends BaseAdapter {
@@ -378,9 +404,9 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (result == null && !ErrString.equals("")) {
-                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (result.equals("false") && !ErrString.equals("") ) {
-                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -413,14 +439,14 @@ public class AppIntOneKeyDeclareItemActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (result == null && !ErrString.equals("")) {
-                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, ErrString, Toast.LENGTH_LONG).show();
                 zhixianPb.setVisibility(View.GONE);
             } else if (result.equals("false") && !ErrString.equals("") ) {
-                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, ErrString, Toast.LENGTH_LONG).show();
                 zhixianPb.setVisibility(View.GONE);
             } else if (result.equals("true")) {
-                Toast.makeText(AppIntOneKeyDeclareItemActivity.this, "合并成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AppIntOneKeyDeclareItemActivity.this, AppIntExpOneKeyDeclareActivity.class);
+                Toast.makeText(AppIntOneKeyDeclarelHomeActivity.this, "合并成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AppIntOneKeyDeclarelHomeActivity.this, AppIntExpOneKeyDeclareActivity.class);
                 startActivity(intent);
                 finish();
             }

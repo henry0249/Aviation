@@ -34,6 +34,10 @@ import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareIn
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEdeclareHomeActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
+import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoHomeActivity;
+import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAwbHouseHomeActivity;
+import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntOneKeyDeclarelHomeActivity;
+import com.example.administrator.aviation.ui.activity.intimpcargoinfo.AppIntimpCarGoInfoHomeActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierHomeActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntImportDayCarrierActivity;
@@ -174,19 +178,19 @@ public class HomePageFragment extends Fragment{
                     Intent intentHouse = new Intent(getActivity(), AppDomWareHouseHomeActivity.class);
                     startActivity(intentHouse);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXP_AWB_MANAGE)) {
-                    Intent intentIntManage = new Intent(getActivity(), AppIntExpAWBHouseManageActivity.class);
+                    Intent intentIntManage = new Intent(getActivity(), AppIntExpAwbHouseHomeActivity.class);
                     startActivity(intentIntManage);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXP_PREPARE_AWB)) {
                     Intent intentIntAwb = new Intent(getActivity(), AppIntExpPrepareAWBActivity.class);
                     startActivity(intentIntAwb);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE)) {
-                    Intent intentDeclare = new Intent(getActivity(), AppIntExpOneKeyDeclareActivity.class);
+                    Intent intentDeclare = new Intent(getActivity(), AppIntOneKeyDeclarelHomeActivity.class);
                     startActivity(intentDeclare);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_EXPONEKEY_DECLARE_INFO)) {
-                    Intent intentDeclareInfo = new Intent(getActivity(), AppIntDeclareInfoSearchActivity.class);
+                    Intent intentDeclareInfo = new Intent(getActivity(), AppIntDeclareInfoHomeActivity.class);
                     startActivity(intentDeclareInfo);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_INT_IMP_CARGO_INFO)) {
-                    Intent intentCargoInfo = new Intent(getActivity(), AppIntimpCargoInfoActivity.class);
+                    Intent intentCargoInfo = new Intent(getActivity(), AppIntimpCarGoInfoHomeActivity.class);
                     startActivity(intentCargoInfo);
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_FLIGHT_MESSAGE)) {
                     Intent intentFlight = new Intent(getActivity(), FlightHomeDetailActivity.class);

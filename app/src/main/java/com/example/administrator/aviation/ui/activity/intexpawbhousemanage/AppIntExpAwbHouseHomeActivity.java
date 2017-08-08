@@ -22,9 +22,11 @@ import com.example.administrator.aviation.http.intExportawbofwarehouse.HttpIntaw
 import com.example.administrator.aviation.model.intawbprepare.Hawb;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
 import com.example.administrator.aviation.model.intawbprepare.PrepareIntAwbInfo;
+import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpChildActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpGroupActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 import com.example.administrator.aviation.util.PullToRefreshView;
@@ -42,12 +44,7 @@ import static com.example.administrator.aviation.R.id.int_group_detail_tev;
  * 国际出港入库管理it
  */
 
-public class AppIntExpAwbHouseItemActivity extends Activity{
-    private String ErrString = "";
-    private String userBumen;
-    private String userName;
-    private String userPass;
-    private String loginFlag;
+public class AppIntExpAwbHouseHomeActivity extends Activity{
 
     private List<MawbInfo> groupList;
     private ExpandableListView listView;
@@ -61,6 +58,11 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
 
     private PullToRefreshView pullToRefreshView;
 
+    private LoadingDialog loadingDialog;
+
+    private String xml;
+    private String currentTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +72,16 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle(R.string.int_awb_house_item_title);
-        navBar.showRight();
-        navBar.hideRight();
+        navBar.setTitle("当天出港入库信息");
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AppIntExpAwbHouseHomeActivity.this, AppIntExpAWBHouseManageActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         listView = (ExpandableListView) findViewById(R.id.int_exp_listview);
         intawbProgressBar = (ProgressBar) findViewById(R.id.int_awb_pb);
@@ -80,23 +89,21 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         showDataTv = (TextView) findViewById(R.id.int_awb_house_load_tv);
         pullToRefreshView = (PullToRefreshView) findViewById(R.id.awb_refresh);
 
-        userBumen = PreferenceUtils.getUserBumen(this);
-        userName = PreferenceUtils.getUserName(this);
-        userPass = PreferenceUtils.getUserPass(this);
-        loginFlag = PreferenceUtils.getLoginFlag(this);
+        loadingDialog = new LoadingDialog(this);
 
-        new GetIntPrepareAsync().execute();
+        intawbLoadTv.setVisibility(View.GONE);
+        intawbProgressBar.setVisibility(View.GONE);
+        showDataTv.setVisibility(View.GONE);
 
         // 下拉刷新
-        final String searchXml = getIntent().getStringExtra("xml");
         pullToRefreshView.disableScroolUp();
         pullToRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("awbXml", searchXml);
+                params.put("awbXml", xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(AppIntExpAwbHouseItemActivity.this, HttpCommons.GET_INT_WARE_HOUSE_NAME,
+                HttpRoot.getInstance().requstAync(AppIntExpAwbHouseHomeActivity.this, HttpCommons.GET_INT_WARE_HOUSE_NAME,
                         HttpCommons.GET_INT_WARE_HOUSE_ACTION, params, new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
@@ -104,7 +111,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
                                 String xmls = object.getProperty(0).toString();
                                 groupList = PrepareIntAwbInfo.parseAwbInfoXml(xmls);
                                 if (groupList != null && groupList.size() >= 1) {
-                                    expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseItemActivity.this);
+                                    expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseHomeActivity.this);
                                     listView.setAdapter(expandableAdapter);
                                 } else {
                                     showDataTv.setVisibility(View.VISIBLE);
@@ -125,13 +132,79 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
             }
         });
 
+
+        // 首次进入加载数据
+        currentTime = DateUtils.getTodayDateTime();
+        xml = HttpIntawbPrepareHouse.getIntWareHouseXml("", currentTime, currentTime);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("awbXml", xml);
+        params.put("ErrString", "");
+        loadingDialog.show();
+        HttpRoot.getInstance().requstAync(AppIntExpAwbHouseHomeActivity.this, HttpCommons.GET_INT_WARE_HOUSE_NAME,
+                HttpCommons.GET_INT_WARE_HOUSE_ACTION, params, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xmls = object.getProperty(0).toString();
+                        groupList = PrepareIntAwbInfo.parseAwbInfoXml(xmls);
+                        if (groupList != null && groupList.size() >= 1) {
+                            expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseHomeActivity.this);
+                            listView.setAdapter(expandableAdapter);
+                        } else {
+                            showDataTv.setVisibility(View.VISIBLE);
+                        }
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
+
     }
 
     // 重新进入此界面重新从服务器获取数据（每次修改完数据信息调用此方法重新获取数据）
     @Override
     protected void onResume() {
         super.onResume();
-        new  GetIntHousePrepareAsync().execute();
+        currentTime = DateUtils.getTodayDateTime();
+        xml = HttpIntawbPrepareHouse.getIntWareHouseXml("", currentTime, currentTime);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("awbXml", xml);
+        params.put("ErrString", "");
+        loadingDialog.show();
+        HttpRoot.getInstance().requstAync(AppIntExpAwbHouseHomeActivity.this, HttpCommons.GET_INT_WARE_HOUSE_NAME,
+                HttpCommons.GET_INT_WARE_HOUSE_ACTION, params, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xmls = object.getProperty(0).toString();
+                        groupList = PrepareIntAwbInfo.parseAwbInfoXml(xmls);
+                        if (groupList != null && groupList.size() >= 1) {
+                            expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseHomeActivity.this);
+                            listView.setAdapter(expandableAdapter);
+                        } else {
+                            showDataTv.setVisibility(View.VISIBLE);
+                        }
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
     }
 
     // 回传参数(接收更新和添加订单传递过来的值更新列表)
@@ -144,32 +217,6 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         }
     }
 
-    // 得到数据的异步请求
-    class GetIntPrepareAsync extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... voids) {
-            // 查询界面返回的xml数据
-            String result = getIntent().getStringExtra(AviationCommons.INT_AWB_HOUSE);
-            groupList = PrepareIntAwbInfo.parseAwbInfoXml(result);
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-                if (groupList == null || groupList.size() <= 0) {
-                    showDataTv.setVisibility(View.VISIBLE);
-                    intawbProgressBar.setVisibility(View.GONE);
-                    intawbLoadTv.setVisibility(View.GONE);
-                } else {
-                    expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseItemActivity.this);
-                    listView.setAdapter(expandableAdapter);
-                    intawbProgressBar.setVisibility(View.GONE);
-                    intawbLoadTv.setVisibility(View.GONE);
-                    showDataTv.setVisibility(View.GONE);
-                }
-        }
-    }
 
     public class ExpandableAdapter extends BaseExpandableListAdapter {
         Activity activity;
@@ -254,7 +301,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
             groupViewHolder.groupDetailTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpGroupActivity.class);
+                    Intent intent = new Intent(AppIntExpAwbHouseHomeActivity.this, AppIntExpGroupActivity.class);
                     Bundle bundle = new Bundle();
                     MawbInfo mawbInfo = groupList.get(groupPosition);
                     bundle.putSerializable(AviationCommons.INT_GROUP_INFO, mawbInfo);
@@ -266,7 +313,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
             groupViewHolder.groupImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpGroupActivity.class);
+                    Intent intent = new Intent(AppIntExpAwbHouseHomeActivity.this, AppIntExpGroupActivity.class);
                     Bundle bundle = new Bundle();
                     MawbInfo mawbInfo = groupList.get(groupPosition);
                     bundle.putSerializable(AviationCommons.INT_GROUP_INFO, mawbInfo);
@@ -322,7 +369,7 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
             childViewHolder.childLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AppIntExpAwbHouseItemActivity.this, AppIntExpChildActivity.class);
+                    Intent intent = new Intent(AppIntExpAwbHouseHomeActivity.this, AppIntExpChildActivity.class);
                     Hawb hawb = groupList.get(groupPosition).getHawb().get(childPosition);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(AviationCommons.INT_CHILD_INFO, hawb);
@@ -363,55 +410,4 @@ public class AppIntExpAwbHouseItemActivity extends Activity{
         }
     }
 
-    // 得到数据的异步请求
-    class GetIntHousePrepareAsync extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String mawb = getIntent().getStringExtra(AviationCommons.MANAGE_HOUSE_MAWAB);
-            String begainTime = getIntent().getStringExtra(AviationCommons.MANAGE_HOUSE_BEGAIN_TIME);
-            String endTime = getIntent().getStringExtra(AviationCommons.MANAGE_HOUSE_END_TIME);
-            String xml = HttpIntawbPrepareHouse.getIntWareHouseXml(mawb, begainTime, endTime);
-            SoapObject object = HttpIntawbPrepareHouse.getIntWareHouseDetail(userBumen, userName,userPass,loginFlag, xml);
-            if (object == null) {
-                ErrString = "服务器响应失败";
-                return null;
-            } else {
-                String result = object.getProperty(0).toString();
-                if (result.equals("anyType{}")) {
-                    ErrString = object.getProperty(1).toString();
-                    return result;
-                } else {
-                    result = object.getProperty(0).toString();
-                    groupList = PrepareIntAwbInfo.parseAwbInfoXml(result);
-                    return result;
-                }
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (result == null && !ErrString.equals("")) {
-                Toast.makeText(AppIntExpAwbHouseItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
-                intawbProgressBar.setVisibility(View.GONE);
-                intawbLoadTv.setVisibility(View.GONE);
-            } else if (result.equals("anyType{}") && !ErrString.equals("")) {
-                Toast.makeText(AppIntExpAwbHouseItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
-                intawbProgressBar.setVisibility(View.GONE);
-                intawbLoadTv.setVisibility(View.GONE);
-            }else {
-                if (groupList == null || groupList.size() <= 0) {
-                    showDataTv.setVisibility(View.VISIBLE);
-                    intawbProgressBar.setVisibility(View.GONE);
-                    intawbLoadTv.setVisibility(View.GONE);
-                } else {
-                    expandableAdapter = new ExpandableAdapter(AppIntExpAwbHouseItemActivity.this);
-                    listView.setAdapter(expandableAdapter);
-                    intawbProgressBar.setVisibility(View.GONE);
-                    intawbLoadTv.setVisibility(View.GONE);
-                }
-            }
-        }
-    }
 }

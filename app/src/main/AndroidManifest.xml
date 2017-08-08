@@ -111,6 +111,11 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
 
+        <!--国际货代出港入库信息-->
+        <activity android:name=".ui.activity.intexpawbhousemanage.AppIntExpAwbHouseHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity"
             android:launchMode="singleTask"
@@ -123,6 +128,10 @@
             android:screenOrientation="portrait"/>
 
         <!--预配与运抵界面-->
+        <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclarelHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity"
             android:launchMode="singleTask"
@@ -144,11 +153,20 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
 
+        <!--国际货代联检状态-->
+        <activity android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoHomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"

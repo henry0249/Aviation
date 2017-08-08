@@ -23,12 +23,13 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
-import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOExportOneKeyDeclare;
+import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoInfo;
 import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoShenBao;
 import com.example.administrator.aviation.model.intimpcargoinfo.CargoInfoMessage;
 import com.example.administrator.aviation.model.intimpcargoinfo.PrepareCargoInfoMessage;
-import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity;
+import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 import com.example.administrator.aviation.util.PullToRefreshView;
@@ -46,7 +47,7 @@ import java.util.Set;
  * 进港货站信息主界面
  */
 
-public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnClickListener{
+public class AppIntimpCarGoInfoHomeActivity extends Activity implements View.OnClickListener{
     // 用户信息
     private String ErrString = "";
     private String userBumen;
@@ -67,10 +68,13 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
 
     private PullToRefreshView pullToRefreshView;
 
-    private String searchXml;
-
     private Map<String, CargoInfoMessage> checkedDeclareMap;
     private Map<Integer, CargoInfoMessage> rearchIdMap;
+
+    private String currentTime;
+
+    private String xml;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +94,15 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
 
     private void initView() {
         NavBar navBar = new NavBar(this);
-        navBar.setTitle("进港货站信息列表");
-        navBar.hideRight();
+        navBar.setTitle("当天进港货站信息列表");
+        navBar.setRight(R.drawable.search);
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AppIntimpCarGoInfoHomeActivity.this, AppIntimpCargoInfoActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 获得用户信息
         userBumen = PreferenceUtils.getUserBumen(this);
@@ -99,7 +110,10 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
         userPass = PreferenceUtils.getUserPass(this);
         loginFlag = PreferenceUtils.getLoginFlag(this);
 
-        searchXml = getIntent().getStringExtra("xml");
+        loadingDialog = new LoadingDialog(this);
+
+        currentTime = DateUtils.getTodayDateTime();
+        xml = HttpPrepareImpCargoInfo.getImpCargoXml("", "",currentTime, currentTime);
 
         impCarGoLv = (ListView) findViewById(R.id.impcargoinfo_lv);
         nodateTv = (TextView) findViewById(R.id.impcargoinfo_nodata_tv);
@@ -120,7 +134,7 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
                 CargoInfoMessage cargoInfoMessage = (CargoInfoMessage) impCargoAdapter.getItem(position);
                 String businessType = ((CargoInfoMessage) impCargoAdapter.getItem(position)).getBusinessType();
                 String hawbID = ((CargoInfoMessage) impCargoAdapter.getItem(position)).getAwbID();
-                Intent intent = new Intent(AppIntimpCarGoInfoItemActivity.this, AppIntimpCarGoInfoItemDetailActivity.class);
+                Intent intent = new Intent(AppIntimpCarGoInfoHomeActivity.this, AppIntimpCarGoInfoItemDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(AviationCommons.IMP_CARGO_INFO_ITEM, cargoInfoMessage);
                 bundle.putString(AviationCommons.IMP_CARGO_INFO_BUSINESSTYPE, businessType);
@@ -134,9 +148,9 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("awbXml", searchXml);
+                params.put("awbXml", xml);
                 params.put("ErrString", "");
-                HttpRoot.getInstance().requstAync(AppIntimpCarGoInfoItemActivity.this, HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_NAME,
+                HttpRoot.getInstance().requstAync(AppIntimpCarGoInfoHomeActivity.this, HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_NAME,
                         HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_ACTION, params, new HttpRoot.CallBack() {
                             @Override
                             public void onSucess(Object result) {
@@ -144,7 +158,7 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
                                 String xmls = object.getProperty(0).toString();
                                 cargoInfoMessageList = PrepareCargoInfoMessage.pullCargoInfoXml(xmls);
                                 if (cargoInfoMessageList != null && cargoInfoMessageList.size() >= 1) {
-                                    impCargoAdapter = new ImpCargoAdapter(AppIntimpCarGoInfoItemActivity.this, cargoInfoMessageList);
+                                    impCargoAdapter = new ImpCargoAdapter(AppIntimpCarGoInfoHomeActivity.this, cargoInfoMessageList);
                                     impCarGoLv.setAdapter(impCargoAdapter);
                                 } else {
                                     nodateTv.setVisibility(View.VISIBLE);
@@ -165,8 +179,39 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
             }
         });
 
-        // 得到数据
-        new GetImpCargoListAsyTask().execute();
+
+        // 首次进入页面加载数据
+        loadingDialog.show();
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("awbXml", xml);
+        params.put("ErrString", "");
+        HttpRoot.getInstance().requstAync(AppIntimpCarGoInfoHomeActivity.this, HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_NAME,
+                HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_ACTION, params, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xmls = object.getProperty(0).toString();
+                        cargoInfoMessageList = PrepareCargoInfoMessage.pullCargoInfoXml(xmls);
+                        if (cargoInfoMessageList != null && cargoInfoMessageList.size() >= 1) {
+                            impCargoAdapter = new ImpCargoAdapter(AppIntimpCarGoInfoHomeActivity.this, cargoInfoMessageList);
+                            impCarGoLv.setAdapter(impCargoAdapter);
+                        } else {
+                            nodateTv.setVisibility(View.VISIBLE);
+                        }
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        loadingDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        loadingDialog.dismiss();
+                    }
+                });
+
     }
 
     @Override
@@ -183,7 +228,7 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
                     new CarGoInfoAsyTask(mawb).execute();
                 }
                 if (mawbList.size() <= 0 ) {
-                    Toast.makeText(AppIntimpCarGoInfoItemActivity.this, "没有申报项",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AppIntimpCarGoInfoHomeActivity.this, "没有申报项",Toast.LENGTH_LONG).show();
                 } else {
                     finish();
                 }
@@ -191,28 +236,6 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
 
             default:
                 break;
-        }
-    }
-
-    // 得到进港货站信息
-    private class GetImpCargoListAsyTask extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            // 进港货站信息传回的xml
-            String cargoXml = getIntent().getStringExtra(AviationCommons.IMP_CARGO_INFO);
-            cargoInfoMessageList = PrepareCargoInfoMessage.pullCargoInfoXml(cargoXml);
-            return cargoXml;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            impCargoAdapter = new ImpCargoAdapter(AppIntimpCarGoInfoItemActivity.this, cargoInfoMessageList);
-            impCarGoLv.setAdapter(impCargoAdapter);
-            if (cargoInfoMessageList.size() <= 0) {
-                nodateTv.setVisibility(View.VISIBLE);
-            }
         }
     }
 
@@ -344,9 +367,9 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (result == null && !ErrString.equals("")) {
-                Toast.makeText(AppIntimpCarGoInfoItemActivity.this, ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntimpCarGoInfoHomeActivity.this, ErrString, Toast.LENGTH_LONG).show();
             } else if (result.equals("false") && !ErrString.equals("")) {
-                Toast.makeText(AppIntimpCarGoInfoItemActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
+                Toast.makeText(AppIntimpCarGoInfoHomeActivity.this, "单号:" + mawb + ErrString, Toast.LENGTH_LONG).show();
             }
         }
     }

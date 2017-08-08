@@ -11,46 +11,107 @@
         android:layout_marginLeft="21dp"
         android:layout_marginRight="21dp"/>
     <LinearLayout
+        android:id="@+id/awb_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:background="#ffffff">
-
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="主运单号："
-            android:textSize="@dimen/house_size"
+            android:layout_height="50dp"
             android:layout_marginLeft="40dp"
-            android:textColor="#2e2d33"/>
-
-        <TextView
-            android:id="@+id/int_group_mawb_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="11111111"
-            android:textSize="@dimen/house_size"
-            android:layout_marginLeft="11dp"
-            android:textColor="#2e2d33"/>
-
-        <TextView
-            android:id="@+id/int_group_detail_tev"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="详情"
-            android:textSize="@dimen/house_size"
-            android:layout_marginLeft="40dp"
-            android:textColor="#1d2089"/>
-        <ImageView
-            android:id="@+id/int_group_imageview"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/int_group_mawb_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="784-77448641"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="12dp"
-            android:src="@drawable/jiantou" />
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/int_group_pc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="211458985"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.3"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/int_group_weight_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="W"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.3"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/int_group_volume_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="S"
+                android:textColor="#3c3c3b"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.3"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/int_group_detail_tev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="详情"
+                android:textColor="#1d2089"
+                android:textSize="12sp" />
+            <ImageView
+                android:id="@+id/int_group_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="2dp"
+                android:src="@drawable/jiantou"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

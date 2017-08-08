@@ -175,6 +175,7 @@ public class AppIntExpOneKeyDeclareActivity extends Activity implements View.OnC
                 Bundle bundle = new Bundle();
                 bundle.putString(AviationCommons.INT_ONEKEY_DECLARE, request);
                 intent.putExtras(bundle);
+                intent.putExtra("xml", xml);
                 startActivity(intent);
                 // 上传成功后finish掉当前的activity
 //                finish();

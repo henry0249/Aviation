@@ -178,6 +178,7 @@ public class AppIntExpAWBHouseManageActivity extends Activity implements View.On
                 bundle.putString(AviationCommons.MANAGE_HOUSE_BEGAIN_TIME, begainTime);
                 bundle.putString(AviationCommons.MANAGE_HOUSE_END_TIME, endTime);
                 intent.putExtras(bundle);
+                intent.putExtra("xml", xml);
                 startActivity(intent);
                 // 上传成功后finish掉当前的activity
 //                finish();

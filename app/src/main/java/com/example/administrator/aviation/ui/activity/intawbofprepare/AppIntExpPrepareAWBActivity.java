@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpGetIntExportAwbOfPrepare;
 import com.example.administrator.aviation.model.intawbprepare.Hawb;
 import com.example.administrator.aviation.model.intawbprepare.MawbInfo;
@@ -23,10 +25,14 @@ import com.example.administrator.aviation.model.intawbprepare.PrepareIntAwbInfo;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.example.administrator.aviation.util.PullToRefreshView;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 获取国际预录入订单列表
@@ -42,6 +48,7 @@ public class AppIntExpPrepareAWBActivity extends Activity{
     private List<MawbInfo> groupList;
     private ExpandableListView listView;
     private ExpandableAdapter expandableAdapter;
+    private PullToRefreshView pullToRefreshView;
 
     private ProgressBar intawbProgressBar;
     private TextView intawbLoadTv;
@@ -71,10 +78,49 @@ public class AppIntExpPrepareAWBActivity extends Activity{
         intawbProgressBar = (ProgressBar) findViewById(R.id.int_awb_pb);
         intawbLoadTv = (TextView) findViewById(R.id.int_awb_load_tv);
         intawbNoneDataTv = (TextView) findViewById(R.id.int_awb_house_load_tv);
+        pullToRefreshView = (PullToRefreshView) findViewById(R.id.awb_refresh);
         userBumen = PreferenceUtils.getUserBumen(this);
         userName = PreferenceUtils.getUserName(this);
         userPass = PreferenceUtils.getUserPass(this);
         loginFlag = PreferenceUtils.getLoginFlag(this);
+
+        // 下拉刷新
+        pullToRefreshView.disableScroolUp();
+        pullToRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Mawb", "");
+                params.put("Hno", "");
+                params.put("ErrString", "");
+                HttpRoot.getInstance().requstAync(AppIntExpPrepareAWBActivity.this, HttpCommons.GET_INT_METHOD_NAME,
+                        HttpCommons.GET_INT_METHOD_ACTION, params, new HttpRoot.CallBack() {
+                            @Override
+                            public void onSucess(Object result) {
+                                SoapObject object = (SoapObject) result;
+                                String xmls = object.getProperty(0).toString();
+                                groupList = PrepareIntAwbInfo.parseAwbInfoXml(xmls);
+                                if (groupList != null && groupList.size() >= 1) {
+                                    expandableAdapter = new ExpandableAdapter(AppIntExpPrepareAWBActivity.this);
+                                    listView.setAdapter(expandableAdapter);
+                                } else {
+                                    intawbNoneDataTv.setVisibility(View.VISIBLE);
+                                }
+                                pullToRefreshView.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onFailed(String message) {
+                                pullToRefreshView.onHeaderRefreshComplete();
+                            }
+
+                            @Override
+                            public void onError() {
+                                pullToRefreshView.onHeaderRefreshComplete();
+                            }
+                        });
+            }
+        });
 
         new GetIntPrepareAsync().execute();
 
@@ -194,13 +240,40 @@ public class AppIntExpPrepareAWBActivity extends Activity{
                 convertView = LayoutInflater.from(activity).inflate(R.layout.int_group_item, parent, false);
                 groupViewHolder = new GroupViewHolder();
                 groupViewHolder.groupMawbIdTv = (TextView) convertView.findViewById(R.id.int_group_mawb_tv);
+                groupViewHolder.groupPc = (TextView) convertView.findViewById(R.id.int_group_pc_tv);
+                groupViewHolder.groupWeight = (TextView) convertView.findViewById(R.id.int_group_weight_tv);
+                groupViewHolder.groupVolume = (TextView) convertView.findViewById(R.id.int_group_volume_tv);
                 groupViewHolder.groupImage = (ImageView) convertView.findViewById(R.id.int_group_imageview);
                 groupViewHolder.groupDeatilTv = (TextView) convertView.findViewById(R.id.int_group_detail_tev);
                 convertView.setTag(groupViewHolder);
             } else {
                 groupViewHolder = (GroupViewHolder) convertView.getTag();
             }
-            groupViewHolder.groupMawbIdTv.setText(groupList.get(groupPosition).getMawb());
+            String mawb = groupList.get(groupPosition).getMawb();
+            if (mawb != null && !mawb.equals("")) {
+                groupViewHolder.groupMawbIdTv.setText(mawb);
+            } else {
+                groupViewHolder.groupMawbIdTv.setText("");
+            }
+            String pc = groupList.get(groupPosition).getPC();
+            if (pc != null && !pc.equals("")) {
+                groupViewHolder.groupPc.setText(pc);
+            } else {
+                groupViewHolder.groupPc.setText("");
+            }
+            String weight = groupList.get(groupPosition).getWeight();
+            if (weight != null && !weight.equals("")) {
+                groupViewHolder.groupWeight.setText(weight);
+            } else {
+                groupViewHolder.groupWeight.setText("");
+            }
+            String volume = groupList.get(groupPosition).getVolume();
+            if (volume != null && !volume.equals("")) {
+                groupViewHolder.groupVolume.setText(volume);
+            } else {
+                groupViewHolder.groupVolume.setText("");
+            }
+
             groupViewHolder.groupDeatilTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -234,17 +307,39 @@ public class AppIntExpPrepareAWBActivity extends Activity{
                 convertView = LayoutInflater.from(activity).inflate(R.layout.int_child_group, parent, false);
                 childViewHolder = new ChildViewHolder();
                 childViewHolder.childText = (TextView) convertView.findViewById(R.id.int_child_hawbid_tv);
+                childViewHolder.childPC = (TextView) convertView.findViewById(R.id.int_child_pc_tv);
+                childViewHolder.childWeight = (TextView) convertView.findViewById(R.id.int_child_weight_tv);
+                childViewHolder.childVolume = (TextView) convertView.findViewById(R.id.int_child_volume_tv);
                 childViewHolder.childLayout = (LinearLayout) convertView.findViewById(R.id.int_child_layout);
                 convertView.setTag(childViewHolder);
             } else {
                 childViewHolder = (ChildViewHolder) convertView.getTag();
             }
+
             if (!groupList.get(groupPosition).getHawb().get(childPosition).getHno().equals("")) {
                 childViewHolder.childText.setText(groupList.get(groupPosition).getHawb().get(childPosition).getHno());
-
             } else {
                 return null;
             }
+            String pc = groupList.get(groupPosition).getHawb().get(childPosition).getPC();
+            if (pc != null && !pc.equals("")) {
+                childViewHolder.childPC.setText(pc);
+            } else {
+                childViewHolder.childPC.setText("");
+            }
+            String weight = groupList.get(groupPosition).getHawb().get(childPosition).getWeight();
+            if (weight != null && !weight.equals("")) {
+                childViewHolder.childWeight.setText(weight);
+            } else {
+                childViewHolder.childWeight.setText("");
+            }
+            String volume = groupList.get(groupPosition).getHawb().get(childPosition).getVolume();
+            if (volume != null && !volume.equals("")) {
+                childViewHolder.childVolume.setText(volume);
+            } else {
+                childViewHolder.childVolume.setText("");
+            }
+
             childViewHolder.childLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -274,11 +369,17 @@ public class AppIntExpPrepareAWBActivity extends Activity{
         }
         class GroupViewHolder{
             TextView groupMawbIdTv;
+            TextView groupPc;
+            TextView groupWeight;
+            TextView groupVolume;
             ImageView groupImage;
             TextView groupDeatilTv;
         }
         class ChildViewHolder{
             TextView childText;
+            TextView childPC;
+            TextView childWeight;
+            TextView childVolume;
             LinearLayout childLayout;
         }
     }
