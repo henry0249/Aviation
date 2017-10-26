@@ -87,7 +87,6 @@ public class DomImportDayCarrierActivity extends Activity implements View.OnClic
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
                                 String xmls = object.getProperty(0).toString();
-//                                Toast.makeText(IntImportDayCarrierActivity.this, xml, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(DomImportDayCarrierActivity.this, DomImportDayCarrierDetailActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("intimportdaydetailxml", xmls);

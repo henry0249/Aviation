@@ -76,6 +76,7 @@ public class AppEdeclareHomeActivity extends Activity {
         // 关闭上拉刷新
         pullRefreshLj.disableScroolUp();
 
+        // 初始化等待
         loadingDialog = new LoadingDialog(this);
         loadingDialog.show();
 

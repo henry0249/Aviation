@@ -95,8 +95,9 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
         edeclareMawbEt.setAdapter(arr_adapter);
         edeclareMawbEt.setDropDownHeight(500);
         edeclareMawbEt.setDropDownWidth(700);
+        edeclareMawbEt.setDropDownVerticalOffset(0);
         edeclareMawbEt.setThreshold(1);
-        edeclareMawbEt.setCompletionHint("最近的5条记录");
+        edeclareMawbEt.setCompletionHint("最近的搜索记录");
         edeclareMawbEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -152,7 +153,6 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
                             public void onSucess(Object result) {
                                 SoapObject object = (SoapObject) result;
                                 String edeclare = object.getProperty(0).toString();
-//                                Toast.makeText(AppEDeclareInfoSearchActivity.this, edeclare, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AppEDeclareInfoSearchActivity.this, AppEdeclareActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString(AviationCommons.EDECLARE_INFO, edeclare);
@@ -180,27 +180,31 @@ public class AppEDeclareInfoSearchActivity extends Activity implements View.OnCl
     }
 
     private String getXml(String mawb, String sffangxing) {
-        String xml = new String("<GJCCarrierReport>"
+        return "<GJCCarrierReport>"
                 + "<Mawb>" + mawb + "</Mawb>"
-                +"<RELStatus>" +sffangxing + "</RELStatus>"
-                + "</GJCCarrierReport>");
-        return xml;
+                + "<RELStatus>" + sffangxing + "</RELStatus>"
+                + "</GJCCarrierReport>";
     }
 
+    // 保存用户输入查询的数据信息
     public void save() {
         // 获取搜索框信息
-        String text = edeclareMawbEt.getText().toString();
+        String text = edeclareMawbEt.getText().toString().trim();
         SharedPreferences mysp = getSharedPreferences("search_history", 0);
         String old_text = mysp.getString("history", "");
 
         // 利用StringBuilder.append新增内容，逗号便于读取内容时用逗号拆分开
         StringBuilder builder = new StringBuilder(old_text);
-        builder.append(text + ",");
+
+        // 插入数据在最前面
+        builder.insert(0,text + ",");
 
         // 判断搜索内容是否已经存在于历史文件，已存在则不重复添加
         if (!old_text.contains(text + ",")) {
             SharedPreferences.Editor myeditor = mysp.edit();
             myeditor.putString("history", builder.toString());
+
+            // 提交保存数据
             myeditor.commit();
         }
 

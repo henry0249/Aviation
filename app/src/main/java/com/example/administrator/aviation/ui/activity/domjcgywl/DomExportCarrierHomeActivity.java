@@ -165,7 +165,6 @@ public class DomExportCarrierHomeActivity extends Activity {
 
     }
 
-
     private class IntDayAdapter extends BaseAdapter {
         private Context context;
         private List<IntExportCarrierInfo> intExportCarrierInfoList;

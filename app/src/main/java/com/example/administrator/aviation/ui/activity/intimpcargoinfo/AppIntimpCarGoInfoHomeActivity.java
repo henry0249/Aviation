@@ -112,6 +112,7 @@ public class AppIntimpCarGoInfoHomeActivity extends Activity implements View.OnC
 
         loadingDialog = new LoadingDialog(this);
 
+        // 获取当前时间
         currentTime = DateUtils.getTodayDateTime();
         xml = HttpPrepareImpCargoInfo.getImpCargoXml("", "",currentTime, currentTime);
 
@@ -147,7 +148,7 @@ public class AppIntimpCarGoInfoHomeActivity extends Activity implements View.OnC
         pullToRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("awbXml", xml);
                 params.put("ErrString", "");
                 HttpRoot.getInstance().requstAync(AppIntimpCarGoInfoHomeActivity.this, HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_NAME,
@@ -179,10 +180,9 @@ public class AppIntimpCarGoInfoHomeActivity extends Activity implements View.OnC
             }
         });
 
-
         // 首次进入页面加载数据
         loadingDialog.show();
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("awbXml", xml);
         params.put("ErrString", "");
         HttpRoot.getInstance().requstAync(AppIntimpCarGoInfoHomeActivity.this, HttpCommons.CGO_GET_INT_IMPORT_CARGO_INFOMATION_NAME,

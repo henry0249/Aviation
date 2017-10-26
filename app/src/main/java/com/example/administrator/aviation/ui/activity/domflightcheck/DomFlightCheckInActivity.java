@@ -83,7 +83,6 @@ public class DomFlightCheckInActivity extends Activity {
         setContentView(R.layout.activity_appdomflightcheck);
         ButterKnife.bind(this);
         initView();
-
     }
 
     private void initView() {
@@ -125,7 +124,7 @@ public class DomFlightCheckInActivity extends Activity {
                             public void onSucess(Object result) {
                                 SoapObject soapObject = (SoapObject) result;
 
-                                // 得到查询返回的xml数据
+                                // 得到查询返回的xml数据（a 代表返回的String型xml 信息）
                                 String a =  soapObject.getProperty(0).toString();
 
                                 // 解析得到的返回数据信息

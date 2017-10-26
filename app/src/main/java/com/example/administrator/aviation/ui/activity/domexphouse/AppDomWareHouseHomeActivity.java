@@ -57,7 +57,6 @@ public class AppDomWareHouseHomeActivity extends Activity {
     @BindView(R.id.refresh_apphouse)
     PullToRefreshView refreshApphouse;
 
-
     private List<WhsInfo> list;
     private HouseAdapter mHouseAdapter;
     private String currentTime;
@@ -122,7 +121,7 @@ public class AppDomWareHouseHomeActivity extends Activity {
                     }
                 });
 
-        // listView单机跳转到详情界面
+        // listView单击跳转到详情界面
         houseListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -239,6 +238,7 @@ public class AppDomWareHouseHomeActivity extends Activity {
                 viewHolder.opdateTv.setText("");
             }
 
+            // 奇偶显示不用颜色条
             if (position % 2 == 0) {
                 viewHolder.showLy.setBackgroundColor(Color.parseColor("#ffffff"));
             } else {

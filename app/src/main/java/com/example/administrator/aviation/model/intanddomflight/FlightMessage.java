@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * 航班动态数据
+ *
+ * 如果需要传递信息类，需要实现Serializable接口，并且传递的时候用putSerializable方法
  */
 
 public class FlightMessage implements Serializable{

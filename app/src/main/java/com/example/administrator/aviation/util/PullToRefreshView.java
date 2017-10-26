@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * 下拉刷新
+ * 下拉刷新（主要用于列表信息的下拉house数据重新加载）
  */
 
 public class PullToRefreshView extends LinearLayout{

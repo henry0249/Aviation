@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 
 /**
  * 获取更新信息主要是读取服务器上的.txt文件内容(此类获取更新信息)
- * 可删除
+ * 可删除（暂时没有使用到）
  */
 
 public class GetUpdateInfo {

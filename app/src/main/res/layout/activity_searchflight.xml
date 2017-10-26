@@ -37,23 +37,22 @@
 
                 <EditText
                     android:id="@+id/flight_timeet"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:layout_gravity="center"
-                    android:layout_weight="3"
                     android:layout_marginLeft="27dp"
                     android:hint="@string/riqi"
                     android:textSize="@dimen/house_size"/>
 
                 <ImageView
                     android:id="@+id/flightchosetime_btn"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="21dp"
-                    android:src="@drawable/xuanzeshijian1"
-                    android:layout_weight="1"/>
+                    android:layout_marginLeft="60dp"
+                    android:src="@drawable/xuanzeshijian1"/>
             </LinearLayout>
 
             <View

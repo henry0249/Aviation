@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * 自定义锁屏密码view
+ * （此类有待优化）
  */
 @SuppressLint({ "ClickableViewAccessibility", "DrawAllocation" })
 public class LockPatternView extends View{

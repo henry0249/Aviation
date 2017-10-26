@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 /**
  * 保存数据到sharedPreference
  *
- * 主要存储一些信息
+ * 主要存储一些信息（例如：自动登录 保存用户密码）
  */
 
 public class PreferenceUtils {

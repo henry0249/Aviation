@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.example.administrator.aviation.http.login.UserLogin;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.activity.SettingPasswordActivity;
-import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
@@ -97,6 +96,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         userBumenEt = (EditText) findViewById(R.id.user_bumen_et);
         userNameEt = (EditText) findViewById(R.id.userName_et);
         userPassEt = (EditText) findViewById(R.id.userPass_et);
+
+        // 测试（后期删除此方法跳转到新界面即即将开发的界面界面写好了，逻辑没写）
+//        TextView company_tv = (TextView) findViewById(R.id.company_tv);
+//        company_tv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this, DomCGSYSearchActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         // 设置输入字段变成大写
         userBumenEt.setTransformationMethod(new AllCapTransformationMethod());

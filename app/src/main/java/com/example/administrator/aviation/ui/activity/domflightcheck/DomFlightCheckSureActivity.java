@@ -139,8 +139,6 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                                 });
                     }
                 }
-
-
                 break;
 
             // 订舱取消
@@ -327,13 +325,10 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
         String pre = "<GNCAWBPlan>";
         String after ="</GNCAWBPlan>";
         String result = pre;
-
-
             result += "<FDate>"+fdate+"</FDate>"
                     +"<Fno>" + fno + "</Fno>"
                     + "<FlightChecked>"+isTrue+"</FlightChecked>"
                     +"<Mawb>" + flightPlanInfo.getMawb() + "</Mawb>";
-//        }
         result = result+after;
         return result;
     }

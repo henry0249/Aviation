@@ -1,7 +1,6 @@
 package com.example.administrator.aviation.ui.activity.domprepareawb;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -219,7 +217,6 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         goodsAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         goodsSpinner.setAdapter(goodsAdapter);
 
-
         // 下拉选择数据
         businessTypeSpinner = (Spinner) findViewById(R.id.update_awb_businesstype_spinner);
         businessTypeList = new ArrayList<>();
@@ -286,10 +283,6 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         allowTransNOTv.setText(allowTransNO);
         cIQNumber = mawbInfo.getMawbm().getCIQNumber();
         cIQNumberTv.setText(cIQNumber);
-        // 修改不赋值
-//        transportNOTv.setVisibility(View.GONE);
-//        allowTransNOTv.setVisibility(View.GONE);
-//        cIQNumberTv.setVisibility(View.GONE);
     }
 
     // 设置EditText不可编辑
@@ -463,6 +456,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
             }
         }
 
+        // 网络请求结束后，修改更新界面
         @Override
         protected void onPostExecute(String request) {
             if (request == null && !ErrString.equals("")) {

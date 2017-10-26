@@ -31,15 +31,16 @@ public class ApkDownService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        String apkUrl = intent.getStringExtra("apkUrl");
         HomeMessage homeMessage = new HomeMessage();
         String apkUrl = homeMessage.getAppconfig().getAPPURL();
+
+        // 注册广播通知
         registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         startDownload(apkUrl);
         return super.onStartCommand(intent, flags, startId);
     }
 
-
+    // 开始下载Apk
     public void startDownload(String apkUrl) {
         dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         if (!com.example.administrator.aviation.model.updateversion.StringUtils.isNetUrl(apkUrl)) {
@@ -55,6 +56,7 @@ public class ApkDownService extends Service {
         downloadId = dm.enqueue(request);
     }
 
+    // 广播
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
@@ -68,10 +70,12 @@ public class ApkDownService extends Service {
         }
     };
 
+    // 得到下载地址
     private String getFileName(String path) {
         return path.substring(path.lastIndexOf("/") + 1);
     }
 
+    // 自动安装已下载Apk
     private void installApk(File file, Context context) {
         Intent intent = new Intent();
         intent.setAction("android.intent.action.VIEW");
@@ -85,6 +89,8 @@ public class ApkDownService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        // 取消注册广播通知
         unregisterReceiver(receiver);
     }
 

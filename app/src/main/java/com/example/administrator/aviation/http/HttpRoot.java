@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.example.administrator.aviation.util.ToastUtils;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -51,7 +52,8 @@ public class HttpRoot {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, "请检查网络状态", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "请检查网络状态", Toast.LENGTH_SHORT).show();
+                                ToastUtils.showToast(context,"请检查网络状态",Toast.LENGTH_LONG);
                                 callBack.onError();
                             }
                         });
@@ -63,7 +65,8 @@ public class HttpRoot {
                                 @Override
                                 public void run() {
                                     if  (null != errString &&!errString.equals(""))
-                                        Toast.makeText(context, errString, Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(context, errString, Toast.LENGTH_LONG).show();
+                                    ToastUtils.showToast(context,errString,Toast.LENGTH_LONG);
                                     callBack.onFailed(errString);
                                 }
                             });

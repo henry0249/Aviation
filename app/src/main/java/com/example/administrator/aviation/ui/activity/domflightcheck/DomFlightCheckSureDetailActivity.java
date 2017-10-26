@@ -62,11 +62,13 @@ public class DomFlightCheckSureDetailActivity extends Activity {
         navBar.setTitle("订舱确定列表详情");
         navBar.hideRight();
 
+        // 获取上层界面传递过来的实体类
         flightAWBPlanInfo = (FlightAWBPlanInfo) getIntent().getSerializableExtra("checksure");
 
         setTextViewValue();
     }
 
+    // 给控件赋值
     private void setTextViewValue() {
         String mawb = flightAWBPlanInfo.getMawb();
         if (mawb != null && !mawb.equals("")) {

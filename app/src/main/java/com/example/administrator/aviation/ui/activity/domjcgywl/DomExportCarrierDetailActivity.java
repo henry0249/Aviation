@@ -2,7 +2,6 @@ package com.example.administrator.aviation.ui.activity.domjcgywl;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -106,7 +105,6 @@ public class DomExportCarrierDetailActivity extends Activity {
         } else if (type != null && type.equals("DAY")) {
             gnjcgTv.setText("航班日期");
         }
-
 
         new Thread() {
             @Override

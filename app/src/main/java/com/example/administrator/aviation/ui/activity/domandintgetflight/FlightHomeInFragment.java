@@ -52,6 +52,8 @@ public class FlightHomeInFragment extends Fragment {
     private  FlightInAdapter flightInAdapter;
 
     private List<FlightMessage> flightMessages;
+
+    // 初始化数据加载提示（即对话框）
     private LoadingDialog dialog;
 
     @Nullable
@@ -66,12 +68,16 @@ public class FlightHomeInFragment extends Fragment {
     private void initView() {
         // 关闭上拉加载
         flightInRefresh.disableScroolUp();
+
+        // 初始化提示框
         dialog = new LoadingDialog(getContext());
         String currentTime = DateUtils.getTodayDateTime();
         String xml = getXml(currentTime, "", "P", "D", "", "", "I");
         Map<String, String> params = new HashMap<>();
         params.put("fltXml", xml);
         params.put("ErrString", "");
+
+        // 显示提示框
         dialog.show();
         HttpRoot.getInstance().requstAync(getActivity(), HttpCommons.CGO_GET_FLIGHT_NAME, HttpCommons.CGO_GET_FLIGHT_ACTION, params,
                 new HttpRoot.CallBack() {
@@ -87,6 +93,7 @@ public class FlightHomeInFragment extends Fragment {
 
                     @Override
                     public void onFailed(String message) {
+                        // 隐藏提示框
                         dialog.dismiss();
                     }
 
@@ -98,6 +105,7 @@ public class FlightHomeInFragment extends Fragment {
                 });
 
 
+        // listView点击事件
         fragmentFlightInLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -109,7 +117,6 @@ public class FlightHomeInFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         // 下拉刷新
         flightInRefresh.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
@@ -146,8 +153,6 @@ public class FlightHomeInFragment extends Fragment {
             }
         });
     }
-
-
 
     private class FlightInAdapter extends BaseAdapter {
         private List<FlightMessage> list;

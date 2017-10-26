@@ -134,6 +134,8 @@ public class FlightHomeActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 FlightMessage flightMessage = (FlightMessage) flightAdapter.getItem(position);
                 Intent intent = new Intent(FlightHomeActivity.this, FlightDetailActivity.class);
+
+                // 传递详细数据类给FlightDetailActivity 界面
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(AviationCommons.FLIGHT_DETAIL, flightMessage);
                 intent.putExtras(bundle);

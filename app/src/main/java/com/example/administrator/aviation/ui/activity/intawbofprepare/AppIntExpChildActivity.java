@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -90,6 +89,8 @@ public class AppIntExpChildActivity extends Activity implements View.OnClickList
         weightEt = (EditText) findViewById(R.id.weight_int_child_tv);
         volumeEt = (EditText) findViewById(R.id.volume_int_child_tv);
         goodsEt = (EditText) findViewById(R.id.goods_int_child_tv);
+
+        // 将输入框值显示成大写
         goodsEt.setTransformationMethod(new AllCapTransformationMethod());
         goodsCNEt = (EditText) findViewById(R.id.goodscn_int_child_tv);
         mftstatusEt = (EditText) findViewById(R.id.mftstatus_int_child_tv);
@@ -108,14 +109,17 @@ public class AppIntExpChildActivity extends Activity implements View.OnClickList
         sureBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
 
+        // 得到上个界面返回的数据信息
         hawb = (Hawb) getIntent().getSerializableExtra(AviationCommons.INT_CHILD_INFO);
         mawb = getIntent().getStringExtra(AviationCommons.INT_GROUP_MAWB);
 
         mawbId = getIntent().getStringExtra("mawbId");
         hawbId = hawb.getHawbID();
 
+        // 设置输入框不可编辑
         setEditTextInvisible();
     }
+
     // 给EditText赋值
     private void setChildEdiText() {
         hno = hawb.getHno();

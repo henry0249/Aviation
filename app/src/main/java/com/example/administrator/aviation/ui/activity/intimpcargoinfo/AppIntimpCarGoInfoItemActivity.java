@@ -23,11 +23,9 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
-import com.example.administrator.aviation.http.getintexportonekeydeclare.HttpCGOExportOneKeyDeclare;
 import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImpCargoShenBao;
 import com.example.administrator.aviation.model.intimpcargoinfo.CargoInfoMessage;
 import com.example.administrator.aviation.model.intimpcargoinfo.PrepareCargoInfoMessage;
-import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -87,7 +85,6 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
         cargoInfoMessageList = new ArrayList<>();
     }
 
-
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.setTitle("进港货站信息列表");
@@ -110,8 +107,6 @@ public class AppIntimpCarGoInfoItemActivity extends Activity implements View.OnC
 
         pullToRefreshView = (PullToRefreshView) findViewById(R.id.go_refresh);
         pullToRefreshView.disableScroolUp();
-
-
 
         // 进港货站信息列表进入详情页
         impCarGoLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -75,7 +75,6 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
         }
     }
 
-
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.showRight();

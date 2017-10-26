@@ -63,14 +63,18 @@ public class FlightDetailActivity extends Activity {
         initView();
     }
 
+    // 初始化activity
     private void initView() {
         NavBar navBar = new NavBar(this);
         navBar.setTitle("航班动态详情");
         navBar.hideRight();
+
+        // 得到界面传递过来的值
         flightMessage = (FlightMessage) getIntent().getSerializableExtra(AviationCommons.FLIGHT_DETAIL);
         setText();
     }
 
+    // 给控件赋值
     private void setText() {
         flightDate.setText(flightMessage.getfDate());
         flightFno.setText(flightMessage.getFno());

@@ -37,8 +37,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.administrator.aviation.R.id.progressBar;
-
 /**
  * 国际货代联检查询
  */
@@ -177,7 +175,6 @@ public class AppIntDeclareInfoHomeActivity extends Activity {
         });
 
     }
-
 
     private class DeclareInfoAdapter extends BaseAdapter {
         private Context context;

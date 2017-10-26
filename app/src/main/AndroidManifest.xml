@@ -383,6 +383,12 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
 
+        <!--国内收运-->
+        <activity android:name=".ui.activity.domcgsy.DomCGSYSearchActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

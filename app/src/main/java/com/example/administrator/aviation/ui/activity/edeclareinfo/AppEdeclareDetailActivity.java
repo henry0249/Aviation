@@ -64,9 +64,12 @@ public class AppEdeclareDetailActivity extends Activity {
         navBar.setTitle("联检状态列表详情");
         navBar.hideRight();
 
+        // 得到上层界面返回值
         edeclareInfo = (EdeclareInfo) getIntent().getSerializableExtra("edeclareInfo");
         setText();
     }
+
+    // 给控件赋值
     private void setText() {
         edeclareinfoMawbDetailTv.setText(edeclareInfo.getMawb());
         edeclareinfoCarrierDetailTv.setText(edeclareInfo.getCarrier());

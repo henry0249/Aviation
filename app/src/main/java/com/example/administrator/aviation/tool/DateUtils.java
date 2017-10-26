@@ -10,6 +10,7 @@ import java.util.Locale;
 /**
  * 时间转换工具类
  * 用于转换时间信息
+ * （用于将服务器的日期格式转化为自己需要的格式）
  */
 
 public class DateUtils {

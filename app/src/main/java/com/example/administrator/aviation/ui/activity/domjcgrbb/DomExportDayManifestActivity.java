@@ -35,8 +35,6 @@ import butterknife.ButterKnife;
  */
 
 public class DomExportDayManifestActivity extends Activity {
-
-
     @BindView(R.id.int_edeclare_nodata_tv)
     TextView intEdeclareNodataTv;
     @BindView(R.id.edeclare_lv)
@@ -123,7 +121,7 @@ public class DomExportDayManifestActivity extends Activity {
                 + "</GNCCarrierReport>";
     }
 
-    // 出港舱单的adpter
+    // 出港舱单的Adapter
     private class IntEManifestAdapter extends BaseAdapter {
         private Context context;
         private List<IntExportDayManifestInfo> intExportDayManifestInfoList;

@@ -67,11 +67,9 @@ public class AppIntimpCargoInfoActivity extends Activity implements View.OnClick
     @Override
     protected void onPause() {
         super.onPause();
-//        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
-//            task.cancel(true);
-//        }
     }
 
+    // activity销毁做的处理
     @Override
     protected void onDestroy() {
         if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {

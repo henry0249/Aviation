@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.ui.base.NavBar;
@@ -18,6 +17,8 @@ import butterknife.ButterKnife;
 
 /**
  * 航班动态查询首次进入界面
+ *
+ * ButterKnife（快速注解组件名）
  */
 
 public class FlightHomeDetailActivity extends FragmentActivity implements View.OnClickListener{

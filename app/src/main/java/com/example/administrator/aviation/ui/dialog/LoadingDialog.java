@@ -7,7 +7,10 @@ import android.text.TextUtils;
 import android.widget.TextView;
  import com.example.administrator.aviation.R;
 
-
+/**
+ * 公用自定义控件
+ *  自定义dialog 用于加载数据等待
+ */
 public class LoadingDialog extends Dialog {
     TextView tvMessage;
     private String message;
@@ -24,6 +27,7 @@ public class LoadingDialog extends Dialog {
         tvMessage = (TextView) findViewById(R.id.tv_message);
     }
 
+    // 显示提示框
     @Override
     public void show() {
         if (tvMessage != null && !TextUtils.isEmpty(message)) {
@@ -41,6 +45,7 @@ public class LoadingDialog extends Dialog {
         tvMessage.postInvalidate();
     }
 
+    // 设置提示信息
     public void setMessage(String message) {
         this.message = message;
     }

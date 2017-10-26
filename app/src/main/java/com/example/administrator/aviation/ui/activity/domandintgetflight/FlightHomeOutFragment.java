@@ -154,8 +154,6 @@ public class FlightHomeOutFragment extends Fragment {
         });
     }
 
-
-
     private class FlightOutAdapter extends BaseAdapter {
         private List<FlightMessage> list;
         private Context context;
@@ -182,6 +180,7 @@ public class FlightHomeOutFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
+            // 优化adapter渲染速度
             ViewHolder viewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.flight_out_item, viewGroup, false);

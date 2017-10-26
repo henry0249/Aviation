@@ -42,6 +42,7 @@ public class AppDomExpWareHouseDetailActivity extends Activity{
         navBar.hideRight();
         navBar.setTitle("国内出港入库列表详情");
 
+        // 初始化组件
         mawbTv = (TextView) findViewById(R.id.house_mawb_detail_tv);
         awbPcTv = (TextView) findViewById(R.id.house_awb_pc_detail_tv);
         pcTv = (TextView) findViewById(R.id.house_pc_detail_tv);

@@ -82,7 +82,7 @@ public class DomExportDayCarrierHomeActivity extends Activity {
             }
         });
 
-        // 隐藏pb和没有数据信息
+        // 隐藏progressBar和没有数据信息
         intEdeclareNodataTv.setVisibility(View.GONE);
         edeclarePb.setVisibility(View.GONE);
 
@@ -160,6 +160,8 @@ public class DomExportDayCarrierHomeActivity extends Activity {
                                 } else {
                                     intEdeclareNodataTv.setVisibility(View.VISIBLE);
                                 }
+
+                                // 关闭下拉刷新
                                 jcgRefresh.onHeaderRefreshComplete();
 
                             }

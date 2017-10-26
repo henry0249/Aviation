@@ -70,7 +70,6 @@ public class AppIntimpCarGoInfoItemDetailActivity extends Activity implements Vi
     private String volume;
     private String goods;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

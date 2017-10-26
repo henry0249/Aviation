@@ -174,7 +174,6 @@ public class IntExportDayCarrierHomeActivity extends Activity {
         });
     }
 
-
     private class ExportDayAdapter extends BaseAdapter {
         private Context context;
         private List<IntExportDayInfo> intExportDayInfoList;

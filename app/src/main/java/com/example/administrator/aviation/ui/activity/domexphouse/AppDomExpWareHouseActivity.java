@@ -18,6 +18,7 @@ import com.example.administrator.aviation.tool.DateUtils;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.example.administrator.aviation.util.ToastUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -127,7 +128,7 @@ public class AppDomExpWareHouseActivity extends Activity implements View.OnClick
                     e.printStackTrace();
                 }
                 if (countTime > 3) {
-                    Toast.makeText(AppDomExpWareHouseActivity.this, "查询日期不能超过3天", Toast.LENGTH_LONG).show();
+                    ToastUtils.showToast(AppDomExpWareHouseActivity.this, "查询日期不能超过3天", Toast.LENGTH_LONG);
                     wareHousePb.setVisibility(View.GONE);
                 } else {
                     xml = HttpPrepareHouse.getHouseXml(mawb, begainTime, endTime, updest);

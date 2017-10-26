@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
@@ -18,13 +15,9 @@ import com.example.administrator.aviation.http.getintimpcargoinfo.HttpPrepareImp
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
-import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
 import org.ksoap2.serialization.SoapObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 进港货站信息新增分单界面
@@ -100,6 +93,7 @@ public class AppIntimpCargoInfoAddActivity extends Activity implements View.OnCl
 
     }
 
+    // 给输入框赋值
     private void getEditText() {
         hno = hnoEt.getText().toString().trim();
         pc = pcEt.getText().toString().trim();

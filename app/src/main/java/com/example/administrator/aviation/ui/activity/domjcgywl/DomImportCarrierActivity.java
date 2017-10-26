@@ -17,7 +17,6 @@ import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.tool.DateUtils;
-import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierDetailActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
@@ -164,6 +163,7 @@ public class DomImportCarrierActivity extends Activity implements View.OnClickLi
         }
     }
 
+    // 得到输入框值
     private void getEditText() {
         reportType = exportCarrierEt.getText().toString().trim();
         reportType = AviationNoteConvert.cNtoEn(reportType);

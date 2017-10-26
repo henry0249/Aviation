@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getIntdeclareinfo.HttpIntDeclareInfo;
 import com.example.administrator.aviation.tool.DateUtils;
-import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAwbHouseItemActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
@@ -64,9 +63,6 @@ public class AppIntDeclareInfoSearchActivity extends Activity implements View.On
     @Override
     protected void onPause() {
         super.onPause();
-//        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
-//            task.cancel(true);
-//        }
     }
 
     @Override
@@ -141,6 +137,7 @@ public class AppIntDeclareInfoSearchActivity extends Activity implements View.On
 
     }
 
+    // 给控件赋值
     private void getEditext() throws ParseException {
         mawb = mawbEt.getText().toString().trim();
         begainTime = startTimeEt.getText().toString().trim();
@@ -187,8 +184,6 @@ public class AppIntDeclareInfoSearchActivity extends Activity implements View.On
                 intent.putExtras(bundle);
                 intent.putExtra("xml", xml);
                 startActivity(intent);
-                // 上传成功后finish掉当前的activity
-//                finish();
                 progressBar.setVisibility(View.GONE);
             }
             super.onPostExecute(request);

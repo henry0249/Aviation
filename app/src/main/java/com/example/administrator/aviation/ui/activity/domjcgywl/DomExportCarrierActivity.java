@@ -158,6 +158,7 @@ public class DomExportCarrierActivity extends Activity implements View.OnClickLi
         }
     }
 
+    // 得到控件输入框值
     private void getEditText() {
         reportType = exportCarrierEt.getText().toString().trim();
         reportType = AviationNoteConvert.cNtoEn(reportType);

@@ -94,6 +94,7 @@ public class DomImportDayCarrierDetailActivity extends Activity {
         xml = getIntent().getStringExtra("intimportdaydetailxml");
         refreshXml = getIntent().getStringExtra("xml");
 
+        // 设置控件不可以上拉
         jcgRefresh.disableScroolUp();
 
         new Thread() {

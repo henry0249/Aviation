@@ -3,7 +3,6 @@ package com.example.administrator.aviation.ui.activity.domflightcheck;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
@@ -108,6 +106,8 @@ public class DomFlightCheckInSearchActivity extends Activity implements View.OnC
                             @Override
                             public void onSucess(Object result) {
                                 SoapObject soapObject = (SoapObject) result;
+
+                                // 获取返回的xml信息
                                 String a =  soapObject.getProperty(0).toString();
                                 Intent intent = new Intent(DomFlightCheckInSearchActivity.this, DomFlightCheckInActivity.class);
                                 Bundle bundle = new Bundle();

@@ -9,6 +9,7 @@ import com.example.administrator.aviation.LoginActivity;
 import com.example.administrator.aviation.ui.activity.UserHomePageActivity;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.example.administrator.aviation.util.ToastUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -65,9 +66,11 @@ public class UserLogin extends AsyncTask<Object, Object, String> {
             ((LoginActivity)activity).dismissProgressBar();
         }
         if (!ErrString.equals("anyType{}") ) {
-            Toast.makeText(activity, ErrString, Toast.LENGTH_LONG).show();
+//            Toast.makeText(activity, ErrString, Toast.LENGTH_LONG).show();
+            ToastUtils.showToast(activity, ErrString, Toast.LENGTH_LONG);
         } else if ( request.equals("anyType{}")) {
-            Toast.makeText(activity, ErrString, Toast.LENGTH_LONG).show();
+//            Toast.makeText(activity, ErrString, Toast.LENGTH_LONG).show();
+            ToastUtils.showToast(activity, ErrString, Toast.LENGTH_LONG);
         }  else {
             PreferenceUtils.saveUser(activity, userBumen, userName, userPass);
             PreferenceUtils.saveIsFirst(activity);

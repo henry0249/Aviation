@@ -51,7 +51,6 @@ public class DomFlightInHomeActivity extends Activity {
 
     private String xml;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +159,7 @@ public class DomFlightInHomeActivity extends Activity {
 
     }
 
+    // 数据适配器
     private class MyFlightInHomeAdapter extends BaseAdapter{
         private List<FlightCheckInfo> flightCheckInfoList;
         private Context context;

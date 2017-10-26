@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
@@ -39,6 +38,7 @@ import butterknife.ButterKnife;
  */
 
 public class FlightActivity extends Activity implements View.OnClickListener{
+    // 快速注解组件
     @BindView(R.id.flight_timeet)
     EditText flightTimeEt;
     @BindView(R.id.flightchosetime_btn)
@@ -102,6 +102,7 @@ public class FlightActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
+        // 每个页面的导航栏
         NavBar navBar = new NavBar(this);
         navBar.setTitle("航班动态查询");
         navBar.hideRight();
@@ -118,7 +119,6 @@ public class FlightActivity extends Activity implements View.OnClickListener{
         // 给默认值
         currentTime = DateUtils.getTodayDateTime();
         flightTimeEt.setText(currentTime);
-
 
         flighthangbanleixingSpList = new ArrayList<>();
 
@@ -178,10 +178,6 @@ public class FlightActivity extends Activity implements View.OnClickListener{
 
             }
         });
-//
-//        flightHangbanleixingEt.setText("客机");
-//        flightQuyuleixingEt.setText("国内");
-//        flightJinchuganget.setText("出港");
 
     }
 
@@ -220,9 +216,6 @@ public class FlightActivity extends Activity implements View.OnClickListener{
             case R.id.flight_search_btn:
                 flightPb.setVisibility(View.VISIBLE);
                 getEditTextValues();
-//                if (hbHao.equals("")) {
-//                    Toast.makeText(FlightActivity.this, "请输入航班号", Toast.LENGTH_SHORT).show();
-//                } else {
                     final String xml = getXml(hbTime,hbHao, hbLexing, qyLexing, qyGang, mdGang, jcgLexing);
                     Map<String, String> params = new HashMap<>();
                     params.put("fltXml", xml);
@@ -233,7 +226,6 @@ public class FlightActivity extends Activity implements View.OnClickListener{
                                 public void onSucess(Object result) {
                                     SoapObject object = (SoapObject) result;
                                     String a = object.getProperty(0).toString();
-//                                    Toast.makeText(FlightActivity.this, a, Toast.LENGTH_SHORT).show();
                                     flightPb.setVisibility(View.GONE);
                                     Intent intent = new Intent(FlightActivity.this, FlightHomeActivity.class);
                                     Bundle bundle = new Bundle();
@@ -254,7 +246,6 @@ public class FlightActivity extends Activity implements View.OnClickListener{
                                     flightPb.setVisibility(View.GONE);
                                 }
                             });
-//                }
                 break;
 
             default:
@@ -262,6 +253,7 @@ public class FlightActivity extends Activity implements View.OnClickListener{
         }
     }
 
+    // 拼接xml(用于更新后台数据)
     private String getXml(String riqi, String hangbhao, String hangbanleixing, String quyuleixing,
                           String qiyungang, String mudigang, String jinchugangleixing) {
         String xml = new String("<FLTFlight>"

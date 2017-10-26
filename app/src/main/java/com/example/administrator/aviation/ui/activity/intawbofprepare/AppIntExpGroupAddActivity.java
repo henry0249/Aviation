@@ -12,15 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.getIntawbofprepare.HttpIntMawbAdd;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
-import com.example.administrator.aviation.ui.activity.domprepareawb.AwbAddActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
@@ -344,6 +341,7 @@ public class AppIntExpGroupAddActivity extends Activity implements View.OnClickL
                 new AddGroupAsyncTask().execute();
                 break;
 
+            // 选择日期点击事件
             case R.id.int_group_date_chose_btn:
                 choseTimeMethod.getCurrentTime(AppIntExpGroupAddActivity.this, fDateEt);
                 break;
