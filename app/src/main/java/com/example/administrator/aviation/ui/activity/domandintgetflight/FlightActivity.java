@@ -38,7 +38,6 @@ import butterknife.ButterKnife;
  */
 
 public class FlightActivity extends Activity implements View.OnClickListener{
-
     // 快速注解组件
     @BindView(R.id.flight_timeet)
     EditText flightTimeEt;
