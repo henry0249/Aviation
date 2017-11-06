@@ -130,6 +130,7 @@ public class AppIntSplitSubLineArrivalActivity extends Activity implements View.
         }
     }
 
+    //直线拆分
     private void getEditText() {
         pcOne = pcOneEt.getText().toString().trim();
         if (!pcOne.equals("") ) {
