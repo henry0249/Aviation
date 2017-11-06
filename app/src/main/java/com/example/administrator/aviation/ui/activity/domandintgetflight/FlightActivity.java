@@ -37,8 +37,6 @@ import butterknife.ButterKnife;
  * 航班动态查询界面
  */
 
-//啦啦啦
-
 public class FlightActivity extends Activity implements View.OnClickListener{
     // 快速注解组件
     @BindView(R.id.flight_timeet)
