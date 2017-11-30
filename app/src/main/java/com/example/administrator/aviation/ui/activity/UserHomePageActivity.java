@@ -67,8 +67,8 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
     private List<HomeMessage> list;
 
     // 4个Fragment
-    private Fragment homePageFragment;
-    private Fragment personFragment;
+    private HomePageFragment homePageFragment;
+    private PersonFragment personFragment;
 
     // 定义一个标识来判断是否退出
     private static boolean isExit = false;

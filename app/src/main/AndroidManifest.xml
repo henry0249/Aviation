@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.aviation">
 
-    <!--权限的添加-->
+    <!-- 权限的添加 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logion"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -18,74 +18,73 @@
             android:name=".LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.activity.ChangePassActivity"
+        <activity
+            android:name=".ui.activity.ChangePassActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.UserHomePageActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.VersionUpdateActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SettingPasswordActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.ResetPasswordActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.domprepareawb.AppDomExpPrePareAWBActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.domprepareawb.AwbDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.domprepareawb.AwbAddActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <!--国内出港入库列表-->
-        <activity android:name=".ui.activity.domexphouse.AppDomWareHouseHomeActivity"
+        <!-- 国内出港入库列表 -->
+        <activity
+            android:name=".ui.activity.domexphouse.AppDomWareHouseHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domexphouse.AppDomExpWareHouseActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domexphouse.AppDomExpWareHouseActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.domexphouse.AppDomExpWareHouseItemActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.domexphouse.AppDomExpWareHouseDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity"
             android:launchMode="singleTask"
@@ -93,302 +92,351 @@
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpGroupActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpGroupAddActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpChildActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intawbofprepare.AppIntExpChildAddActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <!--国际货代出港入库信息-->
-        <activity android:name=".ui.activity.intexpawbhousemanage.AppIntExpAwbHouseHomeActivity"
+        <!-- 国际货代出港入库信息 -->
+        <activity
+            android:name=".ui.activity.intexpawbhousemanage.AppIntExpAwbHouseHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intexpawbhousemanage.AppIntExpAwbHouseItemActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <!--预配与运抵界面-->
-        <activity android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclarelHomeActivity"
+        <!-- 预配与运抵界面 -->
+        <activity
+            android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclarelHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intexponekeydeclare.AppIntOneKeyDeclareItemDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".ui.activity.intexponekeydeclare.AppIntSplitSubLineArrivalActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <!--国际货代联检状态-->
-        <activity android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoHomeActivity"
+        <!-- 国际货代联检状态 -->
+        <activity
+            android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoHomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoItemActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoItemDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoHomeActivity"
+        <!-- 进港货站信息新增界面 -->
+        <activity
+            android:name=".ui.activity.intimpcargoinfo.AppIntimpCargoInfoAddActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoActivity"
+        <!-- 航班动态 -->
+        <activity
+            android:name=".ui.activity.domandintgetflight.FlightHomeDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domandintgetflight.FlightActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domandintgetflight.FlightHomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domandintgetflight.FlightDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".ui.activity.intdeclareinfo.AppIntDeclareInfoDetailActivity"
+        <!-- 联检状态国际承运人 -->
+        <activity
+            android:name=".ui.activity.edeclareinfo.AppEdeclareHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.edeclareinfo.AppEdeclareActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.edeclareinfo.AppEdeclareDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoItemActivity"
+        <!-- 国际承运人进出港业务量 -->
+        <activity
+            android:name=".ui.activity.intjcgywl.IntExportCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgywl.IntExportCarrierActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgywl.IntExportCarrierDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgywl.IntImportCarrierHomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgywl.IntImportCarrierActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgywl.IntImportCarrierDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCarGoInfoItemDetailActivity"
+        <!-- 国际进出港日报表 -->
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntExportDayCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
-        <!--进港货站信息新增界面-->
-        <activity android:name=".ui.activity.intimpcargoinfo.AppIntimpCargoInfoAddActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntExportDayCarrierActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
-        <!--航班动态-->
-        <activity android:name=".ui.activity.domandintgetflight.FlightHomeDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntExportDayCarrierDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.domandintgetflight.FlightActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntExportDayManifestActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domandintgetflight.FlightHomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntImportDayCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domandintgetflight.FlightDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntImportDayCarrierActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
-        <!--联检状态国际承运人-->
-        <activity android:name=".ui.activity.edeclareinfo.AppEdeclareHomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntImportDayCarrierDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.intjcgrbb.IntImportDayManifestActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.edeclareinfo.AppEdeclareActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.edeclareinfo.AppEdeclareDetailActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
-        <!--国际承运人进出港业务量-->
-        <activity android:name=".ui.activity.intjcgywl.IntExportCarrierHomeActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgywl.IntExportCarrierActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgywl.IntExportCarrierDetailActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgywl.IntImportCarrierHomeActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.intjcgywl.IntImportCarrierActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgywl.IntImportCarrierDetailActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
-        <!--国际进出港日报表-->
-        <activity android:name=".ui.activity.intjcgrbb.IntExportDayCarrierHomeActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgrbb.IntExportDayCarrierActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgrbb.IntExportDayCarrierDetailActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgrbb.IntExportDayManifestActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgrbb.IntImportDayCarrierHomeActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgrbb.IntImportDayCarrierActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.intjcgrbb.IntImportDayCarrierDetailActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.intjcgrbb.IntImportDayManifestActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         // 国内承运人进出港
-        <activity android:name=".ui.activity.domjcgywl.DomExportCarrierHomeActivity"
+        <activity
+            android:name=".ui.activity.domjcgywl.DomExportCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgywl.DomExportCarrierActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgywl.DomExportCarrierActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgywl.DomExportCarrierDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgywl.DomExportCarrierDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgywl.DomImportCarrierHomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgywl.DomImportCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgywl.DomImportCarrierActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgywl.DomImportCarrierActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgywl.DomImportCarrierDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgywl.DomImportCarrierDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         // 国内出港日报表
-        <activity android:name=".ui.activity.domjcgrbb.DomExportDayCarrierHomeActivity"
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomExportDayCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgrbb.DomExportDayCarrierActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomExportDayCarrierActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgrbb.DomExportDayCarrierDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomExportDayCarrierDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgrbb.DomExportDayManifestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomExportDayManifestActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         // 国内进港日报表
-        <activity android:name=".ui.activity.domjcgrbb.DomImportDayCarrierHomeActivity"
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomImportDayCarrierHomeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgrbb.DomImportDayCarrierActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomImportDayCarrierActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgrbb.DomImportDayCarrierDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomImportDayCarrierDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domjcgrbb.DomImportDayManifestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domjcgrbb.DomImportDayManifestActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         // 国内订舱计划查询
-        <activity android:name=".ui.activity.domflightcheck.DomFlightCheckInSearchActivity"
+        <activity
+            android:name=".ui.activity.domflightcheck.DomFlightCheckInSearchActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domflightcheck.DomFlightCheckInActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domflightcheck.DomFlightCheckInActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domflightcheck.DomFlightCheckInDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domflightcheck.DomFlightCheckInDetailActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domflightcheck.DomFlightCheckSureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domflightcheck.DomFlightCheckSureDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.domflightcheck.DomFlightInHomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".ui.activity.domflightcheck.DomFlightCheckSureActivity"
+        <!-- 国内收运 -->
+        <activity
+            android:name=".ui.activity.domcgsy.DomCGSYSearchActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domflightcheck.DomFlightCheckSureDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.cgo.domestic.expULDLoading"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.domflightcheck.DomFlightInHomeActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
 
-        <!--国内收运-->
-        <activity android:name=".ui.activity.domcgsy.DomCGSYSearchActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait"/>
-
+        </activity>
     </application>
 
 </manifest>

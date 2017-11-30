@@ -73,6 +73,14 @@ public class AviationCommons {
     public static final String APP_DomImportDayReportOfCarrier = "appDomImportDayReportOfCarrier";
     public static final String APP_DomImportReportOfCarrier = "appDomImportReportOfCarrier";
 
+    //货运 国内出港
+    //国内出港收运
+    public static final String APP_CGO_Dom_Exp_CheckIn = "appCGODomExpCheckIn";
+    //国内出港复磅
+    public static final String APP_CGO_Dom_Exp_ReWeight = "appCGODomExpReWeight";
+    //国内出港理货
+    public static final String APP_CGO_Dom_Exp_ULDLoading = "appCGODomExpULDLoading";
+
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int FLIGHT_REFERCH = 0x222;

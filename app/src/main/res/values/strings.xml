@@ -157,7 +157,7 @@
     <string name="shouhuoguojia">请输入收货国家</string>
     <string name="shouhuochengshi">请输入收货城市</string>
     <string name="huozhi">请输入货值</string>
-    
+
     <!--运抵与申报界面-->
     <string name="declare_rearchid">运抵编号:</string>
     <string name="declare_new_rearchid">新运抵编号</string>
@@ -178,7 +178,7 @@
     <string name="declare_zhiling">指令</string>
     <string name="splite_sure">确定</string>
     <string name="splite_update">修改</string>
-    
+
     <!--联检申报-->
     <string name="declareshanjianhao">商检号:</string>
     <string name="shanjianzhiling">商检指令:</string>
@@ -212,7 +212,7 @@
 
     <string name="xiugaifendan">修改分单</string>
     <string name="shanchufendan">删除分单</string>
-    
+
     <!--航班动态-->
     <string name="impjingtinggang">经停港:</string>
     <string name="impleixing">类型:</string>
@@ -227,7 +227,7 @@
     <string name="impzhuangtai">状态:</string>
     <string name="imphangzhanlou">航站楼:</string>
     <string name="impyanwuyuanyi">延误原因:</string>
-    
+
     <!--航班动态-->
     <string name="flight_date">航班日期:</string>
     <string name="flight_hangbanhao">航班号:</string>

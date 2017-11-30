@@ -97,16 +97,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         userNameEt = (EditText) findViewById(R.id.userName_et);
         userPassEt = (EditText) findViewById(R.id.userPass_et);
 
-        // 测试（后期删除此方法跳转到新界面即即将开发的界面界面写好了，逻辑没写）
-//        TextView company_tv = (TextView) findViewById(R.id.company_tv);
-//        company_tv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, DomCGSYSearchActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         // 设置输入字段变成大写
         userBumenEt.setTransformationMethod(new AllCapTransformationMethod());
         userNameEt.setTransformationMethod(new AllCapTransformationMethod());

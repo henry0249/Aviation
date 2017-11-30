@@ -52,6 +52,7 @@ import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrier
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
@@ -154,6 +155,12 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.gnjgrbb);
                 } else if (obj.getName().equals(AviationCommons.APP_DomImportReportOfCarrier)) {
                     holder.setImageResource(R.id.image_iv, R.drawable.gnjgywl);
+                }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_CheckIn)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.app_cgo_dom_exp_checkin);
+                }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_ReWeight)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.app_cgo_dom_exp_reweight);
+                }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_ULDLoading)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.app_cgo_dom_exp_uldloading);
                 }
                 Log.d("guoji", obj.getName());
                 holder.setText(R.id.image_tv, obj.getNameCN());
@@ -225,7 +232,10 @@ public class HomePageFragment extends Fragment{
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_DomExport0FlightPlanChecked)) {
                     Intent intentDomRDI = new Intent(getActivity(), DomFlightInHomeActivity.class);
                     startActivity(intentDomRDI);
-                } else {
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_ULDLoading)) {
+                    Intent CgoDomExpULDLoading = new Intent(getActivity(), expULDLoading.class);
+                    startActivity(CgoDomExpULDLoading);
+                }else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
             }
