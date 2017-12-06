@@ -41,7 +41,8 @@
                         android:id="@+id/uldloading_edtTxt_PinBanHao_one"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:inputType="number"/>
 
                     <ImageView
                         android:id="@+id/uldloading_Img_SaoMa"
@@ -80,6 +81,16 @@
                         android:textColor="#ffffff"
                         android:textSize="18sp" />
 
+                    <Button
+                        android:id="@+id/uldloading_Btn_QinKong"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_selector"
+                        android:text="清空"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -96,25 +107,21 @@
                         android:text="ULD编号:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_uldBianHao"
+                    <TextView
+                        android:id="@+id/uldloading_tv_uldBianHao"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="27dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="15dp"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@drawable/selector_sinner"
                         android:hint="请选择ULD编号"
-
+                        android:gravity="left|center"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingLeft="5dp"
                         android:textSize="@dimen/house_size" />
-
-                    <ImageView
-                        android:id="@+id/uldloading_Img_XiaLaXuanZe"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/xiala_two" />
                 </LinearLayout>
 
                 <View
@@ -136,14 +143,16 @@
                         android:text="自重:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_ZiZhong"
+                    <TextView
+                        android:id="@+id/uldloading_tv_ZiZhong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                     <TextView
@@ -155,15 +164,17 @@
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_JinZhong"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/uldloading_tv_JinZhong"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                 </LinearLayout>
@@ -181,14 +192,16 @@
                         android:text="货重:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_HuoZhong"
+                    <TextView
+                        android:id="@+id/uldloading_tv_HuoZhong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                     <TextView
@@ -200,15 +213,17 @@
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_TiJi"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/uldloading_tv_TiJi"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                 </LinearLayout>
@@ -227,14 +242,16 @@
                         android:text="件数:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_JianShu"
+                    <TextView
+                        android:id="@+id/uldloading_tv_JianShu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                     <TextView
@@ -246,15 +263,17 @@
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_LeiXin"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/uldloading_tv_LeiXin"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                 </LinearLayout>
@@ -269,17 +288,19 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
-                        android:text="配载:"
+                        android:text="状态:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_PeiZai"
+                    <TextView
+                        android:id="@+id/uldloading_tv_PeiZai"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                     <TextView
@@ -287,19 +308,21 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
-                        android:text="复磅:"
+                        android:text="优先级:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_FuBang"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/uldloading_tv_YouXianJi"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="1"
+                        android:layout_weight="0.85"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
                 </LinearLayout>
 
@@ -316,8 +339,8 @@
                         android:text="航班:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_HangBanHao"
+                    <TextView
+                        android:id="@+id/uldloading_tv_HangBanHao"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -335,8 +358,8 @@
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_MuDinGang"
+                    <TextView
+                        android:id="@+id/uldloading_tv_MuDinGang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -360,14 +383,16 @@
                         android:text="日期:"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_RiQi"
+                    <TextView
+                        android:id="@+id/uldloading_tv_RiQi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
 
                     <TextView
@@ -379,8 +404,8 @@
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <EditText
-                        android:id="@+id/uldloading_edtTxt_ChenYunRen"
+                    <TextView
+                        android:id="@+id/uldloading_tv_ChenYunRen"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -388,11 +413,13 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="0.85"
                         android:background="#ffffff"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:textSize="@dimen/house_size" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/xinzenjiemian"
+                    android:id="@+id/uldloading_linLay_XinZenSheBei"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -435,6 +462,8 @@
                             android:layout_marginLeft="12dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
+                            android:inputType="text|number"
+                            android:maxLines="1"
                             android:textSize="@dimen/house_size" />
 
                         <TextView
@@ -480,8 +509,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="12dp"
-                            android:layout_weight="1"
+                            android:layout_weight="0.9"
                             android:background="#ffffff"
+                            android:inputType="text"
+                            android:maxLines="1"
                             android:textSize="@dimen/house_size" />
 
                         <TextView
@@ -502,6 +533,8 @@
                             android:layout_marginRight="10dp"
                             android:layout_weight="0.3"
                             android:background="#ffffff"
+                            android:inputType="text|number"
+                            android:maxLines="1"
                             android:textSize="@dimen/house_size" />
 
                     </LinearLayout>
@@ -525,8 +558,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="12dp"
-                            android:layout_weight="1"
+                            android:layout_weight="0.9"
                             android:background="#ffffff"
+                            android:inputType="text"
+                            android:maxLines="1"
                             android:textSize="@dimen/house_size" />
 
                         <TextView
@@ -547,6 +582,8 @@
                             android:layout_marginRight="10dp"
                             android:layout_weight="0.3"
                             android:background="#ffffff"
+                            android:inputType="text|number"
+                            android:maxLines="1"
                             android:textSize="@dimen/house_size" />
 
                     </LinearLayout>

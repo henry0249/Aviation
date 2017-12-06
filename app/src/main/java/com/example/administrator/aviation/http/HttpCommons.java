@@ -17,6 +17,7 @@ public class HttpCommons {
 //    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
     // EndPoint 测试版本
     public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirLogisticsService.asmx";
+    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirCargoService.asmx";
 
     // 登录
     public static final String LOGIN_METHOD_NAME = "APPUserLogin";
@@ -181,4 +182,8 @@ public class HttpCommons {
     public static final String CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME = "CGODomExportFlightPlanChecked";
     public static final String CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION= "http://58.213.128.130/CGODomExportFlightPlanChecked";
 
+    //货站国内出港
+    //获得平板车信息总览
+    public static final String CGO_DOM_Exp_ULDLoading_NAME = "GetGNCULDLoading";
+    public static final String CGO_DOM_Exp_ULDLoading_ACTION = "http://58.213.128.130/GetGNCULDLoading";
 }

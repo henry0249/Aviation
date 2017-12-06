@@ -11,6 +11,9 @@ public class AviationCommons {
      */
     public static String LoginFlag = "";
 
+    //解析时 错误信息的TAG
+    public static final String Log_TAG = "ErrorText";
+
     // intent传递xml的标识
     public static final String LOGIN_XML = "loginxml";
 
@@ -92,9 +95,17 @@ public class AviationCommons {
     public static final int INT_E_DAY_MANIFEST = 0x888;
     public static final int INT_ES_DAT = 0x999;
     public static final int DOM_CHECK_INFO = 0x1111;
+    public static final int GNC_expULDLoading = 0x2222;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;
     public static final int AWB_UPDATA = 2;
     public static final int CHANGE_PASS = 114;
+
+    //权限申请
+    public static final int REQUEST_CODE_CAMERA_PERMISSIONS  = 0x100;
+
+    //回调参数
+    public static final int GNC_ULDLOADING_CAMERA_REQUEST = 1;
+    public static final int GNC_ULDLOADING_CAMERA_RESULT = 11;
 }

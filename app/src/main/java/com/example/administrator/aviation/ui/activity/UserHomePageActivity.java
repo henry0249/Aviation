@@ -1,22 +1,27 @@
 package com.example.administrator.aviation.ui.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +33,7 @@ import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
 import com.example.administrator.aviation.ui.fragment.HomePageFragment;
 import com.example.administrator.aviation.ui.fragment.PersonFragment;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -65,6 +71,7 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
     private String xml = "";
 
     private List<HomeMessage> list;
+    private Context mContext;
 
     // 4个Fragment
     private HomePageFragment homePageFragment;
@@ -107,7 +114,7 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
         // 得到登录传递过来的xml数据（有疑问此方法执行两次）
         xml = this.getIntent().getStringExtra(AviationCommons.LOGIN_XML);
         list = PrefereceHomeMessage.pullXml(xml,this);
-
+        this.mContext = this;
         // 获取版本更新信息
         version = PreferenceUtils.getAPPVersion(UserHomePageActivity.this);
         describe = PreferenceUtils.getAPPDescribe(UserHomePageActivity.this);
@@ -161,7 +168,48 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
         homePageTv.setTextColor(Color.parseColor("#3371ae"));
         homePageIv.setImageResource(R.drawable.zhuyedianji);
 
+        requestPermission();
     }
+
+    //region 硬件权限申请
+    private void requestPermission()
+    {
+        //判断Android版本是否大于23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
+
+            if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                        AviationCommons.REQUEST_CODE_CAMERA_PERMISSIONS);
+                return;
+            }
+        }
+    }
+
+    /**
+     * 注册权限申请回调
+     * @param requestCode 申请码
+     * @param permissions 申请的权限
+     * @param grantResults 结果
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        switch (requestCode)
+        {
+            case  AviationCommons.REQUEST_CODE_CAMERA_PERMISSIONS:
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(UserHomePageActivity.this, "Camera Denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
+    }
+    //endregion
 
     // 退出方法
     private void exit() {

@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -425,18 +433,29 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <!-- 国内收运 -->
+        <!-- 货站业务 国内出港 -->
         <activity
             android:name=".ui.activity.domcgsy.DomCGSYSearchActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.cgo.domestic.expULDLoading"
+        <activity
+            android:name=".ui.cgo.domestic.expULDLoading"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
-        </activity>
+        <activity
+            android:name=".ui.cgo.domestic.CaptureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        
+        <activity android:name=".ui.cgo.domestic.expULDcargoInfo"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
     </application>
 
 </manifest>

@@ -42,6 +42,7 @@ dependencies {
     compile files('src/libs/ksoap2-android-assembly-3.6.2-jar-with-dependencies.jar')
     compile files('src/libs/httpclient-4.2.5.jar')
     compile files('src/libs/httpcore-4.4.4.jar')
+    compile files('src/libs/zxing.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
