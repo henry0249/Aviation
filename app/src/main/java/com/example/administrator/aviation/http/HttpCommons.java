@@ -186,4 +186,8 @@ public class HttpCommons {
     //获得平板车信息总览
     public static final String CGO_DOM_Exp_ULDLoading_NAME = "GetGNCULDLoading";
     public static final String CGO_DOM_Exp_ULDLoading_ACTION = "http://58.213.128.130/GetGNCULDLoading";
+
+    //获得平板车上的货物详情
+    public static final String CGO_DOM_Exp_ULDLoadingCargo_NAME = "GetGNCULDLoadingCargo";
+    public static final String CGO_DOM_Exp_ULDLoadingCargo_ACTION = "http://58.213.128.130/GetGNCULDLoadingCargo";
 }

@@ -18,4 +18,9 @@
 
     <!--表单字体颜色突出-->
     <color name="gonggongcolor">#2e2d33</color>
+
+    <!--ProgressWheel-->
+    <color name="ProgressWheel_color">#489df3</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,7 +15,7 @@
         android:layout_marginRight="20dp">
 
         <Button
-            android:id="@+id/flight_in_btn"
+            android:id="@+id/uldInfo_btn_ZhuangZaiXinXi"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"
@@ -25,7 +24,7 @@
             android:textColor="#ffffff"
             android:background="@drawable/button_selector"/>
         <Button
-            android:id="@+id/flight_out_btn"
+            android:id="@+id/uldInfo_btn_DaiZhuangXinXi"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"

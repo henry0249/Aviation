@@ -96,6 +96,7 @@ public class AviationCommons {
     public static final int INT_ES_DAT = 0x999;
     public static final int DOM_CHECK_INFO = 0x1111;
     public static final int GNC_expULDLoading = 0x2222;
+    public static final int GNC_ULDLoadingCargo = 0x2221;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;
@@ -108,4 +109,9 @@ public class AviationCommons {
     //回调参数
     public static final int GNC_ULDLOADING_CAMERA_REQUEST = 1;
     public static final int GNC_ULDLOADING_CAMERA_RESULT = 11;
+
+    //上拉加载更多
+    public static final int LOAD_DATA = 2;
+    //下拉刷新
+    public static final int REFRESH_DATA = 1;
 }

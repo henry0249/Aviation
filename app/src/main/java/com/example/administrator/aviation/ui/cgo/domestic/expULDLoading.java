@@ -41,6 +41,7 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -97,6 +98,10 @@ public class expULDLoading extends AppCompatActivity {
     TextView RiQi;
     @BindView(R.id.uldloading_tv_ChenYunRen)
     TextView ChenYunRen;
+    @BindView(R.id.uldloading_tv_BeiZhu)
+    TextView BeiZhu;
+    @BindView(R.id.uldloading_tv_LiuShuiHao)
+    TextView LiuShuiHao;
 
     @BindView(R.id.uldloading_edtTxt_PinBanHao_A)
     EditText PinBanHao_A;
@@ -154,6 +159,8 @@ public class expULDLoading extends AppCompatActivity {
         MuDinGang.setText("");
         RiQi.setText("");
         ChenYunRen.setText("");
+        LiuShuiHao.setText("");
+        BeiZhu.setText("");
     }
 
     private void EditViewSetEmpty() {
@@ -202,15 +209,14 @@ public class expULDLoading extends AppCompatActivity {
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (gnculd.size() > 0) {
-                    Bundle mBundle = new Bundle();
+                if (gnculd.size() > 0 && !TextUtils.isEmpty(LiuShuiHao.getText().toString().trim())) {
+                    HashMap<String, String> go = new HashMap<String, String>();
+                    go.put("ID",LiuShuiHao.getText().toString().trim());
+                    go.put("ULD", uldBianHao.getText().toString().trim());
+                    go.put("ErrString", "");
 
-                    if (!TextUtils.isEmpty(uldBianHao.getText().toString().trim())) {
-                        mBundle.putString("ID",gnculd.get(0).getID());
-                        mBundle.putString("ULD",uldBianHao.getText().toString().trim());
-                    } else {
-                        mBundle.putString("ID",gnculd.get(0).getID());
-                    }
+                    Bundle mBundle = new Bundle();
+                    mBundle.putSerializable("Info",go);
 
                     Intent intent = new Intent(expULDLoading.this,expULDcargoInfo.class);
                     intent.putExtras(mBundle);
@@ -246,6 +252,12 @@ public class expULDLoading extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String pinBan = PinBanHao_one.getText().toString().trim();
                 if (!TextUtils.isEmpty(pinBan)) {
+                    if (pinBan.length() == 1) {
+                        pinBan = "00" + pinBan;
+                    } else if (pinBan.length() == 2) {
+                        pinBan = "0" + pinBan;
+                    }
+
                     KeyBoardHide();
                     params.put("ID", "0");
                     params.put("CarID", pinBan);
@@ -259,6 +271,7 @@ public class expULDLoading extends AppCompatActivity {
         });
         //endregion
 
+        //region 下拉菜单点击事件
         uldBianHao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,6 +316,7 @@ public class expULDLoading extends AppCompatActivity {
                 }
             }
         });
+        //endregion
 
         //region 清空按钮
         QinKong.setOnClickListener(new View.OnClickListener() {
@@ -415,6 +429,7 @@ public class expULDLoading extends AppCompatActivity {
         MuDinGang.setText(gnculd.get(x).getDest().toString());
         RiQi.setText(gnculd.get(x).getFDate().toString());
         ChenYunRen.setText(gnculd.get(x).getCarrier().toString());
+        LiuShuiHao.setText(gnculd.get(x).getID().toString());
     }
    //endregion
 
