@@ -16,6 +16,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
@@ -161,6 +162,10 @@ public class HttpRoot {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... voids) {
+                if (isCancelled()) {
+                    return null;
+                }
+
                 final SoapObject object = callService(context, methodName, methodAction, params,rePage);
                 if (callBack != null) {
                     if (object == null) {
@@ -230,9 +235,6 @@ public class HttpRoot {
             // 设置调用webservice接口需要传入的参数
             rpc.addProperty(key, params.get(key));
         }
-
-//        rpc.addProperty("hawbXml", xml);
-//        rpc.addProperty("ErrString", "");
 
         // 生成调用WebService方法的SOAP请求信息,并指定SOAP的版本
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

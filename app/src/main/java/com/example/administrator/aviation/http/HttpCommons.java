@@ -190,4 +190,11 @@ public class HttpCommons {
     //获得平板车上的货物详情
     public static final String CGO_DOM_Exp_ULDLoadingCargo_NAME = "GetGNCULDLoadingCargo";
     public static final String CGO_DOM_Exp_ULDLoadingCargo_ACTION = "http://58.213.128.130/GetGNCULDLoadingCargo";
+
+    //国内卸货
+    public static final String CGO_DOM_Exp_unLoading_NAME = "GNCCGOunLoading";
+    public static final String CGO_DOM_Exp_unLoading_ACTION = "http://58.213.128.130/GNCCGOunLoading";
+
+    public static final String CGO_DOM_Exp_GNCLoading_NAME = "GNCCGOLoading";
+    public static final String CGO_DOM_Exp_GNCLoading_ACTION = "http://58.213.128.130/GNCCGOLoading";
 }

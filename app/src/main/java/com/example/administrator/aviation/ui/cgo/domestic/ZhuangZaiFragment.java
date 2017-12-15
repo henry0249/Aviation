@@ -7,18 +7,21 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +31,6 @@ import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.adapter.AbsCommonAdapter;
 import com.example.administrator.aviation.model.adapter.AbsViewHolder;
-import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
 import com.example.administrator.aviation.model.hygnc.ParseULDLoadingCargo;
 import com.example.administrator.aviation.model.hygnc.ULDLoadingCargo;
 import com.example.administrator.aviation.ui.base.AbPullToRefreshView;
@@ -36,6 +38,7 @@ import com.example.administrator.aviation.ui.base.SyncHorizontalScrollView;
 import com.example.administrator.aviation.ui.base.TableModel;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
+import com.example.administrator.aviation.util.WeakHandler;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -48,10 +51,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.administrator.aviation.R.id.sousuoYundan;
-
 /**
- * Created by Administrator on 2017/12/6.
+ * Created by 石松涛 on 2017/12/6.
  */
 
 public class ZhuangZaiFragment extends Fragment {
@@ -86,18 +87,25 @@ public class ZhuangZaiFragment extends Fragment {
     EditText sousuoZhudan;
     @BindView(R.id.pull_refresh_scroll)
     ScrollView refresh_scroll;
+    @BindView(R.id.uldloading_proBar_a)
+    ProgressBar progressBar;
 
-    private AlertDialog.Builder inputDialog;
+    private final String TAG = "ZhuangZaiFragmentError";
+    private final String page = "one";
+    private int talHeight = 0;
+
     private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
+    private WeakHandler mHandler = new WeakHandler();
 
     //用于存放标题的id,与textview引用
     private SparseArray<TextView> mTitleTvArray;
     private HashMap<String,String> res = new HashMap<>();
     private List<ULDLoadingCargo> loadingCargos = new ArrayList<>();
-    private final String TAG = "ZhuangZaiFragmentError";
-    private final String page = "one";
     private HashMap<String,String> store = new HashMap();
 
+    //region 初始化
+
+    //region 入口函数
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -107,10 +115,11 @@ public class ZhuangZaiFragment extends Fragment {
         init();
         return view;
     }
+    //endregion
 
+    //region 设置初始化
     public void init() {
         tv_table_title_left.setText("已装列表");
-        inputDialog = new AlertDialog.Builder(getActivity());
         getActivity().getLayoutInflater().inflate(R.layout.table_right_title, right_title_container);
 
         // 设置两个水平控件的联动
@@ -119,8 +128,6 @@ public class ZhuangZaiFragment extends Fragment {
 
         jiansuokuang.setVisibility(View.GONE);
 
-
-
         res = (HashMap<String, String>) getArguments().getSerializable("zhuangzai");
         GetInfo(res);
 
@@ -128,9 +135,9 @@ public class ZhuangZaiFragment extends Fragment {
         initTableView();
         setListener();
     }
+    //endregion
 
-
-    //初始化标题的TextView的item引用
+    //region 利用反射初始化标题的TextView的item引用
     private void findTitleTextViewIds() {
         mTitleTvArray = new SparseArray<>();
         for (int i = 0; i < loadingCargos.size(); i++) {
@@ -144,7 +151,9 @@ public class ZhuangZaiFragment extends Fragment {
             }
         }
     }
+    //endregion
 
+    //region 初始化表格的view
     public void initTableView() {
         mLeftAdapter = new AbsCommonAdapter<TableModel>(mContext, R.layout.table_left_item) {
             @Override
@@ -202,12 +211,44 @@ public class ZhuangZaiFragment extends Fragment {
         leftListView.setAdapter(mLeftAdapter);
         rightListView.setAdapter(mRightAdapter);
     }
+    //endregion
 
+    //endregion
+
+    //region 控件事件
+
+    //region 设置页面上所有监听事件
     public void setListener() {
+
+        //region 点击其他部位隐藏软键盘
+        view.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                KeyBoardHide();
+                return false;
+            }
+        });
+        //endregion
+
+        //region 下拉刷新
+        pulltorefreshview.setOnHeaderRefreshListener(new AbPullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(AbPullToRefreshView view) {
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        GetInfo(res);
+                    }
+                }, 1000);
+            }
+        });
+        //endregion
+
+        //region 左侧标题列监听事件
         leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //跳转界面
                 if (getActivity() != null){
                     CheckBox checkBox = (CheckBox) view.findViewById(R.id.item_cb);
                     TableModel ta = (TableModel) parent.getItemAtPosition(position);
@@ -225,20 +266,105 @@ public class ZhuangZaiFragment extends Fragment {
                 }
             }
         });
+        //rendregion
 
+        //region 右侧标题列监听事件
         rightListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (getActivity() != null){
-                    TableModel ta = (TableModel) parent.getItemAtPosition(position);
-                    Toast.makeText(getActivity().getApplicationContext(), ta.getLeftTitle() + "_" + position , Toast.LENGTH_SHORT).show();
+//                    TableModel ta = (TableModel) parent.getItemAtPosition(position);
+//                    Toast.makeText(getActivity().getApplicationContext(), ta.getLeftTitle() + "_" + position , Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        //endregion
+
+        //region 检索悬浮按钮的点击事件
+        JianSuofloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jiansuokuang.setVisibility(View.VISIBLE);
+                sousuoZhudan.requestFocus();
+                KeyBoardSwitch();
+            }
+        });
+        //endregion
+
+        //region 搜索弹窗确定按钮
+        sousuoQuedin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //检索运单号
+                int yidongInt = 0;
+                boolean aFlaf = true;
+                if (!TextUtils.isEmpty(sousuoZhudan.getText())) {
+                    String zhudan = sousuoZhudan.getText().toString().trim().replaceAll("P", "").replaceAll("-", "");
+                    int zhudanInt = sousuoZhudan.getText().toString().trim().length();
+
+                    if (zhudanInt < 4) {
+                        Toast.makeText(getActivity(), "请输入运单后四位", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    loop1:for(int i = 0 ;i < loadingCargos.size();i++) {
+                        String MABW = loadingCargos.get(i).getMawb().replaceAll("P", "").replaceAll("-", "");
+                        if (zhudan.equals(MABW.substring(MABW.length()- zhudanInt))) {
+                            yidongInt = i;
+                            aFlaf = false;
+                            break loop1;
+                        }
+                    }
+                }
+
+                if (yidongInt == 0 && aFlaf) {
+                    Toast.makeText(getActivity(), "未找到数据，请再多输几位", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (talHeight < 5) {
+                        ListHeigh(leftListView);
+                    }
+                    KeyBoardHide();
+                    refresh_scroll.smoothScrollTo(0, yidongInt * talHeight);
+                    leftListView.performItemClick(leftListView.getChildAt(yidongInt), yidongInt, leftListView.getItemIdAtPosition(yidongInt));
+                }
+            }
+        });
+        //endregion
+
+        //region 搜索弹窗取消按钮
+        sousuoQuxiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sousuoZhudan.setText("");
+                KeyBoardHide();
+                jiansuokuang.setVisibility(View.GONE);
+            }
+        });
+        //endregion
+
+        //region 卸货按钮
+        JianJianfloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null && store.size() > 0){
+                        xiehuo();
+                        store.clear();
+                        pulltorefreshview.headerRefreshing();
+                }
+            }
+        });
+        //endregion
+
     }
+    //endregion
+
+    //endregion
+
+    //region 功能方法
 
     //region 请求数据
     private void GetInfo(Map<String, String> p) {
+        progressBar.setVisibility(View.VISIBLE);
         HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_NAME, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_ACTION, p,
                 new HttpRoot.CallBack() {
                     @Override
@@ -246,26 +372,66 @@ public class ZhuangZaiFragment extends Fragment {
                         SoapObject object = (SoapObject) result;
                         String ULDLoadingCargoZhuang = object.getProperty(0).toString();
                         loadingCargos = ParseULDLoadingCargo.parseULDLoadingCargoXMLto(ULDLoadingCargoZhuang,0);
-
                         handler.sendEmptyMessage(AviationCommons.GNC_ULDLoadingCargo);
-
                     }
 
                     @Override
                     public void onFailed(String message) {
-                        ToastUtils.showToast(mContext,"数据获取失败", Toast.LENGTH_SHORT);
+                        progressBar.setVisibility(View.GONE);
+                        ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
                     }
 
                     @Override
                     public void onError() {
+                        progressBar.setVisibility(View.GONE);
                         ToastUtils.showToast(mContext,"数据获取出错",Toast.LENGTH_SHORT);
                     }
                 },page);
     }
     //endregion
 
-    //region 功能方法
+    //region 货物卸载
+    private void xiehuo() {
+        List<HashMap> XieHuoList = new ArrayList<>();
+        for (String key : store.keySet()){
+            HashMap<String, String> ll = new HashMap<>();
+            ll.put("WHID", key);
+            ll.put("ErrString","");
+            XieHuoList.add(ll);
+        }
 
+        for (HashMap<String,String> ll: XieHuoList ) {
+            HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_unLoading_NAME, HttpCommons.CGO_DOM_Exp_unLoading_ACTION, ll,
+                    new HttpRoot.CallBack() {
+                        @Override
+                        public void onSucess(Object result) {
+                            SoapObject object = (SoapObject) result;
+                            String xx = object.getProperty(0).toString();
+                            if (xx.equalsIgnoreCase("true")) {
+                                ToastUtils.showToast(mContext, "卸货成功", Toast.LENGTH_SHORT);
+                            } else {
+                                ToastUtils.showToast(mContext, object.getProperty(1).toString(), Toast.LENGTH_SHORT);
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailed(String message) {
+                            ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
+                        }
+
+                        @Override
+                        public void onError() {
+                            ToastUtils.showToast(mContext,"数据上传",Toast.LENGTH_SHORT);
+                        }
+                    },page);
+        }
+
+    }
+    //endregion
+
+    //region 把数据绑定到Model
     private void setDatas(List<ULDLoadingCargo> CGO, int type) {
         pulltorefreshview.setLoadMoreEnable(false);
 
@@ -313,11 +479,13 @@ public class ZhuangZaiFragment extends Fragment {
             mRightAdapter.addData(mDatas, isMore);
 
             mDatas.clear();
+            pulltorefreshview.onHeaderRefreshFinish();
         } else {
                 mLeftAdapter.clearData(true);
                 mRightAdapter.clearData(true);
         }
     }
+    //endregion
 
     //region 句柄监听
     Handler handler = new Handler() {
@@ -327,13 +495,52 @@ public class ZhuangZaiFragment extends Fragment {
             if (msg.what == AviationCommons.GNC_ULDLoadingCargo) {
                 if (loadingCargos.size() > 0) {
                     setDatas(loadingCargos,AviationCommons.REFRESH_DATA);
+
                 } else {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
+                progressBar.setVisibility(View.GONE);
             }
         }
     };
     //endregion
 
+    //region 计算listview每一行高度
+    private void ListHeigh(ListView listView) {
+        ListAdapter mAdapter = listView.getAdapter();
+        if (mAdapter == null) {
+            return;
+        }
+        View mView = mAdapter.getView(1, null, listView);
+        mView.measure(0, 0);
+        talHeight = mView.getMeasuredHeight() + 4;
+    }
     //endregion
+
+    //region 软键盘状态切换
+    private void KeyBoardSwitch() {
+        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        // 得到InputMethodManager的实例
+        if (imm.isActive()) {
+            // 如果开启
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+
+        }
+    }
+    //endregion
+
+    //region 隐藏软键盘
+    private void KeyBoardHide() {
+        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm.isActive() && getActivity().getCurrentFocus()!=null){
+            if (getActivity().getCurrentFocus().getWindowToken()!=null) {
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+    //endregion
+
+    //endregion
+
 }

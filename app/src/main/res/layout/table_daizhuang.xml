@@ -16,7 +16,7 @@
         <!-- 左侧标题的父容器 -->
 
         <TextView
-            android:id="@+id/tv_table_title_left"
+            android:id="@+id/tv_table_title_left_d"
             android:textColor="#000000"
             android:textSize="12sp"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
 
         <!-- 右侧标题的父容器可实现水平滚动 -->
         <com.example.administrator.aviation.ui.base.SyncHorizontalScrollView
-            android:id="@+id/title_horsv"
+            android:id="@+id/title_horsv_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
             android:scrollbars="none">
 
             <LinearLayout
-                android:id="@+id/right_title_container"
+                android:id="@+id/right_title_container_d"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -53,11 +53,11 @@
 
         <!-- 此部分是内容部分 用ScrollView实现上下滚动效果 -->
         <com.example.administrator.aviation.ui.base.AbPullToRefreshView
-            android:id="@+id/pulltorefreshview"
+            android:id="@+id/pulltorefreshview_d"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ScrollView
-                android:id="@+id/pull_refresh_scroll"
+                android:id="@+id/pull_refresh_scroll_d"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -68,7 +68,7 @@
 
                     <!-- 左侧内容的父容器 -->
                     <com.example.administrator.aviation.ui.base.MyListView
-                        android:id="@+id/left_container_listview"
+                        android:id="@+id/left_container_listview_d"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -77,14 +77,14 @@
 
                     <!-- 右侧内容的父容器 实现水平滚动 -->
                     <com.example.administrator.aviation.ui.base.SyncHorizontalScrollView
-                        android:id="@+id/content_horsv"
+                        android:id="@+id/content_horsv_d"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:fillViewport="true"
                         android:scrollbars="none">
                         <com.example.administrator.aviation.ui.base.MyListView
-                            android:id="@+id/right_container_listview"
+                            android:id="@+id/right_container_listview_d"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#ffffff"
@@ -96,7 +96,7 @@
         </com.example.administrator.aviation.ui.base.AbPullToRefreshView>
 
         <LinearLayout
-            android:id="@+id/jiansuokuang"
+            android:id="@+id/jiansuokuang_d"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -105,7 +105,7 @@
 
 
             <EditText
-                android:id="@+id/sousuoYundan"
+                android:id="@+id/sousuoYundan_d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/sousuoQuedin"
+                    android:id="@+id/sousuoQuedin_d"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -126,7 +126,7 @@
                     android:textColor="#121111" />
 
                 <Button
-                    android:id="@+id/sousuoQuxiao"
+                    android:id="@+id/sousuoQuxiao_d"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -144,7 +144,7 @@
             android:layout_marginBottom="10dp">
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/search_2"
+                android:id="@+id/search_d"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="10dp"
@@ -153,16 +153,16 @@
                 app:srcCompat="@drawable/search" />
 
                 <android.support.design.widget.FloatingActionButton
-                android:id="@+id/jianjian"
+                android:id="@+id/jiajia_d"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:clickable="true"
                 app:fabSize="mini"
-                app:srcCompat="@drawable/jianjian" />
+                app:srcCompat="@drawable/jia_1" />
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/uldloading_proBar_a"
+            android:id="@+id/uldloading_proBar_d"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

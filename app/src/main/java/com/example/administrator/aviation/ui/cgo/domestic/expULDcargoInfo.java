@@ -74,6 +74,9 @@ public class expULDcargoInfo extends AppCompatActivity {
             case 1:
                 if (daizhuangFragment == null) {
                     daizhuangFragment = new DaiZhuangFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("daizhuang",idArrary);
+                    daizhuangFragment.setArguments(bundle);
                     transaction.add(R.id.framelayout, daizhuangFragment);
                 } else {
                     transaction.show(daizhuangFragment);
@@ -106,7 +109,11 @@ public class expULDcargoInfo extends AppCompatActivity {
         ZhuangZaiXinXi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ZhuangZaiXinXi.setBackground(getResources().getDrawable(R.drawable.button_selector));
+                ZhuangZaiXinXi.setTextColor(getResources().getColor(R.color.colorGray));
+                DaiZhuangXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));
+                DaiZhuangXinXi.setTextColor(getResources().getColor(R.color.colorTitle));
+                initFragment(0);
             }
         });
         //endregion
@@ -115,7 +122,11 @@ public class expULDcargoInfo extends AppCompatActivity {
         DaiZhuangXinXi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DaiZhuangXinXi.setBackground(getResources().getDrawable(R.drawable.button_selector));
+                DaiZhuangXinXi.setTextColor(getResources().getColor(R.color.colorGray));
+                ZhuangZaiXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));
+                ZhuangZaiXinXi.setTextColor(getResources().getColor(R.color.colorTitle));
+                initFragment(1);
             }
         });
         //endregion

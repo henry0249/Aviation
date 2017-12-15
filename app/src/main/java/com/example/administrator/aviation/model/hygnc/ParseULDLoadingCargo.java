@@ -21,6 +21,7 @@ import java.util.List;
 public class ParseULDLoadingCargo {
     public static List<ULDLoadingCargo> parseULDLoadingCargoXMLto (String xml,int f) {
         List<ULDLoadingCargo> list = new ArrayList<>();
+        String key = "";
         String flag = "";
         if (f == 0) {
             flag = "CGOLoading";
@@ -48,61 +49,68 @@ public class ParseULDLoadingCargo {
                         break;
                     case XmlPullParser.START_TAG:// 开始元素事件
                         String name = parser.getName();
-                        //Log.e("TAG","name="+parser.getName()+"\ntext="+parser.getText()+"\nn");
+
                         if (name.equalsIgnoreCase(flag)) {
-                            LoadingInfo = new ULDLoadingCargo();
-                        } else if (name.equalsIgnoreCase("WHID")) {
-                            LoadingInfo.setWHID(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Mawb")) {
-                            LoadingInfo.setMawb(parser.nextText());
-                        } else if (name.equalsIgnoreCase("AgentCode")) {
-                            LoadingInfo.setAgentCode(parser.nextText());
-                        } else if (name.equalsIgnoreCase("PC")) {
-                            LoadingInfo.setPC(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Weight")) {
-                            LoadingInfo.setWeight(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Volume")) {
-                            LoadingInfo.setVolume(parser.nextText());
-                        } else if (name.equalsIgnoreCase("SpCode")) {
-                            LoadingInfo.setSpCode(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Goods")) {
-                            LoadingInfo.setGoods(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Dest1")) {
-                            LoadingInfo.setDest1(parser.nextText());
-                        } else if (name.equalsIgnoreCase("Dest")) {
-                            LoadingInfo.setDest(parser.nextText());
-                        } else if (name.equalsIgnoreCase("By1")) {
-                            LoadingInfo.setBy1(parser.nextText());
-                        } else if (name.equalsIgnoreCase("FDate")) {
-                            String nTxt = parser.nextText().trim();
-                            if (!TextUtils.isEmpty(nTxt)) {
-                                nTxt += "_" + nTxt.replace("-", "");
-                                LoadingInfo.setFDate(nTxt);
-                            }
-
-                        }else if (name.equalsIgnoreCase("Fno")) {
-                            LoadingInfo.setFno(parser.nextText());
-                        }else if (name.equalsIgnoreCase("Location")) {
-                            LoadingInfo.setLocation(parser.nextText());
-                        }else if (name.equalsIgnoreCase("LocFlag")) {
-                            LoadingInfo.setLocFlag(parser.nextText());
-                        }else if (name.equalsIgnoreCase("LocID")) {
-                            LoadingInfo.setLocID(parser.nextText());
-                        }else if (name.equalsIgnoreCase("PlanFDate")) {
-                            String nTxt = parser.nextText().trim();
-                            if (!TextUtils.isEmpty(nTxt)) {
-                                nTxt += "_" + nTxt.replace("-", "");
-                                LoadingInfo.setPlanFDate(nTxt);
-                            }
-
-                        }else if (name.equalsIgnoreCase("PlanFno")) {
-                            LoadingInfo.setPlanFno(parser.nextText());
+                            key = name;
                         }
+
+                        if (key.equalsIgnoreCase(flag)) {
+                            if (name.equalsIgnoreCase(flag)) {
+                                LoadingInfo = new ULDLoadingCargo();
+                            } else if (name.equalsIgnoreCase("WHID")) {
+                                LoadingInfo.setWHID(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Mawb")) {
+                                LoadingInfo.setMawb(parser.nextText());
+                            } else if (name.equalsIgnoreCase("AgentCode")) {
+                                LoadingInfo.setAgentCode(parser.nextText());
+                            } else if (name.equalsIgnoreCase("PC")) {
+                                LoadingInfo.setPC(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Weight")) {
+                                LoadingInfo.setWeight(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Volume")) {
+                                LoadingInfo.setVolume(parser.nextText());
+                            } else if (name.equalsIgnoreCase("SpCode")) {
+                                LoadingInfo.setSpCode(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Goods")) {
+                                LoadingInfo.setGoods(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Dest1")) {
+                                LoadingInfo.setDest1(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Dest")) {
+                                LoadingInfo.setDest(parser.nextText());
+                            } else if (name.equalsIgnoreCase("By1")) {
+                                LoadingInfo.setBy1(parser.nextText());
+                            } else if (name.equalsIgnoreCase("FDate")) {
+                                String nTxt = parser.nextText().trim();
+                                if (!TextUtils.isEmpty(nTxt)) {
+                                    nTxt += "_" + nTxt.replace("-", "");
+                                    LoadingInfo.setFDate(nTxt);
+                                }
+                            }else if (name.equalsIgnoreCase("Fno")) {
+                                LoadingInfo.setFno(parser.nextText());
+                            }else if (name.equalsIgnoreCase("Location")) {
+                                LoadingInfo.setLocation(parser.nextText());
+                            }else if (name.equalsIgnoreCase("LocFlag")) {
+                                LoadingInfo.setLocFlag(parser.nextText());
+                            }else if (name.equalsIgnoreCase("LocID")) {
+                                LoadingInfo.setLocID(parser.nextText());
+                            }else if (name.equalsIgnoreCase("PlanFDate")) {
+                                String nTxt = parser.nextText().trim();
+                                if (!TextUtils.isEmpty(nTxt)) {
+                                    nTxt += "_" + nTxt.replace("-", "");
+                                    LoadingInfo.setPlanFDate(nTxt);
+                                }
+                            }else if (name.equalsIgnoreCase("PlanFno")) {
+                                LoadingInfo.setPlanFno(parser.nextText());
+                            }
+                        }
+
+
                         break;
                     case XmlPullParser.END_TAG:// 结束元素事件
                         if (parser.getName().equalsIgnoreCase(flag)) {
                             list.add(LoadingInfo);
                             LoadingInfo = null;
+                            key = "";
                         }
                         break;
                 }
