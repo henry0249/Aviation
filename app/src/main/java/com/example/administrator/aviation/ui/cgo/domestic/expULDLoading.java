@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,38 @@ import butterknife.ButterKnife;
 import static android.R.id.list;
 
 public class expULDLoading extends AppCompatActivity {
+    ////////////////////////////////////////////////////////////////////
+    //                          _ooOoo_                               //
+    //                         o8888888o                              //
+    //                         88" . "88                              //
+    //                         (| ^_^ |)                              //
+    //                         O\  =  /O                              //
+    //                      ____/`---'\____                           //
+    //                    .'  \\|     |//  `.                         //
+    //                   /  \\|||  :  |||//  \                        //
+    //                  /  _||||| -:- |||||-  \                       //
+    //                  |   | \\\  -  /// |   |                       //
+    //                  | \_|  ''\---/''  |   |                       //
+    //                  \  .-\__  `-`  ___/-. /                       //
+    //                ___`. .'  /--.--\  `. . ___                     //
+    //              ."" '<  `.___\_<|>_/___.'  >'"".                  //
+    //            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
+    //            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
+    //      ========`-.____`-.___\_____/___.-`____.-'========         //
+    //                           `=---='                              //
+    //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
+    //             佛祖保佑       永无BUG     永不修改                //
+    //                                                                //
+    //       佛曰:                                                    //
+    //               写字楼里写字间，写字间里程序员；                 //
+    //               程序人员写程序，又拿程序换酒钱。                 //
+    //               酒醒只在网上坐，酒醉还来网下眠；                 //
+    //               酒醉酒醒日复日，网上网下年复年。                 //
+    //               但愿老死电脑间，不愿鞠躬老板前；                 //
+    //               奔驰宝马贵者趣，公交自行程序员。                 //
+    //               别人笑我太疯癫，我笑他人看不穿；                 //
+    //               不见满街漂亮妹，哪个归得程序员？                 //
+    ////////////////////////////////////////////////////////////////////
 
     @BindView(R.id.uldloading_linLay_XinZenSheBei)
     LinearLayout XinZenSheBei;
@@ -58,6 +91,8 @@ public class expULDLoading extends AppCompatActivity {
     ProgressBar proBar;
     @BindView(R.id.uldloading_Img_SaoMa)
     ImageView Img_SaoMa;
+    @BindView(R.id.uldloading_Scrl)
+    ScrollView scrollview;
 
     @BindView(R.id.uldloading_Btn_ChaXun)
     Button ChaXun;
@@ -231,6 +266,17 @@ public class expULDLoading extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 XinZenSheBei.setVisibility(View.VISIBLE);
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+                        PinBanHao_A.setFocusable(true);
+                        PinBanHao_A.setFocusableInTouchMode(true);
+                        PinBanHao_A.requestFocus();
+                    }
+                });
+
+
             }
         });
         //endregion

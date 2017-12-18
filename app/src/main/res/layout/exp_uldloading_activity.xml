@@ -10,6 +10,7 @@
     <include layout="@layout/navbar"/>
 
     <ScrollView
+        android:id="@+id/uldloading_Scrl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -487,6 +488,7 @@
                             android:layout_marginLeft="12dp"
                             android:gravity="center"
                             android:text="新增设备"
+                            android:textColor="#002fff"
                             android:textSize="@dimen/house_size" />
                     </LinearLayout>
 
@@ -510,7 +512,6 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="1"
-                            android:background="#ffffff"
                             android:inputType="text|number"
                             android:maxLines="1"
                             android:textSize="@dimen/house_size" />
@@ -532,7 +533,6 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="0.3"
-                            android:background="#ffffff"
                             android:inputType="text|number"
                             android:maxLines="1"
                             android:textSize="@dimen/house_size" />
@@ -559,7 +559,6 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="0.9"
-                            android:background="#ffffff"
                             android:inputType="text"
                             android:maxLines="1"
                             android:textSize="@dimen/house_size" />
@@ -581,7 +580,6 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="0.3"
-                            android:background="#ffffff"
                             android:inputType="text|number"
                             android:maxLines="1"
                             android:textSize="@dimen/house_size" />
@@ -608,7 +606,6 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="0.9"
-                            android:background="#ffffff"
                             android:inputType="text"
                             android:maxLines="1"
                             android:textSize="@dimen/house_size" />
@@ -630,7 +627,6 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="0.3"
-                            android:background="#ffffff"
                             android:inputType="text|number"
                             android:maxLines="1"
                             android:textSize="@dimen/house_size" />
