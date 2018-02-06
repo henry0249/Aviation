@@ -51,6 +51,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,7 +74,8 @@ public class DaiZhuangFragment extends Fragment {
     private int talHeight = 0;
 
     private AlertDialog.Builder inputDialog;
-    private EditText editText;
+    private AlertDialog ad;
+    private EditText diaEdit;
     private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
     private WeakHandler mHandler = new WeakHandler();
 
@@ -376,37 +379,55 @@ public class DaiZhuangFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (getActivity() != null ){
-
                     if (store.size() > 1) {
                         ZhuangHuo();
                         store.clear();
                         pulltorefreshview.headerRefreshing();
                     } else if (store.size() == 1) {
-                        editText = new EditText(mContext);
-                        editText.setTextColor(Color.rgb(0, 0, 0));
-                        editText.setText(store.get(0).get("PC") + "");
-                        editText.setSelection(editText.getText().toString().trim().length());
-                        inputDialog.setTitle("分批件数").setView(editText);
+                        LayoutInflater llInflater = LayoutInflater.from(mContext);
+                        View newPlanDialog = llInflater.inflate(R.layout.dialog_zhuangzai, (ViewGroup)getActivity().findViewById(R.id.dia_ZhuangZai));
+
+                        inputDialog.setView(newPlanDialog);
                         inputDialog.setPositiveButton("装货",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog,
                                                         int which) {
                                         int yuanshishuzi = Integer.parseInt(store.get(0).get("PC"));
-                                        if (!TextUtils.isEmpty(editText.getText().toString().trim())) {
-                                            if (Integer.parseInt(editText.getText().toString()) <= yuanshishuzi) {
-                                                store.get(0).put("PC", editText.getText().toString().trim());
+                                        if (!TextUtils.isEmpty(diaEdit.getText().toString().trim())) {
+                                            if (Integer.parseInt(diaEdit.getText().toString()) <= yuanshishuzi) {
+                                                store.get(0).put("PC", diaEdit.getText().toString().trim());
                                                 ZhuangHuo();
                                                 store.clear();
                                                 pulltorefreshview.headerRefreshing();
                                             } else {
                                                 ToastUtils.showToast(mContext,"输入值大于货物件数", Toast.LENGTH_SHORT);
                                             }
-                                            KeyBoardHide();
+
+                                            Timer timer = new Timer();
+                                            timer.schedule(new TimerTask() {
+
+                                                @Override
+                                                public void run() {
+                                                    KeyBoardHide();
+                                                }  }, 200);
                                         }
                                     }
                                 });
-                        inputDialog.show();
+
+                        ad = inputDialog.create();
+                        ad.show();
+                        diaEdit = (EditText)ad.findViewById(R.id.DiaAdit_ZhuangZai);
+                        diaEdit.setTextColor(Color.rgb(0, 0, 0));
+                        diaEdit.setText(store.get(0).get("PC") + "");
+                        diaEdit.setSelection(diaEdit.getText().toString().trim().length());
+
+                        Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                KeyBoardSwitch();
+                            }  }, 200);
                     }
                 }
             }
@@ -531,7 +552,7 @@ public class DaiZhuangFragment extends Fragment {
         }
         View mView = mAdapter.getView(1, null, listView);
         mView.measure(0, 0);
-        talHeight = mView.getMeasuredHeight() + 4;
+        talHeight = mView.getMeasuredHeight() + listView.getDividerHeight();
     }
     //endregion
 

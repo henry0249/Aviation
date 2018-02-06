@@ -33,7 +33,7 @@
         android:id="@+id/tv_table_content_right_item4"
         style="@style/TextView_Table_Right"
         android:gravity="center"
-        tools:text="列数-4"/>
+        tools:text="列数-4" />
 
     <TextView
         android:id="@+id/tv_table_content_right_item5"

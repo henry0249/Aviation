@@ -186,4 +186,8 @@ public class NavBar {
     private void handleClickRight(ClickRightListener rightListener) {
         rightListener.onClick();
     }
+
+    public View getPopMenuView(){
+        return activity.findViewById(R.id.nav_right_line);
+    }
 }

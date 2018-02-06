@@ -40,6 +40,7 @@ import com.example.administrator.aviation.util.ToastUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -50,6 +51,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.R.id.list;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
 
 public class expULDLoading extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////
@@ -137,6 +140,10 @@ public class expULDLoading extends AppCompatActivity {
     TextView BeiZhu;
     @BindView(R.id.uldloading_tv_LiuShuiHao)
     TextView LiuShuiHao;
+    @BindView(R.id.uldloading_tv_BanXin)
+    TextView BanXin;
+    @BindView(R.id.uldloading_tv_CangWei)
+    TextView CangWei;
 
     @BindView(R.id.uldloading_edtTxt_PinBanHao_A)
     EditText PinBanHao_A;
@@ -195,7 +202,10 @@ public class expULDLoading extends AppCompatActivity {
         RiQi.setText("");
         ChenYunRen.setText("");
         LiuShuiHao.setText("");
+
         BeiZhu.setText("");
+        BanXin.setText("");
+        CangWei.setText("");
     }
 
     private void EditViewSetEmpty() {
@@ -248,6 +258,7 @@ public class expULDLoading extends AppCompatActivity {
                     HashMap<String, String> go = new HashMap<String, String>();
                     go.put("ID",LiuShuiHao.getText().toString().trim());
                     go.put("ULD", uldBianHao.getText().toString().trim());
+                    go.put("BanID", PinBanHao_one.getText().toString().trim());
                     go.put("ErrString", "");
 
                     Bundle mBundle = new Bundle();
@@ -265,16 +276,23 @@ public class expULDLoading extends AppCompatActivity {
         XinZen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                XinZenSheBei.setVisibility(View.VISIBLE);
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollview.fullScroll(ScrollView.FOCUS_DOWN);
-                        PinBanHao_A.setFocusable(true);
-                        PinBanHao_A.setFocusableInTouchMode(true);
-                        PinBanHao_A.requestFocus();
-                    }
-                });
+                if (XinZenSheBei.getVisibility() == View.VISIBLE) {
+                    XinZen.setText("新增");
+                    QuXiao.performClick();
+                } else if (XinZenSheBei.getVisibility() == View.GONE) {
+                    XinZen.setText("关闭");
+                    XinZenSheBei.setVisibility(View.VISIBLE);
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+                            PinBanHao_A.setFocusable(true);
+                            PinBanHao_A.setFocusableInTouchMode(true);
+                            PinBanHao_A.requestFocus();
+                        }
+                    });
+                }
+
 
 
             }
@@ -287,6 +305,9 @@ public class expULDLoading extends AppCompatActivity {
             public void onClick(View v) {
                 EditViewSetEmpty();
                 XinZenSheBei.setVisibility(View.GONE);
+                if (XinZen.getText() == "关闭") {
+                    XinZen.setText("新增");
+                }
             }
         });
         //endregion
@@ -440,7 +461,8 @@ public class expULDLoading extends AppCompatActivity {
     //region 调用相机
     private void useCamera() {
         Intent intent = new Intent(expULDLoading.this, CaptureActivity.class);
-        startActivityForResult(intent,AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST);
+        intent.putExtra("id",GNC_ULDLOADING_CAMERA_REQUEST);
+        startActivityForResult(intent, GNC_ULDLOADING_CAMERA_REQUEST);
     }
     //endregion
 
@@ -476,6 +498,10 @@ public class expULDLoading extends AppCompatActivity {
         RiQi.setText(gnculd.get(x).getFDate().toString());
         ChenYunRen.setText(gnculd.get(x).getCarrier().toString());
         LiuShuiHao.setText(gnculd.get(x).getID().toString());
+
+        BeiZhu.setText(gnculd.get(x).getRemark().toString());
+        BanXin.setText(gnculd.get(x).getBoardType().toString());
+        CangWei.setText(gnculd.get(x).getLocation().toString());
     }
    //endregion
 

@@ -5,15 +5,20 @@
     android:background="@android:color/transparent"
     android:orientation="vertical" >
 
+    <include layout="@layout/navbar"
+        android:id="@+id/include" />
+
     <SurfaceView
         android:id="@+id/capture_preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include" />
 
     <RelativeLayout
         android:id="@+id/capture_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include">
 
         <ImageView
             android:id="@+id/capture_mask_top"
@@ -68,6 +73,16 @@
             android:layout_below="@id/capture_mask_top"
             android:layout_toRightOf="@id/capture_crop_view"
             android:background="@drawable/shadow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扫描时不要靠太近！"
+            android:textSize="20dp"
+            android:background="#fff"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/capture_mask_bottom"/>
     </RelativeLayout>
 
 </RelativeLayout>

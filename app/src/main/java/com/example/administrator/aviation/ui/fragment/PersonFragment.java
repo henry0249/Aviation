@@ -58,6 +58,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
     // 版本更新（版本号 提示消息 下载地址）
     private ProgressDialog pBar;
     private String version;
+    private String LocalVersion;
     private String describe;
     private String url;
 
@@ -100,7 +101,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
             if (isNeedUpdate()) {
                 showUpdateDialog();
             } else {
-                Toast.makeText(getActivity(), "当前是最新版本", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "当前是最新版本:" + LocalVersion, Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -218,6 +219,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
             PackageManager packageManager = getActivity().getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
             String oldVersion = packageInfo.versionName;
+            LocalVersion = oldVersion;
             return oldVersion;
         } catch (Exception e) {
             e.printStackTrace();

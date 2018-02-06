@@ -25,12 +25,14 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.tool.camera.CameraManager;
@@ -38,11 +40,16 @@ import com.example.administrator.aviation.tool.qr.DecodeThread;
 import com.example.administrator.aviation.tool.qr.BeepManager;
 import com.example.administrator.aviation.tool.qr.CaptureActivityHandler;
 import com.example.administrator.aviation.tool.qr.InactivityTimer;
+import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.ToastUtils;
 import com.google.zxing.Result;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
 
 /**
  * This activity opens the camera and does the actual scanning on a background
@@ -66,6 +73,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 	private RelativeLayout scanContainer;
 	private RelativeLayout scanCropView;
 	private ImageView scanLine;
+	private NavBar navBar;
 
 	private Rect mCropRect = null;
 
@@ -87,6 +95,21 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_capture);
 
+		navBar = new NavBar(this);
+		navBar.setTitle("扫一扫");
+
+        navBar.getLeftImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("result", "");
+
+                Intent intent = new Intent();
+                intent.putExtras(bundle);
+                GoToActivity(intent);
+            }
+        });
+
 		scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
 		scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
 		scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
@@ -103,7 +126,17 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		scanLine.startAnimation(animation);
 	}
 
-	@Override
+    @Override
+    public void onBackPressed() {
+        Bundle bundle = new Bundle();
+        bundle.putString("result", "");
+
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+        GoToActivity(intent);
+    }
+
+    @Override
 	protected void onResume() {
 		super.onResume();
 
@@ -194,13 +227,22 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
 		Intent intent = new Intent();
 		intent.putExtras(bundle);
-		setResult(AviationCommons.GNC_ULDLOADING_CAMERA_RESULT,intent);
-		finish();
-
+        GoToActivity(intent);
 //		startActivity(new Intent(CaptureActivity.this, com.example.administrator.zxingdemo.zxing.activity.ResultActivity.class).putExtras(bundle));
 	}
 
-	private void initCamera(SurfaceHolder surfaceHolder) {
+    private void GoToActivity(Intent intent) {
+        Integer req = (Integer) getIntent().getSerializableExtra("id");
+        if (req == GNC_ULDinfo_CAMERA_REQUEST) {
+            setResult(AviationCommons.GNC_ULDinfo_CAMERA_RESULT, intent);
+        } else if(req == GNC_ULDLOADING_CAMERA_REQUEST){
+            setResult(AviationCommons.GNC_ULDLOADING_CAMERA_RESULT,intent);
+        }
+
+        finish();
+    }
+
+    private void initCamera(SurfaceHolder surfaceHolder) {
 		if (surfaceHolder == null) {
 			throw new IllegalStateException("No SurfaceHolder provided");
 		}

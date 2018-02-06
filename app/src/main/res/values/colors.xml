@@ -7,6 +7,7 @@
     <color name="colorGray">#ede8ea</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="home_color">#666666</color>
+    <color name="BanTouMin_color"> #60323232</color>
     <color name="bg_control_center_switch">#979797</color>
     <color name="awb_detail_color">#FFFFFFFF</color>
     <color name="splite_color">#979797</color>

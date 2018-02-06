@@ -195,6 +195,7 @@ public class HttpCommons {
     public static final String CGO_DOM_Exp_unLoading_NAME = "GNCCGOunLoading";
     public static final String CGO_DOM_Exp_unLoading_ACTION = "http://58.213.128.130/GNCCGOunLoading";
 
+    //国内装货
     public static final String CGO_DOM_Exp_GNCLoading_NAME = "GNCCGOLoading";
     public static final String CGO_DOM_Exp_GNCLoading_ACTION = "http://58.213.128.130/GNCCGOLoading";
 }
