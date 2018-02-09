@@ -191,4 +191,5 @@ public class ULDLoadingCargo implements Serializable {
     public void setPlanFno(String planFno) {
         PlanFno = planFno;
     }
+
 }

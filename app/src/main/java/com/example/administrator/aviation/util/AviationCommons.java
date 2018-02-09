@@ -109,8 +109,10 @@ public class AviationCommons {
     //回调参数
     public static final int GNC_ULDLOADING_CAMERA_REQUEST = 1;
     public static final int GNC_ULDinfo_CAMERA_REQUEST = 2;
+    public static final int GNC_ULDLOADING_XinZenPinBan_REQUEST = 3;
     public static final int GNC_ULDLOADING_CAMERA_RESULT = 11;
     public static final int GNC_ULDinfo_CAMERA_RESULT = 22;
+    public static final int GNC_ULDLOADING_XinZenPinBan_RESULT = 33;
 
     //上拉加载更多
     public static final int LOAD_DATA = 2;

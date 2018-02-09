@@ -1,6 +1,7 @@
 package com.example.administrator.aviation.ui.cgo.domestic;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,6 +37,7 @@ import com.example.administrator.aviation.model.hygnc.ULDLoadingCargo;
 import com.example.administrator.aviation.ui.base.AbPullToRefreshView;
 import com.example.administrator.aviation.ui.base.SyncHorizontalScrollView;
 import com.example.administrator.aviation.ui.base.TableModel;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
 import com.example.administrator.aviation.util.WeakHandler;
@@ -44,12 +46,16 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.administrator.aviation.R.id.progressBar;
 
 /**
  * Created by 石松涛 on 2017/12/6.
@@ -120,12 +126,13 @@ public class ZhuangZaiFragment extends Fragment {
     EditText sousuoZhudan;
     @BindView(R.id.pull_refresh_scroll)
     ScrollView refresh_scroll;
-    @BindView(R.id.uldloading_proBar_a)
-    ProgressBar progressBar;
 
     private final String TAG = "ZhuangZaiFragmentError";
     private final String page = "one";
     private int talHeight = 0;
+    // 初始化数据加载提示（即对话框）
+    private LoadingDialog Ldialog;
+    private TextView DaiLiRen;
 
     private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
     private WeakHandler mHandler = new WeakHandler();
@@ -143,7 +150,7 @@ public class ZhuangZaiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.table_zhuangzai, container, false);
-        mContext = getActivity().getApplicationContext();
+        mContext = getContext();
         ButterKnife.bind(this,view);
         init();
         return view;
@@ -154,7 +161,7 @@ public class ZhuangZaiFragment extends Fragment {
     public void init() {
         tv_table_title_left.setText("已装列表");
         getActivity().getLayoutInflater().inflate(R.layout.table_right_title, right_title_container);
-
+        Ldialog = new LoadingDialog(mContext);
         // 设置两个水平控件的联动
         titleHorScv.setScrollView(contentHorScv);
         contentHorScv.setScrollView(titleHorScv);
@@ -173,11 +180,12 @@ public class ZhuangZaiFragment extends Fragment {
     //region 利用反射初始化标题的TextView的item引用
     private void findTitleTextViewIds() {
         mTitleTvArray = new SparseArray<>();
-        for (int i = 0; i < loadingCargos.size(); i++) {
+        for (int i = 0; i < 13; i++) {
             try {
-                Field field = R.id.class.getField("tv_table_title_" + 0);
+                Field field = R.id.class.getField("tv_table_title_" + i);
                 int key = field.getInt(new R.id());
                 TextView textView = (TextView) view.findViewById(key);
+
                 mTitleTvArray.put(key, textView);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -388,6 +396,38 @@ public class ZhuangZaiFragment extends Fragment {
         });
         //endregion
 
+        //region 标题栏点击事件
+        loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
+            int key = 0;
+            key = mTitleTvArray.keyAt(i);
+            final TextView tx = mTitleTvArray.get(key);
+            if (tx.getText().equals("代理人")) {
+                DaiLiRen = tx;
+                break loop1;
+            }
+        }
+
+        DaiLiRen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txColor  = Integer.toHexString(DaiLiRen.getCurrentTextColor());
+                if (txColor.equals("ff000000")) {
+                    Collections.sort(loadingCargos, new Comparator<ULDLoadingCargo>() {
+                        @Override
+                        public int compare(ULDLoadingCargo o1, ULDLoadingCargo o2) {
+                            return o1.getAgentCode().compareTo(o2.getAgentCode());
+                        }
+                    });
+
+                    setDatas(loadingCargos,AviationCommons.REFRESH_DATA);
+                    DaiLiRen.setTextColor(Color.RED);
+                } else {
+                    pulltorefreshview.headerRefreshing();
+                }
+            }
+        });
+        //endregion
+
     }
     //endregion
 
@@ -397,7 +437,8 @@ public class ZhuangZaiFragment extends Fragment {
 
     //region 请求数据
     private void GetInfo(Map<String, String> p) {
-        progressBar.setVisibility(View.VISIBLE);
+        // 显示提示框
+        Ldialog.show();
         HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_NAME, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_ACTION, p,
                 new HttpRoot.CallBack() {
                     @Override
@@ -410,13 +451,13 @@ public class ZhuangZaiFragment extends Fragment {
 
                     @Override
                     public void onFailed(String message) {
-                        progressBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                         ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
                     }
 
                     @Override
                     public void onError() {
-                        progressBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                         ToastUtils.showToast(mContext,"数据获取出错",Toast.LENGTH_SHORT);
                     }
                 },page);
@@ -467,6 +508,8 @@ public class ZhuangZaiFragment extends Fragment {
     //region 把数据绑定到Model
     private void setDatas(List<ULDLoadingCargo> CGO, int type) {
         pulltorefreshview.setLoadMoreEnable(false);
+        store.clear();
+        DaiLiRen.setTextColor(Color.BLACK);
 
         if (CGO.size() > 0) {
             List<TableModel> mDatas = new ArrayList<>();
@@ -532,7 +575,7 @@ public class ZhuangZaiFragment extends Fragment {
                 } else {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
-                progressBar.setVisibility(View.GONE);
+                Ldialog.dismiss();
             }
         }
     };

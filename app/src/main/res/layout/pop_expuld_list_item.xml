@@ -12,5 +12,5 @@
         android:text="扫描装载"
         android:gravity="center"
         android:textColor="#fff"
-        android:background="@color/colorTitle"/>
+        android:background="@color/PopColor"/>
 </LinearLayout>

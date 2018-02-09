@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorTitle">#2e2d33</color>
+    <color name="PopColor">#413f48</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#1d2089</color>
     <color name="colorAccent">#FF4081</color>

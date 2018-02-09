@@ -39,6 +39,7 @@ import com.example.administrator.aviation.model.hygnc.ULDLoadingCargo;
 import com.example.administrator.aviation.ui.base.AbPullToRefreshView;
 import com.example.administrator.aviation.ui.base.SyncHorizontalScrollView;
 import com.example.administrator.aviation.ui.base.TableModel;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
 import com.example.administrator.aviation.util.WeakHandler;
@@ -48,6 +49,8 @@ import org.ksoap2.serialization.SoapObject;
 import java.lang.reflect.Field;
 import java.sql.Ref;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +60,11 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.key;
 import static android.R.id.list;
 import static com.example.administrator.aviation.R.id.pulltorefreshview;
 import static com.example.administrator.aviation.R.id.sousuoQuxiao;
+import static com.example.administrator.aviation.R.id.textView;
 
 /**
  * Created by Administrator on 2017/12/6.
@@ -75,7 +80,10 @@ public class DaiZhuangFragment extends Fragment {
 
     private AlertDialog.Builder inputDialog;
     private AlertDialog ad;
+    // 初始化数据加载提示（即对话框）
+    private LoadingDialog Ldialog;
     private EditText diaEdit;
+    private TextView DaiLiRen;
     private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
     private WeakHandler mHandler = new WeakHandler();
 
@@ -87,8 +95,6 @@ public class DaiZhuangFragment extends Fragment {
 
     @BindView(R.id.tv_table_title_left_d)
     TextView tv_table_title_left_d;
-    @BindView(R.id.uldloading_proBar_d)
-    ProgressBar proBar;
     @BindView(R.id.title_horsv_d)
     SyncHorizontalScrollView titleHorScv;
     @BindView(R.id.content_horsv_d)
@@ -123,7 +129,7 @@ public class DaiZhuangFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.table_daizhuang, container, false);
-        mContext = getActivity().getApplicationContext();
+        mContext = getContext();
         ButterKnife.bind(this,view);
         init();
         return view;
@@ -141,6 +147,7 @@ public class DaiZhuangFragment extends Fragment {
 
         jiansuokuang.setVisibility(View.GONE);
         inputDialog = new AlertDialog.Builder(getActivity());
+        Ldialog = new LoadingDialog(getContext());
 
         res = (HashMap<String, String>) getArguments().getSerializable("daizhuang");
         GetInfo(res);
@@ -154,11 +161,12 @@ public class DaiZhuangFragment extends Fragment {
     //region 利用反射初始化标题的TextView的item引用
     private void findTitleTextViewIds() {
         mTitleTvArray = new SparseArray<>();
-        for (int i = 0; i < DaiZhuangCargos.size(); i++) {
+        for (int i = 0; i < 13; i++) {
             try {
-                Field field = R.id.class.getField("tv_table_title_" + 0);
+                Field field = R.id.class.getField("tv_table_title_" + i);
                 int key = field.getInt(new R.id());
                 TextView textView = (TextView) view.findViewById(key);
+
                 mTitleTvArray.put(key, textView);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -304,8 +312,7 @@ public class DaiZhuangFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (getActivity() != null){
-//                    TableModel ta = (TableModel) parent.getItemAtPosition(position);
-//                    Toast.makeText(getActivity().getApplicationContext(), ta.getLeftTitle() + "_" + position , Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -381,7 +388,6 @@ public class DaiZhuangFragment extends Fragment {
                 if (getActivity() != null ){
                     if (store.size() > 1) {
                         ZhuangHuo();
-                        store.clear();
                         pulltorefreshview.headerRefreshing();
                     } else if (store.size() == 1) {
                         LayoutInflater llInflater = LayoutInflater.from(mContext);
@@ -398,7 +404,6 @@ public class DaiZhuangFragment extends Fragment {
                                             if (Integer.parseInt(diaEdit.getText().toString()) <= yuanshishuzi) {
                                                 store.get(0).put("PC", diaEdit.getText().toString().trim());
                                                 ZhuangHuo();
-                                                store.clear();
                                                 pulltorefreshview.headerRefreshing();
                                             } else {
                                                 ToastUtils.showToast(mContext,"输入值大于货物件数", Toast.LENGTH_SHORT);
@@ -434,6 +439,37 @@ public class DaiZhuangFragment extends Fragment {
         });
         //endregion
 
+        //region 标题栏点击事件
+loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
+            int key = 0;
+            key = mTitleTvArray.keyAt(i);
+            final TextView tx = mTitleTvArray.get(key);
+            if (tx.getText().equals("代理人")) {
+                DaiLiRen = tx;
+                break loop1;
+            }
+        }
+
+        DaiLiRen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txColor  = Integer.toHexString(DaiLiRen.getCurrentTextColor());
+                if (txColor.equals("ff000000")) {
+                    Collections.sort(DaiZhuangCargos, new Comparator<ULDLoadingCargo>() {
+                        @Override
+                        public int compare(ULDLoadingCargo o1, ULDLoadingCargo o2) {
+                            return o1.getAgentCode().compareTo(o2.getAgentCode());
+                        }
+                    });
+
+                    setDatas(DaiZhuangCargos,AviationCommons.REFRESH_DATA);
+                    DaiLiRen.setTextColor(Color.RED);
+                } else {
+                    pulltorefreshview.headerRefreshing();
+                }
+            }
+        });
+        //endregion
     }
     //endregion
 
@@ -444,6 +480,8 @@ public class DaiZhuangFragment extends Fragment {
     //region 把数据绑定到Model
     private void setDatas(List<ULDLoadingCargo> CGO, int type) {
         pulltorefreshview.setLoadMoreEnable(false);
+        store.clear();
+        DaiLiRen.setTextColor(Color.BLACK);
 
         if (CGO.size() > 0) {
             List<TableModel> mDatas = new ArrayList<>();
@@ -499,7 +537,8 @@ public class DaiZhuangFragment extends Fragment {
 
     //region 请求数据
     private void GetInfo(Map<String, String> p) {
-        proBar.setVisibility(View.VISIBLE);
+        // 显示提示框
+        Ldialog.show();
         HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_NAME, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_ACTION, p,
                 new HttpRoot.CallBack() {
                     @Override
@@ -507,20 +546,18 @@ public class DaiZhuangFragment extends Fragment {
                         SoapObject object = (SoapObject) result;
                         String ULDLoadingCargoZhuang = object.getProperty(0).toString();
                         DaiZhuangCargos = ParseULDLoadingCargo.parseULDLoadingCargoXMLto(ULDLoadingCargoZhuang,1);
-
                         handler.sendEmptyMessage(AviationCommons.GNC_ULDLoadingCargo);
-
                     }
 
                     @Override
                     public void onFailed(String message) {
-                        proBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                         ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
                     }
 
                     @Override
                     public void onError() {
-                        proBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                         ToastUtils.showToast(mContext,"数据获取出错",Toast.LENGTH_SHORT);
                     }
                 },page);
@@ -538,7 +575,7 @@ public class DaiZhuangFragment extends Fragment {
                 } else {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
-                proBar.setVisibility(View.GONE);
+                Ldialog.dismiss();
             }
         }
     };

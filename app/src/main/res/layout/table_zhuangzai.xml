@@ -42,7 +42,6 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
-                <!--<include layout="@layout/table_sales_right_tab"/>-->
             </LinearLayout>
         </com.example.administrator.aviation.ui.base.SyncHorizontalScrollView>
     </LinearLayout>
@@ -110,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="输入运单号后四位"
+                android:inputType="number"
                 android:textSize="15sp"
                 android:background="@android:drawable/edit_text"/>
 
@@ -160,13 +160,5 @@
                 app:fabSize="mini"
                 app:srcCompat="@drawable/jianjian" />
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/uldloading_proBar_a"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center"
-            android:visibility="gone"/>
     </FrameLayout>
 </LinearLayout>

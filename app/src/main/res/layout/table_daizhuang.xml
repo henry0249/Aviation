@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fillViewport="true"
+            android:descendantFocusability="blocksDescendants"
             android:scrollbars="none">
 
             <LinearLayout
@@ -110,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="输入运单号后四位"
+                android:inputType="number"
                 android:textSize="15sp"
                 android:background="@android:drawable/edit_text"/>
 
@@ -160,13 +162,5 @@
                 app:fabSize="mini"
                 app:srcCompat="@drawable/jia_1" />
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/uldloading_proBar_d"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center"
-            android:visibility="gone"/>
     </FrameLayout>
 </LinearLayout>

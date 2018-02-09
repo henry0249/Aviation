@@ -1,16 +1,13 @@
 package com.example.administrator.aviation.ui.cgo.domestic;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.PopupMenu;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +15,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,79 +30,82 @@ import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.adapter.ListViewAdapter;
 import com.example.administrator.aviation.model.hygnc.GNCULDLoading;
 import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
+import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
-import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.id.list;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
-import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
 
+////////////////////////////////////////////////////////////////////
+//                          _ooOoo_                               //
+//                         o8888888o                              //
+//                         88" . "88                              //
+//                         (| ^_^ |)                              //
+//                         O\  =  /O                              //
+//                      ____/`---'\____                           //
+//                    .'  \\|     |//  `.                         //
+//                   /  \\|||  :  |||//  \                        //
+//                  /  _||||| -:- |||||-  \                       //
+//                  |   | \\\  -  /// |   |                       //
+//                  | \_|  ''\---/''  |   |                       //
+//                  \  .-\__  `-`  ___/-. /                       //
+//                ___`. .'  /--.--\  `. . ___                     //
+//              ."" '<  `.___\_<|>_/___.'  >'"".                  //
+//            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
+//            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
+//      ========`-.____`-.___\_____/___.-`____.-'========         //
+//                           `=---='                              //
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
+//             佛祖保佑       永无BUG     永不修改                //
+//                                                                //
+//       佛曰:                                                    //
+//               写字楼里写字间，写字间里程序员；                 //
+//               程序人员写程序，又拿程序换酒钱。                 //
+//               酒醒只在网上坐，酒醉还来网下眠；                 //
+//               酒醉酒醒日复日，网上网下年复年。                 //
+//               但愿老死电脑间，不愿鞠躬老板前；                 //
+//               奔驰宝马贵者趣，公交自行程序员。                 //
+//               别人笑我太疯癫，我笑他人看不穿；                 //
+//               不见满街漂亮妹，哪个归得程序员？                 //
+////////////////////////////////////////////////////////////////////
 public class expULDLoading extends AppCompatActivity {
-    ////////////////////////////////////////////////////////////////////
-    //                          _ooOoo_                               //
-    //                         o8888888o                              //
-    //                         88" . "88                              //
-    //                         (| ^_^ |)                              //
-    //                         O\  =  /O                              //
-    //                      ____/`---'\____                           //
-    //                    .'  \\|     |//  `.                         //
-    //                   /  \\|||  :  |||//  \                        //
-    //                  /  _||||| -:- |||||-  \                       //
-    //                  |   | \\\  -  /// |   |                       //
-    //                  | \_|  ''\---/''  |   |                       //
-    //                  \  .-\__  `-`  ___/-. /                       //
-    //                ___`. .'  /--.--\  `. . ___                     //
-    //              ."" '<  `.___\_<|>_/___.'  >'"".                  //
-    //            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
-    //            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
-    //      ========`-.____`-.___\_____/___.-`____.-'========         //
-    //                           `=---='                              //
-    //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
-    //             佛祖保佑       永无BUG     永不修改                //
-    //                                                                //
-    //       佛曰:                                                    //
-    //               写字楼里写字间，写字间里程序员；                 //
-    //               程序人员写程序，又拿程序换酒钱。                 //
-    //               酒醒只在网上坐，酒醉还来网下眠；                 //
-    //               酒醉酒醒日复日，网上网下年复年。                 //
-    //               但愿老死电脑间，不愿鞠躬老板前；                 //
-    //               奔驰宝马贵者趣，公交自行程序员。                 //
-    //               别人笑我太疯癫，我笑他人看不穿；                 //
-    //               不见满街漂亮妹，哪个归得程序员？                 //
-    ////////////////////////////////////////////////////////////////////
-
-    @BindView(R.id.uldloading_linLay_XinZenSheBei)
-    LinearLayout XinZenSheBei;
     @BindView(R.id.uldloading_proBar)
     ProgressBar proBar;
     @BindView(R.id.uldloading_Img_SaoMa)
     ImageView Img_SaoMa;
     @BindView(R.id.uldloading_Scrl)
     ScrollView scrollview;
+    @BindView(R.id.uldloading_Layout_Tijiao)
+    LinearLayout LayTiJiao;
+    @BindView(R.id.uldloading_Lay_PB)
+    LinearLayout Lay_PB;
+    @BindView(R.id.uldloading_navBar)
+    ViewGroup uldloading_navBar;
 
     @BindView(R.id.uldloading_Btn_ChaXun)
     Button ChaXun;
     @BindView(R.id.uldloading_Btn_XinZen)
     Button XinZen;
-    @BindView(R.id.uldloading_Btn_QueDin)
-    Button QueDin;
-    @BindView(R.id.uldloading_Btn_QuXiao)
-    Button QuXiao;
     @BindView(R.id.uldloading_Btn_QinKong)
     Button QinKong;
+    @BindView(R.id.uldloading_Btn_XiuGai)
+    Button XiuGai;
+    @BindView(R.id.uldloading_Btn_Tijiao)
+    Button btn_Tijiao;
+    @BindView(R.id.uldloading_Btn_quXiao)
+    Button btn_Quxiao;
 
     @BindView(R.id.uldloading_edtTxt_PinBanHao_one)
     EditText PinBanHao_one;
@@ -136,8 +135,6 @@ public class expULDLoading extends AppCompatActivity {
     TextView RiQi;
     @BindView(R.id.uldloading_tv_ChenYunRen)
     TextView ChenYunRen;
-    @BindView(R.id.uldloading_tv_BeiZhu)
-    TextView BeiZhu;
     @BindView(R.id.uldloading_tv_LiuShuiHao)
     TextView LiuShuiHao;
     @BindView(R.id.uldloading_tv_BanXin)
@@ -145,21 +142,13 @@ public class expULDLoading extends AppCompatActivity {
     @BindView(R.id.uldloading_tv_CangWei)
     TextView CangWei;
 
-    @BindView(R.id.uldloading_edtTxt_PinBanHao_A)
-    EditText PinBanHao_A;
-    @BindView(R.id.uldloading_edtTxt_PinBanZhong_A)
-    EditText PinBanZhong_A;
-    @BindView(R.id.uldloading_edtTxt_uldBianHao_A)
-    EditText uldBianHao_A;
-    @BindView(R.id.uldloading_edtTxt_uldBianZhong_A)
-    EditText uldBianZhong_A;
-    @BindView(R.id.uldloading_edtTxt_uldBianHao_B)
-    EditText uldBianHao_B;
-    @BindView(R.id.uldloading_edtTxt_uldBianZhong_B)
-    EditText uldBianZhong_B;
+    @BindView(R.id.uldloading_tv_BeiZhu)
+    EditText BeiZhu;
 
     private NavBar navBar;
     private PopupWindow pw;
+    private Context mContext;
+    private Activity mAct;
 
     private final String TAG = "expULDLoadingLog";
     private final String page = "one";
@@ -171,18 +160,25 @@ public class expULDLoading extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = expULDLoading.this;
+        mAct = (Activity) mContext;
         setContentView(R.layout.exp_uldloading_activity);
         ButterKnife.bind(this);
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
     }
 
     private void initView() {
         navBar = new NavBar(this);
         navBar.setTitle("货物装载");
         navBar.setRight(R.drawable.detail_0);
-        XinZenSheBei.setVisibility(View.GONE);
+        LayTiJiao.setVisibility(View.GONE);
         TxtViewSetEmpty();
-        EditViewSetEmpty();
         setListener();
     }
 
@@ -208,14 +204,7 @@ public class expULDLoading extends AppCompatActivity {
         CangWei.setText("");
     }
 
-    private void EditViewSetEmpty() {
-        PinBanHao_A.setText("");
-        PinBanZhong_A.setText("");
-        uldBianHao_A.setText("");
-        uldBianZhong_A.setText("");
-        uldBianHao_B.setText("");
-        uldBianZhong_B.setText("");
-    }
+
 
     //endregion
 
@@ -233,7 +222,7 @@ public class expULDLoading extends AppCompatActivity {
 
                     if (!TextUtils.isEmpty(re)) {
                         Map<String, String> params = new HashMap<>();
-                        KeyBoardHide();
+                        PublicFun.KeyBoardHide(mAct,mContext);
                         params.put("ID", re.split("/")[0].trim());
                         params.put("CarID", "");
                         params.put("ULD", re.split("/")[1].trim());
@@ -243,6 +232,8 @@ public class expULDLoading extends AppCompatActivity {
                         GetInfo(params);
                     }
                 }
+            case 3:
+
         }
     }
     //endregion
@@ -276,38 +267,40 @@ public class expULDLoading extends AppCompatActivity {
         XinZen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (XinZenSheBei.getVisibility() == View.VISIBLE) {
-                    XinZen.setText("新增");
-                    QuXiao.performClick();
-                } else if (XinZenSheBei.getVisibility() == View.GONE) {
-                    XinZen.setText("关闭");
-                    XinZenSheBei.setVisibility(View.VISIBLE);
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
-                            PinBanHao_A.setFocusable(true);
-                            PinBanHao_A.setFocusableInTouchMode(true);
-                            PinBanHao_A.requestFocus();
-                        }
-                    });
+                Intent intent = new Intent(expULDLoading.this, ActLiHuoXinZenPinBan.class);
+                intent.putExtra("id",GNC_ULDLOADING_XinZenPinBan_REQUEST);
+                startActivityForResult(intent, GNC_ULDLOADING_XinZenPinBan_REQUEST);
+            }
+        });
+        //endregion
+
+        //region 修改按钮点击
+        XiuGai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pinBan = PinBanHao_one.getText().toString().trim();
+                if (!TextUtils.isEmpty(pinBan)) {
+                    OpenWri();
                 }
+            }
+        });
+        //endregion
 
-
+        //region 提交按钮点击
+        btn_Tijiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
         //endregion
 
-        //region 取消按钮的点击事件
-        QuXiao.setOnClickListener(new View.OnClickListener() {
+        //region 取消按钮点击
+        btn_Quxiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditViewSetEmpty();
-                XinZenSheBei.setVisibility(View.GONE);
-                if (XinZen.getText() == "关闭") {
-                    XinZen.setText("新增");
-                }
+                CloseWri();
+                ChaXun.performClick();
             }
         });
         //endregion
@@ -325,7 +318,7 @@ public class expULDLoading extends AppCompatActivity {
                         pinBan = "0" + pinBan;
                     }
 
-                    KeyBoardHide();
+                    PublicFun.KeyBoardHide(mAct, mContext);
                     params.put("ID", "0");
                     params.put("CarID", pinBan);
                     params.put("ULD", "");
@@ -333,6 +326,8 @@ public class expULDLoading extends AppCompatActivity {
                     proBar.setVisibility(View.VISIBLE);
 
                     GetInfo(params);
+                } else {
+                    TxtViewSetEmpty();
                 }
             }
         });
@@ -342,7 +337,7 @@ public class expULDLoading extends AppCompatActivity {
         uldBianHao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KeyBoardHide();
+                PublicFun.KeyBoardHide(mAct,mContext);
                 String u = uldBianHao.getText().toString().trim();
                 if (!TextUtils.isEmpty(u) && gnculd.size() > 1) {
                     if (list.size() == 0) {
@@ -385,6 +380,88 @@ public class expULDLoading extends AppCompatActivity {
         });
         //endregion
 
+        //region 舱位下拉选择事件
+        CangWei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PublicFun.KeyBoardHide(mAct,mContext);
+                if (LayTiJiao.getVisibility() == View.VISIBLE) {
+                    //通过布局注入器，注入布局给View对象
+                    View myView = getLayoutInflater().inflate(R.layout.pop_gnculd, null);
+                    //通过view 和宽·高，构造PopopWindow
+                    pw = new PopupWindow(myView, CangWei.getWidth(), 250, true);
+
+                    pw.setBackgroundDrawable(getResources().getDrawable(
+                            //此处为popwindow 设置背景，同事做到点击外部区域，popwindow消失
+                            R.drawable.diaolog_bg));
+                    //设置焦点为可点击
+                    pw.setFocusable(true);//可以试试设为false的结果
+                    //将window视图显示在myButton下面
+                    pw.showAsDropDown(CangWei);
+                    ListView lv = (ListView) myView.findViewById(R.id.lv_pop);
+                    list = new ArrayList<String>();
+                    list.add("1HD");
+                    list.add("2HD");
+                    list.add("3HD");
+                    list.add("4HD");
+                    list.add("5HD");
+
+                    lv.setAdapter(new ListViewAdapter(expULDLoading.this, list));
+
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+                            CangWei.setText(list.get(position));
+                            pw.dismiss();
+                        }
+                    });
+                }
+            }
+        });
+        //endregion
+
+        //region 优先级下拉选择事件
+        YouXianJi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PublicFun.KeyBoardHide(mAct,mContext);
+                if (LayTiJiao.getVisibility() == View.VISIBLE) {
+                    //通过布局注入器，注入布局给View对象
+                    View myView = getLayoutInflater().inflate(R.layout.pop_gnculd, null);
+                    //通过view 和宽·高，构造PopopWindow
+                    pw = new PopupWindow(myView, YouXianJi.getWidth(), 220, true);
+
+                    pw.setBackgroundDrawable(getResources().getDrawable(
+                            //此处为popwindow 设置背景，同事做到点击外部区域，popwindow消失
+                            R.drawable.diaolog_bg));
+                    //设置焦点为可点击
+                    pw.setFocusable(true);//可以试试设为false的结果
+                    //将window视图显示在myButton下面
+                    pw.showAsDropDown(YouXianJi);
+                    ListView lv = (ListView) myView.findViewById(R.id.lv_pop);
+                    list = new ArrayList<String>();
+                    list.add("1");
+                    list.add("2");
+                    list.add("3");
+
+                    lv.setAdapter(new ListViewAdapter(expULDLoading.this, list));
+
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+                            YouXianJi.setText(list.get(position));
+                            pw.dismiss();
+                        }
+                    });
+                }
+            }
+        });
+        //endregion
+
         //region 清空按钮
         QinKong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -406,9 +483,45 @@ public class expULDLoading extends AppCompatActivity {
     }
     //endregion
 
+
     //endregion
 
     //region 功能方法
+
+    //region 打开编辑区
+    private void OpenWri() {
+        LayTiJiao.setVisibility(View.VISIBLE);
+
+        BeiZhu.setBackgroundResource(R.drawable.edit_bg);
+        CangWei.setBackgroundResource(R.drawable.selector_sinner);
+        YouXianJi.setBackgroundResource(R.drawable.selector_sinner);
+        uldBianHao.setBackgroundResource(0);
+
+        BeiZhu.setFocusable(true);
+        BeiZhu.setFocusableInTouchMode(true);
+        BeiZhu.requestFocus();
+
+        PublicFun.ElementSwitch(Lay_PB,false);
+        PublicFun.ElementSwitch(uldloading_navBar,false);
+    }
+    //endregion
+
+    //region 关闭编辑区
+    private void CloseWri() {
+        LayTiJiao.setVisibility(View.GONE);
+
+        BeiZhu.setBackgroundResource(0);
+        CangWei.setBackgroundResource(0);
+        YouXianJi.setBackgroundResource(0);
+        uldBianHao.setBackgroundResource(R.drawable.selector_sinner);
+
+        BeiZhu.setFocusable(false);
+        BeiZhu.setFocusableInTouchMode(false);
+
+        PublicFun.ElementSwitch(Lay_PB,true);
+        PublicFun.ElementSwitch(uldloading_navBar,true);
+    }
+    //endregion
 
     //region 句柄监听
     Handler handler = new Handler() {
@@ -515,25 +628,6 @@ public class expULDLoading extends AppCompatActivity {
                     InputMethodManager.HIDE_NOT_ALWAYS);
 
         }
-    }
-    //endregion
-
-    //region 隐藏软键盘
-    private void KeyBoardHide() {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(imm.isActive() && getCurrentFocus()!=null){
-            if (getCurrentFocus().getWindowToken()!=null) {
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
-    }
-    //endregion
-
-    // region 点击空白处隐藏软键盘
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        KeyBoardHide();
-        return super.onTouchEvent(event);
     }
     //endregion
 
