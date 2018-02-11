@@ -7,10 +7,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -142,6 +145,8 @@ public class expULDLoading extends AppCompatActivity {
     @BindView(R.id.uldloading_tv_CangWei)
     TextView CangWei;
 
+    @BindView(R.id.uldloading_Lay_YinCan)
+    LinearLayout LayYincang;
     @BindView(R.id.uldloading_tv_BeiZhu)
     EditText BeiZhu;
 
@@ -152,8 +157,9 @@ public class expULDLoading extends AppCompatActivity {
 
     private final String TAG = "expULDLoadingLog";
     private final String page = "one";
-    private List<GNCULDLoading> gnculd = new ArrayList<>();
-    private ArrayList<String> list = new ArrayList<>();
+    private static String PinBan_Two = "";
+    private static List<GNCULDLoading> gnculd = new ArrayList<>();
+    private static ArrayList<String> list = new ArrayList<>();
 
     //region 初始化
 
@@ -178,6 +184,7 @@ public class expULDLoading extends AppCompatActivity {
         navBar.setTitle("货物装载");
         navBar.setRight(R.drawable.detail_0);
         LayTiJiao.setVisibility(View.GONE);
+        LayYincang.setVisibility(View.GONE);
         TxtViewSetEmpty();
         setListener();
     }
@@ -198,13 +205,12 @@ public class expULDLoading extends AppCompatActivity {
         RiQi.setText("");
         ChenYunRen.setText("");
         LiuShuiHao.setText("");
+        PinBan_Two = "";
 
         BeiZhu.setText("");
         BanXin.setText("");
         CangWei.setText("");
     }
-
-
 
     //endregion
 
@@ -241,23 +247,27 @@ public class expULDLoading extends AppCompatActivity {
     //region 页面上所有的点击事件
     private void setListener() {
 
-        //region navBar的点击事件
+        //region navBar右侧图片的点击事件
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (gnculd.size() > 0 && !TextUtils.isEmpty(LiuShuiHao.getText().toString().trim())) {
-                    HashMap<String, String> go = new HashMap<String, String>();
-                    go.put("ID",LiuShuiHao.getText().toString().trim());
-                    go.put("ULD", uldBianHao.getText().toString().trim());
-                    go.put("BanID", PinBanHao_one.getText().toString().trim());
-                    go.put("ErrString", "");
+                    if (PinBan_Two.equals(PinBanHao_one.getText().toString().trim())) {
+                        HashMap<String, String> go = new HashMap<String, String>();
+                        go.put("ID", LiuShuiHao.getText().toString().trim());
+                        go.put("ULD", uldBianHao.getText().toString().trim());
+                        go.put("BanID", PinBan_Two);
+                        go.put("ErrString", "");
 
-                    Bundle mBundle = new Bundle();
-                    mBundle.putSerializable("Info",go);
+                        Bundle mBundle = new Bundle();
+                        mBundle.putSerializable("Info", go);
 
-                    Intent intent = new Intent(expULDLoading.this,expULDcargoInfo.class);
-                    intent.putExtras(mBundle);
-                    startActivity(intent);
+                        Intent intent = new Intent(expULDLoading.this, expULDcargoInfo.class);
+                        intent.putExtras(mBundle);
+                        startActivity(intent);
+                    } else {
+                        ToastUtils.showToast(mContext,"平板编号和查询信息不一致！",Toast.LENGTH_LONG);
+                    }
                 }
             }
         });
@@ -268,7 +278,7 @@ public class expULDLoading extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(expULDLoading.this, ActLiHuoXinZenPinBan.class);
-                intent.putExtra("id",GNC_ULDLOADING_XinZenPinBan_REQUEST);
+                intent.putExtra("id", GNC_ULDLOADING_XinZenPinBan_REQUEST);
                 startActivityForResult(intent, GNC_ULDLOADING_XinZenPinBan_REQUEST);
             }
         });
@@ -312,6 +322,7 @@ public class expULDLoading extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String pinBan = PinBanHao_one.getText().toString().trim();
                 if (!TextUtils.isEmpty(pinBan)) {
+
                     if (pinBan.length() == 1) {
                         pinBan = "00" + pinBan;
                     } else if (pinBan.length() == 2) {
@@ -325,6 +336,7 @@ public class expULDLoading extends AppCompatActivity {
                     params.put("ErrString", "");
                     proBar.setVisibility(View.VISIBLE);
 
+                    PinBan_Two = pinBan;
                     GetInfo(params);
                 } else {
                     TxtViewSetEmpty();
@@ -337,7 +349,7 @@ public class expULDLoading extends AppCompatActivity {
         uldBianHao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PublicFun.KeyBoardHide(mAct,mContext);
+                PublicFun.KeyBoardHide(mAct, mContext);
                 String u = uldBianHao.getText().toString().trim();
                 if (!TextUtils.isEmpty(u) && gnculd.size() > 1) {
                     if (list.size() == 0) {
@@ -384,7 +396,7 @@ public class expULDLoading extends AppCompatActivity {
         CangWei.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PublicFun.KeyBoardHide(mAct,mContext);
+                PublicFun.KeyBoardHide(mAct, mContext);
                 if (LayTiJiao.getVisibility() == View.VISIBLE) {
                     //通过布局注入器，注入布局给View对象
                     View myView = getLayoutInflater().inflate(R.layout.pop_gnculd, null);
@@ -426,7 +438,7 @@ public class expULDLoading extends AppCompatActivity {
         YouXianJi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PublicFun.KeyBoardHide(mAct,mContext);
+                PublicFun.KeyBoardHide(mAct, mContext);
                 if (LayTiJiao.getVisibility() == View.VISIBLE) {
                     //通过布局注入器，注入布局给View对象
                     View myView = getLayoutInflater().inflate(R.layout.pop_gnculd, null);
@@ -480,9 +492,21 @@ public class expULDLoading extends AppCompatActivity {
         });
         //endregion
 
+        //region 平板号EditText监听键盘Enter事件
+        PinBanHao_one.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) || ChaXun.isEnabled())  {
+                    ChaXun.performClick();
+                    return true;
+                }
+                return false;
+            }
+        }
+        );
+        //endregion
     }
     //endregion
-
 
     //endregion
 
