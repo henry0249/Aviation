@@ -603,7 +603,7 @@ public class ZhuangZaiFragment extends Fragment {
         if (mAdapter == null) {
             return;
         }
-        View mView = mAdapter.getView(1, null, listView);
+        View mView = mAdapter.getView(0, null, listView);
         mView.measure(0, 0);
         talHeight = mView.getMeasuredHeight() + 4;
     }

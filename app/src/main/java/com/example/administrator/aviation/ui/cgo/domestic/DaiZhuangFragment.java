@@ -604,7 +604,7 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
         if (mAdapter == null) {
             return;
         }
-        View mView = mAdapter.getView(1, null, listView);
+        View mView = mAdapter.getView(0, null, listView);
         mView.measure(0, 0);
         talHeight = mView.getMeasuredHeight() + listView.getDividerHeight();
     }
