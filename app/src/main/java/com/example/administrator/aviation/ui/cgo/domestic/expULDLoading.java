@@ -336,7 +336,7 @@ public class expULDLoading extends AppCompatActivity {
                     params.put("ErrString", "");
                     proBar.setVisibility(View.VISIBLE);
 
-                    PinBan_Two = pinBan;
+
                     GetInfo(params);
                 } else {
                     TxtViewSetEmpty();
@@ -493,7 +493,7 @@ public class expULDLoading extends AppCompatActivity {
         //endregion
 
         //region 平板号EditText监听键盘Enter事件
-        PinBanHao_one.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        PinBanHao_one.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) || ChaXun.isEnabled())  {
@@ -557,6 +557,7 @@ public class expULDLoading extends AppCompatActivity {
                     TextSetVaule(0);
                     list = new ArrayList<>();
                     PinBanHao_one.setSelection(PinBanHao_one.getText().toString().trim().length());
+                    PinBan_Two = PinBanHao_one.getText().toString().trim();
                 } else {
                     ToastUtils.showToast(expULDLoading.this,"数据为空",Toast.LENGTH_SHORT);
                     TxtViewSetEmpty();

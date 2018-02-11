@@ -12,10 +12,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -64,6 +66,7 @@ import static android.R.attr.key;
 import static android.R.id.list;
 import static com.example.administrator.aviation.R.id.pulltorefreshview;
 import static com.example.administrator.aviation.R.id.sousuoQuxiao;
+import static com.example.administrator.aviation.R.id.sousuoYundan;
 import static com.example.administrator.aviation.R.id.textView;
 
 /**
@@ -469,6 +472,20 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
                 }
             }
         });
+        //endregion
+
+        //region 运单号EditText监听键盘Enter事件
+        sousuoZhudan.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+               @Override
+               public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                   if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) || jiansuokuang.isEnabled())  {
+                       sousuoQuedin.performClick();
+                       return true;
+                   }
+                   return false;
+               }
+           }
+        );
         //endregion
     }
     //endregion

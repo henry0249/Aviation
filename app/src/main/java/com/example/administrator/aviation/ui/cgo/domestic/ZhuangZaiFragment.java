@@ -10,10 +10,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -56,6 +58,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.administrator.aviation.R.id.progressBar;
+import static com.example.administrator.aviation.R.id.sousuoYundan;
 
 /**
  * Created by 石松涛 on 2017/12/6.
@@ -428,6 +431,19 @@ public class ZhuangZaiFragment extends Fragment {
         });
         //endregion
 
+        //region 运单号EditText监听键盘Enter事件
+        sousuoZhudan.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+               @Override
+               public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                   if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) || jiansuokuang.isEnabled())  {
+                       sousuoQuedin.performClick();
+                       return true;
+                   }
+                   return false;
+               }
+           }
+        );
+        //endregion
     }
     //endregion
 

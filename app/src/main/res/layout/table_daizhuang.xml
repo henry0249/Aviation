@@ -112,6 +112,7 @@
                 android:layout_weight="1"
                 android:hint="输入运单号后四位"
                 android:inputType="number"
+                android:imeOptions="actionDone"
                 android:textSize="15sp"
                 android:background="@android:drawable/edit_text"/>
 
