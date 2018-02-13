@@ -69,7 +69,7 @@ public class expULDcargoInfo extends AppCompatActivity {
     private EditText diaEdit;
 
     private final String TAG = "expULDcargoInfo";
-    private final String page = "one";
+    private static int PageFlag = 0;
     private HashMap<String, String> idArrary = new HashMap<>();
 
     //region 初始化
@@ -177,6 +177,7 @@ public class expULDcargoInfo extends AppCompatActivity {
                 ZhuangZaiXinXi.setTextColor(getResources().getColor(R.color.colorGray));
                 DaiZhuangXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));
                 DaiZhuangXinXi.setTextColor(getResources().getColor(R.color.colorTitle));
+                PageFlag = 0;
                 initFragment(0);
             }
         });
@@ -190,6 +191,7 @@ public class expULDcargoInfo extends AppCompatActivity {
                 DaiZhuangXinXi.setTextColor(getResources().getColor(R.color.colorGray));
                 ZhuangZaiXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));
                 ZhuangZaiXinXi.setTextColor(getResources().getColor(R.color.colorTitle));
+                PageFlag = 1;
                 initFragment(1);
             }
         });
@@ -231,34 +233,40 @@ public class expULDcargoInfo extends AppCompatActivity {
                     Bundle bundle = data.getExtras();
                     String re = bundle.getString("result");
 
-                    LayoutInflater abcInflater = LayoutInflater.from(Mcontext);
-                    inputDialog = new AlertDialog.Builder(Mcontext);
-                    View newPlanDialog = abcInflater.inflate(R.layout.dialog_saomiao_zhuanghuo, (ViewGroup)findViewById(R.id.dia_saomiaoZhuangHuo));
-                    inputDialog.setView(newPlanDialog);
+                    if (TextUtils.isEmpty(re)) {
+                        LayoutInflater abcInflater = LayoutInflater.from(Mcontext);
+                        inputDialog = new AlertDialog.Builder(Mcontext);
+                        View newPlanDialog = abcInflater.inflate(R.layout.dialog_saomiao_zhuanghuo, (ViewGroup) findViewById(R.id.dia_saomiaoZhuangHuo));
+                        inputDialog.setView(newPlanDialog);
 
-                    inputDialog.setPositiveButton("装货",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
+                        if (PageFlag == 0) {
+                            inputDialog.setPositiveButton("卸货",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //...To-do
+                                        }
+                                    });
+                        } else if (PageFlag == 1) {
+                            inputDialog.setPositiveButton("装货",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //...To-do
+                                        }
+                                    });
+                        }
 
-                                }
-                            });
+                        ad = inputDialog.create();
+                        ad.show();
+                        diaEdit = (EditText) ad.findViewById(R.id.DiaAdit_SaoMiaoYunDanHao);
+                        diaEdit.setTextColor(Color.rgb(0, 0, 0));
+                        diaEdit.setText(re);
+                        diaEdit.setSelection(diaEdit.getText().toString().trim().length());
+                    } else {
+                        ToastUtils.showToast(Mcontext,"成功",Toast.LENGTH_LONG);
+                    }
 
-                    inputDialog.setNegativeButton("卸货" ,
-                            new   DialogInterface.OnClickListener() {
-                                @Override
-                                public   void   onClick(DialogInterface dialog,   int   which) {
-                                    //...To-do
-                                }
-                            });
-
-                    ad = inputDialog.create();
-                    ad.show();
-                    diaEdit = (EditText)ad.findViewById(R.id.DiaAdit_SaoMiaoYunDanHao);
-                    diaEdit.setTextColor(Color.rgb(0, 0, 0));
-                    diaEdit.setText(re);
-                    diaEdit.setSelection(diaEdit.getText().toString().trim().length());
 
                 }
         }

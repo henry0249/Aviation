@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -291,6 +293,13 @@ public class expULDLoading extends AppCompatActivity {
                 String pinBan = PinBanHao_one.getText().toString().trim();
                 if (!TextUtils.isEmpty(pinBan)) {
                     OpenWri();
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+                        }
+                    });
                 }
             }
         });

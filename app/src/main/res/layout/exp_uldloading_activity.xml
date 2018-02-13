@@ -569,6 +569,7 @@
                     android:id="@+id/uldloading_Layout_Tijiao"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
                     android:background="#ffffff">
 
                     <Button
