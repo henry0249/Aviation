@@ -9,6 +9,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -67,8 +68,9 @@ public class expULDcargoInfo extends AppCompatActivity {
     private AlertDialog.Builder inputDialog;
     private AlertDialog ad;
     private EditText diaEdit;
+    private Fragment currentFragment;
 
-    private final String TAG = "expULDcargoInfo";
+    private final static String TAG = "expULDcargoInfo";
     private static int PageFlag = 0;
     private HashMap<String, String> idArrary = new HashMap<>();
 
@@ -80,7 +82,7 @@ public class expULDcargoInfo extends AppCompatActivity {
         setContentView(R.layout.activity_exp_uldcargo_info);
         ButterKnife.bind(this);
         initView();
-        initFragment(0);
+        switchFragment(zhuangzaiFragment,0).commit();
     }
 
     private void initView() {
@@ -88,46 +90,10 @@ public class expULDcargoInfo extends AppCompatActivity {
         navBar = new NavBar(this);
         navBar.setTitle("装载详情 " + idArrary.get("BanID").toString());
         navBar.setRight(R.drawable.ic_menu_two);
-
+        zhuangzaiFragment = new ZhuangZaiFragment();
+        daizhuangFragment = new DaiZhuangFragment();
+        currentFragment = new Fragment();
         setListener();
-    }
-
-    private void initFragment(int index) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // 开启事物
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-        hideFragment(transaction);
-        switch (index) {
-            case 0:
-                if (zhuangzaiFragment == null) {
-                    zhuangzaiFragment = new ZhuangZaiFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("zhuangzai",idArrary);
-                    zhuangzaiFragment.setArguments(bundle);
-                    transaction.add(R.id.framelayout, zhuangzaiFragment);
-                } else {
-                    transaction.show(zhuangzaiFragment);
-                }
-                break;
-
-            case 1:
-                if (daizhuangFragment == null) {
-                    daizhuangFragment = new DaiZhuangFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("daizhuang",idArrary);
-                    daizhuangFragment.setArguments(bundle);
-                    transaction.add(R.id.framelayout, daizhuangFragment);
-                } else {
-                    transaction.show(daizhuangFragment);
-                }
-                break;
-
-            default:
-                break;
-        }
-        transaction.commit();
     }
 
     //endregion
@@ -141,8 +107,6 @@ public class expULDcargoInfo extends AppCompatActivity {
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 View myView = LayoutInflater.from(expULDcargoInfo.this).inflate(R.layout.pop_expuld_info, null);
                 pw = new PopupWindow(myView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                 pw.showAsDropDown(navBar.getPopMenuView());
@@ -178,7 +142,7 @@ public class expULDcargoInfo extends AppCompatActivity {
                 DaiZhuangXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));
                 DaiZhuangXinXi.setTextColor(getResources().getColor(R.color.colorTitle));
                 PageFlag = 0;
-                initFragment(0);
+                switchFragment(zhuangzaiFragment,0).commit();
             }
         });
         //endregion
@@ -192,7 +156,7 @@ public class expULDcargoInfo extends AppCompatActivity {
                 ZhuangZaiXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));
                 ZhuangZaiXinXi.setTextColor(getResources().getColor(R.color.colorTitle));
                 PageFlag = 1;
-                initFragment(1);
+                switchFragment(daizhuangFragment,1).commit();
             }
         });
         //endregion
@@ -204,15 +168,31 @@ public class expULDcargoInfo extends AppCompatActivity {
 
     //region 功能方法
 
-    // region 隐藏fragment
-    private void hideFragment(FragmentTransaction transaction) {
-        if (daizhuangFragment != null) {
-            transaction.hide(daizhuangFragment);
+    //region 碎片切换方法
+    private FragmentTransaction switchFragment(Fragment targetFragment,int index) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+
+        if (!targetFragment.isAdded()) {
+            //第一次使用switchFragment()时currentFragment为null，所以要判断一下
+            if (currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+
+            if (index == 0) {
+                bundle.putSerializable("zhuangzai",idArrary);
+            } else if (index == 1) {
+                bundle.putSerializable("daizhuang",idArrary);
+            }
+
+            targetFragment.setArguments(bundle);
+            transaction.add(R.id.framelayout_uld, targetFragment,targetFragment.getClass().getName());
+        } else {
+            transaction.hide(currentFragment).show(targetFragment);
         }
 
-        if (zhuangzaiFragment != null) {
-            transaction.hide(zhuangzaiFragment);
-        }
+        currentFragment = targetFragment;
+        return transaction;
     }
     //endregion
 
@@ -266,8 +246,6 @@ public class expULDcargoInfo extends AppCompatActivity {
                     } else {
                         ToastUtils.showToast(Mcontext,"成功",Toast.LENGTH_LONG);
                     }
-
-
                 }
         }
     }

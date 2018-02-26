@@ -17,10 +17,6 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -39,10 +35,10 @@
                         android:background="#ffffff">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
                             android:layout_marginLeft="12dp"
-
                             android:text="平板编号:"
                             android:textSize="@dimen/house_size" />
 
@@ -50,28 +46,67 @@
                             android:id="@+id/uldloading_edtTxt_PinBanHao_one"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="0.6"
                             android:inputType="number"
-                            android:imeOptions="actionDone"/>
+                            android:imeOptions="actionDone"
+                            android:paddingLeft="5dp"/>
 
                         <ImageView
                             android:id="@+id/uldloading_Img_SaoMa"
-                            android:layout_width="50dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/saoma_one" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#ffffff">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.26"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:text="ULD编号:"
+                            android:textSize="@dimen/house_size" />
+
+                        <TextView
+                            android:id="@+id/uldloading_tv_uldBianHao"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="0.74"
+                            android:textColor="#000"
+                            android:background="@drawable/selector_sinner"
+                            android:gravity="left|center"
+                            android:hint="请选择ULD编号"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:paddingLeft="5dp"
+                            android:textSize="@dimen/house_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
                         android:background="#ffffff">
 
                         <Button
                             android:id="@+id/uldloading_Btn_ChaXun"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:background="@drawable/button_selector"
@@ -83,6 +118,8 @@
                             android:id="@+id/uldloading_Btn_QinKong"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:background="@drawable/button_selector"
@@ -94,6 +131,8 @@
                             android:id="@+id/uldloading_Btn_XinZen"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:background="@drawable/button_selector"
@@ -105,6 +144,8 @@
                             android:id="@+id/uldloading_Btn_XiuGai"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="1"
@@ -113,45 +154,81 @@
                             android:textColor="#ffffff"
                             android:textSize="18sp" />
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:background="#ffffff">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="12dp"
-                            android:text="ULD编号:"
-                            android:textSize="@dimen/house_size" />
-
-                        <TextView
-                            android:id="@+id/uldloading_tv_uldBianHao"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_weight="1"
-                            android:textColor="#000"
-                            android:background="@drawable/selector_sinner"
-                            android:gravity="left|center"
-                            android:hint="请选择ULD编号"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:paddingLeft="5dp"
-                            android:textSize="@dimen/house_size" />
-                    </LinearLayout>
                 </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/uldloading_Lay_KongZhi"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:layout_marginLeft="12dp"
+                    android:text="目标平板号:"
+                    android:textSize="@dimen/house_size" />
+
+                <EditText
+                    android:id="@+id/uldloading_edtTxt_MuBiaoPinBan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:layout_marginRight="10dp"
+                    android:inputType="number"
+                    android:focusable="false"/>
+
+                <com.example.administrator.aviation.view.SwitchView
+                    android:id="@+id/uldloading_PinBanSwitchBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:layout_marginLeft="12dp"
+                        android:text="目标ULD号:"
+                        android:textSize="@dimen/house_size" />
+
+                    <EditText
+                        android:id="@+id/uldloading_edtTxt_MuBiaoULD"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="text"
+                        android:focusable="false"/>
+
+                    <com.example.administrator.aviation.view.SwitchView
+                        android:id="@+id/uldloading_uldSwitchBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="10dp"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -159,29 +236,89 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.22"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
-                        android:text="自重:"
+                        android:text="平板重:"
                         android:textSize="@dimen/house_size" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/uldloading_tv_ZiZhong"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.28"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left|center"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.22"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="12dp"
+                        android:text="ULD重:"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size" />
+
+                    <EditText
+                        android:id="@+id/uldloading_tv_ULDzhong"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.28"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left|center"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:paddingLeft="5dp"
+                        android:textSize="@dimen/house_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <TextView
+                        android:id="@+id/textView7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:inputType="text"
-                        android:textColor="#000"
-                        android:maxLines="1"
+                        android:layout_weight="0.22"
+                        android:text="货重:"
                         android:textSize="@dimen/house_size" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/uldloading_tv_HuoZhong"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.28"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:background="#ffffff"
+                        android:textColor="#000"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.22"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:text="净重:"
@@ -192,17 +329,18 @@
                         android:id="@+id/uldloading_tv_JinZhong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.28"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="1"
                         android:background="#ffffff"
                         android:inputType="text"
                         android:textColor="#000"
                         android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
-
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -210,51 +348,56 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:text="货重:"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:id="@+id/uldloading_tv_HuoZhong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:textColor="#000"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_weight="0.22"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:text="体积:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/uldloading_tv_TiJi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.28"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left|center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:textColor="#000"
-                        android:inputType="text"
-                        android:maxLines="1"
+                        android:text="板型:"
+                        android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
 
+                    <EditText
+                        android:id="@+id/uldloading_tv_BanXin"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.28"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left|center"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -262,8 +405,32 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="0.22"
+                        android:text="状态:"
+                        android:textSize="@dimen/house_size" />
+
+                    <TextView
+                        android:id="@+id/uldloading_tv_PeiZai"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.28"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:background="#ffffff"
+                        android:textColor="#000"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.22"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
                         android:text="件数:"
@@ -274,37 +441,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:textColor="#000"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:text="类型:"
-                        android:textColor="#666666"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:id="@+id/uldloading_tv_LeiXin"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="1"
+                        android:layout_weight="0.28"
                         android:background="#ffffff"
                         android:textColor="#000"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
-
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -313,57 +458,8 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:text="状态:"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:id="@+id/uldloading_tv_PeiZai"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:textColor="#000"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:text="板型:"
-                        android:textColor="#666666"
-                        android:textSize="@dimen/house_size" />
-
-                    <TextView
-                        android:id="@+id/uldloading_tv_BanXin"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:textColor="#000"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="#ffffff">
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
@@ -373,19 +469,21 @@
                     <TextView
                         android:id="@+id/uldloading_tv_HangBanHao"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="0.93"
+                        android:layout_marginLeft="5dp"
                         android:background="#ffffff"
                         android:textColor="#000"
-                        android:textSize="@dimen/house_size" />
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:text="目的港:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
@@ -393,14 +491,15 @@
                     <TextView
                         android:id="@+id/uldloading_tv_MuDinGang"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="0.85"
                         android:background="#ffffff"
                         android:textColor="#000"
-                        android:textSize="@dimen/house_size" />
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -409,7 +508,8 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
@@ -419,21 +519,23 @@
                     <TextView
                         android:id="@+id/uldloading_tv_RiQi"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="0.93"
+                        android:layout_marginLeft="5dp"
                         android:background="#ffffff"
                         android:textColor="#000"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:text="承运人:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
@@ -441,16 +543,17 @@
                     <TextView
                         android:id="@+id/uldloading_tv_ChenYunRen"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="0.85"
                         android:background="#ffffff"
                         android:textColor="#000"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:textSize="@dimen/house_size" />
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -459,7 +562,8 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
@@ -469,10 +573,10 @@
                     <TextView
                         android:id="@+id/uldloading_tv_CangWei"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="0.93"
+                        android:layout_marginLeft="5dp"
                         android:background="@null"
                         android:gravity="left|center"
                         android:textColor="#000"
@@ -482,10 +586,11 @@
                         android:textSize="@dimen/house_size" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:text="优先级:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size" />
@@ -493,11 +598,11 @@
                     <TextView
                         android:id="@+id/uldloading_tv_YouXianJi"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="0.85"
                         android:background="@null"
                         android:gravity="left|center"
                         android:textColor="#000"
@@ -513,7 +618,8 @@
                     android:background="#ffffff">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="12dp"
@@ -524,11 +630,10 @@
                     <EditText
                         android:id="@+id/uldloading_tv_BeiZhu"
                         android:layout_width="0dp"
+                        android:layout_weight="0.28"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.85"
+                        android:layout_marginLeft="5dp"
                         android:background="@null"
                         android:focusable="false"
                         android:gravity="left|center"
@@ -536,6 +641,31 @@
                         android:maxLines="1"
                         android:paddingLeft="5dp"
                         android:textSize="@dimen/house_size" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.22"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="12dp"
+                        android:text="类型:"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size" />
+
+                    <TextView
+                        android:id="@+id/uldloading_tv_LeiXin"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.28"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#ffffff"
+                        android:textColor="#000"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="@dimen/house_size"
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -599,16 +729,6 @@
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/uldloading_proBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-        </FrameLayout>
     </ScrollView>
 
 </LinearLayout>

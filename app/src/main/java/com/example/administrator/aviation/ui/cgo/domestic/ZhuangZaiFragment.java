@@ -1,5 +1,6 @@
 package com.example.administrator.aviation.ui.cgo.domestic;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import com.example.administrator.aviation.model.adapter.AbsCommonAdapter;
 import com.example.administrator.aviation.model.adapter.AbsViewHolder;
 import com.example.administrator.aviation.model.hygnc.ParseULDLoadingCargo;
 import com.example.administrator.aviation.model.hygnc.ULDLoadingCargo;
+import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.ui.base.AbPullToRefreshView;
 import com.example.administrator.aviation.ui.base.SyncHorizontalScrollView;
 import com.example.administrator.aviation.ui.base.TableModel;
@@ -100,6 +102,7 @@ public class ZhuangZaiFragment extends Fragment {
 
     private View view;
     private Context mContext;
+    private Activity mAct;
 
     @BindView(R.id.pulltorefreshview)
     AbPullToRefreshView pulltorefreshview;
@@ -154,6 +157,7 @@ public class ZhuangZaiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.table_zhuangzai, container, false);
         mContext = getContext();
+        mAct = (Activity) mContext;
         ButterKnife.bind(this,view);
         init();
         return view;
@@ -269,7 +273,7 @@ public class ZhuangZaiFragment extends Fragment {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                KeyBoardHide();
+                PublicFun.KeyBoardHide(mAct,mContext);
                 return false;
             }
         });
@@ -330,7 +334,7 @@ public class ZhuangZaiFragment extends Fragment {
             public void onClick(View v) {
                 jiansuokuang.setVisibility(View.VISIBLE);
                 sousuoZhudan.requestFocus();
-                KeyBoardSwitch();
+                PublicFun.KeyBoardSwitch(mContext);
             }
         });
         //endregion
@@ -367,7 +371,7 @@ public class ZhuangZaiFragment extends Fragment {
                     if (talHeight < 5) {
                         ListHeigh(leftListView);
                     }
-                    KeyBoardHide();
+                    PublicFun.KeyBoardHide(mAct,mContext);
                     refresh_scroll.smoothScrollTo(0, yidongInt * talHeight);
                     leftListView.performItemClick(leftListView.getChildAt(yidongInt), yidongInt, leftListView.getItemIdAtPosition(yidongInt));
                 }
@@ -380,7 +384,7 @@ public class ZhuangZaiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sousuoZhudan.setText("");
-                KeyBoardHide();
+                PublicFun.KeyBoardHide(mAct,mContext);
                 jiansuokuang.setVisibility(View.GONE);
             }
         });
@@ -502,8 +506,6 @@ public class ZhuangZaiFragment extends Fragment {
                             } else {
                                 ToastUtils.showToast(mContext, object.getProperty(1).toString(), Toast.LENGTH_SHORT);
                             }
-
-
                         }
 
                         @Override
@@ -571,11 +573,12 @@ public class ZhuangZaiFragment extends Fragment {
             mRightAdapter.addData(mDatas, isMore);
 
             mDatas.clear();
-            pulltorefreshview.onHeaderRefreshFinish();
         } else {
-                mLeftAdapter.clearData(true);
-                mRightAdapter.clearData(true);
+            mLeftAdapter.clearData(true);
+            mRightAdapter.clearData(true);
         }
+
+        pulltorefreshview.onHeaderRefreshFinish();
     }
     //endregion
 
@@ -585,10 +588,8 @@ public class ZhuangZaiFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == AviationCommons.GNC_ULDLoadingCargo) {
-                if (loadingCargos.size() > 0) {
-                    setDatas(loadingCargos,AviationCommons.REFRESH_DATA);
-
-                } else {
+                setDatas(loadingCargos,AviationCommons.REFRESH_DATA);
+                if (loadingCargos.size() == 0) {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
                 Ldialog.dismiss();
@@ -609,30 +610,5 @@ public class ZhuangZaiFragment extends Fragment {
     }
     //endregion
 
-    //region 软键盘状态切换
-    private void KeyBoardSwitch() {
-        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        // 得到InputMethodManager的实例
-        if (imm.isActive()) {
-            // 如果开启
-            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-
-        }
-    }
     //endregion
-
-    //region 隐藏软键盘
-    private void KeyBoardHide() {
-        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(imm.isActive() && getActivity().getCurrentFocus()!=null){
-            if (getActivity().getCurrentFocus().getWindowToken()!=null) {
-                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
-    }
-    //endregion
-
-    //endregion
-
 }

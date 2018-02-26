@@ -3,6 +3,8 @@ package com.example.administrator.aviation.ui.cgo.domestic;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -35,8 +37,10 @@ import com.example.administrator.aviation.model.hygnc.GNCULDLoading;
 import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
 import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
+import com.example.administrator.aviation.view.SwitchView;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -50,6 +54,8 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.administrator.aviation.R.id.view;
+import static com.example.administrator.aviation.R.string.tiji;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
 
@@ -86,19 +92,7 @@ import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOA
 //               不见满街漂亮妹，哪个归得程序员？                 //
 ////////////////////////////////////////////////////////////////////
 public class expULDLoading extends AppCompatActivity {
-    @BindView(R.id.uldloading_proBar)
-    ProgressBar proBar;
-    @BindView(R.id.uldloading_Img_SaoMa)
-    ImageView Img_SaoMa;
-    @BindView(R.id.uldloading_Scrl)
-    ScrollView scrollview;
-    @BindView(R.id.uldloading_Layout_Tijiao)
-    LinearLayout LayTiJiao;
-    @BindView(R.id.uldloading_Lay_PB)
-    LinearLayout Lay_PB;
-    @BindView(R.id.uldloading_navBar)
-    ViewGroup uldloading_navBar;
-
+    //region Button控件
     @BindView(R.id.uldloading_Btn_ChaXun)
     Button ChaXun;
     @BindView(R.id.uldloading_Btn_XinZen)
@@ -111,19 +105,15 @@ public class expULDLoading extends AppCompatActivity {
     Button btn_Tijiao;
     @BindView(R.id.uldloading_Btn_quXiao)
     Button btn_Quxiao;
+    //endregion
 
-    @BindView(R.id.uldloading_edtTxt_PinBanHao_one)
-    EditText PinBanHao_one;
+    //region TextView控件
     @BindView(R.id.uldloading_tv_uldBianHao)
     TextView uldBianHao;
-    @BindView(R.id.uldloading_tv_ZiZhong)
-    TextView ZiZhong;
     @BindView(R.id.uldloading_tv_JinZhong)
     TextView JinZhong;
     @BindView(R.id.uldloading_tv_HuoZhong)
     TextView HuoZhong;
-    @BindView(R.id.uldloading_tv_TiJi)
-    TextView TiJi;
     @BindView(R.id.uldloading_tv_JianShu)
     TextView JianShu;
     @BindView(R.id.uldloading_tv_LeiXin)
@@ -142,29 +132,68 @@ public class expULDLoading extends AppCompatActivity {
     TextView ChenYunRen;
     @BindView(R.id.uldloading_tv_LiuShuiHao)
     TextView LiuShuiHao;
-    @BindView(R.id.uldloading_tv_BanXin)
-    TextView BanXin;
     @BindView(R.id.uldloading_tv_CangWei)
     TextView CangWei;
+    //endregion
 
+    //region Layout控件
     @BindView(R.id.uldloading_Lay_YinCan)
     LinearLayout LayYincang;
+    @BindView(R.id.uldloading_Layout_Tijiao)
+    LinearLayout LayTiJiao;
+    @BindView(R.id.uldloading_Lay_PB)
+    LinearLayout Lay_PB;
+    //endregion
+
+    //region EditText控件
     @BindView(R.id.uldloading_tv_BeiZhu)
     EditText BeiZhu;
+    @BindView(R.id.uldloading_tv_ZiZhong)
+    EditText ZiZhong;
+    @BindView(R.id.uldloading_edtTxt_PinBanHao_one)
+    EditText PinBanHao_one;
+    @BindView(R.id.uldloading_tv_ULDzhong)
+    EditText ULDzhong;
+    @BindView(R.id.uldloading_tv_TiJi)
+    EditText TiJi;
+    @BindView(R.id.uldloading_tv_BanXin)
+    EditText BanXin;
+    @BindView(R.id.uldloading_edtTxt_MuBiaoPinBan)
+    EditText MuBiaoPinBanEdt;
+    @BindView(R.id.uldloading_edtTxt_MuBiaoULD)
+    EditText MuBiaoULDEdt;
+    //endregion
 
+    //region 其他View控件
+    @BindView(R.id.uldloading_navBar)
+    ViewGroup uldloading_navBar;
+    @BindView(R.id.uldloading_Img_SaoMa)
+    ImageView Img_SaoMa;
+    @BindView(R.id.uldloading_Scrl)
+    ScrollView scrollview;
+    @BindView(R.id.uldloading_PinBanSwitchBtn)
+    SwitchView PinBanSwitchBtn;
+    @BindView(R.id.uldloading_uldSwitchBtn)
+    SwitchView uldSwitchBtn;
+    //endregion
+
+    //region 自定义控件 未实例化
     private NavBar navBar;
     private PopupWindow pw;
     private Context mContext;
     private Activity mAct;
+    private LoadingDialog Ldialog;
+    //endregion
 
+    //region 自定义全局变量
     private final String TAG = "expULDLoadingLog";
     private final String page = "one";
     private static String PinBan_Two = "";
     private static List<GNCULDLoading> gnculd = new ArrayList<>();
     private static ArrayList<String> list = new ArrayList<>();
+    //endregion
 
     //region 初始化
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,10 +212,14 @@ public class expULDLoading extends AppCompatActivity {
 
     private void initView() {
         navBar = new NavBar(this);
-        navBar.setTitle("货物装载");
+        navBar.setTitle("国内出港理货");
         navBar.setRight(R.drawable.detail_0);
         LayTiJiao.setVisibility(View.GONE);
         LayYincang.setVisibility(View.GONE);
+        Ldialog = new LoadingDialog(mContext);
+
+
+
         TxtViewSetEmpty();
         setListener();
     }
@@ -207,6 +240,7 @@ public class expULDLoading extends AppCompatActivity {
         RiQi.setText("");
         ChenYunRen.setText("");
         LiuShuiHao.setText("");
+        ULDzhong.setText("");
         PinBan_Two = "";
 
         BeiZhu.setText("");
@@ -226,16 +260,17 @@ public class expULDLoading extends AppCompatActivity {
                 if (resultCode == AviationCommons.GNC_ULDLOADING_CAMERA_RESULT) {
                     Bundle bundle = data.getExtras();
                     String re = bundle.getString("result");
-                    QinKong.performClick();
 
                     if (!TextUtils.isEmpty(re)) {
+                        QinKong.performClick();
+
                         Map<String, String> params = new HashMap<>();
                         PublicFun.KeyBoardHide(mAct,mContext);
                         params.put("ID", re.split("/")[0].trim());
                         params.put("CarID", "");
                         params.put("ULD", re.split("/")[1].trim());
                         params.put("ErrString", "");
-                        proBar.setVisibility(View.VISIBLE);
+                        Ldialog.show();
 
                         GetInfo(params);
                     }
@@ -343,8 +378,7 @@ public class expULDLoading extends AppCompatActivity {
                     params.put("CarID", pinBan);
                     params.put("ULD", "");
                     params.put("ErrString", "");
-                    proBar.setVisibility(View.VISIBLE);
-
+                    Ldialog.show();
 
                     GetInfo(params);
                 } else {
@@ -354,7 +388,7 @@ public class expULDLoading extends AppCompatActivity {
         });
         //endregion
 
-        //region 下拉菜单点击事件
+        //region ULD编号下拉菜单点击事件
         uldBianHao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -514,6 +548,74 @@ public class expULDLoading extends AppCompatActivity {
         }
         );
         //endregion
+
+        //region 目标平板修改开关
+        PinBanSwitchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (PinBanSwitchBtn.isOpened()) {
+                    MuBiaoPinBanEdt.setFocusable(true);
+                    MuBiaoPinBanEdt.setFocusableInTouchMode(true);
+                } else {
+                    MuBiaoPinBanEdt.setText("");
+                    MuBiaoPinBanEdt.setFocusable(false);
+                    MuBiaoPinBanEdt.setFocusableInTouchMode(false);
+                }
+            }
+        });
+        //endregion
+
+        //region 目标平板状态切换设置
+        PinBanSwitchBtn.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
+            @Override
+            public void toggleToOn(SwitchView view) {
+                if (XiuGai.isEnabled()) {
+                    view.toggleSwitch(false);
+                } else {
+                    view.toggleSwitch(true);
+                }
+            }
+
+            @Override
+            public void toggleToOff(SwitchView view) {
+                view.toggleSwitch(false);
+            }
+        });
+        //endregion
+
+        //region 目标ULD修改开关
+        uldSwitchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uldSwitchBtn.isOpened()) {
+                    MuBiaoULDEdt.setFocusable(true);
+                    MuBiaoULDEdt.setFocusableInTouchMode(true);
+                } else {
+                    MuBiaoULDEdt.setText("");
+                    MuBiaoULDEdt.setFocusable(false);
+                    MuBiaoULDEdt.setFocusableInTouchMode(false);
+                }
+            }
+        });
+        //endregion
+
+        //region 目标ULD状态切换设置
+        uldSwitchBtn.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
+            @Override
+            public void toggleToOn(SwitchView view) {
+                if (XiuGai.isEnabled()) {
+                    view.toggleSwitch(false);
+                } else {
+                    view.toggleSwitch(true);
+                }
+            }
+
+            @Override
+            public void toggleToOff(SwitchView view) {
+                view.toggleSwitch(false);
+            }
+        });
+        //endregion
     }
     //endregion
 
@@ -526,13 +628,29 @@ public class expULDLoading extends AppCompatActivity {
         LayTiJiao.setVisibility(View.VISIBLE);
 
         BeiZhu.setBackgroundResource(R.drawable.edit_bg);
+        BeiZhu.setFocusable(true);
+        BeiZhu.setFocusableInTouchMode(true);
+
+        ZiZhong.setBackgroundResource(R.drawable.edit_bg);
+        ZiZhong.setFocusable(true);
+        ZiZhong.setFocusableInTouchMode(true);
+
+        ULDzhong.setBackgroundResource(R.drawable.edit_bg);
+        ULDzhong.setFocusable(true);
+        ULDzhong.setFocusableInTouchMode(true);
+
+        TiJi.setBackgroundResource(R.drawable.edit_bg);
+        TiJi.setFocusable(true);
+        TiJi.setFocusableInTouchMode(true);
+
+        BanXin.setBackgroundResource(R.drawable.edit_bg);
+        BanXin.setFocusable(true);
+        BanXin.setFocusableInTouchMode(true);
+
         CangWei.setBackgroundResource(R.drawable.selector_sinner);
         YouXianJi.setBackgroundResource(R.drawable.selector_sinner);
         uldBianHao.setBackgroundResource(0);
-
-        BeiZhu.setFocusable(true);
-        BeiZhu.setFocusableInTouchMode(true);
-        BeiZhu.requestFocus();
+        uldBianHao.setTextColor(Color.parseColor("#3A000000"));
 
         PublicFun.ElementSwitch(Lay_PB,false);
         PublicFun.ElementSwitch(uldloading_navBar,false);
@@ -544,12 +662,43 @@ public class expULDLoading extends AppCompatActivity {
         LayTiJiao.setVisibility(View.GONE);
 
         BeiZhu.setBackgroundResource(0);
+        BeiZhu.setFocusable(false);
+        BeiZhu.setFocusableInTouchMode(false);
+
+        ZiZhong.setBackgroundResource(0);
+        ZiZhong.setFocusable(false);
+        ZiZhong.setFocusableInTouchMode(false);
+
+        ULDzhong.setBackgroundResource(0);
+        ULDzhong.setFocusable(false);
+        ULDzhong.setFocusableInTouchMode(false);
+
+        TiJi.setBackgroundResource(0);
+        TiJi.setFocusable(false);
+        TiJi.setFocusableInTouchMode(false);
+
+        BanXin.setBackgroundResource(0);
+        BanXin.setFocusable(false);
+        BanXin.setFocusableInTouchMode(false);
+
         CangWei.setBackgroundResource(0);
         YouXianJi.setBackgroundResource(0);
         uldBianHao.setBackgroundResource(R.drawable.selector_sinner);
+        uldBianHao.setTextColor(Color.BLACK);
 
-        BeiZhu.setFocusable(false);
-        BeiZhu.setFocusableInTouchMode(false);
+        PinBanSwitchBtn.setOpened(false);
+        uldSwitchBtn.setOpened(false);
+
+        MuBiaoPinBanEdt.setText("");
+        MuBiaoULDEdt.setText("");
+
+        MuBiaoPinBanEdt.setText("");
+        MuBiaoPinBanEdt.setFocusable(false);
+        MuBiaoPinBanEdt.setFocusableInTouchMode(false);
+
+        MuBiaoULDEdt.setText("");
+        MuBiaoULDEdt.setFocusable(false);
+        MuBiaoULDEdt.setFocusableInTouchMode(false);
 
         PublicFun.ElementSwitch(Lay_PB,true);
         PublicFun.ElementSwitch(uldloading_navBar,true);
@@ -587,18 +736,18 @@ public class expULDLoading extends AppCompatActivity {
                         gnculd = ParseGNCmessage.parseGNCULDLoadingXMLto(Exp_ULDLoading);
 
                         handler.sendEmptyMessage(AviationCommons.GNC_expULDLoading);
-                        proBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                     }
 
                     @Override
                     public void onFailed(String message) {
-                        proBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                         ToastUtils.showToast(expULDLoading.this,"数据获取失败",Toast.LENGTH_SHORT);
                     }
 
                     @Override
                     public void onError() {
-                        proBar.setVisibility(View.GONE);
+                        Ldialog.dismiss();
                         ToastUtils.showToast(expULDLoading.this,"数据获取出错",Toast.LENGTH_SHORT);
                     }
                 },page);
@@ -642,9 +791,17 @@ public class expULDLoading extends AppCompatActivity {
         YouXianJi.setText(gnculd.get(x).getPriority().toString());
         HangBanHao.setText(gnculd.get(x).getFno().toString());
         MuDinGang.setText(gnculd.get(x).getDest().toString());
-        RiQi.setText(gnculd.get(x).getFDate().toString());
+
+        String fda = gnculd.get(x).getFDate().toString();
+        if (fda.contains("_")) {
+            RiQi.setText(gnculd.get(x).getFDate().toString().split("_")[1]);
+        } else {
+            RiQi.setText(fda);
+        }
+
         ChenYunRen.setText(gnculd.get(x).getCarrier().toString());
         LiuShuiHao.setText(gnculd.get(x).getID().toString());
+        ULDzhong.setText(gnculd.get(x).getULDWeight().toString());
 
         BeiZhu.setText(gnculd.get(x).getRemark().toString());
         BanXin.setText(gnculd.get(x).getBoardType().toString());
@@ -652,16 +809,11 @@ public class expULDLoading extends AppCompatActivity {
     }
    //endregion
 
-    //region 软键盘状态切换
-    private void KeyBoardSwitch() {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        // 得到InputMethodManager的实例
-        if (imm.isActive()) {
-            // 如果开启
-            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-
-        }
+    //region 界面重回栈响应事件
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        ChaXun.performClick();
     }
     //endregion
 

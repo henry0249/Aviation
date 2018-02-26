@@ -121,7 +121,10 @@ public class ParseGNCmessage {
                         }else if (name.equalsIgnoreCase("Carrier")) {
                             LoadingInfo.setCarrier(parser.nextText());
                         }else if (name.equalsIgnoreCase("FDate")) {
-                            LoadingInfo.setFDate(parser.nextText());
+                            String fda = parser.nextText();
+                            if (!TextUtils.isEmpty(fda)) {
+                                LoadingInfo.setFDate(fda + "_" + fda.replaceAll("-",""));
+                            }
                         }else if (name.equalsIgnoreCase("Fno")) {
                             LoadingInfo.setFno(parser.nextText());
                         }else if (name.equalsIgnoreCase("Dest")) {

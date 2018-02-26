@@ -52,6 +52,7 @@ import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrier
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
 import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
@@ -235,6 +236,9 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_ULDLoading)) {
                     Intent CgoDomExpULDLoading = new Intent(getActivity(), expULDLoading.class);
                     startActivity(CgoDomExpULDLoading);
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_ReWeight)) {
+                        Intent CgoDomExpULDLoading = new Intent(getActivity(), ReWeightMain.class);
+                        startActivity(CgoDomExpULDLoading);
                 }else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
