@@ -70,9 +70,9 @@ public class expULDcargoInfo extends AppCompatActivity {
     private EditText diaEdit;
     private Fragment currentFragment;
 
-    private final static String TAG = "expULDcargoInfo";
-    private static int PageFlag = 0;
-    private HashMap<String, String> idArrary = new HashMap<>();
+    private final String TAG = "expULDcargoInfo";
+    private int PageFlag;
+    private HashMap<String, String> idArrary;
 
     //region 初始化
     @Override
@@ -86,6 +86,8 @@ public class expULDcargoInfo extends AppCompatActivity {
     }
 
     private void initView() {
+        PageFlag = 0;
+        idArrary = new HashMap<>();
         idArrary = (HashMap<String, String>) getIntent().getSerializableExtra("Info");
         navBar = new NavBar(this);
         navBar.setTitle("装载详情 " + idArrary.get("BanID").toString());
@@ -208,7 +210,7 @@ public class expULDcargoInfo extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case 2:
+            case GNC_ULDinfo_CAMERA_REQUEST:
                 if (resultCode == AviationCommons.GNC_ULDinfo_CAMERA_RESULT) {
                     Bundle bundle = data.getExtras();
                     String re = bundle.getString("result");

@@ -12,11 +12,9 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +57,7 @@ import static com.example.administrator.aviation.R.string.tiji;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
 
+//region 佛祖保佑 永无BUG 永不修改 --by sst
 ////////////////////////////////////////////////////////////////////
 //                          _ooOoo_                               //
 //                         o8888888o                              //
@@ -91,6 +90,7 @@ import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOA
 //               别人笑我太疯癫，我笑他人看不穿；                 //
 //               不见满街漂亮妹，哪个归得程序员？                 //
 ////////////////////////////////////////////////////////////////////
+//endregion
 public class expULDLoading extends AppCompatActivity {
     //region Button控件
     @BindView(R.id.uldloading_Btn_ChaXun)
@@ -164,7 +164,7 @@ public class expULDLoading extends AppCompatActivity {
     EditText MuBiaoULDEdt;
     //endregion
 
-    //region 其他View控件
+    //region 其他控件
     @BindView(R.id.uldloading_navBar)
     ViewGroup uldloading_navBar;
     @BindView(R.id.uldloading_Img_SaoMa)
@@ -177,29 +177,30 @@ public class expULDLoading extends AppCompatActivity {
     SwitchView uldSwitchBtn;
     //endregion
 
-    //region 自定义控件 未实例化
+    //region 未实例化控件
     private NavBar navBar;
     private PopupWindow pw;
-    private Context mContext;
-    private Activity mAct;
     private LoadingDialog Ldialog;
     //endregion
 
     //region 自定义全局变量
     private final String TAG = "expULDLoadingLog";
     private final String page = "one";
-    private static String PinBan_Two = "";
-    private static List<GNCULDLoading> gnculd = new ArrayList<>();
-    private static ArrayList<String> list = new ArrayList<>();
+    private String PinBan_Two;
+    private String OriULD;
+    private List<GNCULDLoading> gnculd;
+    private ArrayList<String> list;
+    private Context mContext;
+    private Activity mAct;
     //endregion
 
     //region 初始化
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.exp_uldloading_activity);
         mContext = expULDLoading.this;
         mAct = (Activity) mContext;
-        setContentView(R.layout.exp_uldloading_activity);
         ButterKnife.bind(this);
         initView();
     }
@@ -211,14 +212,17 @@ public class expULDLoading extends AppCompatActivity {
     }
 
     private void initView() {
+        PinBan_Two = "";
+        OriULD = "";
+        gnculd = new ArrayList<>();
+        list = new ArrayList<>();
+
         navBar = new NavBar(this);
         navBar.setTitle("国内出港理货");
         navBar.setRight(R.drawable.detail_0);
         LayTiJiao.setVisibility(View.GONE);
         LayYincang.setVisibility(View.GONE);
         Ldialog = new LoadingDialog(mContext);
-
-
 
         TxtViewSetEmpty();
         setListener();
@@ -256,7 +260,7 @@ public class expULDLoading extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case 1:
+            case GNC_ULDLOADING_CAMERA_REQUEST:
                 if (resultCode == AviationCommons.GNC_ULDLOADING_CAMERA_RESULT) {
                     Bundle bundle = data.getExtras();
                     String re = bundle.getString("result");
@@ -275,8 +279,17 @@ public class expULDLoading extends AppCompatActivity {
                         GetInfo(params);
                     }
                 }
-            case 3:
+            case GNC_ULDLOADING_XinZenPinBan_REQUEST:
+                if (resultCode == AviationCommons.GNC_ULDLOADING_XinZenPinBan_RESULT) {
+                    Bundle bundle = data.getExtras();
+                    String re = bundle.getString("result");
 
+                    if (!TextUtils.isEmpty(re)) {
+                        QinKong.performClick();
+                        PinBanHao_one.setText(re);
+                        ChaXun.performClick();
+                    }
+                }
         }
     }
     //endregion
@@ -354,6 +367,9 @@ public class expULDLoading extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CloseWri();
+                if (!TextUtils.isEmpty(uldBianHao.getText().toString().trim())) {
+                    OriULD = uldBianHao.getText().toString().trim();
+                }
                 ChaXun.performClick();
             }
         });
@@ -365,8 +381,8 @@ public class expULDLoading extends AppCompatActivity {
             public void onClick(View v) {
                 Map<String, String> params = new HashMap<>();
                 String pinBan = PinBanHao_one.getText().toString().trim();
-                if (!TextUtils.isEmpty(pinBan)) {
 
+                if (!TextUtils.isEmpty(pinBan)) {
                     if (pinBan.length() == 1) {
                         pinBan = "00" + pinBan;
                     } else if (pinBan.length() == 2) {
@@ -649,7 +665,7 @@ public class expULDLoading extends AppCompatActivity {
 
         CangWei.setBackgroundResource(R.drawable.selector_sinner);
         YouXianJi.setBackgroundResource(R.drawable.selector_sinner);
-        uldBianHao.setBackgroundResource(0);
+
         uldBianHao.setTextColor(Color.parseColor("#3A000000"));
 
         PublicFun.ElementSwitch(Lay_PB,false);
@@ -683,7 +699,7 @@ public class expULDLoading extends AppCompatActivity {
 
         CangWei.setBackgroundResource(0);
         YouXianJi.setBackgroundResource(0);
-        uldBianHao.setBackgroundResource(R.drawable.selector_sinner);
+
         uldBianHao.setTextColor(Color.BLACK);
 
         PinBanSwitchBtn.setOpened(false);
@@ -727,6 +743,7 @@ public class expULDLoading extends AppCompatActivity {
 
     //region 请求数据
     private void GetInfo(Map<String, String> p) {
+        final int ia = 0;
         HttpRoot.getInstance().requstAync(expULDLoading.this, HttpCommons.CGO_DOM_Exp_ULDLoading_NAME, HttpCommons.CGO_DOM_Exp_ULDLoading_ACTION, p,
                 new HttpRoot.CallBack() {
                     @Override
@@ -764,8 +781,15 @@ public class expULDLoading extends AppCompatActivity {
 
     //region 文本框赋值
     private void TextSetVaule(int x) {
-        PinBanHao_one.setText(gnculd.get(x).getCarID().toString());
+        for (int j = 0;j < gnculd.size();j++) {
+            if (gnculd.get(j).getULD().toString().equals(OriULD)) {
+                x = j;
+                break;
+            }
+        }
 
+        OriULD = "";
+        PinBanHao_one.setText(gnculd.get(x).getCarID().toString());
         uldBianHao.setText(gnculd.get(x).getULD().toString());
 
         ZiZhong.setText(gnculd.get(x).getULDWeight().toString());
@@ -808,14 +832,6 @@ public class expULDLoading extends AppCompatActivity {
         CangWei.setText(gnculd.get(x).getLocation().toString());
     }
    //endregion
-
-    //region 界面重回栈响应事件
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        ChaXun.performClick();
-    }
-    //endregion
 
     //endregion
 }

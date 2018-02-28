@@ -109,14 +109,22 @@ import static com.example.administrator.aviation.R.id.textView;
 //               不见满街漂亮妹，哪个归得程序员？                 //
 ////////////////////////////////////////////////////////////////////
 public class DaiZhuangFragment extends Fragment {
+
+    //region 全局变量
+    private final String TAG = "DaiZhuangFragmentError";
+    private final String page = "one";
+    private int talHeight;
+    //用于存放标题的id,与textview引用
+    private SparseArray<TextView> mTitleTvArray;
+    private HashMap<String,String> res;
+    private List<ULDLoadingCargo> DaiZhuangCargos;
+    private List<HashMap<String,String>> store;
     private View view;
     private Context mContext;
     private Activity mAct;
+    //endregion
 
-    private final String TAG = "DaiZhuangFragmentError";
-    private final String page = "one";
-    private int talHeight = 0;
-
+    //region 自定义和代码定义的控件
     private AlertDialog.Builder inputDialog;
     private AlertDialog ad;
     // 初始化数据加载提示（即对话框）
@@ -124,42 +132,45 @@ public class DaiZhuangFragment extends Fragment {
     private EditText diaEdit;
     private TextView DaiLiRen;
     private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
-    private WeakHandler mHandler = new WeakHandler();
+    private WeakHandler mHandler;
+    //endregion
 
-    //用于存放标题的id,与textview引用
-    private SparseArray<TextView> mTitleTvArray;
-    private HashMap<String,String> res = new HashMap<>();
-    private List<ULDLoadingCargo> DaiZhuangCargos = new ArrayList<>();
-    private List<HashMap<String,String>> store = new ArrayList<>();
-
-    @BindView(R.id.tv_table_title_left_d)
-    TextView tv_table_title_left_d;
-    @BindView(R.id.title_horsv_d)
-    SyncHorizontalScrollView titleHorScv;
-    @BindView(R.id.content_horsv_d)
-    SyncHorizontalScrollView contentHorScv;
-    @BindView(R.id.jiansuokuang_d)
-    LinearLayout jiansuokuang;
-    @BindView(R.id.left_container_listview_d)
-    ListView leftListView;
-    @BindView(R.id.right_container_listview_d)
-    ListView rightListView;
-    @BindView(R.id.right_title_container_d)
-    LinearLayout right_title_container;
-    @BindView(R.id.pulltorefreshview_d)
-    AbPullToRefreshView pulltorefreshview;
-    @BindView(R.id.jiajia_d)
-    FloatingActionButton JiaJiafloatingButton;
-    @BindView(R.id.search_d)
-    FloatingActionButton JianSuofloatingButton;
-    @BindView(R.id.sousuoYundan_d)
-    EditText sousuoZhudan;
+    //region Button and TextView and EditText控件
     @BindView(R.id.sousuoQuedin_d)
     Button sousuoQuedin;
     @BindView(R.id.sousuoQuxiao_d)
     Button sousuoQuxiao;
+    @BindView(R.id.tv_table_title_left_d)
+    TextView tv_table_title_left_d;
+    @BindView(R.id.sousuoYundan_d)
+    EditText sousuoZhudan;
+    @BindView(R.id.jiajia_d)
+    FloatingActionButton JiaJiafloatingButton;
+    @BindView(R.id.search_d)
+    FloatingActionButton JianSuofloatingButton;
+    //endregion
+
+    //region ScrollView and ListView控件
     @BindView(R.id.pull_refresh_scroll_d)
     ScrollView refresh_scroll;
+    @BindView(R.id.title_horsv_d)
+    SyncHorizontalScrollView titleHorScv;
+    @BindView(R.id.content_horsv_d)
+    SyncHorizontalScrollView contentHorScv;
+    @BindView(R.id.pulltorefreshview_d)
+    AbPullToRefreshView pulltorefreshview;
+    @BindView(R.id.left_container_listview_d)
+    ListView leftListView;
+    @BindView(R.id.right_container_listview_d)
+    ListView rightListView;
+    //endregion
+
+    //region layout控件
+    @BindView(R.id.jiansuokuang_d)
+    LinearLayout jiansuokuang;
+    @BindView(R.id.right_title_container_d)
+    LinearLayout right_title_container;
+    //endregion
 
     //region 初始化
 
@@ -178,6 +189,12 @@ public class DaiZhuangFragment extends Fragment {
 
     //region 设置初始化
     public void init() {
+        talHeight = 0;
+        res = new HashMap<>();
+        DaiZhuangCargos = new ArrayList<>();
+        mHandler = new WeakHandler();
+        store = new ArrayList<>();
+
         tv_table_title_left_d.setText("待装列表");
         getActivity().getLayoutInflater().inflate(R.layout.table_right_title, right_title_container);
 
@@ -647,7 +664,7 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
     }
     //endregion
 
-    //region 货物装载
+    //region 货物装载操作方法
     private void ZhuangHuo() {
         List<HashMap<String,String>> ZhuangHuoList = new ArrayList<>(store);
 

@@ -17,6 +17,14 @@ android {
         versionName "2.8"
     }
 
+    ext {
+        buildToolsVersion = "25.0.3"
+        minSdkVersion = 16
+        targetSdkVersion = 23
+        compileSdkVersion = 25
+        supportVersion = "25.3.1"
+    }
+
     //指定打包后应用名称
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -30,6 +38,15 @@ android {
                 }
                 output.outputFile = new File(outputFile.parent, fileName)
             }
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force "com.android.support:recyclerview-v7:$supportVersion"
+            force "com.android.support:appcompat-v7:$supportVersion"
+            force "com.android.support:design:$supportVersion"
+            force "com.android.support:support-vector-drawable:$supportVersion"
         }
     }
 
@@ -66,4 +83,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'com.qmuiteam:qmui:1.0.7'
 }

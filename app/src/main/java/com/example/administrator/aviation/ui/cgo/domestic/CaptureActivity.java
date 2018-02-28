@@ -49,33 +49,64 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_RESULT;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
 
-/**
- * This activity opens the camera and does the actual scanning on a background
- * thread. It draws a viewfinder to help the user place the barcode correctly,
- * shows feedback as the image processing is happening, and then overlays the
- * results when a scan is successful.
- * 
- * @author dswitkin@google.com (Daniel Switkin)
- * @author Sean Owen
- */
+//region 佛祖保佑 永无BUG 永不修改 --by sst
+////////////////////////////////////////////////////////////////////
+//                          _ooOoo_                               //
+//                         o8888888o                              //
+//                         88" . "88                              //
+//                         (| ^_^ |)                              //
+//                         O\  =  /O                              //
+//                      ____/`---'\____                           //
+//                    .'  \\|     |//  `.                         //
+//                   /  \\|||  :  |||//  \                        //
+//                  /  _||||| -:- |||||-  \                       //
+//                  |   | \\\  -  /// |   |                       //
+//                  | \_|  ''\---/''  |   |                       //
+//                  \  .-\__  `-`  ___/-. /                       //
+//                ___`. .'  /--.--\  `. . ___                     //
+//              ."" '<  `.___\_<|>_/___.'  >'"".                  //
+//            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
+//            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
+//      ========`-.____`-.___\_____/___.-`____.-'========         //
+//                           `=---='                              //
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
+//             佛祖保佑       永无BUG     永不修改                //
+//                                                                //
+//       佛曰:                                                    //
+//               写字楼里写字间，写字间里程序员；                 //
+//               程序人员写程序，又拿程序换酒钱。                 //
+//               酒醒只在网上坐，酒醉还来网下眠；                 //
+//               酒醉酒醒日复日，网上网下年复年。                 //
+//               但愿老死电脑间，不愿鞠躬老板前；                 //
+//               奔驰宝马贵者趣，公交自行程序员。                 //
+//               别人笑我太疯癫，我笑他人看不穿；                 //
+//               不见满街漂亮妹，哪个归得程序员？                 //
+////////////////////////////////////////////////////////////////////
+//endregion
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
 
-	private static final String TAG = CaptureActivity.class.getSimpleName();
+    //region 自定义变量
+	private final String TAG = CaptureActivity.class.getSimpleName();
+    private Rect mCropRect = null;
+    //endregion
 
+    //region 自定义类
 	private CameraManager cameraManager;
 	private CaptureActivityHandler handler;
 	private InactivityTimer inactivityTimer;
 	private BeepManager beepManager;
+    //endregion
 
+    //region 自定义组件
 	private SurfaceView scanPreview = null;
 	private RelativeLayout scanContainer;
 	private RelativeLayout scanCropView;
 	private ImageView scanLine;
 	private NavBar navBar;
-
-	private Rect mCropRect = null;
+    //endregion
 
 	public Handler getHandler() {
 		return handler;
@@ -87,6 +118,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
 	private boolean isHasSurface = false;
 
+    private String mResult;
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -94,21 +127,22 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		Window window = getWindow();
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_capture);
+        mResult = "";
 
 		navBar = new NavBar(this);
 		navBar.setTitle("扫一扫");
 
-        navBar.getLeftImageView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("result", "");
-
-                Intent intent = new Intent();
-                intent.putExtras(bundle);
-                GoToActivity(intent);
-            }
-        });
+//        navBar.getLeftImageView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("result", "");
+//
+//                Intent intent = new Intent();
+//                intent.putExtras(bundle);
+//                GoToActivity(intent);
+//            }
+//        });
 
 		scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
 		scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
@@ -127,13 +161,26 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 	}
 
     @Override
-    public void onBackPressed() {
+    public void finish() {
         Bundle bundle = new Bundle();
-        bundle.putString("result", "");
-
+        bundle.putInt("width", mCropRect.width());
+		bundle.putInt("height", mCropRect.height());
+        bundle.putString("result", mResult);
         Intent intent = new Intent();
+        int num = 0;
+
+        Integer req = (Integer) getIntent().getSerializableExtra("id");
+        if (req == GNC_ULDinfo_CAMERA_REQUEST) {
+            intent.setClass(CaptureActivity.this, expULDcargoInfo.class);
+            num = AviationCommons.GNC_ULDinfo_CAMERA_RESULT;
+        } else if(req == GNC_ULDLOADING_CAMERA_REQUEST){
+            intent.setClass(CaptureActivity.this, expULDLoading.class);
+            num = AviationCommons.GNC_ULDLOADING_CAMERA_RESULT;
+        }
+
         intent.putExtras(bundle);
-        GoToActivity(intent);
+        setResult(num,intent);
+        super.finish();
     }
 
     @Override
@@ -207,41 +254,17 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
 	}
 
-	/**
-	 * A valid barcode has been found, so give an indication of success and show
-	 * the results.
-	 * 
-	 * @param rawResult
-	 *            The contents of the barcode.
-	 * 
-	 * @param bundle
-	 *            The extras
-	 */
+	//region 扫描有结果时，返回结果
 	public void handleDecode(Result rawResult, Bundle bundle) {
 		inactivityTimer.onActivity();
 		beepManager.playBeepSoundAndVibrate();
 
-		bundle.putInt("width", mCropRect.width());
-		bundle.putInt("height", mCropRect.height());
-		bundle.putString("result", rawResult.getText());
-
-		Intent intent = new Intent();
-		intent.putExtras(bundle);
-        GoToActivity(intent);
-//		startActivity(new Intent(CaptureActivity.this, com.example.administrator.zxingdemo.zxing.activity.ResultActivity.class).putExtras(bundle));
-	}
-
-    private void GoToActivity(Intent intent) {
-        Integer req = (Integer) getIntent().getSerializableExtra("id");
-        if (req == GNC_ULDinfo_CAMERA_REQUEST) {
-            setResult(AviationCommons.GNC_ULDinfo_CAMERA_RESULT, intent);
-        } else if(req == GNC_ULDLOADING_CAMERA_REQUEST){
-            setResult(AviationCommons.GNC_ULDLOADING_CAMERA_RESULT,intent);
-        }
-
+        mResult = rawResult.getText();
         finish();
-    }
+	}
+	//endregion
 
+    //region 初始化相机
     private void initCamera(SurfaceHolder surfaceHolder) {
 		if (surfaceHolder == null) {
 			throw new IllegalStateException("No SurfaceHolder provided");
@@ -269,6 +292,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 			displayFrameworkBugMessageAndExit();
 		}
 	}
+	//endregion
 
 	private void displayFrameworkBugMessageAndExit() {
 		// camera error
@@ -303,9 +327,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		return mCropRect;
 	}
 
-	/**
-	 * 初始化截取的矩形区域
-	 */
+    //region 初始化截取的矩形区域
 	private void initCrop() {
 		int cameraWidth = cameraManager.getCameraResolution().y;
 		int cameraHeight = cameraManager.getCameraResolution().x;
@@ -337,7 +359,9 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		/** 生成最终的截取的矩形 */
 		mCropRect = new Rect(x, y, width + x, height + y);
 	}
+	//endregion
 
+    //region 获得结果区域的高度
 	private int getStatusBarHeight() {
 		try {
 			Class<?> c = Class.forName("com.android.internal.R$dimen");
@@ -350,4 +374,5 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		}
 		return 0;
 	}
+	//endregion
 }
