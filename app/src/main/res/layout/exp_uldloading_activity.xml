@@ -64,6 +64,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/saoma_one" />
+
                     </LinearLayout>
 
                     <LinearLayout

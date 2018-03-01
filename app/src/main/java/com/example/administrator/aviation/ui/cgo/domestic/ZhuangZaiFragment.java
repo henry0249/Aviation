@@ -581,10 +581,9 @@ public class ZhuangZaiFragment extends Fragment {
     //endregion
 
     //region 句柄监听
-    Handler handler = new Handler() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if (msg.what == AviationCommons.GNC_ULDLoadingCargo) {
                 setDatas(loadingCargos,AviationCommons.REFRESH_DATA);
                 if (loadingCargos.size() == 0) {
@@ -592,8 +591,9 @@ public class ZhuangZaiFragment extends Fragment {
                 }
                 Ldialog.dismiss();
             }
+            return false;
         }
-    };
+    });
     //endregion
 
     //region 计算listview每一行高度

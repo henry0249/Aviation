@@ -1,16 +1,22 @@
 package com.example.administrator.aviation.ui.cgo.domestic;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.graphics.Region;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.TextUtils;
+import android.util.ArrayMap;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,14 +52,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.example.administrator.aviation.R.id.view;
-import static com.example.administrator.aviation.R.string.tiji;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
 
@@ -339,7 +340,7 @@ public class expULDLoading extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String pinBan = PinBanHao_one.getText().toString().trim();
-                if (!TextUtils.isEmpty(pinBan)) {
+                if (!TextUtils.isEmpty(pinBan) && pinBan.equals(PinBan_Two)) {
                     OpenWri();
 
                     handler.post(new Runnable() {
@@ -355,9 +356,29 @@ public class expULDLoading extends AppCompatActivity {
 
         //region 提交按钮点击
         btn_Tijiao.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                ArrayMap<String,String> re = new ArrayMap<>();
+                re.put("OLDCarID", PinBanHao_one.getText().toString().trim());
+                re.put("OLDULD",uldBianHao.getText().toString().trim());
 
+                re.put("CarID",TextUtils.isEmpty(MuBiaoPinBanEdt.getText().toString().trim())
+                        ? PinBanHao_one.getText().toString().trim():MuBiaoPinBanEdt.getText().toString().trim());
+                re.put("ULD",TextUtils.isEmpty(MuBiaoULDEdt.getText().toString().trim())
+                        ? uldBianHao.getText().toString().trim():MuBiaoULDEdt.getText().toString().trim());
+                re.put("CarWeight",TextUtils.isEmpty(ZiZhong.getText().toString().trim())
+                        ? "0":ZiZhong.getText().toString().trim());
+                re.put("ULDWeight",TextUtils.isEmpty(ULDzhong.getText().toString().trim())
+                        ? "0":ULDzhong.getText().toString().trim());
+                re.put("Volume",TextUtils.isEmpty(TiJi.getText().toString().trim())
+                        ? "0":TiJi.getText().toString().trim());
+                re.put("BoardType",BanXin.getText().toString().trim());
+                re.put("Priority",YouXianJi.getText().toString().trim());
+                re.put("Location",CangWei.getText().toString().trim());
+                re.put("Remark",BeiZhu.getText().toString().trim());
+
+                UpdatePinBanInfo(getUpdateXml(re));
             }
         });
         //endregion
@@ -480,7 +501,6 @@ public class expULDLoading extends AppCompatActivity {
                     lv.setAdapter(new ListViewAdapter(expULDLoading.this, list));
 
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view,
                                                 int position, long id) {
@@ -513,6 +533,7 @@ public class expULDLoading extends AppCompatActivity {
                     pw.showAsDropDown(YouXianJi);
                     ListView lv = (ListView) myView.findViewById(R.id.lv_pop);
                     list = new ArrayList<String>();
+                    list.add("0");
                     list.add("1");
                     list.add("2");
                     list.add("3");
@@ -639,6 +660,60 @@ public class expULDLoading extends AppCompatActivity {
 
     //region 功能方法
 
+    //region 封装平板修改的参数信息
+    private Map<String,String> getUpdateXml(ArrayMap<String,String> uldloading) {
+        StringBuilder sb = new StringBuilder();
+        Map<String, String> pa = new HashMap<>();
+        sb.append("<?xml version='1.0' encoding='UTF-8'?>");
+        sb.append("<GNCULDLoading>");
+        sb.append("  <Loading>");
+        sb.append("    <OLDCarID>" + uldloading.get("OLDCarID") + "</OLDCarID>");
+        sb.append("    <OLDULD>" + uldloading.get("OLDULD") +"</OLDULD>");
+        sb.append("    <CarID>" + uldloading.get("CarID") +"</CarID>");
+        sb.append("    <ULD>" + uldloading.get("ULD") +"</ULD>");
+        sb.append("    <CarWeight>" + uldloading.get("CarWeight") +"</CarWeight>");
+        sb.append("    <ULDWeight>" + uldloading.get("ULDWeight") +"</ULDWeight>");
+        sb.append("    <Volume>" + uldloading.get("Volume") +"</Volume>");
+        sb.append("    <BoardType>" + uldloading.get("BoardType") +"</BoardType>");
+        sb.append("    <Priority>" + uldloading.get("Priority") +"</Priority>");
+        sb.append("    <Location>" + uldloading.get("Location") +"</Location>");
+        sb.append("    <Remark>" + uldloading.get("Remark") +"</Remark>");
+        sb.append("  </Loading>");
+        sb.append("</GNCULDLoading>");
+
+
+        pa.put("ULDLoadingXml", sb.toString());
+        pa.put("ErrString", "");
+        return pa;
+    }
+    //endregion
+
+    //region 上传修改平板信息的方法
+    private void UpdatePinBanInfo(Map<String, String> p) {
+        HttpRoot.getInstance().requstAync(expULDLoading.this, HttpCommons.CGO_DOM_Exp_UpdateGNCLoading_NAME, HttpCommons.CGO_DOM_Exp_UpdateGNCLoading_ACTION, p,
+                new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        Log.i(TAG, object.toString());
+                        Ldialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        Ldialog.dismiss();
+                        ToastUtils.showToast(expULDLoading.this,message,Toast.LENGTH_SHORT);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Ldialog.dismiss();
+                        ToastUtils.showToast(expULDLoading.this,"数据获取出错",Toast.LENGTH_SHORT);
+                    }
+                },page);
+    }
+    //endregion
+
     //region 打开编辑区
     private void OpenWri() {
         LayTiJiao.setVisibility(View.VISIBLE);
@@ -722,10 +797,9 @@ public class expULDLoading extends AppCompatActivity {
     //endregion
 
     //region 句柄监听
-    Handler handler = new Handler() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if (msg.what == AviationCommons.GNC_expULDLoading) {
                 if (gnculd.size() > 0) {
                     TextSetVaule(0);
@@ -737,13 +811,13 @@ public class expULDLoading extends AppCompatActivity {
                     TxtViewSetEmpty();
                 }
             }
+            return false;
         }
-    };
+    });
     //endregion
 
     //region 请求数据
     private void GetInfo(Map<String, String> p) {
-        final int ia = 0;
         HttpRoot.getInstance().requstAync(expULDLoading.this, HttpCommons.CGO_DOM_Exp_ULDLoading_NAME, HttpCommons.CGO_DOM_Exp_ULDLoading_ACTION, p,
                 new HttpRoot.CallBack() {
                     @Override
@@ -759,7 +833,7 @@ public class expULDLoading extends AppCompatActivity {
                     @Override
                     public void onFailed(String message) {
                         Ldialog.dismiss();
-                        ToastUtils.showToast(expULDLoading.this,"数据获取失败",Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(expULDLoading.this,message,Toast.LENGTH_SHORT);
                     }
 
                     @Override

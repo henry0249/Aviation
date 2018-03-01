@@ -637,10 +637,9 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
     //endregion
 
     //region 句柄监听
-    Handler handler = new Handler() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if (msg.what == AviationCommons.GNC_ULDLoadingCargo) {
                 setDatas(DaiZhuangCargos,AviationCommons.REFRESH_DATA);
                 if (DaiZhuangCargos.size() == 0) {
@@ -648,8 +647,9 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
                 }
                 Ldialog.dismiss();
             }
+            return false;
         }
-    };
+    });
     //endregion
 
     //region 计算listview每一行高度

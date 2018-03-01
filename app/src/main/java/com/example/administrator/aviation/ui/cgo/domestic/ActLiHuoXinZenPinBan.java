@@ -167,10 +167,9 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         super.finish();
     }
 
-    Handler handler = new Handler() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             View rootview = mAct.getWindow().getDecorView();
             if (rootview.findFocus() != null) {
                 View FocusView = rootview.findFocus();
@@ -190,7 +189,8 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                         break;
                 }
             }
+            return false;
         }
-    };
+    });
     //endregion
 }

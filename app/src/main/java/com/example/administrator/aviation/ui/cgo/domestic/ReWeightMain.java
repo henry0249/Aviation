@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.WeakHandler;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
@@ -22,6 +23,7 @@ public class ReWeightMain extends AppCompatActivity {
     private Activity mAct;
     private QMUITipDialog tipDialog;
     private WeakHandler mHandler = new WeakHandler();
+    private NavBar navBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class ReWeightMain extends AppCompatActivity {
         mContext = ReWeightMain.this;
         mAct = (Activity) mContext;
         ButterKnife.bind(this);
+
+        navBar = new NavBar(this);
 
         qq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +50,6 @@ public class ReWeightMain extends AppCompatActivity {
                         tipDialog.dismiss();
                     }
                 }, 2000);
-
-
 
             }
         });

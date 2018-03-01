@@ -198,4 +198,9 @@ public class HttpCommons {
     //国内装货
     public static final String CGO_DOM_Exp_GNCLoading_NAME = "GNCCGOLoading";
     public static final String CGO_DOM_Exp_GNCLoading_ACTION = "http://58.213.128.130/GNCCGOLoading";
+
+    //region 国内 修改装载信息
+    public static final String CGO_DOM_Exp_UpdateGNCLoading_NAME = "ReSetGNCULDLoading";
+    public static final String CGO_DOM_Exp_UpdateGNCLoading_ACTION = "http://58.213.128.130/ReSetGNCULDLoading";
+    //endregion
 }
