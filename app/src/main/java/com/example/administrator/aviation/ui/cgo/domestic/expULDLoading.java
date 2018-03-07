@@ -537,6 +537,12 @@ public class expULDLoading extends AppCompatActivity {
                     list.add("1");
                     list.add("2");
                     list.add("3");
+                    list.add("4");
+                    list.add("5");
+                    list.add("6");
+                    list.add("7");
+                    list.add("8");
+                    list.add("9");
 
                     lv.setAdapter(new ListViewAdapter(expULDLoading.this, list));
 
@@ -703,6 +709,7 @@ public class expULDLoading extends AppCompatActivity {
                     public void onFailed(String message) {
                         Ldialog.dismiss();
                         ToastUtils.showToast(expULDLoading.this,message,Toast.LENGTH_SHORT);
+                        handler.sendEmptyMessage(2);
                     }
 
                     @Override
@@ -810,6 +817,8 @@ public class expULDLoading extends AppCompatActivity {
                     ToastUtils.showToast(expULDLoading.this,"数据为空",Toast.LENGTH_SHORT);
                     TxtViewSetEmpty();
                 }
+            } else if (msg.what == 2) {
+
             }
             return false;
         }

@@ -8,24 +8,38 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
+import com.example.administrator.aviation.http.HttpCommons;
+import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.model.hygnc.ParseULDEntity;
+import com.example.administrator.aviation.model.hygnc.ULDEntity;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+
+import org.ksoap2.serialization.SoapObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.id.button1;
-import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
-import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
 
 /**
  * Created by Administrator on 2018/2/7.
@@ -55,14 +69,24 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
     Button btn_QinChu;
     //endregion
 
+    //region Layout控件
+    @BindView(R.id.LiHuoXinZenA)
+    LinearLayout LiHuoXinZenA;
+    @BindView(R.id.LiHuoXinZenB)
+    LinearLayout LiHuoXinZenB;
+    //endregion
     //region 自定义控件
     private NavBar navBar;
+    private QMUIDialog qmuiDialog;
     //endregion
 
     //region 自定义全局变量
     private final String TAG = "ActLiHuoXinZenPinBan";
+    private final String page = "one";
     private Context mContext;
     private Activity mAct;
+    private int uldFlag = 0;
+    private List<ULDEntity> ulden;
     //endregion
 
     //region 初始化
@@ -80,6 +104,40 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         navBar = new NavBar(this);
         navBar.setTitle("新增平板");
 
+        ulden = new ArrayList<>();
+
+        uldBianHao_A.setTransformationMethod(new AllCapTransformationMethod());
+        uldBianHao_B.setTransformationMethod(new AllCapTransformationMethod());
+
+        qmuiDialog = new QMUIDialog.MessageDialogBuilder(mContext)
+                .setTitle("创建新ULD")
+                .setMessage("输入的ULD号不存在，是否创建？")
+                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        if (uldFlag == 1) {
+                            CreatULDInfo(uldBianHao_A.getText().toString().toUpperCase().trim());
+                        }else if (uldFlag == 2) {
+                            CreatULDInfo(uldBianHao_B.getText().toString().toUpperCase().trim());
+                        }
+
+                    }
+                })
+                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        if (uldFlag == 1) {
+                            uldBianHao_A.setText("");
+                            uldBianZhong_A.setText("");
+                        } else if (uldFlag == 2) {
+                            uldBianHao_B.setText("");
+                            uldBianZhong_B.setText("");
+                        }
+                    }
+                })
+                .create();
         EditViewSetEmpty();
         setListener();
     }
@@ -103,7 +161,12 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         btn_QueDin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                ArrayMap<String,String> re = new ArrayMap<>();
+                re.put(uldBianHao_A.getText().toString().toUpperCase().trim(), uldBianZhong_A.getText().toString().toUpperCase().trim());
+                re.put(uldBianHao_B.getText().toString().toUpperCase().trim(), uldBianZhong_B.getText().toString().toUpperCase().trim());
+
+                CreatGNCULDLoading(getUpdateXml(PinBanHao_A.getText().toString().trim(),PinBanZhong_A.getText().toString().trim(),re));
             }
         });
 
@@ -114,31 +177,26 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
             }
         });
 
-        uldBianHao_A.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        uldBianZhong_A.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-
-                } else {
-                    String str = uldBianHao_A.getText().toString();
-                    if (str.length() > 11) {
-                        handler.sendEmptyMessage(2);
-                        ToastUtils.showToast(mContext, "位数不能大于11位", Toast.LENGTH_LONG);
+                    if (!TextUtils.isEmpty(uldBianHao_A.getText().toString().toUpperCase().trim())) {
+                        uldFlag = 1;
+                        ULDisExist(uldBianHao_A.getText().toString().toUpperCase().trim());
                     }
                 }
             }
         });
 
-        uldBianHao_B.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        uldBianZhong_B.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-
-                } else {
-                    String str = uldBianHao_B.getText().toString();
-                    if (str.length() > 11) {
-                        handler.sendEmptyMessage(3);
-                        ToastUtils.showToast(mContext, "位数不能大于11位", Toast.LENGTH_LONG);
+                    if (!TextUtils.isEmpty(uldBianHao_B.getText().toString().toUpperCase().trim())) {
+                        uldFlag = 2;
+                        ULDisExist(uldBianHao_B.getText().toString().toUpperCase().trim());
                     }
                 }
             }
@@ -149,6 +207,8 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
     //endregion
 
     //region 功能方法
+
+    //region activity销毁时调用的方法
     @Override
     public void finish() {
         Integer req = (Integer) getIntent().getSerializableExtra("id");
@@ -166,7 +226,9 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         }
         super.finish();
     }
+    //endregion
 
+    //region 处理UI的线程
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -176,21 +238,176 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                 FocusView.clearFocus();
                 //焦点失去时的校验方法，用于更新ID
                 switch (msg.what) {
-                    case 1:
-
-                        break;
-                    case 2:
-                        uldBianHao_A.setText("");
-                        uldBianHao_A.requestFocus();
-                        break;
-                    case 3:
-                        uldBianHao_B.setText("");
-                        uldBianHao_B.requestFocus();
+                    case 6:
+                        finish();
                         break;
                 }
             }
             return false;
         }
     });
+    //endregion
+
+    //region 校验平板是否存在的方法
+    private void ULDisExist (String uldID) {
+        String a = "";
+        ArrayMap<String, String> p = new ArrayMap<>();
+        p.put("ULD",uldID);
+        p.put("nowAirPort","NKG");
+        p.put("ErrString","");
+        ulden = new ArrayList<>();
+        HttpRoot.getInstance().requstAync(ActLiHuoXinZenPinBan.this, HttpCommons.CGO_DOM_Exp_GetEQMULD_NAME , HttpCommons.CGO_DOM_Exp_GetEQMULD_ACTION, p,
+                new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xx = object.getProperty(0).toString();
+                        ulden = ParseULDEntity.parseULDEntityXMLto(xx);
+                        if (ulden.size() > 0 && TextUtils.isEmpty(ulden.get(0).getULD())) {
+                            if (uldFlag == 1) {
+                                uldBianZhong_A.setText("");
+                                uldBianHao_A.requestFocus();
+                            } else if (uldFlag == 2) {
+                                uldBianZhong_B.setText("");
+                                uldBianHao_B.requestFocus();
+                            }
+
+                            qmuiDialog.show();
+                        } else {
+                            if (uldFlag == 1) {
+                                uldBianZhong_A.setText(ulden.get(0).getULDWeight());
+                                uldBianZhong_A.setSelection(uldBianZhong_A.getText().toString().trim().length());
+                            }else if (uldFlag == 2) {
+                                uldBianZhong_B.setText(ulden.get(0).getULDWeight());
+                                uldBianZhong_B.setSelection(uldBianZhong_B.getText().toString().trim().length());
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        ToastUtils.showToast(ActLiHuoXinZenPinBan.this,message,Toast.LENGTH_SHORT);
+                        if (uldFlag == 1) {
+                            uldBianHao_A.setText("");
+                            uldBianZhong_A.setText("");
+                            uldBianHao_A.requestFocus();
+                        } else if (uldFlag == 2) {
+                            uldBianHao_B.requestFocus();
+                            uldBianZhong_B.setText("");
+                            uldBianHao_B.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"数据获取出错",Toast.LENGTH_SHORT);
+                    }
+                },page);
+    }
+    //endregion
+
+    //region 创建新ULD
+    private void CreatULDInfo (String uldID) {
+        ArrayMap<String, String> p = new ArrayMap<>();
+        p.put("ULD",uldID);
+        p.put("nowAirPort","NKG");
+        p.put("ErrString","");
+        HttpRoot.getInstance().requstAync(ActLiHuoXinZenPinBan.this, HttpCommons.CGO_DOM_Exp_CreatULDInfo_NAME , HttpCommons.CGO_DOM_Exp_CreatULDInfo_ACTION, p,
+                new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        String xx = object.getProperty(0).toString();
+                        ulden = ParseULDEntity.parseULDEntityXMLto(xx);
+                        if (ulden.size() > 0 && !TextUtils.isEmpty(ulden.get(0).getULD())) {
+                            if (uldFlag == 1) {
+                                uldBianZhong_A.setText(ulden.get(0).getULDWeight());
+
+                                uldBianHao_A.setText(ulden.get(0).getULD());
+                                uldBianHao_A.setSelection( uldBianHao_A.getText().toString().trim().length());
+                            } else if (uldFlag == 2) {
+                                uldBianZhong_B.setText(ulden.get(0).getULDWeight());
+
+                                uldBianHao_B.setText(ulden.get(0).getULD());
+                                uldBianHao_B.setSelection( uldBianHao_B.getText().toString().trim().length());
+                            };
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        ToastUtils.showToast(ActLiHuoXinZenPinBan.this,message,Toast.LENGTH_SHORT);
+                        if (uldFlag == 1) {
+                            uldBianHao_A.setText("");
+                            uldBianZhong_A.setText("");
+                        } else if (uldFlag == 2) {
+                            uldBianHao_B.setText("");
+                            uldBianZhong_B.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"数据获取出错",Toast.LENGTH_SHORT);
+                    }
+                },page);
+
+    }
+    //endregion
+
+    //region 创建新平板
+    private void CreatGNCULDLoading (Map<String, String> p) {
+        HttpRoot.getInstance().requstAync(ActLiHuoXinZenPinBan.this, HttpCommons.CGO_DOM_Exp_CreatGNCULDLoading_NAME, HttpCommons.CGO_DOM_Exp_CreatGNCULDLoading_ACTION, p,
+                new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject object = (SoapObject) result;
+                        Log.i(TAG, object.toString());
+                        String res = object.getProperty(0).toString();
+                        if (res.contains("true")) {
+                            ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"新增成功",Toast.LENGTH_SHORT);
+                            handler.sendEmptyMessage(6);
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        ToastUtils.showToast(ActLiHuoXinZenPinBan.this,message,Toast.LENGTH_SHORT);
+                    }
+
+                    @Override
+                    public void onError() {
+                        ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"数据获取出错",Toast.LENGTH_SHORT);
+                    }
+                },page);
+    }
+    //endregion
+
+    //region 生成创建新平板用的XML
+    private Map<String,String> getUpdateXml(String CarID,String CarWeight,ArrayMap<String,String> uldloading) {
+        StringBuilder sb = new StringBuilder();
+        Map<String, String> pa = new HashMap<>();
+        sb.append("<?xml version='1.0' encoding='UTF-8'?>");
+        sb.append("<GNCCarUseRecord>");
+        sb.append("  <CarID>" + CarID + "</CarID>");
+        sb.append("  <CarWeight>" + CarWeight + "</CarWeight>");
+        sb.append("  <Loading>");
+
+        Set<String> keys = uldloading.keySet();
+        for (String k : keys) {
+            sb.append("    <ULD>" + k + "</ULD>");
+            sb.append("    <ULDWeight>" + uldloading.get(k) + "</ULDWeight>");
+        }
+
+        sb.append("  </Loading>");
+        sb.append("</GNCCarUseRecord>");
+
+        pa.put("CarUseXml", sb.toString());
+        pa.put("ErrString", "");
+        return pa;
+    }
+    //endregion
+
     //endregion
 }

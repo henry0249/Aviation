@@ -203,4 +203,19 @@ public class HttpCommons {
     public static final String CGO_DOM_Exp_UpdateGNCLoading_NAME = "ReSetGNCULDLoading";
     public static final String CGO_DOM_Exp_UpdateGNCLoading_ACTION = "http://58.213.128.130/ReSetGNCULDLoading";
     //endregion
+
+    //region 国内 验证ULD是否存在
+    public static final String CGO_DOM_Exp_GetEQMULD_NAME = "GetEQMULDEntity";
+    public static final String CGO_DOM_Exp_GetEQMULD_ACTION = "http://58.213.128.130/GetEQMULDEntity";
+    //endregion
+
+    //region 国内 创建ULD
+    public static final String CGO_DOM_Exp_CreatULDInfo_NAME = "CreatULDInfo";
+    public static final String CGO_DOM_Exp_CreatULDInfo_ACTION = "http://58.213.128.130/CreatULDInfo";
+    //endregion
+
+    //region 国内 创建新平板
+    public static final String CGO_DOM_Exp_CreatGNCULDLoading_NAME = "CreatGNCULDLoading";
+    public static final String CGO_DOM_Exp_CreatGNCULDLoading_ACTION = "http://58.213.128.130/CreatGNCULDLoading";
+    //endregion
 }

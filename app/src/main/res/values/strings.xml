@@ -236,4 +236,6 @@
     <string name="flight_tishiqiyungang">请输入启运港</string>
     <string name="flight_jinchugangleixing">进出港类型:</string>
     <string name="flight_tishijinchugangleixing">请选择类型</string>
+
+    <string name="login_only_can_input">0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
 </resources>
