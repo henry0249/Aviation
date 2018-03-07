@@ -76,6 +76,7 @@ import static com.example.administrator.aviation.R.id.textView;
  * Created by Administrator on 2017/12/6.
  */
 
+//region 佛祖保佑 永无BUG 永不修改 --by sst
 ////////////////////////////////////////////////////////////////////
 //                          _ooOoo_                               //
 //                         o8888888o                              //
@@ -108,6 +109,7 @@ import static com.example.administrator.aviation.R.id.textView;
 //               别人笑我太疯癫，我笑他人看不穿；                 //
 //               不见满街漂亮妹，哪个归得程序员？                 //
 ////////////////////////////////////////////////////////////////////
+//endregion
 public class DaiZhuangFragment extends Fragment {
 
     //region 全局变量
@@ -416,12 +418,11 @@ public class DaiZhuangFragment extends Fragment {
                     Toast.makeText(getActivity(), "未找到数据，请再多输几位", Toast.LENGTH_SHORT).show();
                 } else {
                     if (talHeight < 5) {
-                        ListHeigh(leftListView);
+                        talHeight = PublicFun.CalcListHeigh(leftListView);
                     }
                     PublicFun.KeyBoardHide(mAct,mContext);
                     refresh_scroll.smoothScrollTo(0, yidongInt * talHeight);
                     leftListView.performItemClick(leftListView.getChildAt(yidongInt), yidongInt, leftListView.getItemIdAtPosition(yidongInt));
-//                    Toast.makeText(getActivity(), store.size() + "", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -642,26 +643,21 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
         public boolean handleMessage(Message msg) {
             if (msg.what == AviationCommons.GNC_ULDLoadingCargo) {
                 setDatas(DaiZhuangCargos,AviationCommons.REFRESH_DATA);
+
                 if (DaiZhuangCargos.size() == 0) {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
-                Ldialog.dismiss();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Ldialog.dismiss();
+                    }
+                }, 1000);
             }
             return false;
         }
     });
-    //endregion
-
-    //region 计算listview每一行高度
-    private void ListHeigh(ListView listView) {
-        ListAdapter mAdapter = listView.getAdapter();
-        if (mAdapter == null) {
-            return;
-        }
-        View mView = mAdapter.getView(0, null, listView);
-        mView.measure(0, 0);
-        talHeight = mView.getMeasuredHeight() + listView.getDividerHeight();
-    }
     //endregion
 
     //region 货物装载操作方法

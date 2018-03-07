@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
 import com.example.administrator.aviation.R;
 import java.util.LinkedList;
 
@@ -104,6 +107,19 @@ public class PublicFun {
                 imm.hideSoftInputFromWindow(act.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+    }
+    //endregion
+
+    //region 计算ListView的高度
+    public static int CalcListHeigh(ListView listView) {
+        ListAdapter mAdapter = listView.getAdapter();
+        if (mAdapter == null) {
+            return 0;
+        }
+        View mView = mAdapter.getView(0, null, listView);
+        mView.measure(0, 0);
+        int res = mView.getMeasuredHeight() + listView.getDividerHeight();
+        return res;
     }
     //endregion
 

@@ -229,8 +229,9 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
 	@Override
 	protected void onDestroy() {
-		inactivityTimer.shutdown();
 		super.onDestroy();
+		inactivityTimer.shutdown();
+		System.gc();
 	}
 
 	@Override

@@ -98,54 +98,62 @@ import static com.example.administrator.aviation.R.id.sousuoYundan;
 //endregion
 public class ZhuangZaiFragment extends Fragment {
 
-    private View view;
-    private Context mContext;
-    private Activity mAct;
-
-    @BindView(R.id.pulltorefreshview)
-    AbPullToRefreshView pulltorefreshview;
-    @BindView(R.id.tv_table_title_left)
-    TextView tv_table_title_left;
+    //region 滚动的listview控件
     @BindView(R.id.left_container_listview)
     ListView leftListView;
     @BindView(R.id.right_container_listview)
     ListView rightListView;
-    @BindView(R.id.right_title_container)
-    LinearLayout right_title_container;
+    @BindView(R.id.pulltorefreshview)
+    AbPullToRefreshView pulltorefreshview;
     @BindView(R.id.title_horsv)
     SyncHorizontalScrollView titleHorScv;
     @BindView(R.id.content_horsv)
     SyncHorizontalScrollView contentHorScv;
+    @BindView(R.id.pull_refresh_scroll)
+    ScrollView refresh_scroll;
+    //endregion
+
+    //region Button控件
     @BindView(R.id.jianjian)
     FloatingActionButton JianJianfloatingButton;
     @BindView(R.id.search_2)
     FloatingActionButton JianSuofloatingButton;
-    @BindView(R.id.jiansuokuang)
-    LinearLayout jiansuokuang;
     @BindView(R.id.sousuoQuedin)
     Button sousuoQuedin;
     @BindView(R.id.sousuoQuxiao)
     Button sousuoQuxiao;
+    //endregion
+
+    //region layout和textView控件
+    @BindView(R.id.tv_table_title_left)
+    TextView tv_table_title_left;
+    @BindView(R.id.right_title_container)
+    LinearLayout right_title_container;
+    @BindView(R.id.jiansuokuang)
+    LinearLayout jiansuokuang;
     @BindView(R.id.sousuoYundan)
     EditText sousuoZhudan;
-    @BindView(R.id.pull_refresh_scroll)
-    ScrollView refresh_scroll;
+    //endregion
+
+    //region 自定义变量和未在XML中声明的控件
+    // 初始化数据加载提示（即对话框）
+    private LoadingDialog Ldialog;
+    private TextView DaiLiRen;
+    private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
+    private WeakHandler mHandler = new WeakHandler();
+    private View view;
+    private Context mContext;
+    private Activity mAct;
 
     private final String TAG = "ZhuangZaiFragmentError";
     private final String page = "one";
     private int talHeight = 0;
-    // 初始化数据加载提示（即对话框）
-    private LoadingDialog Ldialog;
-    private TextView DaiLiRen;
-
-    private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
-    private WeakHandler mHandler = new WeakHandler();
-
     //用于存放标题的id,与textview引用
     private SparseArray<TextView> mTitleTvArray;
     private HashMap<String,String> res = new HashMap<>();
     private List<ULDLoadingCargo> loadingCargos = new ArrayList<>();
     private HashMap<String,String> store = new HashMap();
+    //endregion
 
     //region 初始化
 
@@ -367,7 +375,7 @@ public class ZhuangZaiFragment extends Fragment {
                     Toast.makeText(getActivity(), "未找到数据，请再多输几位", Toast.LENGTH_SHORT).show();
                 } else {
                     if (talHeight < 5) {
-                        ListHeigh(leftListView);
+                        talHeight = PublicFun.CalcListHeigh(leftListView);
                     }
                     PublicFun.KeyBoardHide(mAct,mContext);
                     refresh_scroll.smoothScrollTo(0, yidongInt * talHeight);
@@ -586,26 +594,21 @@ public class ZhuangZaiFragment extends Fragment {
         public boolean handleMessage(Message msg) {
             if (msg.what == AviationCommons.GNC_ULDLoadingCargo) {
                 setDatas(loadingCargos,AviationCommons.REFRESH_DATA);
+
                 if (loadingCargos.size() == 0) {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
-                Ldialog.dismiss();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Ldialog.dismiss();
+                    }
+                }, 1000);
             }
             return false;
         }
     });
-    //endregion
-
-    //region 计算listview每一行高度
-    private void ListHeigh(ListView listView) {
-        ListAdapter mAdapter = listView.getAdapter();
-        if (mAdapter == null) {
-            return;
-        }
-        View mView = mAdapter.getView(0, null, listView);
-        mView.measure(0, 0);
-        talHeight = mView.getMeasuredHeight() + 4;
-    }
     //endregion
 
     //endregion

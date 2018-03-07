@@ -75,6 +75,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
     @BindView(R.id.LiHuoXinZenB)
     LinearLayout LiHuoXinZenB;
     //endregion
+
     //region 自定义控件
     private NavBar navBar;
     private QMUIDialog qmuiDialog;
@@ -90,6 +91,8 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
     //endregion
 
     //region 初始化
+
+    //region 活动的创建
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +102,9 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
     }
+    //endregion
 
+    //region 初始化变量和控件
     private void initView() {
         navBar = new NavBar(this);
         navBar.setTitle("新增平板");
@@ -141,6 +146,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         EditViewSetEmpty();
         setListener();
     }
+    //endregion
 
     //region 所有输入框置空
     private void EditViewSetEmpty() {
@@ -156,27 +162,47 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
     //endregion
 
     //region 控件事件
+
     //region 页面上所有的点击事件
     private void setListener() {
+        //region 确定按钮点击事件
         btn_QueDin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String pinBan = PinBanHao_A.getText().toString().trim();
+
+                if (TextUtils.isEmpty(PinBanZhong_A.getText().toString().trim())) {
+                    ToastUtils.showToast(mContext," 平板自重不可为空！",Toast.LENGTH_SHORT);
+                    return;
+                } else if (TextUtils.isEmpty(uldBianZhong_A.getText().toString().trim()) || TextUtils.isEmpty(uldBianZhong_B.getText().toString().trim())) {
+                    ToastUtils.showToast(mContext," ULD自重不可为空！",Toast.LENGTH_SHORT);
+                    return;
+                }
+                if (pinBan.length() == 1) {
+                    pinBan = "00" + pinBan;
+                } else if (pinBan.length() == 2) {
+                    pinBan = "0" + pinBan;
+                }
 
                 ArrayMap<String,String> re = new ArrayMap<>();
                 re.put(uldBianHao_A.getText().toString().toUpperCase().trim(), uldBianZhong_A.getText().toString().toUpperCase().trim());
                 re.put(uldBianHao_B.getText().toString().toUpperCase().trim(), uldBianZhong_B.getText().toString().toUpperCase().trim());
 
-                CreatGNCULDLoading(getUpdateXml(PinBanHao_A.getText().toString().trim(),PinBanZhong_A.getText().toString().trim(),re));
+                CreatGNCULDLoading(getUpdateXml(pinBan,PinBanZhong_A.getText().toString().trim(),re));
             }
         });
+        //endregion
 
+        //region 清空按钮
         btn_QinChu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditViewSetEmpty();
             }
         });
+        //endregion
 
+        //region ULD_A焦点改变—获得事件
         uldBianZhong_A.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -188,8 +214,9 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                 }
             }
         });
+        //endregion
 
-
+        //region ULD_B焦点改变—获得事件
         uldBianZhong_B.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -201,6 +228,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                 }
             }
         });
+        //endregion
     }
     //endregion
 
@@ -208,9 +236,17 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
 
     //region 功能方法
 
-    //region activity销毁时调用的方法
+    //region finish前清空消息队列，并回收垃圾
     @Override
-    public void finish() {
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+        System.gc();
+    }
+    //endregion
+
+    //region 新增成功后的回调查询方法
+    private void FanHui() {
         Integer req = (Integer) getIntent().getSerializableExtra("id");
         Intent intent = new Intent(ActLiHuoXinZenPinBan.this,expULDLoading.class);
         if (req == GNC_ULDLOADING_XinZenPinBan_REQUEST) {
@@ -223,8 +259,10 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
 
             intent.putExtras(bundle);
             setResult(AviationCommons.GNC_ULDLOADING_XinZenPinBan_RESULT, intent);
+            ActLiHuoXinZenPinBan.this.finish();
+        } else {
+            ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"上层请求码错误，无法回调！",Toast.LENGTH_SHORT);
         }
-        super.finish();
     }
     //endregion
 
@@ -239,7 +277,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                 //焦点失去时的校验方法，用于更新ID
                 switch (msg.what) {
                     case 6:
-                        finish();
+                        FanHui();
                         break;
                 }
             }
@@ -282,7 +320,6 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                                 uldBianZhong_B.setSelection(uldBianZhong_B.getText().toString().trim().length());
                             }
                         }
-
                     }
 
                     @Override
@@ -392,15 +429,14 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         sb.append("<GNCCarUseRecord>");
         sb.append("  <CarID>" + CarID + "</CarID>");
         sb.append("  <CarWeight>" + CarWeight + "</CarWeight>");
-        sb.append("  <Loading>");
 
         Set<String> keys = uldloading.keySet();
         for (String k : keys) {
+            sb.append("  <Loading>");
             sb.append("    <ULD>" + k + "</ULD>");
             sb.append("    <ULDWeight>" + uldloading.get(k) + "</ULDWeight>");
+            sb.append("  </Loading>");
         }
-
-        sb.append("  </Loading>");
         sb.append("</GNCCarUseRecord>");
 
         pa.put("CarUseXml", sb.toString());

@@ -196,6 +196,8 @@ public class expULDLoading extends AppCompatActivity {
     //endregion
 
     //region 初始化
+
+    //region activity的创建
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,13 +207,28 @@ public class expULDLoading extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
     }
+    //endregion
 
+    //region finish前清空消息队列，并回收垃圾
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
         System.gc();
     }
+    //endregion
 
+    //region start方法，会在OnActivityResult之后调用
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (gnculd.size() > 0 && PinBan_Two.equals(PinBanHao_one.getText().toString().trim())) {
+            ChaXun.performClick();
+        }
+    }
+    //endregion
+
+    //region 变量和控件的初始化
     private void initView() {
         PinBan_Two = "";
         OriULD = "";
@@ -228,7 +245,9 @@ public class expULDLoading extends AppCompatActivity {
         TxtViewSetEmpty();
         setListener();
     }
+    //endregion
 
+    //region 输入框置空
     private void TxtViewSetEmpty() {
         PinBanHao_one.setText("");
         uldBianHao.setText("");
@@ -252,6 +271,7 @@ public class expULDLoading extends AppCompatActivity {
         BanXin.setText("");
         CangWei.setText("");
     }
+    //endregion
 
     //endregion
 

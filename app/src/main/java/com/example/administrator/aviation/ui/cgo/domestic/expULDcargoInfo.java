@@ -55,11 +55,15 @@ import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinf
 import static java.security.AccessController.getContext;
 
 public class expULDcargoInfo extends AppCompatActivity {
+
+    //region Button控件
     @BindView(R.id.uldInfo_btn_ZhuangZaiXinXi)
     Button ZhuangZaiXinXi;
     @BindView(R.id.uldInfo_btn_DaiZhuangXinXi)
     Button DaiZhuangXinXi;
+    //endregion
 
+    //region 自定义变量和控件
     private NavBar navBar;
     private Context Mcontext;
     private PopupWindow pw;
@@ -73,8 +77,11 @@ public class expULDcargoInfo extends AppCompatActivity {
     private final String TAG = "expULDcargoInfo";
     private int PageFlag;
     private HashMap<String, String> idArrary;
+    //endregion
 
     //region 初始化
+
+    //region 入口函数
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +91,9 @@ public class expULDcargoInfo extends AppCompatActivity {
         initView();
         switchFragment(zhuangzaiFragment,0).commit();
     }
+    //endregion
 
+    //region 初始化变量和控件
     private void initView() {
         PageFlag = 0;
         idArrary = new HashMap<>();
@@ -97,6 +106,7 @@ public class expULDcargoInfo extends AppCompatActivity {
         currentFragment = new Fragment();
         setListener();
     }
+    //endregion
 
     //endregion
 
