@@ -267,6 +267,19 @@ public class ZhuangZaiFragment extends Fragment {
     }
     //endregion
 
+    //region 碎片show的时候刷新
+    @Override
+    public void onHiddenChanged(boolean hidd) {
+        if (hidd) {
+            //隐藏时所作的事情
+
+        } else {
+            //显示时所作的事情
+            pulltorefreshview.headerRefreshing();
+        }
+    }
+    //endregion
+
     //endregion
 
     //region 控件事件
@@ -599,12 +612,8 @@ public class ZhuangZaiFragment extends Fragment {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Ldialog.dismiss();
-                    }
-                }, 1000);
+                Ldialog.dismiss();
+
             }
             return false;
         }

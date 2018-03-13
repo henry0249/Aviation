@@ -23,6 +23,7 @@ import com.example.administrator.aviation.model.hygnc.ParseULDEntity;
 import com.example.administrator.aviation.model.hygnc.ULDEntity;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -79,6 +80,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
     //region 自定义控件
     private NavBar navBar;
     private QMUIDialog qmuiDialog;
+    private LoadingDialog Ldialog;
     //endregion
 
     //region 自定义全局变量
@@ -113,6 +115,10 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
 
         uldBianHao_A.setTransformationMethod(new AllCapTransformationMethod());
         uldBianHao_B.setTransformationMethod(new AllCapTransformationMethod());
+        Ldialog = new LoadingDialog(mContext);
+
+        EditViewSetEmpty();
+        setListener();
 
         qmuiDialog = new QMUIDialog.MessageDialogBuilder(mContext)
                 .setTitle("创建新ULD")
@@ -143,8 +149,6 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                     }
                 })
                 .create();
-        EditViewSetEmpty();
-        setListener();
     }
     //endregion
 
@@ -171,13 +175,17 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
             public void onClick(View v) {
                 String pinBan = PinBanHao_A.getText().toString().trim();
 
-                if (TextUtils.isEmpty(PinBanZhong_A.getText().toString().trim())) {
-                    ToastUtils.showToast(mContext," 平板自重不可为空！",Toast.LENGTH_SHORT);
+                if (TextUtils.isEmpty(PinBanZhong_A.getText().toString().trim()) || TextUtils.isEmpty(PinBanHao_A.getText().toString().trim())) {
+                    ToastUtils.showToast(mContext," 平板信息不可为空！",Toast.LENGTH_SHORT);
                     return;
-                } else if (TextUtils.isEmpty(uldBianZhong_A.getText().toString().trim()) || TextUtils.isEmpty(uldBianZhong_B.getText().toString().trim())) {
-                    ToastUtils.showToast(mContext," ULD自重不可为空！",Toast.LENGTH_SHORT);
+                } else if (!TextUtils.isEmpty(uldBianHao_A.getText().toString().trim()) && TextUtils.isEmpty(uldBianZhong_A.getText().toString().trim())) {
+                    ToastUtils.showToast(mContext," ULD_1自重不可为空！",Toast.LENGTH_SHORT);
+                    return;
+                } else if (!TextUtils.isEmpty(uldBianHao_B.getText().toString().trim()) && TextUtils.isEmpty(uldBianZhong_B.getText().toString().trim())) {
+                    ToastUtils.showToast(mContext," ULD_2自重不可为空！",Toast.LENGTH_SHORT);
                     return;
                 }
+
                 if (pinBan.length() == 1) {
                     pinBan = "00" + pinBan;
                 } else if (pinBan.length() == 2) {
@@ -294,6 +302,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
         p.put("nowAirPort","NKG");
         p.put("ErrString","");
         ulden = new ArrayList<>();
+        Ldialog.show();
         HttpRoot.getInstance().requstAync(ActLiHuoXinZenPinBan.this, HttpCommons.CGO_DOM_Exp_GetEQMULD_NAME , HttpCommons.CGO_DOM_Exp_GetEQMULD_ACTION, p,
                 new HttpRoot.CallBack() {
                     @Override
@@ -310,6 +319,7 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                                 uldBianHao_B.requestFocus();
                             }
 
+                            Ldialog.dismiss();
                             qmuiDialog.show();
                         } else {
                             if (uldFlag == 1) {
@@ -319,6 +329,8 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                                 uldBianZhong_B.setText(ulden.get(0).getULDWeight());
                                 uldBianZhong_B.setSelection(uldBianZhong_B.getText().toString().trim().length());
                             }
+
+                            Ldialog.dismiss();
                         }
                     }
 
@@ -334,11 +346,13 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                             uldBianZhong_B.setText("");
                             uldBianHao_B.setText("");
                         }
+                        Ldialog.dismiss();
                     }
 
                     @Override
                     public void onError() {
                         ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"数据获取出错",Toast.LENGTH_SHORT);
+                        Ldialog.dismiss();
                     }
                 },page);
     }
@@ -389,7 +403,6 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                         ToastUtils.showToast(ActLiHuoXinZenPinBan.this,"数据获取出错",Toast.LENGTH_SHORT);
                     }
                 },page);
-
     }
     //endregion
 

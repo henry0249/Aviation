@@ -141,6 +141,8 @@ public class ParseGNCmessage {
                             LoadingInfo.setOPDate(parser.nextText());
                         }else if (name.equalsIgnoreCase("OPID")) {
                             LoadingInfo.setOPID(parser.nextText());
+                        }else if (name.equalsIgnoreCase("CarWeight")) {
+                            LoadingInfo.setCarWeight(parser.nextText());
                         }
                         break;
                     case XmlPullParser.END_TAG:// 结束元素事件

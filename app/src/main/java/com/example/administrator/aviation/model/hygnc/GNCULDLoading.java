@@ -35,6 +35,7 @@ public class GNCULDLoading implements Serializable {
     private String FClose;
     private String OPDate;
     private String OPID;
+    private String CarWeight;
 
     public GNCULDLoading() {
         ID = "";
@@ -43,6 +44,7 @@ public class GNCULDLoading implements Serializable {
         ULD = "";
         ULDFlag = "";
         ULDWeight = "";
+        CarWeight = "";
         MaxWeight = "";
         MaxVolume = "";
         BoardType = "";
@@ -280,5 +282,13 @@ public class GNCULDLoading implements Serializable {
 
     public void setOPID(String OPID) {
         this.OPID = OPID;
+    }
+
+    public String getCarWeight() {
+        return CarWeight;
+    }
+
+    public void setCarWeight(String carWeight) {
+        CarWeight = carWeight;
     }
 }

@@ -40,6 +40,7 @@ import com.example.administrator.aviation.model.adapter.ListViewAdapter;
 import com.example.administrator.aviation.model.hygnc.GNCULDLoading;
 import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
 import com.example.administrator.aviation.sys.PublicFun;
+import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -187,8 +188,9 @@ public class expULDLoading extends AppCompatActivity {
     //region 自定义全局变量
     private final String TAG = "expULDLoadingLog";
     private final String page = "one";
-    private String PinBan_Two;
-    private String OriULD;
+    private String PinBan_Two = "";
+    private String OriULD = "";
+    private String YiHuanPinBan = "";
     private List<GNCULDLoading> gnculd;
     private ArrayList<String> list;
     private Context mContext;
@@ -230,10 +232,9 @@ public class expULDLoading extends AppCompatActivity {
 
     //region 变量和控件的初始化
     private void initView() {
-        PinBan_Two = "";
-        OriULD = "";
         gnculd = new ArrayList<>();
         list = new ArrayList<>();
+        MuBiaoULDEdt.setTransformationMethod(new AllCapTransformationMethod());
 
         navBar = new NavBar(this);
         navBar.setTitle("国内出港理货");
@@ -380,13 +381,24 @@ public class expULDLoading extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayMap<String,String> re = new ArrayMap<>();
+                re.put("ID", LiuShuiHao.getText().toString().trim());
                 re.put("OLDCarID", PinBanHao_one.getText().toString().trim());
-                re.put("OLDULD",uldBianHao.getText().toString().trim());
+                re.put("OLDULD",uldBianHao.getText().toString().toUpperCase().trim());
 
-                re.put("CarID",TextUtils.isEmpty(MuBiaoPinBanEdt.getText().toString().trim())
-                        ? PinBanHao_one.getText().toString().trim():MuBiaoPinBanEdt.getText().toString().trim());
-                re.put("ULD",TextUtils.isEmpty(MuBiaoULDEdt.getText().toString().trim())
-                        ? uldBianHao.getText().toString().trim():MuBiaoULDEdt.getText().toString().trim());
+                String Cid = MuBiaoPinBanEdt.getText().toString().trim();
+                if (TextUtils.isEmpty(Cid)) {
+                    re.put("CarID", PinBanHao_one.getText().toString().trim());
+                } else {
+                    if (Cid.length() == 1) {
+                        Cid = "00" + Cid;
+                    } else if (Cid.length() == 2) {
+                        Cid = "0" + Cid;
+                    }
+                    re.put("CarID",Cid);
+                }
+
+                re.put("ULD",TextUtils.isEmpty(MuBiaoULDEdt.getText().toString().toUpperCase().trim())
+                        ? uldBianHao.getText().toString().toUpperCase().trim():MuBiaoULDEdt.getText().toString().toUpperCase().trim());
                 re.put("CarWeight",TextUtils.isEmpty(ZiZhong.getText().toString().trim())
                         ? "0":ZiZhong.getText().toString().trim());
                 re.put("ULDWeight",TextUtils.isEmpty(ULDzhong.getText().toString().trim())
@@ -398,6 +410,7 @@ public class expULDLoading extends AppCompatActivity {
                 re.put("Location",CangWei.getText().toString().trim());
                 re.put("Remark",BeiZhu.getText().toString().trim());
 
+                Ldialog.show();
                 UpdatePinBanInfo(getUpdateXml(re));
             }
         });
@@ -693,6 +706,7 @@ public class expULDLoading extends AppCompatActivity {
         sb.append("<?xml version='1.0' encoding='UTF-8'?>");
         sb.append("<GNCULDLoading>");
         sb.append("  <Loading>");
+        sb.append("    <ID>" + uldloading.get("ID") + "</ID>");
         sb.append("    <OLDCarID>" + uldloading.get("OLDCarID") + "</OLDCarID>");
         sb.append("    <OLDULD>" + uldloading.get("OLDULD") +"</OLDULD>");
         sb.append("    <CarID>" + uldloading.get("CarID") +"</CarID>");
@@ -722,14 +736,53 @@ public class expULDLoading extends AppCompatActivity {
                     public void onSucess(Object result) {
                         SoapObject object = (SoapObject) result;
                         Log.i(TAG, object.toString());
-                        Ldialog.dismiss();
+                        String res = object.getProperty(0).toString();
+                        if (res.contains("true")) {
+                            String Cid = MuBiaoPinBanEdt.getText().toString().trim();
+                            if (TextUtils.isEmpty(Cid)) {
+                                btn_Quxiao.performClick();
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Ldialog.dismiss();
+                                        ToastUtils.showToast(expULDLoading.this, "修改成功", Toast.LENGTH_SHORT);
+                                    }
+                                }, 500);
+
+                            } else {
+
+                                Map<String, String> params = new HashMap<>();
+                                PublicFun.KeyBoardHide(mAct, mContext);
+
+                                if (Cid.length() == 1) {
+                                    Cid = "00" + Cid;
+                                } else if (Cid.length() == 2) {
+                                    Cid = "0" + Cid;
+                                }
+
+                                if (!TextUtils.isEmpty(MuBiaoULDEdt.getText().toString().toUpperCase().trim())) {
+                                    OriULD = MuBiaoULDEdt.getText().toString().toUpperCase().trim();
+                                }
+
+                                params.put("ID", "0");
+                                params.put("CarID", Cid);
+                                params.put("ULD", "");
+                                params.put("ErrString", "");
+
+                                CloseWri();
+
+                                Ldialog.show();
+                                GetInfo(params);
+                                ToastUtils.showToast(expULDLoading.this, "修改成功", Toast.LENGTH_SHORT);
+                            }
+                        }
                     }
 
                     @Override
                     public void onFailed(String message) {
                         Ldialog.dismiss();
                         ToastUtils.showToast(expULDLoading.this,message,Toast.LENGTH_SHORT);
-                        handler.sendEmptyMessage(2);
                     }
 
                     @Override
@@ -837,8 +890,6 @@ public class expULDLoading extends AppCompatActivity {
                     ToastUtils.showToast(expULDLoading.this,"数据为空",Toast.LENGTH_SHORT);
                     TxtViewSetEmpty();
                 }
-            } else if (msg.what == 2) {
-
             }
             return false;
         }
@@ -895,7 +946,9 @@ public class expULDLoading extends AppCompatActivity {
         PinBanHao_one.setText(gnculd.get(x).getCarID().toString());
         uldBianHao.setText(gnculd.get(x).getULD().toString());
 
-        ZiZhong.setText(gnculd.get(x).getULDWeight().toString());
+        ZiZhong.setText(gnculd.get(x).getCarWeight().toString());
+        ULDzhong.setText(gnculd.get(x).getULDWeight().toString());
+
         JinZhong.setText(gnculd.get(x).getNetWeight().toString());
         HuoZhong.setText(gnculd.get(x).getCargoWeight().toString());
         TiJi.setText(gnculd.get(x).getVolume().toString());
@@ -928,7 +981,7 @@ public class expULDLoading extends AppCompatActivity {
 
         ChenYunRen.setText(gnculd.get(x).getCarrier().toString());
         LiuShuiHao.setText(gnculd.get(x).getID().toString());
-        ULDzhong.setText(gnculd.get(x).getULDWeight().toString());
+
 
         BeiZhu.setText(gnculd.get(x).getRemark().toString());
         BanXin.setText(gnculd.get(x).getBoardType().toString());

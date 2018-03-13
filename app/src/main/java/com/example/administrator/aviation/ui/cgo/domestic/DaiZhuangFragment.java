@@ -48,6 +48,8 @@ import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
 import com.example.administrator.aviation.util.WeakHandler;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -124,6 +126,7 @@ public class DaiZhuangFragment extends Fragment {
     private View view;
     private Context mContext;
     private Activity mAct;
+    Timer timer = new Timer();
     //endregion
 
     //region 自定义和代码定义的控件
@@ -168,6 +171,8 @@ public class DaiZhuangFragment extends Fragment {
     //endregion
 
     //region layout控件
+    @BindView(R.id.tableDaiZh)
+    LinearLayout LaytableDaiZh;
     @BindView(R.id.jiansuokuang_d)
     LinearLayout jiansuokuang;
     @BindView(R.id.right_title_container_d)
@@ -206,7 +211,7 @@ public class DaiZhuangFragment extends Fragment {
 
         jiansuokuang.setVisibility(View.GONE);
         inputDialog = new AlertDialog.Builder(getActivity());
-        Ldialog = new LoadingDialog(getContext());
+        Ldialog = new LoadingDialog(mContext);
 
         res = (HashMap<String, String>) getArguments().getSerializable("daizhuang");
         GetInfo(res);
@@ -294,6 +299,19 @@ public class DaiZhuangFragment extends Fragment {
     }
     //endregion
 
+    //region 碎片show的时候刷新
+    @Override
+    public void onHiddenChanged(boolean hidd) {
+        if (hidd) {
+            //隐藏时所作的事情
+
+        } else {
+            //显示时所作的事情
+            pulltorefreshview.headerRefreshing();
+        }
+    }
+    //endregion
+
     //endregion
 
     //region 控件事件
@@ -302,12 +320,12 @@ public class DaiZhuangFragment extends Fragment {
     public void setListener() {
 
         //region 点击其他部位隐藏软键盘
-        view.setOnTouchListener(new View.OnTouchListener() {
+        LaytableDaiZh.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 PublicFun.KeyBoardHide(mAct,mContext);
-                return false;
+                return true;
             }
         });
         //endregion
@@ -444,10 +462,21 @@ public class DaiZhuangFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (getActivity() != null ){
-                    if (store.size() > 1) {
+                    if (store.size() > 0) {
                         ZhuangHuo();
                         pulltorefreshview.headerRefreshing();
-                    } else if (store.size() == 1) {
+                    }
+                }
+            }
+        });
+        //endregion
+
+        //region 装货按钮长按事件
+        JiaJiafloatingButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (getActivity() != null ){
+                    if (store.size() == 1) {
                         LayoutInflater llInflater = LayoutInflater.from(mContext);
                         View newPlanDialog = llInflater.inflate(R.layout.dialog_zhuangzai, (ViewGroup)getActivity().findViewById(R.id.dia_ZhuangZai));
 
@@ -467,16 +496,31 @@ public class DaiZhuangFragment extends Fragment {
                                                 ToastUtils.showToast(mContext,"输入值大于货物件数", Toast.LENGTH_SHORT);
                                             }
 
-                                            Timer timer = new Timer();
                                             timer.schedule(new TimerTask() {
 
                                                 @Override
                                                 public void run() {
                                                     PublicFun.KeyBoardHide(mAct,mContext);
-                                                }  }, 200);
+                                                }  }, 100);
                                         }
                                     }
                                 });
+
+                        inputDialog.setNegativeButton("取消",new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                timer.schedule(new TimerTask() {
+
+                                    @Override
+                                    public void run() {
+                                        PublicFun.KeyBoardHide(mAct,mContext);
+                                    }  }, 100);
+                                ad.dismiss();
+
+                            }
+                        });
+                        inputDialog.setCancelable(false);
 
                         ad = inputDialog.create();
                         ad.show();
@@ -485,15 +529,9 @@ public class DaiZhuangFragment extends Fragment {
                         diaEdit.setText(store.get(0).get("PC") + "");
                         diaEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
                         diaEdit.setSelection(diaEdit.getText().toString().trim().length());
-
-                        Timer timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                PublicFun.KeyBoardSwitch(mContext);
-                            }  }, 200);
                     }
                 }
+                return true;
             }
         });
         //endregion
@@ -648,12 +686,8 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                 }
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Ldialog.dismiss();
-                    }
-                }, 1000);
+                Ldialog.dismiss();
+
             }
             return false;
         }

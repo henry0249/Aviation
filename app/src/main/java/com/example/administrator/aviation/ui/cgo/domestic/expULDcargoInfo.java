@@ -119,28 +119,28 @@ public class expULDcargoInfo extends AppCompatActivity {
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View myView = LayoutInflater.from(expULDcargoInfo.this).inflate(R.layout.pop_expuld_info, null);
-                pw = new PopupWindow(myView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                pw.showAsDropDown(navBar.getPopMenuView());
-
-                List list = new ArrayList<String>();
-                list.add(0,"扫描装卸");
-
-                uldAdapter ul = new uldAdapter(expULDcargoInfo.this, R.layout.pop_expuld_list_item, list);
-                ListView lv = (ListView) myView.findViewById(R.id.list_pop_expUld);
-                lv.setAdapter(ul);
-
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            int position, long id) {
-                        pw.dismiss();
-                        if (position == 0) {
-                            useCamera();
-                        }
-                    }
-                });
+//                View myView = LayoutInflater.from(expULDcargoInfo.this).inflate(R.layout.pop_expuld_info, null);
+//                pw = new PopupWindow(myView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+//                pw.showAsDropDown(navBar.getPopMenuView());
+//
+//                List list = new ArrayList<String>();
+//                list.add(0,"扫描装卸");
+//
+//                uldAdapter ul = new uldAdapter(expULDcargoInfo.this, R.layout.pop_expuld_list_item, list);
+//                ListView lv = (ListView) myView.findViewById(R.id.list_pop_expUld);
+//                lv.setAdapter(ul);
+//
+//                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view,
+//                                            int position, long id) {
+//                        pw.dismiss();
+//                        if (position == 0) {
+//                            useCamera();
+//                        }
+//                    }
+//                });
             }
         });
         //endregion
@@ -283,6 +283,8 @@ public class expULDcargoInfo extends AppCompatActivity {
         }
     }
     //endregion
+
+
 
     //endregion
 }
