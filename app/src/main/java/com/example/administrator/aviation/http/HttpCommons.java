@@ -218,4 +218,9 @@ public class HttpCommons {
     public static final String CGO_DOM_Exp_CreatGNCULDLoading_NAME = "CreatGNCULDLoading";
     public static final String CGO_DOM_Exp_CreatGNCULDLoading_ACTION = "http://58.213.128.130/CreatGNCULDLoading";
     //endregion
+
+    //region 国内 修改过磅信息
+    public static final String CGO_DOM_Exp_FlatUseReWeight_NAME = "FlatUseReWeight";
+    public static final String CGO_DOM_Exp_FlatUseReWeight_ACTION = "http://58.213.128.130/FlatUseReWeight";
+    //endregion
 }

@@ -460,7 +460,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.cgo.domestic.ReWeightMain"></activity>
+        <activity android:name=".ui.cgo.domestic.ReWeightMain" />
+        <activity android:name=".ui.cgo.domestic.ReWeightInfo"></activity>
     </application>
 
 </manifest>

@@ -496,12 +496,12 @@ public class DaiZhuangFragment extends Fragment {
                                                 ToastUtils.showToast(mContext,"输入值大于货物件数", Toast.LENGTH_SHORT);
                                             }
 
-                                            timer.schedule(new TimerTask() {
-
+                                            mHandler.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
                                                     PublicFun.KeyBoardHide(mAct,mContext);
-                                                }  }, 100);
+                                                }
+                                            }, 100);
                                         }
                                     }
                                 });
@@ -510,12 +510,12 @@ public class DaiZhuangFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog,
                                                 int which) {
-                                timer.schedule(new TimerTask() {
-
+                                mHandler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
                                         PublicFun.KeyBoardHide(mAct,mContext);
-                                    }  }, 100);
+                                    }
+                                }, 100);
                                 ad.dismiss();
 
                             }

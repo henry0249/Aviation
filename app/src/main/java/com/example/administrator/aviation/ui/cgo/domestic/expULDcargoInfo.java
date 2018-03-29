@@ -284,7 +284,5 @@ public class expULDcargoInfo extends AppCompatActivity {
     }
     //endregion
 
-
-
     //endregion
 }

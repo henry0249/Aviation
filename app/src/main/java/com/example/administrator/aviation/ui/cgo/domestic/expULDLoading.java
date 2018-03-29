@@ -190,7 +190,6 @@ public class expULDLoading extends AppCompatActivity {
     private final String page = "one";
     private String PinBan_Two = "";
     private String OriULD = "";
-    private String YiHuanPinBan = "";
     private List<GNCULDLoading> gnculd;
     private ArrayList<String> list;
     private Context mContext;
@@ -363,13 +362,6 @@ public class expULDLoading extends AppCompatActivity {
                 String pinBan = PinBanHao_one.getText().toString().trim();
                 if (!TextUtils.isEmpty(pinBan) && pinBan.equals(PinBan_Two)) {
                     OpenWri();
-
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
-                        }
-                    });
                 }
             }
         });
@@ -825,6 +817,13 @@ public class expULDLoading extends AppCompatActivity {
 
         PublicFun.ElementSwitch(Lay_PB,false);
         PublicFun.ElementSwitch(uldloading_navBar,false);
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
     }
     //endregion
 
@@ -873,6 +872,13 @@ public class expULDLoading extends AppCompatActivity {
 
         PublicFun.ElementSwitch(Lay_PB,true);
         PublicFun.ElementSwitch(uldloading_navBar,true);
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollview.fullScroll(ScrollView.FOCUS_UP);
+            }
+        });
     }
     //endregion
 

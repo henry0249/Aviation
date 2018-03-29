@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:id="@+id/merge_sales_ReWeight"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_0"
+        style="@style/TextView_Table_Right"
+        android:text="ULD"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_1"
+        style="@style/TextView_Table_Right"
+        android:text="航班"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_2"
+        style="@style/TextView_Table_Right"
+        android:text="目的港"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_3"
+        style="@style/TextView_Table_Right"
+        android:text="体积"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_4"
+        style="@style/TextView_Table_Right"
+        android:text="舱位"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_5"
+        style="@style/TextView_Table_Right"
+        android:text="装机重"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_6"
+        style="@style/TextView_Table_Right"
+        android:text="优先级"/>
+
+    <TextView android:id="@+id/ReWeight_tv_table_title_7"
+        style="@style/TextView_Table_Right"
+        android:text="时间"/>
+</merge>
