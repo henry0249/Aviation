@@ -14,7 +14,7 @@
         android:id="@+id/ReWeight_Scrll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="0dp">
 
         <LinearLayout
             android:id="@+id/ReWeight_AllLayout"
@@ -37,7 +37,7 @@
                     <com.example.administrator.aviation.view.AutofitTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
+                        android:layout_weight="0.16"
                         android:text="地磅:"
                         android:layout_gravity="center"
                         android:maxLines="1"
@@ -52,7 +52,7 @@
                         android:id="@+id/txt_ReWeight_DiBangZhong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.7"
+                        android:layout_weight="0.4"
                         android:layout_marginLeft="10dp"
                         android:padding="2dp"
                         android:textSize="30sp"
@@ -64,13 +64,30 @@
                         android:inputType="number"
                         android:background="@drawable/edit_bg"/>
 
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:id="@+id/ReWeight_txt_calc"
+                        android:background="#7f9b9a9a"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.34"
+                        android:text=""
+                        android:layout_gravity="center"
+                        android:gravity="center|left"
+                        android:maxLines="2"
+                        app:sizeToFit="true"
+                        android:textColor="#0000FF"
+                        android:textSize="16sp"
+                        android:padding="5dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="0dp"/>
+
                     <com.example.administrator.aviation.view.SwitchView
                         android:id="@+id/ReWeight_SwitchBtn"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="0.1"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginRight="10dp"
                         android:layout_alignParentTop="true"
                         android:layout_toRightOf="@+id/txt_ReWeight_DiBangZhong"/>
@@ -329,7 +346,7 @@
                         android:id="@+id/txt_ReWeight_DangQianZhongLiang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.24"
+                        android:layout_weight="0.3"
                         android:layout_gravity="center"
                         android:maxLines="1"
                         android:text=""
@@ -339,20 +356,10 @@
                         android:textColor="#000"
                         android:textSize="@dimen/house_size"
                         android:layout_marginLeft="0dp"
-                        android:layout_marginRight="0dp"
+                        android:layout_marginRight="10dp"
                         android:inputType="number"
                         android:paddingLeft="5dp"/>
 
-                    <Button
-                        android:id="@+id/btn_ReWeight_PianCha"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_weight="0.06"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:background="@drawable/xiala_sanjiao_lv"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"/>
                 </LinearLayout>
 
                 <LinearLayout

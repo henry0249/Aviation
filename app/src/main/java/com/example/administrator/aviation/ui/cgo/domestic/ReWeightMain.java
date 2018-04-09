@@ -66,6 +66,7 @@ import butterknife.ButterKnife;
 import static android.R.attr.padding;
 import static android.media.CamcorderProfile.get;
 import static com.example.administrator.aviation.R.id.ReWeight_edit_uldHao;
+import static com.example.administrator.aviation.R.id.textView;
 import static com.example.administrator.aviation.R.id.view;
 import static com.example.administrator.aviation.R.id.wrap_content;
 import static java.security.AccessController.getContext;
@@ -124,8 +125,6 @@ public class ReWeightMain extends AppCompatActivity {
     Button btnQueDin;
     @BindView(R.id.ReWeight_btn_QuXiao)
     Button btnQuXiao;
-    @BindView(R.id.btn_ReWeight_PianCha)
-    Button btnPianCha;
     //endregion
 
     //region TextView控件
@@ -157,6 +156,8 @@ public class ReWeightMain extends AppCompatActivity {
     AutofitTextView txtDangQianHuoZhong;
     @BindView(R.id.txt_ReWeight_ZhuangTai)
     AutofitTextView txtZhuangTai;
+    @BindView(R.id.ReWeight_txt_calc)
+    AutofitTextView txtCalc;
     //endregion
 
     //region Layout控件
@@ -193,7 +194,6 @@ public class ReWeightMain extends AppCompatActivity {
     private void initView() {
         navBar = new NavBar(this);
         navBar.setTitle("国内出港复磅");
-        navBar.setRight(R.drawable.detail_0);
         gnculd = new ArrayList<>();
 
         Ldialog = new LoadingDialog(mContext);
@@ -234,6 +234,7 @@ public class ReWeightMain extends AppCompatActivity {
         editBeiZhu.setText("");
         txtDangQianHuoZhong.setText("");
         txtZhuangTai.setText("");
+        txtCalc.setText("");
     }
     //endregion
 
@@ -253,32 +254,11 @@ public class ReWeightMain extends AppCompatActivity {
     //region 界面上所有控件的点击事件
     private void setListener() {
 
-        //region 偏差值按钮点击事件
-        btnPianCha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalcInt();
-                if (chaZhi != 0 &&  biZhi != 0 ) {
-                    pop = new QMUIPopup(mContext);
-                    TextView textView = new TextView(mContext);
-                    DecimalFormat df1 = new DecimalFormat("0");
-                    DecimalFormat df2 = new DecimalFormat("0.0%");
-                    textView.setPadding(10,10,10,10);
-                    textView.setTextSize(16);
-                    textView.setText("偏差值： " +  df1.format(chaZhi) + "KG" +"\n" + "偏差比： " + df2.format(biZhi));
-                    pop.setContentView(textView);
-                    pop.show(v);
-                }
-            }
-        });
-        //endregion
-
         //region navBar右侧图片的点击事件
 //        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent in = new Intent(ReWeightMain.this, ReWeightInfo.class);
-//                startActivity(in);
+//
 //            }
 //        });
         //endregion
@@ -414,8 +394,21 @@ public class ReWeightMain extends AppCompatActivity {
 
                 if (res > 0) {
                     editDangQianZhongLiang.setText(String.valueOf(res));
+                    CalcInt(); //偏差值计算
+                    if (chaZhi != 0 &&  biZhi != 0 ) {
+                        DecimalFormat df1 = new DecimalFormat("0");
+                        DecimalFormat df2 = new DecimalFormat("0.0%");
+                        if (biZhi > 0.03 || biZhi < -0.03) {
+                            txtCalc.setTextColor(Color.RED);
+                        } else {
+                            txtCalc.setTextColor(Color.BLUE);
+                        }
+                        txtCalc.setText("偏差值:  " +  df1.format(chaZhi) + "KG" +"\n" + "偏差比:  " + df2.format(biZhi));
+                    }
+
                 } else {
                     editDangQianZhongLiang.setText("");
+                    txtCalc.setText("");
                 }
             }
         });
