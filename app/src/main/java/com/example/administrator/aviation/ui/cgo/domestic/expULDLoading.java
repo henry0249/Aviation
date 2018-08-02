@@ -179,7 +179,7 @@ public class expULDLoading extends AppCompatActivity {
     SwitchView uldSwitchBtn;
     //endregion
 
-    //region 未实例化控件
+    //region 未预设XML控件
     private NavBar navBar;
     private PopupWindow pw;
     private LoadingDialog Ldialog;
@@ -300,6 +300,7 @@ public class expULDLoading extends AppCompatActivity {
                         GetInfo(params);
                     }
                 }
+                break;
             case GNC_ULDLOADING_XinZenPinBan_REQUEST:
                 if (resultCode == AviationCommons.GNC_ULDLOADING_XinZenPinBan_RESULT) {
                     Bundle bundle = data.getExtras();
@@ -311,6 +312,7 @@ public class expULDLoading extends AppCompatActivity {
                         ChaXun.performClick();
                     }
                 }
+                break;
         }
     }
     //endregion

@@ -346,19 +346,19 @@
                         android:id="@+id/txt_ReWeight_DangQianZhongLiang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
                         android:layout_gravity="center"
-                        android:maxLines="1"
-                        android:text=""
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="0.3"
                         android:background="@null"
                         android:focusable="false"
                         android:gravity="left|center"
-                        android:textColor="#000"
-                        android:textSize="@dimen/house_size"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="10dp"
                         android:inputType="number"
-                        android:paddingLeft="5dp"/>
+                        android:maxLines="1"
+                        android:paddingLeft="5dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="@dimen/house_size" />
 
                 </LinearLayout>
 
@@ -600,7 +600,7 @@
                         android:layout_weight="0.2"
                         android:layout_gravity="center"
                         android:maxLines="1"
-                        android:text="目的港:"
+                        android:text="日期:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size"
                         app:sizeToFit="true"
@@ -608,7 +608,7 @@
                         android:layout_marginRight="0dp"/>
 
                     <com.example.administrator.aviation.view.AutofitTextView
-                        android:id="@+id/txt_ReWeight_MuDiGang"
+                        android:id="@+id/txt_ReWeight_riqi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
@@ -663,30 +663,26 @@
                         android:layout_weight="0.2"
                         android:layout_gravity="center"
                         android:maxLines="1"
-                        android:text="板型:"
+                        android:text="目的港:"
                         android:textColor="#666666"
                         android:textSize="@dimen/house_size"
                         app:sizeToFit="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="0dp"/>
 
-                    <EditText
-                        android:id="@+id/txt_ReWeight_BanXin"
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:id="@+id/txt_ReWeight_MuDiGang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:layout_gravity="center"
                         android:maxLines="1"
                         android:text=""
-                        android:background="@null"
-                        android:focusable="false"
-                        android:gravity="left|center"
                         android:textColor="#000"
                         android:textSize="@dimen/house_size"
+                        app:sizeToFit="true"
                         android:layout_marginLeft="0dp"
-                        android:layout_marginRight="10dp"
-                        android:inputType="text"
-                        android:paddingLeft="5dp"/>
+                        android:layout_marginRight="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -777,7 +773,38 @@
                         android:id="@+id/txt_ReWeight_BeiZhu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:layout_weight="0.3"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text=""
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left|center"
+                        android:textColor="#000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"/>
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text="板型:"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        app:sizeToFit="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp"/>
+
+                    <EditText
+                        android:id="@+id/txt_ReWeight_BanXin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
                         android:layout_gravity="center"
                         android:maxLines="1"
                         android:text=""
@@ -789,8 +816,7 @@
                         android:layout_marginLeft="0dp"
                         android:layout_marginRight="10dp"
                         android:inputType="text"
-                        android:paddingLeft="5dp"/>/>
-
+                        android:paddingLeft="5dp"/>
                 </LinearLayout>
 
                 <LinearLayout

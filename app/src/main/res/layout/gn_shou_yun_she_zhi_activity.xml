@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/navbar"
+        android:id="@+id/gnShouYunSheZhiBar" />
+
+    <ScrollView
+        android:id="@+id/gnShouYunSheZhi_Scrl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_marginTop="10dp">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="平板号:"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:id="@+id/edt_gnShouYun_PinBanHao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:text="自重:"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:id="@+id/edt_gnShouYun_ZiZhong"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff"
+                    android:layout_marginTop="10dp">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="ULD号:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_ULDHao_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="自重:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_ULDzhong_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="体积:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_TiJi_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="板形:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_BanXin_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="件数:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_JianShu_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="货重:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_HuoZhong_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="备注:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_BeiZhu_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="优先级:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <TextView
+                        android:id="@+id/edt_gnShouYun_YouXianJI_A"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/spinner_bg" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff"
+                    android:layout_marginTop="10dp">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="ULD号:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_ULDHao_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="自重:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_ULDzhong_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="体积:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_TiJi_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="板形:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_BanXin_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="件数:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_JianShu_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="货重:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_HuoZhong_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#058000"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="备注:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <EditText
+                        android:id="@+id/edt_gnShouYun_BeiZhu_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp" />
+
+                    <com.example.administrator.aviation.view.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:text="优先级:"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        app:sizeToFit="true"
+                        android:textColor="#aa00ba"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="0dp" />
+
+                    <TextView
+                        android:id="@+id/edt_gnShouYun_YouXianJI_B"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="#666666"
+                        android:textSize="@dimen/house_size"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/spinner_bg" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/btn_gnShouYun_ShangChuan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:text="数据上传"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_gnShouYun_QinZhuangZai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:text="清除装载"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_gnShouYun_PiZhong"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:text="平板皮重"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_gnShouYun_TDH"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:text="通道号"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

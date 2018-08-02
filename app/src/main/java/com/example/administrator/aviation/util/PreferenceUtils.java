@@ -28,6 +28,9 @@ public class PreferenceUtils {
     // 锁屏密码
     private static final String lockPassKey = "password";
 
+    // 通道号
+    private static final String TongDaoHao = "TongDaoHao";
+
     // APP升级用到的信息
     private static final String APP_VERSION = "APPVersion";
     private static final String APP_DESCRIBE = "APPDescribe";
@@ -58,6 +61,15 @@ public class PreferenceUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(lockPassKey, lockPass);
+        editor.commit();
+
+    }
+
+    //保存通道号
+    public static void saveTDH(Context context, String TDH) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TongDaoHao, TDH);
         editor.commit();
 
     }
@@ -126,6 +138,12 @@ public class PreferenceUtils {
     public static boolean getIsFirst(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("ISFIRST", false);
+    }
+
+    //获取通道号
+    public static String getTongDaoHao(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(TongDaoHao, "");
     }
 
     /**

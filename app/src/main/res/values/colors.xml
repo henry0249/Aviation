@@ -25,4 +25,15 @@
     <color name="ProgressWheel_color">#489df3</color>
     <!-- 透明 -->
     <color name="transparent">#00000000</color>
+
+    <color name="main_top_color">#f7614d</color>
+    <color name="main_top_tab_color">#fcc9c5</color>
+    <color name="main_top_tab_color_2">#ffffff</color>
+    <color name="matrix_color">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#FFFF1826</color>
+
+    <color name="app_color_blue_2">#31BDF3</color>
+    <color name="app_color_blue_2_disabled">#7F31BDF3</color>
+    <color name="app_color_blue_2_pressed">#7F31BDF3</color>
 </resources>

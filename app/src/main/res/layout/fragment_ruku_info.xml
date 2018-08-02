@@ -1,0 +1,718 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.aviation.ui.cgo.domestic.RuKuInfoFragment">
+
+    <ScrollView
+        android:id="@+id/rukuInfo_Scrl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:text="地磅:"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"/>
+
+                <EditText
+                    android:text=""
+                    android:id="@+id/txt_ReWeight_DiBangZhong"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:padding="2dp"
+                    android:textSize="30sp"
+                    android:textColor="#000"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:inputType="number"
+                    android:background="@drawable/edit_bg"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"/>
+
+                <com.example.administrator.aviation.view.SwitchView
+                    android:id="@+id/ReWeight_SwitchBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.1"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentTop="true" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="#121212"
+                    android:layout_gravity="center_horizontal" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text=""
+                    android:layout_gravity="center"
+                    android:hint="运单号"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/dash_line"
+                android:layout_margin="5dp"
+                android:layerType="software"  />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text=""
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:clickable="false"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text="件数"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:id="@+id/autofitTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="重量"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    app:sizeToFit="true" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="体积"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    app:sizeToFit="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text="申报运单:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    android:clickable="false"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text=""
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/edit_bg"/>
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    app:sizeToFit="true" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    app:sizeToFit="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text="已入库:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    android:clickable="false"
+                    android:textColor="#058000"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text=""
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    app:sizeToFit="true" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    app:sizeToFit="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:text="现入库:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    android:clickable="false"
+                    android:textColor="#aa00ba"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:focusable="false"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:focusable="false"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:focusable="false"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/edit_bg"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/dash_line"
+                android:layout_margin="5dp"
+                android:layerType="software"  />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="航程:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/edit_bg"
+                    android:focusable="false"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:text="—"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:text="—"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="承运人:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="备注:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="特码:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:background="@drawable/selector_sinner"
+                    android:paddingLeft="5dp"/>
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="子码:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:background="@drawable/selector_sinner"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="品名:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="运输证:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="准运证:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="检疫证:"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:textSize="@dimen/house_size"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/dash_line"
+                android:layout_margin="5dp"
+                android:layerType="software"  />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector"
+                    android:text="收运"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

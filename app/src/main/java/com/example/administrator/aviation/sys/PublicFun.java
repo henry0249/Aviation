@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import com.example.administrator.aviation.R;
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Administrator on 2018/2/7.
@@ -120,6 +122,17 @@ public class PublicFun {
         mView.measure(0, 0);
         int res = mView.getMeasuredHeight() + listView.getDividerHeight();
         return res;
+    }
+    //endregion
+
+    //region 判断字符串是否是数字
+    public static boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        if( !isNum.matches() ){
+            return false;
+        }
+        return true;
     }
     //endregion
 

@@ -399,9 +399,11 @@ public class DaiZhuangFragment extends Fragment {
         JianSuofloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jiansuokuang.setVisibility(View.VISIBLE);
-                sousuoZhudan.requestFocus();
-                PublicFun.KeyBoardSwitch(mContext);
+                if (jiansuokuang.getVisibility() == View.GONE) {
+                    jiansuokuang.setVisibility(View.VISIBLE);
+                    sousuoZhudan.requestFocus();
+                    PublicFun.KeyBoardSwitch(mContext);
+                }
             }
         });
         //endregion
@@ -451,7 +453,7 @@ public class DaiZhuangFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sousuoZhudan.setText("");
-                PublicFun.KeyBoardHide(mAct,mContext);;
+                PublicFun.KeyBoardHide(mAct,mContext);
                 jiansuokuang.setVisibility(View.GONE);
             }
         });

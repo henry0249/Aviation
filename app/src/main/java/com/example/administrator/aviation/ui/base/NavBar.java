@@ -41,6 +41,13 @@ public class NavBar {
 
         // 标题
         this.tvTitle = (TextView) activity.findViewById(R.id.nav_title_tv);
+        this.tvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handlerClickTitle();
+            }
+        });
+
 
         // 右侧图标
         this.ivRight = (ImageView) activity.findViewById(R.id.nav_right_iv);
@@ -66,6 +73,12 @@ public class NavBar {
 
         // 标题
         this.tvTitle = (TextView) activity.findViewById(R.id.nav_title_tv);
+        this.tvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handlerClickTitle();
+            }
+        });
 
         // 右侧图标
         this.ivRight = (ImageView) activity.findViewById(R.id.nav_right_iv);
@@ -102,7 +115,17 @@ public class NavBar {
         tvTitle.setText(titleResId);
     }
 
-    //-------- 左侧图标 ----------
+    public interface TitleListener {
+        void onClick();
+    }
+
+    private void handlerClickTitle() {
+        if (activity instanceof TitleListener) {
+            ((TitleListener) activity).onClick();
+        }
+    }
+
+        //-------- 左侧图标 ----------
 
     // 显示左侧图标
     public void showLeft()   {

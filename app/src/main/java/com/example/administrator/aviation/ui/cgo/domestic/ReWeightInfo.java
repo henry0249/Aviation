@@ -65,15 +65,11 @@ public class ReWeightInfo extends AppCompatActivity {
 
     //region 设置初始化
     public void init() {
-
-
-
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ReWeight_right_title_container);
         layoutInflater.inflate(R.layout.reweight_table_right_title,linearLayout,true);
 
         findTitleTextViewIds();
-
     }
     //endregion
 

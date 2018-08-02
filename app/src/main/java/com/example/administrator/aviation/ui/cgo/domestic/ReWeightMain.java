@@ -158,6 +158,8 @@ public class ReWeightMain extends AppCompatActivity {
     AutofitTextView txtZhuangTai;
     @BindView(R.id.ReWeight_txt_calc)
     AutofitTextView txtCalc;
+    @BindView(R.id.txt_ReWeight_riqi)
+    AutofitTextView txtHangBanRiQi;
     //endregion
 
     //region Layout控件
@@ -235,6 +237,7 @@ public class ReWeightMain extends AppCompatActivity {
         txtDangQianHuoZhong.setText("");
         txtZhuangTai.setText("");
         txtCalc.setText("");
+        txtHangBanRiQi.setText("");
     }
     //endregion
 
@@ -395,15 +398,18 @@ public class ReWeightMain extends AppCompatActivity {
                 if (res > 0) {
                     editDangQianZhongLiang.setText(String.valueOf(res));
                     CalcInt(); //偏差值计算
-                    if (chaZhi != 0 &&  biZhi != 0 ) {
+                    if (chaZhi != 0 && biZhi != 0) {
                         DecimalFormat df1 = new DecimalFormat("0");
                         DecimalFormat df2 = new DecimalFormat("0.0%");
                         if (biZhi > 0.03 || biZhi < -0.03) {
                             txtCalc.setTextColor(Color.RED);
                         } else {
                             txtCalc.setTextColor(Color.BLUE);
+                            editDangQianZhongLiang.setText(txtZhuangJiJinZhong.getText().toString().trim());
                         }
-                        txtCalc.setText("偏差值:  " +  df1.format(chaZhi) + "KG" +"\n" + "偏差比:  " + df2.format(biZhi));
+                        txtCalc.setText("偏差值:  " + df1.format(chaZhi) + "KG" + "\n" + "偏差比:  " + df2.format(biZhi));
+                    } else {
+                        txtCalc.setText("");
                     }
 
                 } else {
@@ -719,6 +725,13 @@ public class ReWeightMain extends AppCompatActivity {
         editBeiZhu.setText(gnculd.get(x).getRemark().toString());
         editBanXin.setText(gnculd.get(x).getBoardType().toString());
         txtCangWei.setText(gnculd.get(x).getLocation().toString());
+
+        String fda = gnculd.get(x).getFDate().toString();
+        if (fda.contains("_")) {
+            txtHangBanRiQi.setText(gnculd.get(x).getFDate().toString().split("_")[1]);
+        } else {
+            txtHangBanRiQi.setText(fda);
+        }
 
         String cFlagTxt = gnculd.get(x).getcFlag().toString();
         if (cFlagTxt.contains("-")) {

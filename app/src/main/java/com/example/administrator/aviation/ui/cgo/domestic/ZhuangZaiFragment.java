@@ -351,9 +351,11 @@ public class ZhuangZaiFragment extends Fragment {
         JianSuofloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jiansuokuang.setVisibility(View.VISIBLE);
-                sousuoZhudan.requestFocus();
-                PublicFun.KeyBoardSwitch(mContext);
+                if (jiansuokuang.getVisibility() == View.GONE) {
+                    jiansuokuang.setVisibility(View.VISIBLE);
+                    sousuoZhudan.requestFocus();
+                    PublicFun.KeyBoardSwitch(mContext);
+                }
             }
         });
         //endregion
