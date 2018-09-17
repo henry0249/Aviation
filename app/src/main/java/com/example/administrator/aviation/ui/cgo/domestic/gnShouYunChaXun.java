@@ -188,15 +188,15 @@ public class gnShouYunChaXun extends AppCompatActivity {
             }
         };
 
-        for(int i = 0; i < mTitleTvArray.size(); i++) {
-            int key = 0;
-            key = mTitleTvArray.keyAt(i);
-            TextView tx = mTitleTvArray.get(key);
+//        for(int i = 0; i < mTitleTvArray.size(); i++) {
+//            int key = 0;
+//            key = mTitleTvArray.keyAt(i);
+//            TextView tx = mTitleTvArray.get(key);
 //            if (tx.getText().equals("ULD")) {
 //                DaiLiRen = tx;
 //                DaiLiRen.setText("hello");
 //            }
-        };
+//        };
 
     }
     //endregion

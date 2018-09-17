@@ -111,11 +111,13 @@ public class AviationCommons {
     public static final int GNC_ULDinfo_CAMERA_REQUEST = 2;
     public static final int GNC_ULDLOADING_XinZenPinBan_REQUEST = 3;
     public static final int GNC_gnShouYun_REQUEST = 4;
+    public static final int GNC_ZhuangJiDan_REQUEST = 5;
+
     public static final int GNC_ULDLOADING_CAMERA_RESULT = 11;
     public static final int GNC_ULDinfo_CAMERA_RESULT = 22;
     public static final int GNC_ULDLOADING_XinZenPinBan_RESULT = 33;
     public static final int GNC_gnShouYun_RESULT = 44;
-
+    public static final int GNC_ZhuangJiDan_RESULT = 55;
     //上拉加载更多
     public static final int LOAD_DATA = 2;
     //下拉刷新

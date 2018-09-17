@@ -53,6 +53,7 @@ import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrier
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
+import com.example.administrator.aviation.ui.cgo.domestic.ZhuangJiDanMain;
 import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
 import com.example.administrator.aviation.ui.cgo.domestic.gnShouYunChaXun;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -241,7 +242,10 @@ public class HomePageFragment extends Fragment{
                         Intent CgoDomExpULDLoading = new Intent(getActivity(), ReWeightMain.class);
                         startActivity(CgoDomExpULDLoading);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_CheckIn)) {
-                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
+//                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
+//                    startActivity(CgoDomExpULDLoading);
+
+                    Intent CgoDomExpULDLoading = new Intent(getActivity(), ZhuangJiDanMain.class);
                     startActivity(CgoDomExpULDLoading);
                 }else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();

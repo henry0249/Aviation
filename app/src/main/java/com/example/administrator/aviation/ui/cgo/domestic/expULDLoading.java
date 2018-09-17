@@ -56,8 +56,13 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.attr.data;
+import static android.R.attr.tag;
+import static android.R.id.message;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
 
 //region 佛祖保佑 永无BUG 永不修改 --by sst
 ////////////////////////////////////////////////////////////////////
@@ -225,6 +230,17 @@ public class expULDLoading extends AppCompatActivity {
         super.onStart();
         if (gnculd.size() > 0 && PinBan_Two.equals(PinBanHao_one.getText().toString().trim())) {
             ChaXun.performClick();
+        } else {
+            Intent da = getIntent();
+            Bundle bundle = da.getExtras();
+            if (bundle != null) {
+                String re = bundle.getString("ZhuangJiDanMain","");
+                if (!TextUtils.isEmpty(re)) {
+                    QinKong.performClick();
+                    PinBanHao_one.setText(re);
+                    ChaXun.performClick();
+                }
+            }
         }
     }
     //endregion
@@ -273,6 +289,14 @@ public class expULDLoading extends AppCompatActivity {
     }
     //endregion
 
+    //region 类的Intent
+    public static Intent newIndexIntent(Context context, String name,String message) {
+        Intent newIntent = new Intent(context, expULDLoading.class);
+        newIntent.putExtra(name, message);
+        return newIntent;
+    }
+    //endregion
+
     //endregion
 
     //region 控件事件
@@ -314,6 +338,27 @@ public class expULDLoading extends AppCompatActivity {
                 }
                 break;
         }
+    }
+    //endregion
+
+    //region 返回后触发父界面逻辑
+    @Override
+    public void finish() {
+        Intent intent = new Intent();
+        Bundle bundle = intent.getExtras();
+        int num = 0;
+
+        if (bundle != null) {
+            String req =  bundle.getString("ZhuangJiDanMain","");
+            if (!TextUtils.isEmpty(req) &&req.equals(req)) {
+                intent.setClass(mContext, ZhuangJiDanMain.class);
+                num = AviationCommons.GNC_ZhuangJiDan_RESULT;
+            }
+
+            setResult(num,intent);
+        }
+
+        super.finish();
     }
     //endregion
 
@@ -519,6 +564,7 @@ public class expULDLoading extends AppCompatActivity {
                     pw.showAsDropDown(CangWei);
                     ListView lv = (ListView) myView.findViewById(R.id.lv_pop);
                     list = new ArrayList<String>();
+                    list.add("");
                     list.add("1HD");
                     list.add("2HD");
                     list.add("3HD");
