@@ -69,6 +69,7 @@ import butterknife.ButterKnife;
 
 import static android.R.attr.key;
 import static android.R.id.list;
+import static android.R.id.message;
 import static com.example.administrator.aviation.R.id.pulltorefreshview;
 import static com.example.administrator.aviation.R.id.sousuoQuxiao;
 import static com.example.administrator.aviation.R.id.sousuoYundan;
@@ -126,7 +127,9 @@ public class DaiZhuangFragment extends Fragment {
     private View view;
     private Context mContext;
     private Activity mAct;
-    Timer timer = new Timer();
+    private String ZhuangHuoTiShi="";
+    private int ZhuangHuoJiShu = 0;
+    private int newZhuangHuoJiShu = 0;
     //endregion
 
     //region 自定义和代码定义的控件
@@ -278,7 +281,13 @@ public class DaiZhuangFragment extends Fragment {
                 tv_table_content_right_item7.setText(item.getText7());
                 tv_table_content_right_item8.setText(item.getText8());
                 tv_table_content_right_item9.setText(item.getText9());
-                tv_table_content_right_item10.setText(item.getText10());
+
+                if (item.getText10().length() > 8){
+                    tv_table_content_right_item10.setText(item.getText10().substring(0,3) + "\n" + item.getText10().substring(3));
+                }else{
+                    tv_table_content_right_item10.setText(item.getText10());
+                }
+
                 tv_table_content_right_item11.setText(item.getText11());
                 tv_table_content_right_item12.setText(item.getText12());
 
@@ -603,14 +612,14 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
                 TableModel tableMode = new TableModel();
                 tableMode.setOrgCode(cc.getWHID() + "");
                 tableMode.setLeftTitle(cc.getMawb() + "");
-                tableMode.setText0(cc.getAgentCode() + "");//列0内容
-                tableMode.setText1(cc.getPC() + "");//列1内容
-                tableMode.setText2(cc.getWeight() + "");//列2内容
-                tableMode.setText3(cc.getVolume() + "");
-                tableMode.setText4(cc.getSpCode() + "");
-                tableMode.setText5(cc.getGoods() + "");//
-                tableMode.setText6(cc.getDest() + "");//
-                tableMode.setText7(cc.getBy1() + "");//
+                tableMode.setText0(cc.getPC() + "");//列1内容
+                tableMode.setText1(cc.getWeight() + "");//列2内容
+                tableMode.setText2(cc.getVolume() + "");
+                tableMode.setText3(cc.getSpCode() + "");
+                tableMode.setText4(cc.getGoods() + "");//
+                tableMode.setText5(cc.getDest() + "");//
+                tableMode.setText6(cc.getBy1() + "");//
+                tableMode.setText7(cc.getAgentCode() + "");//
 
                 if (TextUtils.isEmpty(cc.getFDate())) {
                     tableMode.setText8(cc.getFDate() + "");
@@ -690,6 +699,12 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
 
                 Ldialog.dismiss();
 
+            }else if(msg.what == 666){
+                newZhuangHuoJiShu  += 1;
+                if (newZhuangHuoJiShu == ZhuangHuoJiShu){
+                    ToastUtils.showToast(mContext,ZhuangHuoTiShi,Toast.LENGTH_LONG);
+                    newZhuangHuoJiShu = 0;
+                }
             }
             return false;
         }
@@ -699,29 +714,28 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
     //region 货物装载操作方法
     private void ZhuangHuo() {
         List<HashMap<String,String>> ZhuangHuoList = new ArrayList<>(store);
+        ZhuangHuoJiShu = ZhuangHuoList.size();
+        ZhuangHuoTiShi = "";
 
         for (HashMap<String,String> ll: ZhuangHuoList ) {
             HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_GNCLoading_NAME, HttpCommons.CGO_DOM_Exp_GNCLoading_ACTION, ll,
                     new HttpRoot.CallBack() {
                         @Override
                         public void onSucess(Object result) {
-                            SoapObject object = (SoapObject) result;
-                            String xx = object.getProperty(0).toString();
-                            if (xx.equalsIgnoreCase("true")) {
-                                ToastUtils.showToast(mContext, "装货成功", Toast.LENGTH_SHORT);
-                            } else {
-                                ToastUtils.showToast(mContext, object.getProperty(1).toString(), Toast.LENGTH_SHORT);
-                            }
+                            ZhuangHuoTiShi += "成功" + "\n";
+                            handler.sendEmptyMessage(666);
                         }
 
                         @Override
                         public void onFailed(String message) {
-                            ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
+                            ZhuangHuoTiShi += message + "\n";
+                            handler.sendEmptyMessage(666);
                         }
 
                         @Override
                         public void onError() {
-                            ToastUtils.showToast(mContext,"数据上传",Toast.LENGTH_SHORT);
+                            ZhuangHuoTiShi += "上传失败" + "\n";
+                            handler.sendEmptyMessage(666);
                         }
                     },page);
         }

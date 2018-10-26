@@ -189,6 +189,14 @@ public class HttpCommons {
     public static final String CGO_DOM_Exp_ULDLoading_NAME = "GetGNCULDLoading";
     public static final String CGO_DOM_Exp_ULDLoading_ACTION = "http://58.213.128.130/GetGNCULDLoading";
 
+    //获取航班装机单
+    public static final String GET_GNC_ManifestLoading_NAME = "GetGNCManifestLoading";
+    public static final String GET_GNC_ManifestLoading_ACTION = "http://58.213.128.130/GetGNCManifestLoading";
+
+    //舱单装机单比对
+    public static final String GET_GNC_ManifestVSLoading_NAME = "GNCManifestVSLoading";
+    public static final String GET_GNC_ManifestVSLoading_ACTION = "http://58.213.128.130/GNCManifestVSLoading";
+
     //获得平板车上的货物详情
     public static final String CGO_DOM_Exp_ULDLoadingCargo_NAME = "GetGNCULDLoadingCargo";
     public static final String CGO_DOM_Exp_ULDLoadingCargo_ACTION = "http://58.213.128.130/GetGNCULDLoadingCargo";
@@ -225,4 +233,22 @@ public class HttpCommons {
     public static final String CGO_DOM_Exp_FlatUseReWeight_NAME = "FlatUseReWeight";
     public static final String CGO_DOM_Exp_FlatUseReWeight_ACTION = "http://58.213.128.130/FlatUseReWeight";
     //endregion
+
+    //region 国内 截载上传
+    public static final String CGO_DOM_GNCLockLoading_NAME = "GNCLockLoading";
+    public static final String CGO_DOM_GNCLockLoading_ACTION = "http://58.213.128.130/GNCLockLoading";
+    //endregion
+
+    //获取航班进程
+    public static final String GET_GNC_GetFlightProgress_NAME = "GetFlightProgress";
+    public static final String GET_GNC_GetFlightProgress_ACTION = "http://58.213.128.130/GetFlightProgress";
+
+    //理货开始
+    public static final String GET_GNC_TallyStart_NAME = "GNCTallyStart";
+    public static final String GET_GNC_TallyStart_ACTION = "http://58.213.128.130/GNCTallyStart";
+
+    //理货结束
+    public static final String GET_GNC_TallyEnd_NAME = "GNCTallyEnd";
+    public static final String GET_GNC_TallyEnd_ACTION = "http://58.213.128.130/GNCTallyEnd";
+
 }

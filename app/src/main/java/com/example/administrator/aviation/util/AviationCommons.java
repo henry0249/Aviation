@@ -83,7 +83,10 @@ public class AviationCommons {
     public static final String APP_CGO_Dom_Exp_ReWeight = "appCGODomExpReWeight";
     //国内出港理货
     public static final String APP_CGO_Dom_Exp_ULDLoading = "appCGODomExpULDLoading";
-
+    //国内出港装机单
+    public static final String APP_CGO_Dom_Exp_MftLoading = "appCGODomExpMftLoading";
+    //国内出港航班进程管控
+    public static final String APP_CGO_Dom_Exp_FlightCtrl = "appCGODomExpFlightCtrl";
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int FLIGHT_REFERCH = 0x222;
@@ -97,6 +100,9 @@ public class AviationCommons {
     public static final int DOM_CHECK_INFO = 0x1111;
     public static final int GNC_expULDLoading = 0x2222;
     public static final int GNC_ULDLoadingCargo = 0x2221;
+    public static final int GNC_ManifestLoading = 0x112;
+    public static final int GNC_ManifestVsLoading = 0x113;
+    public static final int GNC_FlightControls = 0x114;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;

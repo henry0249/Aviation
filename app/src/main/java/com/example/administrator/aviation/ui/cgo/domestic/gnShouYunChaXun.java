@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.model.adapter.AbsCommonAdapter;
 import com.example.administrator.aviation.model.adapter.AbsViewHolder;
+import com.example.administrator.aviation.model.adapter.PopWindowsAdapter;
 import com.example.administrator.aviation.model.hygnc.ULDLoadingCargo;
 import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.ui.base.AbPullToRefreshView;
@@ -334,7 +335,7 @@ public class gnShouYunChaXun extends AppCompatActivity {
                 List list = new ArrayList<String>();
                 list.add(0,"货物扫描");
 
-                uldAdapter ul = new uldAdapter(gnShouYunChaXun.this, R.layout.pop_expuld_list_item, list);
+                PopWindowsAdapter ul = new PopWindowsAdapter(gnShouYunChaXun.this, R.layout.pop_expuld_list_item, list);
                 ListView lv = (ListView) myView.findViewById(R.id.list_pop_expUld);
                 lv.setAdapter(ul);
 
@@ -424,27 +425,6 @@ public class gnShouYunChaXun extends AppCompatActivity {
             return false;
         }
     });
-    //endregion
-
-    // region 自定义弹出菜单适配器
-    private class uldAdapter extends ArrayAdapter<String> {
-        private int resourceID;
-
-        public uldAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects) {
-            super(context, resource, objects);
-            this.resourceID = resource;
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            String a = getItem(position);
-            View view = LayoutInflater.from(getContext()).inflate(resourceID, parent, false);
-            TextView tx = (TextView) view.findViewById(R.id.pop_listitem);
-            tx.setText(a);
-            return view;
-        }
-    }
     //endregion
 
     //region 调用相机

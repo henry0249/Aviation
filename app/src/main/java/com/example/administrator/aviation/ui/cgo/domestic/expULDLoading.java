@@ -39,6 +39,8 @@ import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.adapter.ListViewAdapter;
 import com.example.administrator.aviation.model.hygnc.GNCULDLoading;
 import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
+import com.example.administrator.aviation.model.hygnc.ParseULDLoadingCargo;
+import com.example.administrator.aviation.model.hygnc.ULDLoadingCargo;
 import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
@@ -141,6 +143,8 @@ public class expULDLoading extends AppCompatActivity {
     TextView LiuShuiHao;
     @BindView(R.id.uldloading_tv_CangWei)
     TextView CangWei;
+    @BindView(R.id.uldloading_tv_QiZhongYouJian)
+    TextView QiZhongYouJian;
     //endregion
 
     //region Layout控件
@@ -176,6 +180,8 @@ public class expULDLoading extends AppCompatActivity {
     ViewGroup uldloading_navBar;
     @BindView(R.id.uldloading_Img_SaoMa)
     ImageView Img_SaoMa;
+    @BindView(R.id.uldloading_Img_JinGao)
+    ImageView TeMaJinGao;
     @BindView(R.id.uldloading_Scrl)
     ScrollView scrollview;
     @BindView(R.id.uldloading_PinBanSwitchBtn)
@@ -196,6 +202,7 @@ public class expULDLoading extends AppCompatActivity {
     private String PinBan_Two = "";
     private String OriULD = "";
     private List<GNCULDLoading> gnculd;
+    private List<ULDLoadingCargo> loadingCargos;
     private ArrayList<String> list;
     private Context mContext;
     private Activity mAct;
@@ -236,6 +243,15 @@ public class expULDLoading extends AppCompatActivity {
             if (bundle != null) {
                 String re = bundle.getString("ZhuangJiDanMain","");
                 if (!TextUtils.isEmpty(re)) {
+                    ChaXun.setBackgroundColor(Color.parseColor("#979797"));
+                    ChaXun.setEnabled(false);
+                    QinKong.setBackgroundColor(Color.parseColor("#979797"));
+                    QinKong.setEnabled(false);
+                    XinZen.setBackgroundColor(Color.parseColor("#979797"));
+                    XinZen.setEnabled(false);
+                    PinBanHao_one.setEnabled(false);
+                    Img_SaoMa.setEnabled(false);
+
                     QinKong.performClick();
                     PinBanHao_one.setText(re);
                     ChaXun.performClick();
@@ -248,6 +264,8 @@ public class expULDLoading extends AppCompatActivity {
     //region 变量和控件的初始化
     private void initView() {
         gnculd = new ArrayList<>();
+        loadingCargos = new ArrayList<>();
+
         list = new ArrayList<>();
         MuBiaoULDEdt.setTransformationMethod(new AllCapTransformationMethod());
 
@@ -286,6 +304,8 @@ public class expULDLoading extends AppCompatActivity {
         BeiZhu.setText("");
         BanXin.setText("");
         CangWei.setText("");
+        QiZhongYouJian.setText("");
+        TeMaJinGao.setBackgroundResource(0);
     }
     //endregion
 
@@ -344,7 +364,7 @@ public class expULDLoading extends AppCompatActivity {
     //region 返回后触发父界面逻辑
     @Override
     public void finish() {
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         int num = 0;
 
@@ -944,6 +964,16 @@ public class expULDLoading extends AppCompatActivity {
                     ToastUtils.showToast(expULDLoading.this,"数据为空",Toast.LENGTH_SHORT);
                     TxtViewSetEmpty();
                 }
+            }else if(msg.what == AviationCommons.GNC_ULDLoadingCargo){
+                if (loadingCargos.size() > 0) {
+                    for (ULDLoadingCargo a :loadingCargos){
+                        if (!TextUtils.isEmpty(a.getSpCode())) {
+                            TeMaJinGao.setBackgroundResource(R.drawable.jingao);
+                            break;
+                        }
+                    }
+                }
+
             }
             return false;
         }
@@ -989,6 +1019,8 @@ public class expULDLoading extends AppCompatActivity {
 
     //region 文本框赋值
     private void TextSetVaule(int x) {
+        TxtViewSetEmpty();
+
         for (int j = 0;j < gnculd.size();j++) {
             if (gnculd.get(j).getULD().toString().equals(OriULD)) {
                 x = j;
@@ -1035,13 +1067,50 @@ public class expULDLoading extends AppCompatActivity {
 
         ChenYunRen.setText(gnculd.get(x).getCarrier().toString());
         LiuShuiHao.setText(gnculd.get(x).getID().toString());
+        QiZhongYouJian.setText(gnculd.get(x).getMailWeight().toString());
 
 
         BeiZhu.setText(gnculd.get(x).getRemark().toString());
         BanXin.setText(gnculd.get(x).getBoardType().toString());
         CangWei.setText(gnculd.get(x).getLocation().toString());
+
+        TeMaJianCha();
     }
    //endregion
+
+    //region 特码校验
+    private void TeMaJianCha(){
+        if (gnculd.size() > 0 && !TextUtils.isEmpty(LiuShuiHao.getText().toString().trim())) {
+            HashMap<String, String> go = new HashMap<String, String>();
+            go.put("ID", LiuShuiHao.getText().toString().trim());
+            go.put("ULD", uldBianHao.getText().toString().trim());
+            go.put("BanID", PinBan_Two);
+            go.put("ErrString", "");
+
+            HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_NAME, HttpCommons.CGO_DOM_Exp_ULDLoadingCargo_ACTION, go,
+                    new HttpRoot.CallBack() {
+                        @Override
+                        public void onSucess(Object result) {
+                            SoapObject object = (SoapObject) result;
+                            String ULDLoadingCargoZhuang = object.getProperty(0).toString();
+                            loadingCargos = ParseULDLoadingCargo.parseULDLoadingCargoXMLto(ULDLoadingCargoZhuang,0);
+                            handler.sendEmptyMessage(AviationCommons.GNC_ULDLoadingCargo);
+                        }
+
+                        @Override
+                        public void onFailed(String message) {
+                            ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
+                        }
+
+                        @Override
+                        public void onError() {
+                            ToastUtils.showToast(mContext,"特码数据获取出错",Toast.LENGTH_SHORT);
+                        }
+                    },page);
+        }
+
+    }
+    //endregion
 
     //endregion
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:id="@+id/merge_sales_ZhuangJiDanBiDui"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_0"
+        style="@style/TextView_Table_Right"
+        android:text="ULD"/>
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_1"
+        style="@style/TextView_Table_Right"
+        android:text="卸货港"/>
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_2"
+        style="@style/TextView_Table_Right"
+        android:text="净重"/>
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_3"
+        style="@style/TextView_Table_Right"
+        android:text="装机货重"/>
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_4"
+        style="@style/TextView_Table_Right"
+        android:text="舱单货重"/>
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_5"
+        style="@style/TextView_Table_Right"
+        android:text="装机-舱单"/>
+
+    <TextView android:id="@+id/ZhuangJiDanBiDui_tv_table_title_6"
+        style="@style/TextView_Table_Right"
+        android:text="偏差"/>
+</merge>

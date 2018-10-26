@@ -3,6 +3,10 @@ package com.example.administrator.aviation.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * 保存数据到sharedPreference
  *
@@ -35,6 +39,8 @@ public class PreferenceUtils {
     private static final String APP_VERSION = "APPVersion";
     private static final String APP_DESCRIBE = "APPDescribe";
     private static final String APP_URL = "appurl";
+
+    private static final String JCGK = "GNCjcgk";
 
     // -------------以下是存储信息-------------
     /**
@@ -72,6 +78,20 @@ public class PreferenceUtils {
         editor.putString(TongDaoHao, TDH);
         editor.commit();
 
+    }
+
+    //保存排序信息
+    public static void savejcgk(Context context, String TDH) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(JCGK, TDH);
+        editor.commit();
+
+    }
+
+    public static String getjcgk(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(JCGK,"");
     }
 
     /**

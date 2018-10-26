@@ -6,35 +6,35 @@
 
     <TextView android:id="@+id/tv_table_title_0"
               style="@style/TextView_Table_Right"
-              android:text="代理人"/>
+              android:text="件数"/>
 
     <TextView android:id="@+id/tv_table_title_1"
               style="@style/TextView_Table_Right"
-              android:text="件数"/>
+              android:text="重量"/>
 
     <TextView android:id="@+id/tv_table_title_2"
               style="@style/TextView_Table_Right"
-              android:text="重量"/>
+              android:text="体积"/>
 
     <TextView android:id="@+id/tv_table_title_3"
               style="@style/TextView_Table_Right"
-              android:text="体积"/>
+              android:text="特码"/>
 
     <TextView android:id="@+id/tv_table_title_4"
               style="@style/TextView_Table_Right"
-              android:text="特码"/>
+              android:text="品名"/>
 
     <TextView android:id="@+id/tv_table_title_5"
               style="@style/TextView_Table_Right"
-              android:text="品名"/>
+              android:text="目的港"/>
 
     <TextView android:id="@+id/tv_table_title_6"
               style="@style/TextView_Table_Right"
-              android:text="目的港"/>
+              android:text="承运人"/>
 
     <TextView android:id="@+id/tv_table_title_7"
-              style="@style/TextView_Table_Right"
-              android:text="承运人"/>
+        style="@style/TextView_Table_Right"
+        android:text="代理人"/>
 
     <TextView android:id="@+id/tv_table_title_8"
               style="@style/TextView_Table_Right"

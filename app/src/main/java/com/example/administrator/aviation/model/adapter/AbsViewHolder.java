@@ -3,6 +3,7 @@ package com.example.administrator.aviation.model.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 public class AbsViewHolder {
 	private final SparseArray<View> mViews;
@@ -119,6 +122,12 @@ public class AbsViewHolder {
 	public AbsViewHolder setText(int viewId, String text) {
 		TextView view = getView(viewId);
 		view.setText(text);
+		return this;
+	}
+
+	public AbsViewHolder setTextColor(int viewId, String str_red_color) {
+		TextView view = getView(viewId);
+		view.setTextColor(Color.parseColor(str_red_color));
 		return this;
 	}
 

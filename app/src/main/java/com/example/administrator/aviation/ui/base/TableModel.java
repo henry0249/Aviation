@@ -27,6 +27,105 @@ public class TableModel {
     private String text17;
     private String text18;
     private String text19;
+    private String text20;
+    private String text21;
+    private String text22;
+    private String text23;
+    private String text24;
+    private String text25;
+    private String text26;
+    private String text27;
+    private String text28;
+    private String text29;
+    private String text30;
+
+    public String getText20() {
+        return text20;
+    }
+
+    public void setText20(String text20) {
+        this.text20 = text20;
+    }
+
+    public String getText21() {
+        return text21;
+    }
+
+    public void setText21(String text21) {
+        this.text21 = text21;
+    }
+
+    public String getText22() {
+        return text22;
+    }
+
+    public void setText22(String text22) {
+        this.text22 = text22;
+    }
+
+    public String getText23() {
+        return text23;
+    }
+
+    public void setText23(String text23) {
+        this.text23 = text23;
+    }
+
+    public String getText24() {
+        return text24;
+    }
+
+    public void setText24(String text24) {
+        this.text24 = text24;
+    }
+
+    public String getText25() {
+        return text25;
+    }
+
+    public void setText25(String text25) {
+        this.text25 = text25;
+    }
+
+    public String getText26() {
+        return text26;
+    }
+
+    public void setText26(String text26) {
+        this.text26 = text26;
+    }
+
+    public String getText27() {
+        return text27;
+    }
+
+    public void setText27(String text27) {
+        this.text27 = text27;
+    }
+
+    public String getText28() {
+        return text28;
+    }
+
+    public void setText28(String text28) {
+        this.text28 = text28;
+    }
+
+    public String getText29() {
+        return text29;
+    }
+
+    public void setText29(String text29) {
+        this.text29 = text29;
+    }
+
+    public String getText30() {
+        return text30;
+    }
+
+    public void setText30(String text30) {
+        this.text30 = text30;
+    }
 
     public TableModel(){}
 
@@ -206,6 +305,8 @@ public class TableModel {
     public void setText19(String text19) {
         this.text19 = text19;
     }
+
+
 
     /**
      * 是否正数

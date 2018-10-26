@@ -52,6 +52,7 @@ import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrier
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.JinChengGuanKong;
 import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
 import com.example.administrator.aviation.ui.cgo.domestic.ZhuangJiDanMain;
 import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
@@ -164,9 +165,20 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.app_cgo_dom_exp_reweight);
                 } else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_ULDLoading)) {
                     holder.setImageResource(R.id.image_iv, R.drawable.app_cgo_dom_exp_uldloading);
+                }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_MftLoading)) {
+                    holder.setImageResource(R.id.image_iv, R.drawable.gnchugangcangdan);
+                }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_FlightCtrl)){
+                    holder.setImageResource(R.id.image_iv, R.drawable.hangbanjinchen);
                 }
                 Log.d("guoji", obj.getName());
-                holder.setText(R.id.image_tv, obj.getNameCN());
+
+                String title = "";
+                if (obj.getNameCN().contains("国内")) {
+                    title = obj.getNameCN().substring(2);
+                } else {
+                    title = obj.getNameCN();
+                }
+                holder.setText(R.id.image_tv, title);
             }
         };
         grid_home.setAdapter(mAdapter);
@@ -242,12 +254,15 @@ public class HomePageFragment extends Fragment{
                         Intent CgoDomExpULDLoading = new Intent(getActivity(), ReWeightMain.class);
                         startActivity(CgoDomExpULDLoading);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_CheckIn)) {
-//                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
-//                    startActivity(CgoDomExpULDLoading);
-
+                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
+                    startActivity(CgoDomExpULDLoading);
+                }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_MftLoading)) {
                     Intent CgoDomExpULDLoading = new Intent(getActivity(), ZhuangJiDanMain.class);
                     startActivity(CgoDomExpULDLoading);
-                }else {
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_FlightCtrl)) {
+                    Intent CgoDomExpULDLoading = new Intent(getActivity(), JinChengGuanKong.class);
+                    startActivity(CgoDomExpULDLoading);
+                } else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
             }

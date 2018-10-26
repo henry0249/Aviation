@@ -8,7 +8,7 @@
     android:id="@+id/ZhuangJiDan_main">
 
     <include layout="@layout/navbar"
-        android:id="@+id/ZhuangJiDanBar"/>
+        android:id="@+id/JinChenBar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,10 +30,10 @@
 
         <EditText
             android:text=""
-            android:id="@+id/txt_ZhuangJiDan_HangBanHao"
+            android:id="@+id/txt_JinChen_HangBanHao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="0.3"
             android:padding="2dp"
             android:textSize="@dimen/house_size"
             android:textColor="#666666"
@@ -58,10 +58,10 @@
 
 
         <com.example.administrator.aviation.view.AutofitTextView
-            android:id="@+id/txt_ZhuangJiDan_riqi"
+            android:id="@+id/txt_JinChen_riqi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="0.3"
             android:text=""
             android:layout_gravity="center"
             android:maxLines="1"
@@ -71,73 +71,27 @@
             android:textSize="@dimen/house_size"
             android:background="@drawable/edit_bg"
             android:layout_marginLeft="0dp"
-            android:layout_marginRight="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="0dp"
-        android:background="#ffffff"
-        android:visibility="gone">
-
-        <com.example.administrator.aviation.view.AutofitTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:text="航程:"
-            android:textColor="#666666"
-            android:textSize="@dimen/house_size"
-            app:sizeToFit="true"
-            android:layout_marginLeft="10dp"
             android:layout_marginRight="0dp"/>
 
-        <com.example.administrator.aviation.view.AutofitTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:text="NKG"
-            android:padding="2dp"
+        <ImageView
+            android:id="@+id/Img_JinChen_ChaXun"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
-            android:maxLines="1"
-            app:sizeToFit="true"
-            android:textColor="#666666"
-            android:textSize="@dimen/house_size"
-            android:background="@drawable/edit_bg"
-            android:layout_marginLeft="00dp"
-            android:layout_marginRight="00dp"/>
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/chaxun0"
+            android:clickable="true"/>
 
-        <com.example.administrator.aviation.view.AutofitTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="—"
-            android:gravity="center"
+        <ImageView
+            android:id="@+id/Img_JinChen_QinKong"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
-            android:maxLines="1"
-            app:sizeToFit="true"
-            android:textColor="#666666"
-            android:textSize="@dimen/house_size"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <com.example.administrator.aviation.view.AutofitTextView
-            android:id="@+id/txt_ZhuangJiDan_MuDiGang"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:text=""
-            android:layout_gravity="center"
-            android:maxLines="1"
-            app:sizeToFit="true"
-            android:textColor="#666666"
-            android:textSize="@dimen/house_size"
-            android:background="@drawable/spinner_bg"
             android:layout_marginLeft="0dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="20dp"
+            android:background="@drawable/qinkong0"
+            android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -148,20 +102,21 @@
         android:background="#ffffff">
 
         <Button
-            android:id="@+id/btn_ZhuangJiDan_ChaXun"
+            android:id="@+id/btn_JinChen_KaiShi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="查询"
+            android:text="理货开始"
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/btn_ZhuangJiDan_QinKong"
+            android:id="@+id/btn_JinChen_JieShu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -170,35 +125,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="清空"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btn_ZhuangJiDan_JieZai"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_selector"
-            android:text="截载"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btn_ZhuangJiDan_BiDui"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_selector"
-            android:text="比对"
+            android:text="理货结束"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>
@@ -213,7 +140,7 @@
 
         <!-- 左侧标题的父容器 -->
         <TextView
-            android:id="@+id/ZhuangJiDan_tv_table_title_left"
+            android:id="@+id/JinChen_tv_table_title_left"
             android:textColor="#000000"
             android:textSize="12sp"
             android:layout_width="0dp"
@@ -226,7 +153,7 @@
 
         <!-- 右侧标题的父容器可实现水平滚动 -->
         <com.example.administrator.aviation.ui.base.SyncHorizontalScrollView
-            android:id="@+id/ZhuangJiDan_title_horsv"
+            android:id="@+id/JinChen_title_horsv"
             android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_weight="1"
@@ -235,7 +162,7 @@
             android:scrollbars="none">
 
             <LinearLayout
-                android:id="@+id/ZhuangJiDan_right_title_container"
+                android:id="@+id/JinChen_right_title_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -250,11 +177,11 @@
 
         <!-- 此部分是内容部分 用ScrollView实现上下滚动效果 -->
         <com.example.administrator.aviation.ui.base.AbPullToRefreshView
-            android:id="@+id/ZhuangJiDan_pulltorefreshview"
+            android:id="@+id/JinChen_pulltorefreshview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ScrollView
-                android:id="@+id/ZhuangJiDan_pull_refresh_scroll"
+                android:id="@+id/JinChen_pull_refresh_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -265,7 +192,7 @@
 
                     <!-- 左侧内容的父容器 -->
                     <com.example.administrator.aviation.ui.base.MyListView
-                        android:id="@+id/ZhuangJiDan_left_container_listview"
+                        android:id="@+id/JinChen_left_container_listview"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
@@ -274,14 +201,14 @@
 
                     <!-- 右侧内容的父容器 实现水平滚动 -->
                     <com.example.administrator.aviation.ui.base.SyncHorizontalScrollView
-                        android:id="@+id/ZhuangJiDan_content_horsv"
+                        android:id="@+id/JinChen_content_horsv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fillViewport="true"
                         android:scrollbars="none">
                         <com.example.administrator.aviation.ui.base.MyListView
-                            android:id="@+id/ZhuangJiDan_right_container_listview"
+                            android:id="@+id/JinChen_right_container_listview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#ffffff"
@@ -293,3 +220,4 @@
         </com.example.administrator.aviation.ui.base.AbPullToRefreshView>
     </FrameLayout>
 </LinearLayout>
+

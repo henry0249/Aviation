@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.example.administrator.aviation.R;
 
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
@@ -140,6 +141,15 @@ public class PublicFun {
     }
     //endregion
 
+    //region 浮点数转字符
+    public static String DoubleToStr(Double n,int m){
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        nf.setMaximumFractionDigits(m);
+        String dou_str = nf.format(n);
+        return  dou_str;
+    }
+    //endregion
 
 }
 

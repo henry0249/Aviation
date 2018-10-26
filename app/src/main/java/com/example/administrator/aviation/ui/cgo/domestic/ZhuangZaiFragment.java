@@ -59,6 +59,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.id.message;
 import static com.example.administrator.aviation.R.id.progressBar;
 import static com.example.administrator.aviation.R.id.sousuoYundan;
 
@@ -153,6 +154,9 @@ public class ZhuangZaiFragment extends Fragment {
     private HashMap<String,String> res = new HashMap<>();
     private List<ULDLoadingCargo> loadingCargos = new ArrayList<>();
     private HashMap<String,String> store = new HashMap();
+    private String XieHuoTiShi="";
+    private int XieHuoJiShu = 0;
+    private int newXieHuoJiShu = 0;
     //endregion
 
     //region 初始化
@@ -246,7 +250,13 @@ public class ZhuangZaiFragment extends Fragment {
                 tv_table_content_right_item7.setText(item.getText7());
                 tv_table_content_right_item8.setText(item.getText8());
                 tv_table_content_right_item9.setText(item.getText9());
-                tv_table_content_right_item10.setText(item.getText10());
+
+                if (item.getText10().length() > 8){
+                    tv_table_content_right_item10.setText(item.getText10().substring(0,3) + "\n" + item.getText10().substring(3));
+                }else{
+                    tv_table_content_right_item10.setText(item.getText10());
+                }
+
                 tv_table_content_right_item11.setText(item.getText11());
                 tv_table_content_right_item12.setText(item.getText12());
 
@@ -424,7 +434,7 @@ public class ZhuangZaiFragment extends Fragment {
         });
         //endregion
 
-        //region 标题栏点击事件
+        //region 标题栏点击事件 排序
         loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
             int key = 0;
             key = mTitleTvArray.keyAt(i);
@@ -515,28 +525,28 @@ public class ZhuangZaiFragment extends Fragment {
             XieHuoList.add(ll);
         }
 
+        XieHuoJiShu = XieHuoList.size();
+        XieHuoTiShi = "";
+
         for (HashMap<String,String> ll: XieHuoList ) {
             HttpRoot.getInstance().requstAync(mContext, HttpCommons.CGO_DOM_Exp_unLoading_NAME, HttpCommons.CGO_DOM_Exp_unLoading_ACTION, ll,
                     new HttpRoot.CallBack() {
                         @Override
                         public void onSucess(Object result) {
-                            SoapObject object = (SoapObject) result;
-                            String xx = object.getProperty(0).toString();
-                            if (xx.equalsIgnoreCase("true")) {
-                                ToastUtils.showToast(mContext, "卸货成功", Toast.LENGTH_SHORT);
-                            } else {
-                                ToastUtils.showToast(mContext, object.getProperty(1).toString(), Toast.LENGTH_SHORT);
-                            }
+                            XieHuoTiShi += "成功" + "\n";
+                            handler.sendEmptyMessage(666);
                         }
 
                         @Override
                         public void onFailed(String message) {
-                            ToastUtils.showToast(mContext,message, Toast.LENGTH_LONG);
+                            XieHuoTiShi += message + "\n";
+                            handler.sendEmptyMessage(666);
                         }
 
                         @Override
                         public void onError() {
-                            ToastUtils.showToast(mContext,"数据上传",Toast.LENGTH_SHORT);
+                            XieHuoTiShi += "上传失败" + "\n";
+                            handler.sendEmptyMessage(666);
                         }
                     },page);
         }
@@ -557,14 +567,14 @@ public class ZhuangZaiFragment extends Fragment {
                 TableModel tableMode = new TableModel();
                 tableMode.setOrgCode(cc.getWHID() + "");
                 tableMode.setLeftTitle(cc.getMawb() + "");
-                tableMode.setText0(cc.getAgentCode() + "");//列0内容
-                tableMode.setText1(cc.getPC() + "");//列1内容
-                tableMode.setText2(cc.getWeight() + "");//列2内容
-                tableMode.setText3(cc.getVolume() + "");
-                tableMode.setText4(cc.getSpCode() + "");
-                tableMode.setText5(cc.getGoods() + "");//
-                tableMode.setText6(cc.getDest() + "");//
-                tableMode.setText7(cc.getBy1() + "");//
+                tableMode.setText0(cc.getPC() + "");//列1内容
+                tableMode.setText1(cc.getWeight() + "");//列2内容
+                tableMode.setText2(cc.getVolume() + "");
+                tableMode.setText3(cc.getSpCode() + "");
+                tableMode.setText4(cc.getGoods() + "");//
+                tableMode.setText5(cc.getDest() + "");//
+                tableMode.setText6(cc.getBy1() + "");//
+                tableMode.setText7(cc.getAgentCode() + "");//
 
                 if (TextUtils.isEmpty(cc.getFDate())) {
                     tableMode.setText8(cc.getFDate() + "");
@@ -616,6 +626,12 @@ public class ZhuangZaiFragment extends Fragment {
 
                 Ldialog.dismiss();
 
+            }else if(msg.what == 666){
+                newXieHuoJiShu  += 1;
+                if (newXieHuoJiShu == XieHuoJiShu){
+                    ToastUtils.showToast(mContext,XieHuoTiShi,Toast.LENGTH_LONG);
+                    newXieHuoJiShu = 0;
+                }
             }
             return false;
         }

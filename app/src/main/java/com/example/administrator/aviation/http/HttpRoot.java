@@ -172,7 +172,6 @@ public class HttpRoot {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtils.showToast(context,"请检查网络状态",Toast.LENGTH_LONG);
                                 callBack.onError();
                             }
                         });
@@ -183,9 +182,9 @@ public class HttpRoot {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if  (null != errString &&!errString.equals(""))
-                                        ToastUtils.showToast(context,errString,Toast.LENGTH_LONG);
+                                    if  (null != errString &&!errString.equals("")){
                                         callBack.onFailed(errString);
+                                    }
                                 }
                             });
                         }else {
@@ -259,7 +258,14 @@ public class HttpRoot {
         }
 
         // 获取返回数据
-        SoapObject object = (SoapObject) envelope.bodyIn;
+        Object res = (Object) envelope.bodyIn;
+        if (res.toString().contains("There is an error in XML")) {
+            Log.e("text", res.toString());
+            return null;
+        }
+
+        SoapObject object = (SoapObject)res;
+
         // 获取返回结果
         if (object != null) {
             String result = object.toString();

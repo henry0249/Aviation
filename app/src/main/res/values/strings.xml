@@ -239,6 +239,9 @@
 
     <string name="login_only_can_input">0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
 
+    <string name="dialog_title">拖拽排序</string>
+    <string name="dialog_division">点击添加到导航条</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
