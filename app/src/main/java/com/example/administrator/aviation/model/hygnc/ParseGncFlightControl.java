@@ -80,18 +80,62 @@ public class ParseGncFlightControl {
                             flightControl.setdATackOff(parser.nextText());
                         }else if (name.equalsIgnoreCase("dEArrival")) {
                             flightControl.setdEArrival(parser.nextText());
+                        }else if (name.equalsIgnoreCase("dAArrival")) {
+                            flightControl.setdAArrival(parser.nextText());
                         }else if (name.equalsIgnoreCase("FlightStatus")) {
-                            flightControl.setFlightStatus(parser.nextText());
+                            String nFlightStatus = parser.nextText().trim();
+                            if (!TextUtils.isEmpty(nFlightStatus)) {
+                                switch (nFlightStatus){
+                                    case "0":
+                                        nFlightStatus += "_" + "正常";
+                                        break;
+                                    case "1":
+                                        nFlightStatus += "_" + "登机";
+                                        break;
+                                    case "2":
+                                        nFlightStatus += "_" + "登机结束";
+                                        break;
+                                    case "3":
+                                        nFlightStatus += "_" + "起飞";
+                                        break;
+                                    case "4":
+                                        nFlightStatus += "_" + "到达";
+                                        break;
+                                    case "5":
+                                        nFlightStatus += "_" + "取消";
+                                        break;
+                                    case "6":
+                                        nFlightStatus += "_" + "备降";
+                                        break;
+                                    case "7":
+                                        nFlightStatus += "_" + "删除发布";
+                                        break;
+                                    case "8":
+                                        nFlightStatus += "_" + "延误";
+                                        break;
+                                    case "9":
+                                        nFlightStatus += "_" + "未知";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                flightControl.setFlightStatus(nFlightStatus);
+                            }
+
                         }else if (name.equalsIgnoreCase("DelayFreeText")) {
                             flightControl.setDelayFreeText(parser.nextText());
                         }else if (name.equalsIgnoreCase("Registeration")) {
                             flightControl.setRegisteration(parser.nextText());
                         }else if (name.equalsIgnoreCase("AirCraftCode")) {
                             flightControl.setAirCraftCode(parser.nextText());
+                        }else if (name.equalsIgnoreCase("StandID")) {
+                            flightControl.setStandID(parser.nextText());
                         }else if (name.equalsIgnoreCase("TallyStart")) {
                             flightControl.setTallyStart(parser.nextText());
                         }else if (name.equalsIgnoreCase("TallyEnd")) {
                             flightControl.setTallyEnd(parser.nextText());
+                        }else if (name.equalsIgnoreCase("MClose")) {
+                            flightControl.setMClose(parser.nextText());
                         }else if (name.equalsIgnoreCase("OutBound")) {
                             flightControl.setOutBound(parser.nextText());
                         }else if (name.equalsIgnoreCase("CheckTime")) {

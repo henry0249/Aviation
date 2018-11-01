@@ -79,5 +79,5 @@
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_18"
         style="@style/TextView_Table_Right"
         android:text="前置航班"
-        android:textColor="#08c405"/>
+        android:textColor="#009cd0"/>
 </merge>

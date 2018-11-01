@@ -15,9 +15,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ReplacementTransformationMethod;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,6 +60,7 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -179,7 +182,6 @@ public class ZhuangJiDanMain extends AppCompatActivity {
     //region 输入框置空
     private void TxtViewSetEmpty() {
         editHangBanHao.setText("");
-        txt_riqi.setText("");
         txt_MuDiGang.setText("");
 
         Fdate = "";
@@ -187,6 +189,10 @@ public class ZhuangJiDanMain extends AppCompatActivity {
 
         mLeftAdapter.clearData(true);
         mRightAdapter.clearData(true);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        txt_riqi.setText(simpleDateFormat.format(date).toString());
     }
     //endregion
 
@@ -257,7 +263,22 @@ public class ZhuangJiDanMain extends AppCompatActivity {
                 tv_table_content_right_item9.setText(item.getText9());
                 tv_table_content_right_item10.setText(item.getText10());
                 tv_table_content_right_item11.setText(item.getText11());
-                tv_table_content_right_item12.setText(item.getText12());
+
+                if (item.getText12().length() > 6){
+                    final String remark = item.getText12();
+                    tv_table_content_right_item12.setText(item.getText12().substring(0,5) + "...");
+                    tv_table_content_right_item12.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new QMUIDialog.MessageDialogBuilder(mAct)
+                                    .setTitle("备注")
+                                    .setMessage(remark).show();
+                        }
+                    });
+                }else{
+                    tv_table_content_right_item12.setText(item.getText12());
+                }
+
                 tv_table_content_right_item13.setText(item.getText13());
 
                 for (int i = 0; i < 14; i++) {
@@ -289,6 +310,20 @@ public class ZhuangJiDanMain extends AppCompatActivity {
 
     //region 页面上所有的点击事件
     private void setListener() {
+
+        //region 航班号输入框监听键盘ENTER事件
+        editHangBanHao.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+             @Override
+             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                 if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER))  {
+                     btnChaXun.performClick();
+                     return true;
+                 }
+                 return false;
+             }
+         }
+        );
+        //endregion
 
         //region 航班号自动变大写
         editHangBanHao.setTransformationMethod(new ReplacementTransformationMethod() {
@@ -640,36 +675,6 @@ public class ZhuangJiDanMain extends AppCompatActivity {
         Fdate = txt_riqi.getText().toString().toUpperCase().trim() + "T00:00:00";
         Fno = editHangBanHao.getText().toString().toUpperCase().trim();
     }
-    //endregion
-
-    //region 循环读取listview
-//     private void BianSe(String ori,ViewGroup viewGroup){
-//         if(viewGroup instanceof ViewGroup) {
-//             LinkedList<ViewGroup> queue = new LinkedList<ViewGroup>();
-//             queue.add(viewGroup);
-//             String str_red_color="#ff0000";
-//
-//             while(!queue.isEmpty()) {
-//                 ViewGroup current = queue.removeFirst();
-//
-//                 for(int i = 0; i < current.getChildCount(); i ++) {
-//                     if(current.getChildAt(i) instanceof ViewGroup) {
-//                         queue.addLast((ViewGroup) current.getChildAt(i));
-//                     }else {
-//                         View view = current.getChildAt(i);
-//                         if (view instanceof AppCompatTextView) {
-//                             AppCompatTextView tv = (AppCompatTextView) view;
-//                             if (ori.contains(tv.getText())) {
-//                                 tv.setTextColor(Color.parseColor(str_red_color));
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//
-//             HongSe = "";
-//         }
-//     }
     //endregion
 
     //region 清空tableview

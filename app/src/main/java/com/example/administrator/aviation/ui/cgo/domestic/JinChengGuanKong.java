@@ -15,9 +15,11 @@ import android.text.method.ReplacementTransformationMethod;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -63,6 +65,7 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +73,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.delay;
 import static android.R.attr.key;
+import static android.R.attr.x;
+import static android.R.attr.y;
 import static android.R.id.message;
 import static com.example.administrator.aviation.R.id.pulltorefreshview;
 import static com.example.administrator.aviation.R.id.view;
@@ -96,6 +102,7 @@ public class JinChengGuanKong extends AppCompatActivity {
     private String LiHuoTiShi="";
     private int LiHuoJiShu = 0;
     private int newLiHuoJiShu = 0;
+//    private int XiaLaJiShu = 0;
     private final String yuzhiTitle = "航班日期 航程 平板数 净重 预计起飞 实际起飞 预计到达 实际到达 航班状态 延误原因 机号 机型 机位 理货开始 理货结束 截载 交接 地服";
     //endregion
 
@@ -177,9 +184,11 @@ public class JinChengGuanKong extends AppCompatActivity {
         navBar.setTitle("航班进程管控");
         navBar.setRight(R.drawable.ic_menu_two);
         txt_RightTitle.setText("航班号");
+
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.JinChen_right_title_container);
         layoutInflater.inflate(R.layout.jinchengguankong_right_title,linearLayout,true);
+
 
         // 设置两个水平控件的联动
         titleHorScv.setScrollView(contentHorScv);
@@ -195,14 +204,18 @@ public class JinChengGuanKong extends AppCompatActivity {
     //region 输入框置空
     private void TxtViewSetEmpty() {
         editHangBanHao.setText("");
-        txt_riqi.setText("");
 
         Fdate = "";
         Fno = "";
+//        XiaLaJiShu = 0;
         store.clear();
 
         mLeftAdapter.clearData(true);
         mRightAdapter.clearData(true);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        txt_riqi.setText(simpleDateFormat.format(date).toString());
     }
     //endregion
 
@@ -342,6 +355,20 @@ public class JinChengGuanKong extends AppCompatActivity {
     //region 页面上所有的点击事件
     private void setListener() {
 
+        //region 航班号输入框监听键盘ENTER事件
+        editHangBanHao.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+             @Override
+             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                 if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER))  {
+                     ImgChaXun.performClick();
+                     return true;
+                 }
+                 return false;
+             }
+         }
+        );
+        //endregion
+
         //region 左侧标题列监听事件
         leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -439,7 +466,7 @@ public class JinChengGuanKong extends AppCompatActivity {
                                         dialog.dismiss();
                                         lihuo("start");
                                         store.clear();
-                                        pulltorefreshview.headerRefreshing();
+                                        ImgChaXun.performClick();
                                     }
                                 })
                                 .show();
@@ -471,7 +498,7 @@ public class JinChengGuanKong extends AppCompatActivity {
                                     dialog.dismiss();
                                     lihuo("end");
                                     store.clear();
-                                    pulltorefreshview.headerRefreshing();
+                                    ImgChaXun.performClick();
                                 }
                             })
                             .show();
@@ -485,22 +512,22 @@ public class JinChengGuanKong extends AppCompatActivity {
         //endregion
 
         //region 下拉刷新
-        pulltorefreshview.setOnHeaderRefreshListener(new AbPullToRefreshView.OnHeaderRefreshListener() {
-            @Override
-            public void onHeaderRefresh(AbPullToRefreshView view) {
-                if (TextUtils.isEmpty(Fdate)) {
-                    pulltorefreshview.onHeaderRefreshFinish();
-                    ToastUtils.showToast(mContext, "查询数据有误", Toast.LENGTH_SHORT);
-                } else {
-                    HashMap<String, String> go = new HashMap<String, String>();
-                    go.put("FDate", Fdate);
-                    go.put("Fno", Fno);
-                    go.put("ErrString", "");
-
-                    GetInfo(go);
-                }
-            }
-        });
+//        pulltorefreshview.setOnHeaderRefreshListener(new AbPullToRefreshView.OnHeaderRefreshListener() {
+//            @Override
+//            public void onHeaderRefresh(AbPullToRefreshView view) {
+//                if (TextUtils.isEmpty(Fdate)) {
+//                    pulltorefreshview.onHeaderRefreshFinish();
+//                    ToastUtils.showToast(mContext, "查询数据有误", Toast.LENGTH_SHORT);
+//                } else {
+//                    HashMap<String, String> go = new HashMap<String, String>();
+//                    go.put("FDate", Fdate);
+//                    go.put("Fno", Fno);
+//                    go.put("ErrString", "");
+//
+//                    GetInfo(go);
+//                }
+//            }
+//        });
         //endregion
 
         //region 标题栏右侧图片点击按钮
@@ -532,6 +559,13 @@ public class JinChengGuanKong extends AppCompatActivity {
         });
         //endregion
 
+//        pulltorefreshview.setOnFooterLoadListener(new AbPullToRefreshView.OnFooterLoadListener() {
+//            @Override
+//            public void onFooterLoad(AbPullToRefreshView view) {
+//                setDatas(flightControls,AviationCommons.LOAD_DATA);
+//                pulltorefreshview.onFooterLoadFinish();
+//            }
+//        });
     }
 
     //endregion
@@ -548,14 +582,20 @@ public class JinChengGuanKong extends AppCompatActivity {
                 if (flightControls.size() == 0) {
                     ToastUtils.showToast(mContext,"数据为空",Toast.LENGTH_SHORT);
                     clearTableView();
+                    Ldialog.dismiss();
                 }else {
                     setDatas(flightControls,AviationCommons.REFRESH_DATA);
+                    mHandler.postDelayed(new Runnable(){
+                        public void run() {
+                            //execute the task
+                            Ldialog.dismiss();
+                        }
+                    }, 1000);
                 }
-
-                Ldialog.dismiss();
             }else if(msg.what == 666){
                 newLiHuoJiShu  += 1;
                 if (newLiHuoJiShu == LiHuoJiShu){
+                    LiHuoTiShi = LiHuoTiShi.substring(0,LiHuoTiShi.length() - 1);
                     ToastUtils.showToast(mContext,LiHuoTiShi,Toast.LENGTH_LONG);
                     newLiHuoJiShu = 0;
                 }
@@ -581,9 +621,7 @@ public class JinChengGuanKong extends AppCompatActivity {
                         String Exp_ULDLoading = object.getProperty(0).toString();
 
                         flightControls = ParseGncFlightControl.parseFlightControlToEntity(Exp_ULDLoading);
-
                         mHandler.sendEmptyMessage(AviationCommons.GNC_FlightControls);
-                        Ldialog.dismiss();
                     }
 
                     @Override
@@ -665,7 +703,24 @@ public class JinChengGuanKong extends AppCompatActivity {
 
     //region 把数据绑定到Model
     private void setDatas(List<GncFlightControl> CGO, int type) {
+//        int x = 0;
+//        int y = 0;
+//        if (XiaLaJiShu == 0){
+//            x = 0;
+//            y = 50;
+//        }else {
+//            x = XiaLaJiShu * 50;
+//            y = (XiaLaJiShu + 1) * 50 - 1;
+//        }
+//
+//        if (y > CGO.size()){
+//            y =  CGO.size();
+//            pulltorefreshview.setLoadMoreEnable(false);
+//            XiaLaJiShu = 0;
+//        }
         pulltorefreshview.setLoadMoreEnable(false);
+        pulltorefreshview.setPullRefreshEnable(false);
+
         if (CGO.size() > 0) {
             List<TableModel> mDatas = new ArrayList<>();
             for (int i = 0; i < CGO.size(); i++) {
@@ -707,6 +762,7 @@ public class JinChengGuanKong extends AppCompatActivity {
                 isMore = true;
             } else {
                 isMore = false;
+//                pulltorefreshview.onHeaderRefreshFinish();
             }
             mLeftAdapter.addData(mDatas, isMore);
             mRightAdapter.addData(mDatas, isMore);
@@ -715,11 +771,12 @@ public class JinChengGuanKong extends AppCompatActivity {
         } else {
             mLeftAdapter.clearData(true);
             mRightAdapter.clearData(true);
+//            XiaLaJiShu = 0;
         }
 
-        pulltorefreshview.onHeaderRefreshFinish();
         Fdate = txt_riqi.getText().toString().toUpperCase().trim() + "T00:00:00";
         Fno = editHangBanHao.getText().toString().toUpperCase().trim();
+//        XiaLaJiShu += 1;
     }
     //endregion
 
@@ -755,7 +812,12 @@ public class JinChengGuanKong extends AppCompatActivity {
                 result = y.getdAArrival();
                 break;
             case "航班状态":
-                result = y.getFlightStatus();
+                if (y.getFlightStatus().contains("_")){
+                    result = y.getFlightStatus().split("_")[1];
+                }else{
+                    result = y.getFlightStatus();
+                }
+
                 break;
             case "延误原因":
                 result = y.getDelayFreeText();
@@ -817,7 +879,6 @@ public class JinChengGuanKong extends AppCompatActivity {
     private void clearTableView(){
         mLeftAdapter.clearData(true);
         mRightAdapter.clearData(true);
-        pulltorefreshview.onHeaderRefreshFinish();
 
         Fdate = "";
         Fno = "";

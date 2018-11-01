@@ -41,6 +41,7 @@
             android:focusableInTouchMode="true"
             android:focusable="true"
             android:inputType="text"
+            android:imeOptions="actionDone"
             android:background="@drawable/edit_bg" />
 
         <com.example.administrator.aviation.view.AutofitTextView

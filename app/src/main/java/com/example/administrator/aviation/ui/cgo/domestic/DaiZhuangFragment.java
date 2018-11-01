@@ -702,6 +702,7 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
             }else if(msg.what == 666){
                 newZhuangHuoJiShu  += 1;
                 if (newZhuangHuoJiShu == ZhuangHuoJiShu){
+                    ZhuangHuoTiShi = ZhuangHuoTiShi.substring(0,ZhuangHuoTiShi.length() - 1);
                     ToastUtils.showToast(mContext,ZhuangHuoTiShi,Toast.LENGTH_LONG);
                     newZhuangHuoJiShu = 0;
                 }

@@ -629,6 +629,7 @@ public class ZhuangZaiFragment extends Fragment {
             }else if(msg.what == 666){
                 newXieHuoJiShu  += 1;
                 if (newXieHuoJiShu == XieHuoJiShu){
+                    XieHuoTiShi = XieHuoTiShi.substring(0,XieHuoTiShi.length() - 1);
                     ToastUtils.showToast(mContext,XieHuoTiShi,Toast.LENGTH_LONG);
                     newXieHuoJiShu = 0;
                 }
