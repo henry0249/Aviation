@@ -15,6 +15,11 @@
     <color name="guoneidingdan_color">#2e2d33</color>
     <color name="dark_gray">#555</color>
     <color name="chose_color">#3371ae</color>
+    <color name="mBlue">#0000FF</color>
+    <color name="mBlack">#000000</color>
+    <color name="mWhite">#ffffff</color>
+    <color name="mRed">#FF0000</color>
+    <color name="mGray">#666666</color>
 
     <color name="gonggong">#3371ae</color>
 

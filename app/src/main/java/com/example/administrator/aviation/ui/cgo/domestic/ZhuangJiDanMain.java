@@ -588,7 +588,7 @@ public class ZhuangJiDanMain extends AppCompatActivity {
                         SoapObject object = (SoapObject) result;
                         String res = object.getProperty(0).toString();
                         if (res.equalsIgnoreCase("true")) {
-                            ToastUtils.showToast(mContext, "卸货成功", Toast.LENGTH_SHORT);
+                            ToastUtils.showToast(mContext, "截载成功", Toast.LENGTH_SHORT);
                         } else {
                             ToastUtils.showToast(mContext, object.getProperty(1).toString(), Toast.LENGTH_SHORT);
                         }

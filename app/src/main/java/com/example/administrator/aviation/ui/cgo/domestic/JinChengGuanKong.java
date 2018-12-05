@@ -4,16 +4,15 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.text.method.ReplacementTransformationMethod;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -23,13 +22,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,14 +38,10 @@ import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.adapter.AbsCommonAdapter;
 import com.example.administrator.aviation.model.adapter.AbsViewHolder;
 import com.example.administrator.aviation.model.adapter.PopWindowsAdapter;
-import com.example.administrator.aviation.model.hygnc.GNCULDLoading;
 import com.example.administrator.aviation.model.hygnc.GncFlightControl;
-import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
 import com.example.administrator.aviation.model.hygnc.ParseGncFlightControl;
 import com.example.administrator.aviation.tool.DateUtils;
-import com.example.administrator.aviation.tool.TanChuPaiXu.DragGridView;
 import com.example.administrator.aviation.tool.TanChuPaiXu.DragSortDialog;
-import com.example.administrator.aviation.ui.base.AbPullToRefreshView;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.base.SyncHorizontalScrollView;
 import com.example.administrator.aviation.ui.base.TableModel;
@@ -57,10 +52,7 @@ import com.example.administrator.aviation.util.ToastUtils;
 import com.example.administrator.aviation.view.AutofitTextView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-
 import org.ksoap2.serialization.SoapObject;
-
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,17 +65,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.attr.delay;
-import static android.R.attr.key;
-import static android.R.attr.x;
-import static android.R.attr.y;
-import static android.R.id.message;
-import static com.example.administrator.aviation.R.id.pulltorefreshview;
-import static com.example.administrator.aviation.R.id.view;
-
 public class JinChengGuanKong extends AppCompatActivity {
-
-
 
     //region 自定义变量
     private Context mContext;
@@ -102,6 +84,7 @@ public class JinChengGuanKong extends AppCompatActivity {
     private String LiHuoTiShi="";
     private int LiHuoJiShu = 0;
     private int newLiHuoJiShu = 0;
+    private String Depoff = "true";
 //    private int XiaLaJiShu = 0;
     private final String yuzhiTitle = "航班日期 航程 平板数 净重 预计起飞 实际起飞 预计到达 实际到达 航班状态 延误原因 机号 机型 机位 理货开始 理货结束 截载 交接 地服";
     //endregion
@@ -116,6 +99,8 @@ public class JinChengGuanKong extends AppCompatActivity {
     ListView leftListView;
     @BindView(R.id.JinChen_right_container_listview)
     ListView rightListView;
+    @BindView(R.id.checkbox_JinChen_Depoff)
+    CheckBox DepoffCheckcBox;
     private PopupWindow pw;
     private  DragSortDialog dialog;
     //endregion
@@ -138,7 +123,7 @@ public class JinChengGuanKong extends AppCompatActivity {
 
     //region 滚动View控件
     @BindView(R.id.JinChen_pulltorefreshview)
-    AbPullToRefreshView pulltorefreshview;
+    SwipeRefreshLayout pulltorefreshview;
     @BindView(R.id.JinChen_title_horsv)
     SyncHorizontalScrollView titleHorScv;
     @BindView(R.id.JinChen_content_horsv)
@@ -184,6 +169,12 @@ public class JinChengGuanKong extends AppCompatActivity {
         navBar.setTitle("航班进程管控");
         navBar.setRight(R.drawable.ic_menu_two);
         txt_RightTitle.setText("航班号");
+        DepoffCheckcBox.setChecked(true);
+        //设置下拉的距离和动画颜色
+        pulltorefreshview.setProgressViewEndTarget (true,100);
+        pulltorefreshview.setDistanceToTriggerSync(150);
+        pulltorefreshview.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
 
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.JinChen_right_title_container);
@@ -369,6 +360,19 @@ public class JinChengGuanKong extends AppCompatActivity {
         );
         //endregion
 
+        //region 过滤起飞单选框
+        DepoffCheckcBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Depoff = "true";
+                } else {
+                    Depoff = "false";
+                }
+            }
+        });
+        //endregion
+
         //region 左侧标题列监听事件
         leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -429,9 +433,10 @@ public class JinChengGuanKong extends AppCompatActivity {
                     String Hangban = editHangBanHao.getText().toString().toUpperCase().trim();
                     go.put("FDate", ri);
                     go.put("Fno", Hangban);
-                    go.put("DepOff","false");
+                    go.put("DepOff",Depoff);
                     go.put("ErrString", "");
                     GetInfo(go);
+                    Ldialog.show();
                 }
             }
         });
@@ -512,23 +517,23 @@ public class JinChengGuanKong extends AppCompatActivity {
         //endregion
 
         //region 下拉刷新
-//        pulltorefreshview.setOnHeaderRefreshListener(new AbPullToRefreshView.OnHeaderRefreshListener() {
-//            @Override
-//            public void onHeaderRefresh(AbPullToRefreshView view) {
-//                if (TextUtils.isEmpty(Fdate)) {
-//                    pulltorefreshview.onHeaderRefreshFinish();
-//                    ToastUtils.showToast(mContext, "查询数据有误", Toast.LENGTH_SHORT);
-//                } else {
-//                    HashMap<String, String> go = new HashMap<String, String>();
-//                    go.put("FDate", Fdate);
-//                    go.put("Fno", Fno);
-//                    go.put("ErrString", "");
-//
-//                    GetInfo(go);
-//                }
-//            }
-//        });
-        //endregion
+        pulltorefreshview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (TextUtils.isEmpty(Fdate)) {
+                    pulltorefreshview.setRefreshing(false);
+                    ToastUtils.showToast(mContext, "查询数据有误", Toast.LENGTH_SHORT);
+                } else {
+                    HashMap<String, String> go = new HashMap<String, String>();
+                    go.put("FDate", Fdate);
+                    go.put("Fno", Fno);
+                    go.put("DepOff",Depoff);
+                    go.put("ErrString", "");
+                    GetInfo(go);
+                }
+
+            }
+        });
 
         //region 标题栏右侧图片点击按钮
         navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
@@ -608,7 +613,6 @@ public class JinChengGuanKong extends AppCompatActivity {
     //region 请求数据
     private void GetInfo(Map<String, String> p) {
         titleHorScv.scrollTo(0,0);
-        Ldialog.show();
         Fdate = "";
         Fno = "";
         store.clear();
@@ -718,8 +722,8 @@ public class JinChengGuanKong extends AppCompatActivity {
 //            pulltorefreshview.setLoadMoreEnable(false);
 //            XiaLaJiShu = 0;
 //        }
-        pulltorefreshview.setLoadMoreEnable(false);
-        pulltorefreshview.setPullRefreshEnable(false);
+//        pulltorefreshview.setLoadMoreEnable(false);
+//        pulltorefreshview.setPullRefreshEnable(true);
 
         if (CGO.size() > 0) {
             List<TableModel> mDatas = new ArrayList<>();
@@ -763,6 +767,7 @@ public class JinChengGuanKong extends AppCompatActivity {
             } else {
                 isMore = false;
 //                pulltorefreshview.onHeaderRefreshFinish();
+                pulltorefreshview.setRefreshing(false);
             }
             mLeftAdapter.addData(mDatas, isMore);
             mRightAdapter.addData(mDatas, isMore);

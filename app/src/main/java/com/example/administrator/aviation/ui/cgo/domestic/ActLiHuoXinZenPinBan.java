@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.ReplacementTransformationMethod;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
 import com.example.administrator.aviation.model.hygnc.ParseULDEntity;
 import com.example.administrator.aviation.model.hygnc.ULDEntity;
+import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.dialog.LoadingDialog;
@@ -186,17 +188,29 @@ public class ActLiHuoXinZenPinBan extends AppCompatActivity {
                     return;
                 }
 
-                if (pinBan.length() == 1) {
-                    pinBan = "00" + pinBan;
-                } else if (pinBan.length() == 2) {
-                    pinBan = "0" + pinBan;
-                }
+                pinBan = PublicFun.getPinBanHao(pinBan);
 
                 ArrayMap<String,String> re = new ArrayMap<>();
                 re.put(uldBianHao_A.getText().toString().toUpperCase().trim(), uldBianZhong_A.getText().toString().toUpperCase().trim());
                 re.put(uldBianHao_B.getText().toString().toUpperCase().trim(), uldBianZhong_B.getText().toString().toUpperCase().trim());
 
                 CreatGNCULDLoading(getUpdateXml(pinBan,PinBanZhong_A.getText().toString().trim(),re));
+            }
+        });
+        //endregion
+
+        //region 平板编号自动变大写
+        PinBanHao_A.setTransformationMethod(new ReplacementTransformationMethod() {
+            @Override
+            protected char[] getOriginal() {
+                char[] originalCharArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+                return originalCharArr;
+            }
+
+            @Override
+            protected char[] getReplacement() {
+                char[] replacementCharArr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
+                return replacementCharArr;
             }
         });
         //endregion

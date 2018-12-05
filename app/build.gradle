@@ -34,7 +34,7 @@ android {
                 if (variant.buildType.name.equals('release')) {
                     fileName = "app-release_2.apk"
                 } else if (variant.buildType.name.equals('debug')) {
-                    fileName = "货站APP测试_${defaultConfig.versionName}_${defaultConfig.versionCode}_debug.apk"
+                    fileName = "货站版APP测试_${defaultConfig.versionName}_${defaultConfig.versionCode}_debug.apk"
                 }
                 output.outputFile = new File(outputFile.parent, fileName)
             }

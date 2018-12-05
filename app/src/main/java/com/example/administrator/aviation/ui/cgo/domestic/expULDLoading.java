@@ -10,10 +10,12 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.TextUtils;
+import android.text.method.ReplacementTransformationMethod;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
@@ -48,6 +50,9 @@ import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
 import com.example.administrator.aviation.view.SwitchView;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.popup.QMUIPopup;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -64,7 +69,6 @@ import static android.R.attr.tag;
 import static android.R.id.message;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_CAMERA_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDLOADING_XinZenPinBan_REQUEST;
-import static com.example.administrator.aviation.util.AviationCommons.GNC_ULDinfo_CAMERA_REQUEST;
 
 //region 佛祖保佑 永无BUG 永不修改 --by sst
 ////////////////////////////////////////////////////////////////////
@@ -201,6 +205,7 @@ public class expULDLoading extends AppCompatActivity {
     private final String page = "one";
     private String PinBan_Two = "";
     private String OriULD = "";
+    private String HuiDiaoFlag = "";
     private List<GNCULDLoading> gnculd;
     private List<ULDLoadingCargo> loadingCargos;
     private ArrayList<String> list;
@@ -241,8 +246,8 @@ public class expULDLoading extends AppCompatActivity {
             Intent da = getIntent();
             Bundle bundle = da.getExtras();
             if (bundle != null) {
-                String re = bundle.getString("ZhuangJiDanMain","");
-                if (!TextUtils.isEmpty(re)) {
+                HuiDiaoFlag = bundle.getString("ZhuangJiDanMain","");
+                if (!TextUtils.isEmpty(HuiDiaoFlag)) {
                     ChaXun.setBackgroundColor(Color.parseColor("#979797"));
                     ChaXun.setEnabled(false);
                     QinKong.setBackgroundColor(Color.parseColor("#979797"));
@@ -253,7 +258,7 @@ public class expULDLoading extends AppCompatActivity {
                     Img_SaoMa.setEnabled(false);
 
                     QinKong.performClick();
-                    PinBanHao_one.setText(re);
+                    PinBanHao_one.setText(HuiDiaoFlag);
                     ChaXun.performClick();
                 }
             }
@@ -335,13 +340,16 @@ public class expULDLoading extends AppCompatActivity {
 
                         Map<String, String> params = new HashMap<>();
                         PublicFun.KeyBoardHide(mAct,mContext);
-                        params.put("ID", re.split("/")[0].trim());
-                        params.put("CarID", "");
-                        params.put("ULD", re.split("/")[1].trim());
-                        params.put("ErrString", "");
-                        Ldialog.show();
+//                        params.put("ID", re.split("/")[0].trim());
+//                        params.put("CarID", "");
+//                        params.put("ULD", re.split("/")[1].trim());
+//                        params.put("ErrString", "");
+//                        Ldialog.show();
+//
+//                        GetInfo(params);
+                         PinBanHao_one.setText(re);
+                         ChaXun.performClick();
 
-                        GetInfo(params);
                     }
                 }
                 break;
@@ -496,12 +504,7 @@ public class expULDLoading extends AppCompatActivity {
                 String pinBan = PinBanHao_one.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(pinBan)) {
-                    if (pinBan.length() == 1) {
-                        pinBan = "00" + pinBan;
-                    } else if (pinBan.length() == 2) {
-                        pinBan = "0" + pinBan;
-                    }
-
+                    pinBan = PublicFun.getPinBanHao(pinBan);
                     PublicFun.KeyBoardHide(mAct, mContext);
                     params.put("ID", "0");
                     params.put("CarID", pinBan);
@@ -513,6 +516,22 @@ public class expULDLoading extends AppCompatActivity {
                 } else {
                     TxtViewSetEmpty();
                 }
+            }
+        });
+        //endregion
+
+        //region 平板编号自动变大写
+        PinBanHao_one.setTransformationMethod(new ReplacementTransformationMethod() {
+            @Override
+            protected char[] getOriginal() {
+                char[] originalCharArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+                return originalCharArr;
+            }
+
+            @Override
+            protected char[] getReplacement() {
+                char[] replacementCharArr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
+                return replacementCharArr;
             }
         });
         //endregion
@@ -938,8 +957,19 @@ public class expULDLoading extends AppCompatActivity {
         MuBiaoULDEdt.setFocusable(false);
         MuBiaoULDEdt.setFocusableInTouchMode(false);
 
+
         PublicFun.ElementSwitch(Lay_PB,true);
         PublicFun.ElementSwitch(uldloading_navBar,true);
+        if (!TextUtils.isEmpty(HuiDiaoFlag)) {
+            ChaXun.setBackgroundColor(Color.parseColor("#979797"));
+            ChaXun.setEnabled(false);
+            QinKong.setBackgroundColor(Color.parseColor("#979797"));
+            QinKong.setEnabled(false);
+            XinZen.setBackgroundColor(Color.parseColor("#979797"));
+            XinZen.setEnabled(false);
+            PinBanHao_one.setEnabled(false);
+            Img_SaoMa.setEnabled(false);
+        }
 
         handler.post(new Runnable() {
             @Override
@@ -966,11 +996,29 @@ public class expULDLoading extends AppCompatActivity {
                 }
             }else if(msg.what == AviationCommons.GNC_ULDLoadingCargo){
                 if (loadingCargos.size() > 0) {
+                    final List<ULDLoadingCargo> result = new ArrayList<>();
                     for (ULDLoadingCargo a :loadingCargos){
                         if (!TextUtils.isEmpty(a.getSpCode())) {
-                            TeMaJinGao.setBackgroundResource(R.drawable.jingao);
-                            break;
+                            result.add(a);
                         }
+                    }
+
+                    if (result.size() > 0){
+                        TeMaJinGao.setBackgroundResource(R.drawable.jingao);
+                        TeMaJinGao.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String re = "";
+                                for (ULDLoadingCargo x :result){
+                                    re += x.getMawb() + "/" + x.getGoods() + "/" + x.getSpCode() + "\n";
+                                }
+                                if (!TextUtils.isEmpty(re)){
+                                    new QMUIDialog.MessageDialogBuilder(mAct)
+                                            .setTitle("特码列表")
+                                            .setMessage(re.substring(0,re.length() - 1)).show();
+                                }
+                            }
+                        });
                     }
                 }
 

@@ -274,12 +274,7 @@ public class ReWeightMain extends AppCompatActivity {
                 String pinBan = editPinBanHao.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(pinBan)) {
-                    if (pinBan.length() == 1) {
-                        pinBan = "00" + pinBan;
-                    } else if (pinBan.length() == 2) {
-                        pinBan = "0" + pinBan;
-                    }
-
+                    pinBan = PublicFun.getPinBanHao(pinBan);
                     PublicFun.KeyBoardHide(mAct, mContext);
                     params.put("ID", "0");
                     params.put("CarID", pinBan);

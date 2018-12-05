@@ -151,5 +151,38 @@ public class PublicFun {
     }
     //endregion
 
+    //region 转换平板号
+    public static String getPinBanHao(String x){
+        String result = "";
+        String first = x.substring(0,1);
+
+        if (isNumeric(first)){
+            if (x.length() == 1) {
+                result = "00" + x;
+            }else if (x.length() == 2) {
+                result = "0" + x;
+            } else {
+                result = x;
+            }
+        }else if (x.length() > 1){
+            result = first.toUpperCase();
+            String two = x.substring(1);
+            if (two.length() == 1){
+                result += "000" + two;
+            }else if (two.length() == 2) {
+                result += "00" + two;
+            }else if (two.length() == 3) {
+                result += "0" + two;
+            }else {
+                result = x;
+            }
+        } else {
+            result = x;
+        }
+
+        return result;
+    }
+    //endregion
+
 }
 

@@ -72,35 +72,57 @@
             android:textSize="@dimen/house_size"
             android:background="@drawable/edit_bg"
             android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"/>
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
 
         <ImageView
             android:id="@+id/Img_JinChen_ChaXun"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="0dp"
             android:background="@drawable/chaxun0"
             android:clickable="true"/>
 
         <ImageView
             android:id="@+id/Img_JinChen_QinKong"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="0dp"
             android:background="@drawable/qinkong0"
-            android:clickable="true"/>
-    </LinearLayout>
+            android:clickable="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp"
-        android:background="#ffffff">
+        <CheckBox
+            android:id="@+id/checkbox_JinChen_Depoff"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="0dp"
+            android:button="@null"
+            android:background="@drawable/checkbox"
+            android:focusable="false"/>
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="过滤起飞"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            app:sizeToFit="true"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="0dp"/>
 
         <Button
             android:id="@+id/btn_JinChen_KaiShi"
@@ -110,7 +132,7 @@
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.3"
             android:background="@drawable/button_selector"
             android:text="理货开始"
             android:textColor="#ffffff"
@@ -120,11 +142,11 @@
             android:id="@+id/btn_JinChen_JieShu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.3"
             android:background="@drawable/button_selector"
             android:text="理货结束"
             android:textColor="#ffffff"
@@ -177,7 +199,7 @@
         android:layout_height="match_parent">
 
         <!-- 此部分是内容部分 用ScrollView实现上下滚动效果 -->
-        <com.example.administrator.aviation.ui.base.AbPullToRefreshView
+        <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/JinChen_pulltorefreshview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -195,7 +217,7 @@
                     <com.example.administrator.aviation.ui.base.MyListView
                         android:id="@+id/JinChen_left_container_listview"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="fill_parent"
                         android:layout_weight="0.2"
                         android:scrollbars="none">
                     </com.example.administrator.aviation.ui.base.MyListView>
@@ -204,7 +226,7 @@
                     <com.example.administrator.aviation.ui.base.SyncHorizontalScrollView
                         android:id="@+id/JinChen_content_horsv"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:fillViewport="true"
                         android:scrollbars="none">
@@ -218,7 +240,7 @@
                     </com.example.administrator.aviation.ui.base.SyncHorizontalScrollView>
                 </LinearLayout>
             </ScrollView>
-        </com.example.administrator.aviation.ui.base.AbPullToRefreshView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>
 </LinearLayout>
 

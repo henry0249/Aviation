@@ -120,7 +120,7 @@
                         android:layout_weight="0.8"
                         android:layout_gravity="center"
                         android:maxLines="1"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:imeOptions="actionDone"
                         android:text=""
                         android:textColor="#666666"
