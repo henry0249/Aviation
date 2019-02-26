@@ -340,16 +340,8 @@ public class expULDLoading extends AppCompatActivity {
 
                         Map<String, String> params = new HashMap<>();
                         PublicFun.KeyBoardHide(mAct,mContext);
-//                        params.put("ID", re.split("/")[0].trim());
-//                        params.put("CarID", "");
-//                        params.put("ULD", re.split("/")[1].trim());
-//                        params.put("ErrString", "");
-//                        Ldialog.show();
-//
-//                        GetInfo(params);
                          PinBanHao_one.setText(re);
                          ChaXun.performClick();
-
                     }
                 }
                 break;
@@ -378,7 +370,7 @@ public class expULDLoading extends AppCompatActivity {
 
         if (bundle != null) {
             String req =  bundle.getString("ZhuangJiDanMain","");
-            if (!TextUtils.isEmpty(req) &&req.equals(req)) {
+            if (!TextUtils.isEmpty(req) && req.equals(req)) {
                 intent.setClass(mContext, ZhuangJiDanMain.class);
                 num = AviationCommons.GNC_ZhuangJiDan_RESULT;
             }

@@ -82,6 +82,9 @@ public class PrepareceAwbInfo {
                         else if (name.equalsIgnoreCase("Remark")) {
                             mawbInfo.setRemark(parser.nextText());
                         }
+                        else if (name.equalsIgnoreCase("CargoType")) {
+                            mawbInfo.setCargoType(parser.nextText());
+                        }
                         else if (name.equalsIgnoreCase("Mawbm")) {
                             mawbm = new Mawbm();
                         }
@@ -111,6 +114,9 @@ public class PrepareceAwbInfo {
                         }
                         else if (name.equalsIgnoreCase("AllowTransNO")) {
                             mawbm.setAllowTransNO(parser.nextText());
+                        }
+                        else if (name.equalsIgnoreCase("ProTime")) {
+                            mawbm.setProTime(parser.nextText());
                         }
                         else if (name.equalsIgnoreCase("CIQNumber")) {
                             mawbm.setCIQNumber(parser.nextText());

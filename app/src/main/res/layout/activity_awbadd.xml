@@ -170,6 +170,102 @@
                     android:textSize="@dimen/declare_size"
                     android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:text="货物类型:"
+                    android:textSize="@dimen/declare_size"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <TextView
+                    android:id="@+id/TextView_awbadd_huowuleixin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="请选择货物类型"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/declare_size"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/Img_awbadd_hwlxXiaLa"
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/xiala_two"
+                        android:clickable="true"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="21dp"
+                    android:text="预约安检时间:"
+                    android:textSize="@dimen/declare_size"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <TextView
+                    android:id="@+id/TextView_awbadd_anjianshijian"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="请选择预约时间"
+                    android:background="#ffffff"
+                    android:textSize="@dimen/declare_size"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/Img_awbadd_ajsjXiaLa"
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/xiala_two"
+                        android:clickable="true"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -227,7 +323,8 @@
                     android:background="#ffffff"
                     android:hint="@string/leixing"
                     android:textSize="@dimen/declare_size"
-                    android:textColor="@color/guoneidingdan_color"/>
+                    android:textColor="@color/guoneidingdan_color"
+                    android:enabled="false"/>
                 <Spinner
                     android:id="@+id/awb_package_spinner"
                     android:layout_width="0dp"
@@ -354,11 +451,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:background="#ffffff"
                     android:hint="@string/riqi"
                     android:textSize="@dimen/declare_size"
-                    android:textColor="@color/guoneidingdan_color"/>
+                    android:textColor="@color/guoneidingdan_color"
+                    android:enabled="false"/>
 
                 <ImageView
                     android:id="@+id/date_chose_btn"

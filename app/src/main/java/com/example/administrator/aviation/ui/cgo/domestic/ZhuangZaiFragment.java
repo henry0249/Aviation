@@ -282,7 +282,7 @@ public class ZhuangZaiFragment extends Fragment {
     public void onHiddenChanged(boolean hidd) {
         if (hidd) {
             //隐藏时所作的事情
-
+            ToastUtils.hideToast();
         } else {
             //显示时所作的事情
             pulltorefreshview.headerRefreshing();

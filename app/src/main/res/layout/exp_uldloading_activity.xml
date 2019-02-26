@@ -191,7 +191,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:layout_marginRight="10dp"
-                android:inputType="number"
+                android:inputType="none"
                 android:focusableInTouchMode="false"
                 android:focusable="false"/>
 

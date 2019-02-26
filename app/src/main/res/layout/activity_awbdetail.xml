@@ -191,18 +191,12 @@
                     android:id="@+id/goods_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="#ffffff"
                     android:hint="@string/pinming"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/declare_size" />
 
-                <Spinner
-                    android:id="@+id/update_awb_goods_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="invisible" />
             </LinearLayout>
 
             <View
@@ -266,11 +260,19 @@
                     android:id="@+id/package_detail_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:background="#ffffff"
                     android:hint="@string/leixing"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/declare_size" />
+                    android:textSize="@dimen/declare_size"
+                    android:enabled="false"/>
+
+                <Spinner
+                    android:id="@+id/update_awb_goods_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <View
@@ -302,6 +304,104 @@
                     android:hint="@string/mingzi"
                     android:textColor="#2e2d33"
                     android:textSize="@dimen/declare_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="预约安检时间:"
+                    android:textSize="@dimen/declare_size" />
+
+                <TextView
+                    android:id="@+id/awbdetail_textview_protime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:hint="请选择时间"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/declare_size" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/awbdetail_Img_ajsjXiaLa"
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/xiala_two"
+                        android:clickable="true"
+                        android:visibility="invisible"/>
+                 </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#f4f4f4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_weight="1"
+                    android:text="货物类型:"
+                    android:textSize="@dimen/declare_size" />
+
+                <TextView
+                    android:id="@+id/awbdetail_textview_cargotype"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:background="#ffffff"
+                    android:hint="请选择类型"
+                    android:textColor="#2e2d33"
+                    android:textSize="@dimen/declare_size" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/awbdetail_Img_hwlxXiaLa"
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/xiala_two"
+                        android:clickable="true"
+                        android:visibility="invisible"/>
+                </LinearLayout>
+
             </LinearLayout>
 
             <View
@@ -458,13 +558,6 @@
                     android:textSize="@dimen/declare_size"/>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="#f4f4f4" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -484,10 +577,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:hint="@string/riqi"
                     android:textColor="#2e2d33"
-                    android:textSize="@dimen/declare_size" />
+                    android:textSize="@dimen/declare_size"
+                    android:enabled="false"/>
 
                 <ImageView
                     android:id="@+id/change_awb_time"

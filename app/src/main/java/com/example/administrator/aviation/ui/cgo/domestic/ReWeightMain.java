@@ -3,6 +3,7 @@ package com.example.administrator.aviation.ui.cgo.domestic;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.icu.text.DecimalFormat;
@@ -49,6 +50,7 @@ import com.example.administrator.aviation.util.WeakHandler;
 import com.example.administrator.aviation.view.AutofitTextView;
 import com.example.administrator.aviation.view.SwitchView;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.qmuiteam.qmui.widget.popup.QMUIPopup;
 
@@ -450,6 +452,45 @@ public class ReWeightMain extends AppCompatActivity {
         });
         //endregion
 
+        //region 修改重量时选择备注
+        editDangQianZhongLiang.setOnFocusChangeListener(new android.view.View.
+                OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // 此处为得到焦点时的处理内容
+                } else {
+                    if (!TextUtils.isEmpty(editDangQianZhongLiang.getText()) ) {
+                        editBeiZhu.performLongClick();
+                    }
+                }
+            }
+        });
+        //endregion
+
+        //region 备注长按选择
+        editBeiZhu.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                PublicFun.KeyBoardHide(mAct, mContext);
+                final String[] items = new String[]{"取消","雨布网罩", "正常偏差" };
+                new QMUIDialog.CheckableDialogBuilder(mAct)
+                        .addItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which > 0) {
+                                    editBeiZhu.setText(items[which]);
+                                    editBeiZhu.setSelection(items[which].length());
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+                return true;
+            }
+        });
+        //endregion
+
         //region 平板号EditText监听键盘Enter事件
         editPinBanHao.setOnEditorActionListener(new EditText.OnEditorActionListener() {
                 @Override
@@ -524,7 +565,7 @@ public class ReWeightMain extends AppCompatActivity {
                 if (re.size() > 0 && !TextUtils.isEmpty(editDangQianZhongLiang.getText().toString().trim())) {
                     CalcInt();
                     if (biZhi > 0.03 || biZhi < -0.03) {
-                        ToastUtils.showToast(mContext,"偏差值过大，点击小三角查看详情！",Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(mContext,"偏差值过大！",Toast.LENGTH_SHORT);
                     } else {
                         Ldialog.show();
                         UpdatePinBanInfo(getUpdateXml(re));
@@ -544,7 +585,7 @@ public class ReWeightMain extends AppCompatActivity {
                 if (re.size() > 0 && !TextUtils.isEmpty(editDangQianZhongLiang.getText().toString().trim())) {
                     CalcInt();
                     if (biZhi > 0.03 || biZhi < -0.03) {
-                        ToastUtils.showToast(mContext,"偏差值过大，点击小三角查看详情！",Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(mContext,"偏差值过大！",Toast.LENGTH_SHORT);
                     } else {
                         Ldialog.show();
                         UpdatePinBanInfo(getUpdateXml(re));
@@ -766,7 +807,7 @@ public class ReWeightMain extends AppCompatActivity {
         editDangQianZhongLiang.setFocusable(true);
         editDangQianZhongLiang.setFocusableInTouchMode(true);
 
-        editBeiZhu.setBackgroundResource(R.drawable.edit_bg);
+        editBeiZhu.setBackgroundResource(R.drawable.edit_bg_longclick);
         editBeiZhu.setFocusable(true);
         editBeiZhu.setFocusableInTouchMode(true);
 

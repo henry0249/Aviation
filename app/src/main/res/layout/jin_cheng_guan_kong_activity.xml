@@ -98,7 +98,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="0dp"
-            android:background="@drawable/qinkong0"
+            android:background="@drawable/qingkongziyuan"
             android:clickable="true" />
 
         <CheckBox

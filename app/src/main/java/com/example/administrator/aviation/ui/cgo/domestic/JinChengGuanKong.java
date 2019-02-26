@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -54,9 +56,12 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import org.ksoap2.serialization.SoapObject;
 import java.lang.reflect.Field;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +69,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.administrator.aviation.util.AviationCommons.GNC_JinChenGuanKong_REQUEST;
+import static com.example.administrator.aviation.util.AviationCommons.GNC_ZhuangJiDan_REQUEST;
 
 public class JinChengGuanKong extends AppCompatActivity {
 
@@ -86,7 +94,7 @@ public class JinChengGuanKong extends AppCompatActivity {
     private int newLiHuoJiShu = 0;
     private String Depoff = "true";
 //    private int XiaLaJiShu = 0;
-    private final String yuzhiTitle = "航班日期 航程 平板数 净重 预计起飞 实际起飞 预计到达 实际到达 航班状态 延误原因 机号 机型 机位 理货开始 理货结束 截载 交接 地服";
+    private final String yuzhiTitle = "净重 航班日期 航程 预计起飞 实际起飞 预计到达 实际到达 航班状态 延误原因 机号 机型 机位 截载 交接 地服";
     //endregion
 
     //region 未预设XML控件
@@ -198,7 +206,6 @@ public class JinChengGuanKong extends AppCompatActivity {
 
         Fdate = "";
         Fno = "";
-//        XiaLaJiShu = 0;
         store.clear();
 
         mLeftAdapter.clearData(true);
@@ -234,11 +241,11 @@ public class JinChengGuanKong extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(title) && mTitleTvArray.size() > 0){
             String[] ts = title.split(" ");
-            for (int i=0;i<ts.length;i++){
+            for (int i = 3;i<ts.length;i++){
                 int key = 0;
                 key = mTitleTvArray.keyAt(i);
                 AppCompatTextView tx =  (AppCompatTextView)mTitleTvArray.get(key);
-                tx.setText(ts[i]);
+                tx.setText(ts[i - 3]);
             }
         }
     }
@@ -258,7 +265,7 @@ public class JinChengGuanKong extends AppCompatActivity {
 
         mRightAdapter = new AbsCommonAdapter<TableModel>(mContext, R.layout.jinchenguankong_right_item) {
             @Override
-            public void convert(AbsViewHolder helper, TableModel item, int pos) {
+            public void convert(AbsViewHolder helper, final TableModel item, int pos) {
                 TextView tv_table_content_right_item0 = helper.getView(R.id.JinChengGuanKong_tv_table_content_right_item0);
                 TextView tv_table_content_right_item1 = helper.getView(R.id.JinChengGuanKong_tv_table_content_right_item1);
                 TextView tv_table_content_right_item2 = helper.getView(R.id.JinChengGuanKong_tv_table_content_right_item2);
@@ -299,6 +306,7 @@ public class JinChengGuanKong extends AppCompatActivity {
                 tv_table_content_right_item17.setText(item.getText17());
                 tv_table_content_right_item18.setText(item.getText18());
 
+                //region 前置航班赋值
                 if (!TextUtils.isEmpty(item.getText18()) && !TextUtils.isEmpty(item.getText19())){
                     final ArrayMap<String,String> aa = new ArrayMap<>();
                     aa.put("航班日期",item.getText19());
@@ -310,15 +318,27 @@ public class JinChengGuanKong extends AppCompatActivity {
                     aa.put("预计到达",item.getText24());
                     aa.put("实际到达",item.getText25());
 
+                    tv_table_content_right_item2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!TextUtils.isEmpty(item.getText2())) {
+                                String XiangQin = item.getLeftTitle() + "/" + txt_riqi.getText().toString().trim();
+                                Intent intent = new Intent(mContext, ZhuangJiDanMain.class);
+                                intent.putExtra(TAG,XiangQin);
+                                startActivityForResult(intent, GNC_JinChenGuanKong_REQUEST);
+                            }
+                        }
+                    });
+
                     tv_table_content_right_item18.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             new QMUIDialog.MessageDialogBuilder(mAct)
                                     .setTitle("前置航班")
                                     .setMessage("航班日期: " + aa.get("航班日期") + "\n"
-                                                 + "航班号: " + aa.get("航班号") + "\n"
-                                                 + "航程: " + aa.get("航程") + "\n"
-                                                 + "过站量: " + aa.get("过站量") + "\n"
+                                            + "航班号: " + aa.get("航班号") + "\n"
+                                            + "航程: " + aa.get("航程") + "\n"
+                                            + "过站量: " + aa.get("过站量") + "\n"
                                             + "预计起飞: " + aa.get("预计起飞") + "\n"
                                             + "实际起飞: " + aa.get("实际起飞") + "\n"
                                             + "预计到达: " + aa.get("预计到达") + "\n"
@@ -326,6 +346,23 @@ public class JinChengGuanKong extends AppCompatActivity {
                         }
                     });
                 }
+                //endregion
+
+                //region 理货开始变色
+                if (!TextUtils.isEmpty(item.getText0())) {
+                    tv_table_content_right_item0.setBackgroundColor(Color.parseColor("#00ff00"));
+                } else {
+                    tv_table_content_right_item0.setBackgroundColor(Color.parseColor("#ffffff"));
+                }
+
+                if (!TextUtils.isEmpty(item.getText1())) {
+                    tv_table_content_right_item1.setBackgroundColor(Color.parseColor("#00FFFF"));
+                    tv_table_content_right_item0.setBackgroundColor(Color.parseColor("#ffffff"));
+                } else {
+
+                    tv_table_content_right_item1.setBackgroundColor(Color.parseColor("#ffffff"));
+                }
+               //endregion
 
                 for (int i = 0; i < 19; i++) {
                     View view = ((LinearLayout) helper.getConvertView()).getChildAt(i);
@@ -336,6 +373,26 @@ public class JinChengGuanKong extends AppCompatActivity {
 
         leftListView.setAdapter(mLeftAdapter);
         rightListView.setAdapter(mRightAdapter);
+    }
+    //endregion
+
+    //region activity界面回调事件
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case GNC_JinChenGuanKong_REQUEST:
+                if (resultCode == AviationCommons.GNC_JinChenGuanKong_RESULT) {
+                    String re  = data.getStringExtra("ZhuangJiDanMain");
+                    editHangBanHao.setText(re.split("/")[0]);
+                    editHangBanHao.setSelection(re.split("/")[0].length());
+                    txt_riqi.setText(re.split("/")[1]);
+                    ImgChaXun.performClick();
+                }
+                break;
+            default:
+                break;
+
+        }
     }
     //endregion
 
@@ -373,7 +430,7 @@ public class JinChengGuanKong extends AppCompatActivity {
         });
         //endregion
 
-        //region 左侧标题列监听事件
+        //region 左侧标题列点击转跳事件
         leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -389,12 +446,49 @@ public class JinChengGuanKong extends AppCompatActivity {
                         if (!flag) {
                             store.put(ta.getLeftTitle().toString().trim(),"");
                         }
-
                     }
                 }
             }
         });
         //rendregion
+
+        //region 左侧标题列长按选择事件
+//        leftListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                TableModel ta = (TableModel) parent.getItemAtPosition(position);
+//
+//                if (mAct != null && !TextUtils.isEmpty(ta.getLeftTitle())){
+//                    final String XiangQin = ta.getLeftTitle() + "/" + txt_riqi.getText().toString().trim();
+//                    String me = "";
+//                    if (TextUtils.isEmpty(ta.getText2())) {
+//                        me = "该航班还未有装机信息！";
+//                    }
+//
+//                    new QMUIDialog.MessageDialogBuilder(mAct)
+//                            .setTitle("查看装机详情")
+//                            .setMessage(me)
+//                            .addAction("取消", new QMUIDialogAction.ActionListener() {
+//                                @Override
+//                                public void onClick(QMUIDialog dialog, int index) {
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .addAction("确定", new QMUIDialogAction.ActionListener() {
+//                                @Override
+//                                public void onClick(QMUIDialog dialog, int index) {
+//                                    dialog.dismiss();
+//                                    Intent intent = new Intent(mContext, ZhuangJiDanMain.class);
+//                                    intent.putExtra(TAG,XiangQin);
+//                                    startActivityForResult(intent, GNC_JinChenGuanKong_REQUEST);
+//
+//                                }
+//                            }).show();
+//                }
+//                return true;
+//            }
+//        });
+        //endregion
 
         //region 航班号自动变大写
         editHangBanHao.setTransformationMethod(new ReplacementTransformationMethod() {
@@ -456,25 +550,29 @@ public class JinChengGuanKong extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mAct != null && store.size() > 0) {
-                        new QMUIDialog.MessageDialogBuilder(mAct)
-                                .setTitle("理货开始")
-                                .setMessage("确认理货开始吗？")
-                                .addAction("取消", new QMUIDialogAction.ActionListener() {
-                                    @Override
-                                    public void onClick(QMUIDialog dialog, int index) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .addAction("确定", new QMUIDialogAction.ActionListener() {
-                                    @Override
-                                    public void onClick(QMUIDialog dialog, int index) {
-                                        dialog.dismiss();
-                                        lihuo("start");
-                                        store.clear();
-                                        ImgChaXun.performClick();
-                                    }
-                                })
-                                .show();
+                    String keys = "";
+                    for (String key : store.keySet()){
+                        keys += key + " ";
+                    }
+                    new QMUIDialog.MessageDialogBuilder(mAct)
+                            .setTitle("理货开始")
+                            .setMessage(keys)
+                            .addAction("取消", new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .addAction("确定", new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    dialog.dismiss();
+                                    lihuo("start");
+                                    store.clear();
+                                    ImgChaXun.performClick();
+                                }
+                            })
+                            .show();
 
                 } else {
                     ToastUtils.showToast(mContext, "请先选择数据", Toast.LENGTH_SHORT);
@@ -488,9 +586,14 @@ public class JinChengGuanKong extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mAct != null && store.size() > 0) {
+                    String keys = "";
+                    for (String key : store.keySet()){
+                        keys += key + " ";
+                    }
+
                     new QMUIDialog.MessageDialogBuilder(mAct)
                             .setTitle("理货结束")
-                            .setMessage("确认理货结束吗？")
+                            .setMessage(keys)
                             .addAction("取消", new QMUIDialogAction.ActionListener() {
                                 @Override
                                 public void onClick(QMUIDialog dialog, int index) {
@@ -531,50 +634,39 @@ public class JinChengGuanKong extends AppCompatActivity {
                     go.put("ErrString", "");
                     GetInfo(go);
                 }
-
-            }
-        });
-
-        //region 标题栏右侧图片点击按钮
-        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View myView = LayoutInflater.from(mContext).inflate(R.layout.pop_expuld_info, null);
-                pw = new PopupWindow(myView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                pw.showAsDropDown(navBar.getPopMenuView());
-
-                List list = new ArrayList<String>();
-                list.add(0,"数据项排序");
-
-                PopWindowsAdapter ul = new PopWindowsAdapter(mContext, R.layout.pop_expuld_list_item, list);
-                ListView lv = (ListView) myView.findViewById(R.id.list_pop_expUld);
-                lv.setAdapter(ul);
-
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            int position, long id) {
-                        pw.dismiss();
-                        showDialog(view);
-
-                    }
-                });
             }
         });
         //endregion
 
-//        pulltorefreshview.setOnFooterLoadListener(new AbPullToRefreshView.OnFooterLoadListener() {
+        //region 标题栏右侧图片点击按钮
+//        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onFooterLoad(AbPullToRefreshView view) {
-//                setDatas(flightControls,AviationCommons.LOAD_DATA);
-//                pulltorefreshview.onFooterLoadFinish();
+//            public void onClick(View v) {
+//                View myView = LayoutInflater.from(mContext).inflate(R.layout.pop_expuld_info, null);
+//                pw = new PopupWindow(myView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+//                pw.showAsDropDown(navBar.getPopMenuView());
+//
+//                List list = new ArrayList<String>();
+//                list.add(0,"数据项排序");
+//
+//                PopWindowsAdapter ul = new PopWindowsAdapter(mContext, R.layout.pop_expuld_list_item, list);
+//                ListView lv = (ListView) myView.findViewById(R.id.list_pop_expUld);
+//                lv.setAdapter(ul);
+//
+//                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view,
+//                                            int position, long id) {
+//                        pw.dismiss();
+//                        showDialog(view);
+//
+//                    }
+//                });
 //            }
 //        });
+        //endregion
     }
-
-    //endregion
-
     //endregion
 
     //region 功能方法
@@ -589,6 +681,7 @@ public class JinChengGuanKong extends AppCompatActivity {
                     clearTableView();
                     Ldialog.dismiss();
                 }else {
+                    ListSort(flightControls);
                     setDatas(flightControls,AviationCommons.REFRESH_DATA);
                     mHandler.postDelayed(new Runnable(){
                         public void run() {
@@ -707,24 +800,6 @@ public class JinChengGuanKong extends AppCompatActivity {
 
     //region 把数据绑定到Model
     private void setDatas(List<GncFlightControl> CGO, int type) {
-//        int x = 0;
-//        int y = 0;
-//        if (XiaLaJiShu == 0){
-//            x = 0;
-//            y = 50;
-//        }else {
-//            x = XiaLaJiShu * 50;
-//            y = (XiaLaJiShu + 1) * 50 - 1;
-//        }
-//
-//        if (y > CGO.size()){
-//            y =  CGO.size();
-//            pulltorefreshview.setLoadMoreEnable(false);
-//            XiaLaJiShu = 0;
-//        }
-//        pulltorefreshview.setLoadMoreEnable(false);
-//        pulltorefreshview.setPullRefreshEnable(true);
-
         if (CGO.size() > 0) {
             List<TableModel> mDatas = new ArrayList<>();
             for (int i = 0; i < CGO.size(); i++) {
@@ -732,9 +807,9 @@ public class JinChengGuanKong extends AppCompatActivity {
                 TableModel tableMode = new TableModel();
                 tableMode.setOrgCode(cc.getFID() + "");
                 tableMode.setLeftTitle(cc.getFno() + "");
-                tableMode.setText0(getDongTai(0,cc) + "");//列0内容
-                tableMode.setText1(getDongTai(1,cc) + "");//列1内容
-                tableMode.setText2(getDongTai(2,cc) + "");//列2内容
+                tableMode.setText0(cc.getTallyStart() + "");//列0内容
+                tableMode.setText1(cc.getTallyEnd() + "");//列1内容
+                tableMode.setText2(cc.getlNumber() + "");//列2内容
                 tableMode.setText3(getDongTai(3,cc) + "");
                 tableMode.setText4(getDongTai(4,cc) + "");
                 tableMode.setText5(getDongTai(5,cc) + "");//
@@ -798,9 +873,6 @@ public class JinChengGuanKong extends AppCompatActivity {
             case "航程":
                 result = y.getdSegment();
                 break;
-            case "平板数":
-                result = y.getlNumber();
-                break;
             case "净重":
                 result = y.getNetWeight();
                 break;
@@ -835,12 +907,6 @@ public class JinChengGuanKong extends AppCompatActivity {
                 break;
             case "机位":
                 result = y.getStandID();
-                break;
-            case "理货开始":
-                result = y.getTallyStart();
-                break;
-            case "理货结束":
-                result = y.getTallyEnd();
                 break;
             case "截载":
                 result = y.getMClose();
@@ -913,5 +979,39 @@ public class JinChengGuanKong extends AppCompatActivity {
         dialog.show();
     }
     //endregion
+
+    //region 按照理货开始时间进行排序
+    private static void ListSort(List<GncFlightControl> list) {
+        Collections.sort(list, new Comparator<GncFlightControl>() {
+            @Override
+            public int compare(GncFlightControl o1, GncFlightControl o2) {
+                // 返回值为int类型，大于0表示正序，小于0表示逆序
+                try {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    if (o1.getTallyStart().length() > 0 && o2.getTallyStart().length() > 0) {
+                        Date dt1 = format.parse(o1.getTallyStart());
+                        Date dt2 = format.parse(o2.getTallyStart());
+                        if (dt1.getTime() > dt2.getTime()) {
+                            return -1;
+                        } else if (dt1.getTime() < dt2.getTime()) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+
+                    } else {
+                        return o2.getTallyStart().length() - o1.getTallyStart().length();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+                return 0;
+            }
+        });
+    }
+    //endregion
+
     //endregion
 }

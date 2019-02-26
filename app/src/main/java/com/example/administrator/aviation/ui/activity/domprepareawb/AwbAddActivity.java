@@ -2,10 +2,12 @@ package com.example.administrator.aviation.ui.activity.domprepareawb;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,22 +17,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.prepareawb.HttpPrepareAWBAdd;
 import com.example.administrator.aviation.http.prepareawb.HttpPrepareAWBUpdate;
+import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * 订单增加
@@ -56,6 +68,8 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
     private String mawbId = "";
     private String mawb;
     private String pc;
+    private String protime;
+    private String cargotype;
     private String weight;
     private String volume;
     private String goods;
@@ -77,11 +91,28 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
     private String ErrString;
     private ArrayAdapter<String> businessTypeAdapter;
     private ArrayAdapter<String> goodsAdapter;
+    private Context mContext;
+    private Activity mAct;
+    private TimePickerView pvTime;
+
+    @BindView(R.id.TextView_awbadd_huowuleixin)
+    TextView TextView_huowuleixin;
+    @BindView(R.id.Img_awbadd_hwlxXiaLa)
+    ImageView ImageView_hwlxXiaLa;
+    @BindView(R.id.TextView_awbadd_anjianshijian)
+    TextView TextView_anjianshijian;
+    @BindView(R.id.Img_awbadd_ajsjXiaLa)
+    ImageView ImageView_ajsjXiaLa;
+
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awbadd);
+        mContext = AwbAddActivity.this;
+        mAct = (Activity) mContext;
+        ButterKnife.bind(this);
         initView();
     }
 
@@ -127,6 +158,25 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
         consigneeTv = (EditText) findViewById(R.id.consignee_add_tv);
         consigneeTv.setTransformationMethod(new AllCapTransformationMethod());
         addSureBtn = (Button) findViewById(R.id.sure_add_btn);
+
+        pvTime = new TimePickerView(this, TimePickerView.Type.ALL);
+        pvTime.setTime(new Date());
+        pvTime.setCyclic(false);
+
+        pvTime.setTitle("选择预约时间");
+
+        pvTime.setCancelable(true);
+        //时间选择后回调
+        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+
+            @Override
+            public void onTimeSelect(Date date) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String re = sdf.format(date);
+                re = re.replace(" ", "T");
+                TextView_anjianshijian.setText(re);
+            }
+        });
 
         addSureBtn.setOnClickListener(this);
 
@@ -186,6 +236,33 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
             }
         });
 
+        ImageView_ajsjXiaLa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pvTime.show();
+            }
+        });
+
+        ImageView_hwlxXiaLa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PublicFun.KeyBoardHide(mAct, mContext);
+                final String[] items = new String[]{"取消","DZHA:大宗货(无油机械、著名企业纺织品、无锂电池的电子产品、著名企业含锂电池的电子产品、纸质品、塑料制品、特殊货物)", "WYXH:无氧鲜活" , "DZHB:大宗货(有油机械、航材、工艺品、生物制品)", "YYXH:有氧鲜活", "KJ:快件", "YJ:邮件", "SP:食品", "CPY:成品药", "HGP:化工品", "WXP:危险品", "SPFZ:散拼,回收类服装"};
+                new QMUIDialog.CheckableDialogBuilder(mAct)
+                        .addItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which > 0) {
+                                    String re = items[which].split(":")[0];
+                                    TextView_huowuleixin.setText(re);
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
+
     }
 
     // 提交订单到服务器
@@ -197,7 +274,7 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
                 xml = HttpPrepareAWBUpdate.getXml(mawbId, mawb, pc,weight,volume,"",
                         goods,  businessType, packg, "", "NKG", dest1,dest2,
                         remark, "", fDate, fNo, shipper,"",
-                        consignee,"","","", "");
+                        consignee,"","","", "",protime,cargotype);
                 userBumen = PreferenceUtils.getUserBumen(this);
                 userName = PreferenceUtils.getUserName(this);
                 userPass = PreferenceUtils.getUserPass(this);
@@ -224,9 +301,11 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
                 String result = object.getProperty(0).toString();
                 if (result.equals("false")) {
                     ErrString = object.getProperty(1).toString();
+                    Log.e("text", result.toString());
                     return result;
                 } else {
                     result = object.getProperty(0).toString();
+                    Log.e("text", result.toString());
                     return result;
                 }
             }
@@ -257,6 +336,8 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
     private void getEditText() {
         mawb = mawbTv.getText().toString();
         pc = pcTv.getText().toString();
+        protime = TextView_anjianshijian.getText().toString().trim();
+        cargotype = TextView_huowuleixin.getText().toString().trim();
         weight= weightTv.getText().toString();
         volume= volumeTv.getText().toString();
         goods = goodsTv.getText().toString();

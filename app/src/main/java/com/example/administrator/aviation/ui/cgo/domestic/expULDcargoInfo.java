@@ -149,6 +149,7 @@ public class expULDcargoInfo extends AppCompatActivity {
         ZhuangZaiXinXi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ZhuangZaiXinXi.setBackground(getResources().getDrawable(R.drawable.button_selector));
                 ZhuangZaiXinXi.setTextColor(getResources().getColor(R.color.colorGray));
                 DaiZhuangXinXi.setBackground(getResources().getDrawable(R.drawable.button_noselector));

@@ -2,6 +2,7 @@ package com.example.administrator.aviation.ui.activity.domprepareawb;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,22 +17,31 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.prepareawb.HttpPrepareAWBUpdate;
 import com.example.administrator.aviation.model.prepareawb.MawbInfo;
+import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.tool.AllCapTransformationMethod;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.ChoseTimeMethod;
 import com.example.administrator.aviation.util.PreferenceUtils;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * 订单列表详情页面
@@ -71,6 +81,8 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
 
     private String mawbId;
     private String mawb;
+    private String protime;
+    private String cargotype;
     private String pc;
     private String weight;
     private String volume;
@@ -105,17 +117,33 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private Spinner businessTypeSpinner;
     private List<String> businessTypeList;
     private int businessTypeSpinnerPosition;
+    private Context mContext;
+    private Activity mAct;
 
     private ArrayAdapter<String> goodsAdapter;
     private Spinner goodsSpinner;
     private List<String> goodsList;
     private int goodsSpinnerPosition;
+    private TimePickerView pvTime;
 
     ChoseTimeMethod choseTimeMethod = new ChoseTimeMethod();
+
+    @BindView(R.id.awbdetail_textview_cargotype)
+    TextView TextView_huowuleixin;
+    @BindView(R.id.awbdetail_Img_hwlxXiaLa)
+    ImageView ImageView_hwlxXiaLa;
+    @BindView(R.id.awbdetail_textview_protime)
+    TextView TextView_anjianshijian;
+    @BindView(R.id.awbdetail_Img_ajsjXiaLa)
+    ImageView ImageView_ajsjXiaLa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awbdetail);
+        mContext = AwbDetailActivity.this;
+        mAct = (Activity) mContext;
+        ButterKnife.bind(this);
         initView();
         showDetail();
     }
@@ -229,6 +257,52 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 businessTypeSpinnerPosition =  i;
             }
         }
+
+        pvTime = new TimePickerView(this, TimePickerView.Type.ALL);
+        pvTime.setTime(new Date());
+        pvTime.setCyclic(false);
+
+        pvTime.setTitle("选择预约时间");
+
+        pvTime.setCancelable(true);
+        //时间选择后回调
+        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+
+            @Override
+            public void onTimeSelect(Date date) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String re = sdf.format(date);
+                re = re.replace(" ", "T");
+                TextView_anjianshijian.setText(re);
+            }
+        });
+
+        ImageView_ajsjXiaLa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pvTime.show();
+            }
+        });
+
+        ImageView_hwlxXiaLa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PublicFun.KeyBoardHide(mAct, mContext);
+                final String[] items = new String[]{" ","DZHA:大宗货(无油机械、著名企业纺织品、无锂电池的电子产品、著名企业含锂电池的电子产品、纸质品、塑料制品、特殊货物)", "WYXH:无氧鲜活" , "DZHB:大宗货(有油机械、航材、工艺品、生物制品)", "YYXH:有氧鲜活", "KJ:快件", "YJ:邮件", "SP:食品", "CPY:成品药", "HGP:化工品", "WXP:危险品", "SPFZ:散拼,回收类服装"};
+                new QMUIDialog.CheckableDialogBuilder(mAct)
+                        .addItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which > 0) {
+                                    String re = items[which].split(":")[0];
+                                    TextView_huowuleixin.setText(re);
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
     }
 
     // 给控件赋值显示
@@ -268,6 +342,10 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         flightChecked = mawbInfo.getMawbm().getFlightChecked();
         flightCheckedTv.setText(flightChecked);
         fDate = mawbInfo.getMawbm().getFDate();
+        cargotype = mawbInfo.getCargoType();
+        TextView_huowuleixin.setText(cargotype);
+        protime = mawbInfo.getMawbm().getProTime();
+        TextView_anjianshijian.setText(protime);
         fDateTv.setText(fDate);
         fNo = mawbInfo.getMawbm().getFno();
         fnoTv.setText(fNo);
@@ -348,12 +426,15 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 zhunyunzhengLayout.setVisibility(View.GONE);
                 shangjianhaoLayout.setVisibility(View.GONE);
 
+                ImageView_ajsjXiaLa.setVisibility(View.VISIBLE);
+                ImageView_hwlxXiaLa.setVisibility(View.VISIBLE);
+
                 businessTypeSpinner.setVisibility(View.VISIBLE);
                 goodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                         goods = goodsAdapter.getItem(position);
-                        goodsTv.setText(goods);
+                        packageTv.setText(goods);
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
@@ -380,7 +461,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 xml = HttpPrepareAWBUpdate.getXml(mawbId, mawb, pc,weight,volume,spCode,
                          goods,  businessType, packg, by, dep, dest1,dest2,
                          remark, flightChecked, fDate, fNo, shipper, shipperTEL,
-                         consignee, cNEETEL,transportNO,allowTransNO, cIQNumber);
+                         consignee, cNEETEL,transportNO,allowTransNO, cIQNumber,protime,cargotype);
                 userBumen = PreferenceUtils.getUserBumen(this);
                 userName = PreferenceUtils.getUserName(this);
                 userPass = PreferenceUtils.getUserPass(this);
@@ -434,6 +515,8 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         allowTransNO = allowTransNO.toUpperCase();
         cIQNumber = cIQNumberTv.getText().toString();
         cIQNumber = cIQNumber.toUpperCase();
+        protime = TextView_anjianshijian.getText().toString().trim();
+        cargotype = TextView_huowuleixin.getText().toString().trim();
     }
 
     // 上传xml到服务器

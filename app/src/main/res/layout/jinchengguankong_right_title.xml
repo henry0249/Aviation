@@ -6,15 +6,16 @@
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_0"
         style="@style/TextView_Table_Right"
-        android:text="航班日期"/>
+        android:text="理货开始"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_1"
         style="@style/TextView_Table_Right"
-        android:text="航程"/>
+        android:text="理货结束"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_2"
         style="@style/TextView_Table_Right"
-        android:text="平板数"/>
+        android:text="平板数"
+        android:textColor="#009cd0"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_3"
         style="@style/TextView_Table_Right"
@@ -22,47 +23,47 @@
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_4"
         style="@style/TextView_Table_Right"
-        android:text="预计起飞"/>
+        android:text="航班日期"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_5"
         style="@style/TextView_Table_Right"
-        android:text="实际起飞"/>
+        android:text="航程"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_6"
         style="@style/TextView_Table_Right"
-        android:text="预计到达"/>
+        android:text="预计起飞"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_7"
         style="@style/TextView_Table_Right"
-        android:text="实际到达"/>
+        android:text="实际起飞"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_8"
         style="@style/TextView_Table_Right"
-        android:text="航班状态"/>
+        android:text="预计到达"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_9"
         style="@style/TextView_Table_Right"
-        android:text="延误原因"/>
+        android:text="实际到达"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_10"
         style="@style/TextView_Table_Right"
-        android:text="机号"/>
+        android:text="航班状态"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_11"
         style="@style/TextView_Table_Right"
-        android:text="机型"/>
+        android:text="延误原因"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_12"
         style="@style/TextView_Table_Right"
-        android:text="机位"/>
+        android:text="机号"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_13"
         style="@style/TextView_Table_Right"
-        android:text="理货开始"/>
+        android:text="机型"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_14"
         style="@style/TextView_Table_Right"
-        android:text="理货结束"/>
+        android:text="机位"/>
 
     <TextView android:id="@+id/JinChengGuanKong_tv_table_title_15"
         style="@style/TextView_Table_Right"

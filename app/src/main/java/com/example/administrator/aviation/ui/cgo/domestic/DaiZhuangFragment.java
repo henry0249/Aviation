@@ -313,6 +313,7 @@ public class DaiZhuangFragment extends Fragment {
     public void onHiddenChanged(boolean hidd) {
         if (hidd) {
             //隐藏时所作的事情
+            ToastUtils.hideToast();
 
         } else {
             //显示时所作的事情
@@ -382,7 +383,7 @@ public class DaiZhuangFragment extends Fragment {
                             CargoItem.put("LoadingID",res.get("ID"));
                             CargoItem.put("ULD",res.get("ULD"));
                             CargoItem.put("WHID",ta.getOrgCode().toString().trim());
-                            CargoItem.put("PC",ta.getText1().toString().trim());
+                            CargoItem.put("PC",ta.getText0().toString().trim());
                             CargoItem.put("Weight","0");
                             CargoItem.put("ErrString","");
                             store.add(CargoItem);
@@ -482,7 +483,8 @@ public class DaiZhuangFragment extends Fragment {
         });
         //endregion
 
-        //region 装货按钮长按事件
+        //region
+        // 按钮长按事件
         JiaJiafloatingButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

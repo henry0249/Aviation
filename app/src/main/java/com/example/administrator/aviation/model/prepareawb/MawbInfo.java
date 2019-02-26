@@ -21,7 +21,28 @@ public class MawbInfo implements Serializable{
     private String Dest1;//第一目的港，3位字符，必填
     private String Dest2 ;//第二目的港，3位字符，必填
     private String Remark;//备注，字符
+    private String CargoType;//货物类型
     private  Mawbm mawbm;
+
+    public MawbInfo() {
+        MawbID = "";//主运单ID号，系统提供
+        Mawb = "";//主运单号，11位数字，必填
+        PC = "";//件数，必填
+        Weight = "";//重量，必填
+        Volume = "";//体积，必填
+        SpCode = "";//特码，3位字母，数字
+        Goods = "";//品名，字符，必填
+        BusinessType = "";//业务类型，3位字符，可暂不填写
+        Package = "";//包装类型，字符
+        By = "";//承运人，2位字符，必填
+        Dep = "";//启运港，3位字符，必填
+        Dest1 = "";//第一目的港，3位字符，必填
+        Dest2 = "";//第二目的港，3位字符，必填
+        Remark = "";//备注，字符
+        CargoType = "";//货物类型
+        mawbm = new Mawbm();
+    }
+
     public String getMawbID() {
         return MawbID;
     }
@@ -112,6 +133,16 @@ public class MawbInfo implements Serializable{
     public void setMawbm(Mawbm mawbm) {
         this.mawbm = mawbm;
     }
+
+
+    public String getCargoType() {
+        return CargoType;
+    }
+
+    public void setCargoType(String cargoType) {
+        CargoType = cargoType;
+    }
+
     @Override
     public String toString() {
         return "MawbInfo [MawbID=" + MawbID + ", Mawb=" + Mawb + ", PC=" + PC

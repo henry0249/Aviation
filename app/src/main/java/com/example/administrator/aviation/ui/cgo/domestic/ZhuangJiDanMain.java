@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ReplacementTransformationMethod;
+import android.util.ArrayMap;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -176,6 +177,25 @@ public class ZhuangJiDanMain extends AppCompatActivity {
         initTableView();
         TxtViewSetEmpty();
         setListener();
+        CallSetup();
+    }
+    //endregion
+
+    //region 其他界面调用设置
+    private void CallSetup(){
+        Intent da = getIntent();
+        Bundle bundle = da.getExtras();
+
+        if (bundle != null) {
+            String re = bundle.getString("JinChengGuanKong","");
+            txt_riqi.setEnabled(false);
+            editHangBanHao.setEnabled(false);
+            btnQinKong.setEnabled(false);
+            btnQinKong.setBackgroundColor(Color.parseColor("#979797"));
+            editHangBanHao.setText(re.split("/")[0]);
+            txt_riqi.setText(re.split("/")[1]);
+            btnChaXun.performClick();
+        }
     }
     //endregion
 
@@ -305,6 +325,28 @@ public class ZhuangJiDanMain extends AppCompatActivity {
                 break;
 
         }
+    }
+    //endregion
+
+    //region 返回后触发父界面逻辑
+    @Override
+    public void finish() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        int num = 0;
+
+        if (bundle != null) {
+            String req =  bundle.getString("JinChengGuanKong","");
+            if (!TextUtils.isEmpty(req)) {
+                intent.putExtra(TAG,editHangBanHao.getText().toString().trim() + "/" + txt_riqi.getText().toString().trim());
+                intent.setClass(mContext, JinChengGuanKong.class);
+                num = AviationCommons.GNC_JinChenGuanKong_RESULT;
+            }
+            ToastUtils.hideToast();
+            setResult(num,intent);
+        }
+
+        super.finish();
     }
     //endregion
 

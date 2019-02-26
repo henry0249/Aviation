@@ -17,6 +17,22 @@ public class Mawbm implements Serializable{
     private String TransportNO;//运输证
     private String AllowTransNO;//'准运证
     private String CIQNumber ;//商检号
+    private String ProTime;//预约时间
+
+    public Mawbm() {
+        FlightChecked = "";//定舱确认，系统提供
+        FDate = "";//计划航班日期，必填
+        Fno = "";//计划航班号，必填
+        Shipper = "";//托运人，字符
+        ShipperTEL = "";//托运人电话
+        Consignee = "";//收货人
+        CNEETEL = "";//收货人电话
+        TransportNO = "";//运输证
+        AllowTransNO = "";//'准运证
+        CIQNumber = "";//商检号
+        ProTime = "";//预约时间
+    }
+
     public String getFlightChecked() {
         return FlightChecked;
     }
@@ -76,6 +92,13 @@ public class Mawbm implements Serializable{
     }
     public void setCIQNumber(String cIQNumber) {
         CIQNumber = cIQNumber;
+    }
+    public String getProTime() {
+        return ProTime;
+    }
+
+    public void setProTime(String proTime) {
+        ProTime = proTime;
     }
     @Override
     public String toString() {
