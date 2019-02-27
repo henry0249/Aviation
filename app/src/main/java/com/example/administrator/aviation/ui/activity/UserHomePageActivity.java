@@ -16,12 +16,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +34,6 @@ import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.ui.base.NavBar;
-import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
 import com.example.administrator.aviation.ui.fragment.HomePageFragment;
 import com.example.administrator.aviation.ui.fragment.PersonFragment;
 import com.example.administrator.aviation.util.AviationCommons;
@@ -55,6 +55,14 @@ import java.util.List;
  * 不同的用户跳到该页面是显示是自己可选界面
  */
 public class UserHomePageActivity extends FragmentActivity implements View.OnClickListener {
+    private String[] permissions = {Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+
+    };
+    private String content[]={"拍照和录制视频权限","读写存储卡权限"};
+    private StringBuilder sb_error=null;
+    private StringBuilder sb_wrong=null;
+
     // 标题
     private NavBar navBar;
 
@@ -171,23 +179,19 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
         requestPermission();
     }
 
+
+
     //region 硬件权限申请
     private void requestPermission()
     {
         //判断Android版本是否大于23
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            int checkCallPhonePermission = ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
-
-            if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED)
-            {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
-                        AviationCommons.REQUEST_CODE_CAMERA_PERMISSIONS);
-                return;
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            ActivityCompat.requestPermissions(this, permissions, 321);
         }
     }
+    //endregion
 
+    //region 权限申请允许的处理方法
     /**
      * 注册权限申请回调
      * @param requestCode 申请码
@@ -197,17 +201,76 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
-        switch (requestCode)
-        {
-            case  AviationCommons.REQUEST_CODE_CAMERA_PERMISSIONS:
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(UserHomePageActivity.this, "Camera Denied", Toast.LENGTH_SHORT).show();
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 321) {
+            if (Build.VERSION.SDK_INT >= 23) {
+                int index = 0;
+                sb_error = new StringBuilder();
+                for (int i = 0; i < permissions.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        if (shouldShowRequestPermissionRationale(permissions[i])) {
+                            sb_error.append(content[i]);
+                            sb_error.append(" ");
+                            index++;
+                        }
+                    }
                 }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                break;
+                if (index != 0) {
+                    setAuthority(sb_error.toString());
+                    index = 0;
+                }
+            }
         }
+    }
+    //endregion
+
+    //region 权限申请用户取消时的处理方法的回调
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 123) {
+            if (Build.VERSION.SDK_INT >= 23) {
+                sb_wrong = new StringBuilder();
+                int index = 0;
+                for (int i = 0; i < permissions.length; i++) {
+            /*if (permissions[i] == "Manifest.permission.READ_EXTERNAL_STORAGE" || permissions[i] == "Manifest.permission.ACCESS_COARSE_LOCATION")
+            {continue;}*/
+                    int checkper = ContextCompat.checkSelfPermission(UserHomePageActivity.this, permissions[i]);
+                    {
+                        if (checkper != PackageManager.PERMISSION_GRANTED){
+                            sb_wrong.append(content[i]);
+                            sb_wrong.append(" ");
+                            index++;
+                        }
+                    }
+                }
+                if (index != 0) {
+                    setAuthority(sb_wrong.toString());
+                    index = 0;
+                } else {
+                    Toast.makeText(this, "获取所有权限成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+    //endregion
+
+    //region 权限申请用户取消时的处理方法
+    public void setAuthority(String content) {
+        new AlertDialog.Builder(this)
+                .setTitle("还有权限未设置")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setMessage(content)
+                .setPositiveButton("立即设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivityForResult(intent, 123);
+                    }
+                }).setCancelable(false).show();
+
     }
     //endregion
 

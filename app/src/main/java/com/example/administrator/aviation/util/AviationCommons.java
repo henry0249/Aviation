@@ -111,6 +111,8 @@ public class AviationCommons {
 
     //权限申请
     public static final int REQUEST_CODE_CAMERA_PERMISSIONS  = 0x100;
+    public static final int REQUEST_CODE_WRITE_PERMISSIONS  = 0x200;
+    public static final int REQUEST_CODE_READ_PERMISSIONS  = 0x300;
 
     //回调参数
     public static final int GNC_ULDLOADING_CAMERA_REQUEST = 1;

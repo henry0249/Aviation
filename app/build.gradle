@@ -14,7 +14,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "2.8"
+        versionName "2.9"
     }
 
     ext {
@@ -32,7 +32,7 @@ android {
             def fileName
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 if (variant.buildType.name.equals('release')) {
-                    fileName = "app-release_2.apk"
+                    fileName = "app-release.apk"
                 } else if (variant.buildType.name.equals('debug')) {
                     fileName = "货站版APP测试_${defaultConfig.versionName}_${defaultConfig.versionCode}_debug.apk"
                 }
