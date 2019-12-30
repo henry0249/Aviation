@@ -100,7 +100,7 @@ public class gnShouYunInfo extends AppCompatActivity {
     //region 设置初始化
     public void init() {
         navBar = new NavBar(this);
-        navBar.setTitle("当前板号 " + "111");
+        navBar.setTitle("当前板号 " + "121");
         navBar.setRight(R.drawable.ic_menu_two);
 
         mContentViewPager = (QMUIViewPager)findViewById(R.id.contentViewPager);

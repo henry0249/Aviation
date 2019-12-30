@@ -84,8 +84,8 @@
     <string name="qiyungang">请输入启运港</string>
     <string name="hangcheng">请输入航程</string>
     <string name="hangbanhao">请输入航班号</string>
-    <string name="tuoyunren">请输入名字和手机号</string>
-    <string name="shouhuoren">请输入名字和手机号</string>
+    <string name="tuoyunren">请输入托运人名称</string>
+    <string name="shouhuoren">请输入收货人名称</string>
     <string name="yunshuzheng">请输入运输证</string>
     <string name="zhunyunzheng">请输入准运证</string>
     <string name="shangjianhao">请出入商检号</string>

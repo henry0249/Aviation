@@ -41,6 +41,8 @@ public class PreferenceUtils {
     private static final String APP_URL = "appurl";
 
     private static final String JCGK = "GNCjcgk";
+    private static final String FBzdy = "FBzdy";
+    private static final String DBnumber = "DBnumber";
 
     // -------------以下是存储信息-------------
     /**
@@ -92,6 +94,33 @@ public class PreferenceUtils {
     public static String getjcgk(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(JCGK,"");
+    }
+
+    //保存复磅自定义信息
+    public static void saveFBzdy(Context context, String TDH) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(FBzdy, TDH);
+        editor.commit();
+
+    }
+
+    public static String getFBzdy(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(FBzdy,"");
+    }
+
+    //保存地磅编号
+    public static void saveDBnumber(Context context, String TDH) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(DBnumber, TDH);
+        editor.commit();
+    }
+
+    public static String getDBnumber(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(DBnumber,"");
     }
 
     /**

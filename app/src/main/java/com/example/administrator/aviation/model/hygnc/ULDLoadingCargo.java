@@ -26,6 +26,7 @@ public class ULDLoadingCargo implements Serializable {
     private String LocID;
     private String PlanFDate;
     private String PlanFno;
+    private String Remark;
 
     public ULDLoadingCargo() {
         WHID ="";
@@ -192,4 +193,11 @@ public class ULDLoadingCargo implements Serializable {
         PlanFno = planFno;
     }
 
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 }

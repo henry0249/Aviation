@@ -51,7 +51,7 @@
                     android:layout_marginRight="0dp"/>
 
                 <com.example.administrator.aviation.view.SwitchView
-                    android:id="@+id/ReWeight_SwitchBtn"
+                    android:id="@+id/Re_SwitchBtn"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="0.1"
@@ -72,7 +72,7 @@
                     android:layout_weight="0.5"
                     android:text=""
                     android:layout_gravity="center"
-                    android:hint="运单号"
+                    android:hint="999-00000221"
                     android:gravity="center"
                     android:maxLines="1"
                     app:sizeToFit="true"
@@ -177,11 +177,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.25"
-                    android:text=""
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:maxLines="1"
                     app:sizeToFit="true"
+                    android:text="10"
                     android:textColor="#666666"
                     android:textSize="@dimen/house_size"
                     android:layout_marginLeft="10dp"
@@ -197,7 +197,7 @@
                     android:layout_weight="0.25"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text=""
+                    android:text="108"
                     android:textColor="#666666"
                     android:textSize="@dimen/house_size"
                     android:background="@drawable/edit_bg"
@@ -212,7 +212,7 @@
                     android:layout_weight="0.25"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text=""
+                    android:text="10"
                     android:textColor="#666666"
                     android:textSize="@dimen/house_size"
                     android:background="@drawable/edit_bg"
@@ -311,7 +311,6 @@
                     android:layout_weight="0.25"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:focusable="false"
                     android:gravity="left|center"
                     android:inputType="number"
                     android:maxLines="1"
@@ -325,7 +324,6 @@
                     android:layout_weight="0.25"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:focusable="false"
                     android:gravity="left|center"
                     android:inputType="number"
                     android:maxLines="1"
@@ -340,7 +338,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:focusable="false"
                     android:gravity="left|center"
                     android:inputType="number"
                     android:maxLines="1"
@@ -389,6 +386,7 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:textSize="@dimen/house_size"
+                    android:text="NKG"
                     android:paddingLeft="5dp"/>
 
                 <TextView
@@ -413,7 +411,6 @@
                     android:layout_marginLeft="0dp"
                     android:background="@drawable/edit_bg"
                     android:gravity="left|center"
-                    android:inputType="number"
                     android:maxLines="1"
                     android:textSize="@dimen/house_size"
                     android:paddingLeft="5dp"/>

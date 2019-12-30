@@ -99,8 +99,11 @@ public class ParseULDLoadingCargo {
                                     nTxt += "_" + nTxt.replace("-", "");
                                     LoadingInfo.setPlanFDate(nTxt);
                                 }
-                            }else if (name.equalsIgnoreCase("PlanFno")) {
+                            else if (name.equalsIgnoreCase("PlanFno")) {
                                 LoadingInfo.setPlanFno(parser.nextText());
+                            }
+                            }else if (name.equalsIgnoreCase("Remark")) {
+                                LoadingInfo.setRemark(parser.nextText());
                             }
                         }
 

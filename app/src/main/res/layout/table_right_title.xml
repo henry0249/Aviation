@@ -56,4 +56,9 @@
               style="@style/TextView_Table_Right"
               android:text="计划航班"/>
 
+    <TextView android:id="@+id/tv_table_title_13"
+        style="@style/TextView_Table_Right"
+        android:textColor="#009cd0"
+        android:text="备注"/>
+
 </merge>

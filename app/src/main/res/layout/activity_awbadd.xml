@@ -196,7 +196,7 @@
                     android:id="@+id/TextView_awbadd_huowuleixin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:hint="请选择货物类型"
                     android:background="#ffffff"
                     android:textSize="@dimen/declare_size"/>
@@ -204,7 +204,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="0.5">
 
                     <ImageView
                         android:id="@+id/Img_awbadd_hwlxXiaLa"
@@ -243,7 +243,7 @@
                     android:id="@+id/TextView_awbadd_anjianshijian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:hint="请选择预约时间"
                     android:background="#ffffff"
                     android:textSize="@dimen/declare_size"
@@ -252,7 +252,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="0.5">
                     <ImageView
                         android:id="@+id/Img_awbadd_ajsjXiaLa"
                         android:layout_width="25dp"
@@ -498,6 +498,13 @@
                     android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f4f4f4"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -522,6 +529,7 @@
                     android:textSize="@dimen/declare_size"
                     android:textColor="@color/guoneidingdan_color"/>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

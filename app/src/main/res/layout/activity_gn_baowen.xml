@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/baowen_main">
+
+    <include layout="@layout/navbar"
+        android:id="@+id/gnBaoWenBar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.qmuiteam.qmui.widget.QMUITabSegment
+            android:id="@+id/gnBaoWenInfo_Tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="?attr/qmui_list_item_bg_with_border_top"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/framelayout_gnBaoWenInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp">
+
+        <com.qmuiteam.qmui.widget.QMUIViewPager
+            android:id="@+id/gnBaoWenInfoViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/qmui_config_color_white"/>
+
+    </LinearLayout>
+</LinearLayout>

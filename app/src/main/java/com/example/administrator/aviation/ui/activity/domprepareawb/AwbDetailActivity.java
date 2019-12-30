@@ -43,6 +43,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.administrator.aviation.util.AviationCommons.SPfenlei;
+
 /**
  * 订单列表详情页面
  */
@@ -61,7 +63,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private EditText dest1Tv;
     private EditText dest2Tv;
     private EditText remarkTv;
-    private EditText flightCheckedTv;
+    private TextView flightCheckedTv;
     private EditText fDateTv;
     private ImageView changeTimeBtn;
     private EditText fnoTv;
@@ -112,6 +114,9 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     private String userPass;
     private String loginFlag;
     private String ErrString;
+    private String Priority;//优先级
+    private String CheckID;//确认人
+    private String CheckTime;//确认时间
 
     private ArrayAdapter<String> businessTypeAdapter;
     private Spinner businessTypeSpinner;
@@ -136,6 +141,12 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
     TextView TextView_anjianshijian;
     @BindView(R.id.awbdetail_Img_ajsjXiaLa)
     ImageView ImageView_ajsjXiaLa;
+    @BindView(R.id.awbdetail_textview_checkman)
+    TextView textview_checkman;
+    @BindView(R.id.awbdetail_textview_checktime)
+    TextView textview_checktime;
+    @BindView(R.id.awbdetail_textview_Priority)
+    TextView textview_Priority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,7 +202,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         dest2Tv.setTransformationMethod(new AllCapTransformationMethod());
         remarkTv = (EditText) findViewById(R.id.remake_detail_tv);
         remarkTv.setTransformationMethod(new AllCapTransformationMethod());
-        flightCheckedTv = (EditText) findViewById(R.id.flightchecked_detail_tv);
+        flightCheckedTv = (TextView) findViewById(R.id.flightchecked_detail_tv);
         flightCheckedTv.setTransformationMethod(new AllCapTransformationMethod());
         fDateTv = (EditText) findViewById(R.id.fdate_detail_tv);
         changeTimeBtn = (ImageView) findViewById(R.id.change_awb_time);
@@ -288,15 +299,12 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 PublicFun.KeyBoardHide(mAct, mContext);
-                final String[] items = new String[]{" ","DZHA:大宗货(无油机械、著名企业纺织品、无锂电池的电子产品、著名企业含锂电池的电子产品、纸质品、塑料制品、特殊货物)", "WYXH:无氧鲜活" , "DZHB:大宗货(有油机械、航材、工艺品、生物制品)", "YYXH:有氧鲜活", "KJ:快件", "YJ:邮件", "SP:食品", "CPY:成品药", "HGP:化工品", "WXP:危险品", "SPFZ:散拼,回收类服装"};
                 new QMUIDialog.CheckableDialogBuilder(mAct)
-                        .addItems(items, new DialogInterface.OnClickListener() {
+                        .addItems(SPfenlei, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (which > 0) {
-                                    String re = items[which].split(":")[0];
-                                    TextView_huowuleixin.setText(re);
-                                }
+                                String re = SPfenlei[which].split(":")[0];
+                                TextView_huowuleixin.setText(re);
                                 dialog.dismiss();
                             }
                         })
@@ -341,6 +349,12 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         remarkTv.setText(remark);
         flightChecked = mawbInfo.getMawbm().getFlightChecked();
         flightCheckedTv.setText(flightChecked);
+        CheckID = mawbInfo.getMawbm().getCheckID();
+        textview_checkman.setText(CheckID);
+        CheckTime = mawbInfo.getMawbm().getCheckTime();
+        textview_checktime.setText(CheckTime);
+        Priority = mawbInfo.getMawbm().getPriority();
+        textview_Priority.setText(Priority);
         fDate = mawbInfo.getMawbm().getFDate();
         cargotype = mawbInfo.getCargoType();
         TextView_huowuleixin.setText(cargotype);
@@ -395,8 +409,6 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         volumeTv.setEnabled(true);
         spcodeTv.setEnabled(true);
         goodsTv.setEnabled(true);
-        businessTypeTv.setEnabled(true);
-        packageTv.setEnabled(true);
         byTv.setEnabled(true);
         depTv.setEnabled(true);
         dest1Tv.setEnabled(true);
@@ -420,7 +432,6 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                 sureBtn.setVisibility(View.VISIBLE);
                 changeTimeBtn.setVisibility(View.VISIBLE);
                 dest2Layout.setVisibility(View.VISIBLE);
-                businessTypeTv.setVisibility(View.GONE);
                 goodsSpinner.setVisibility(View.VISIBLE);
                 yunshuzhengLayout.setVisibility(View.GONE);
                 zhunyunzhengLayout.setVisibility(View.GONE);
@@ -447,11 +458,13 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                         cnbusinessType = businessTypeAdapter.getItem(position);
                         businessType = AviationNoteConvert.cNtoEn(cnbusinessType);
+                        businessTypeTv.setText(cnbusinessType);
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
                         cnbusinessType = businessTypeAdapter.getItem(0);
                         businessType = AviationNoteConvert.cNtoEn(cnbusinessType);
+                        businessTypeTv.setText(cnbusinessType);
                     }
                 });
                 businessTypeSpinner.setSelection(businessTypeSpinnerPosition);
@@ -488,7 +501,7 @@ public class AwbDetailActivity extends Activity implements View.OnClickListener{
         spCode = spCode.toUpperCase();
         goods = goodsTv.getText().toString();
         goods = goods.toUpperCase();
-//        businessType = businessTypeTv.getText().toString();
+        businessType = businessTypeTv.getText().toString();
         packg = packageTv.getText().toString();
         packg = packg.toUpperCase();
         by = byTv.getText().toString();

@@ -15,11 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.ReplacementTransformationMethod;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -38,19 +41,23 @@ import android.widget.Toast;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
 import com.example.administrator.aviation.http.HttpRoot;
+import com.example.administrator.aviation.http.SocThread;
 import com.example.administrator.aviation.model.adapter.ListViewAdapter;
+import com.example.administrator.aviation.model.adapter.PopWindowsAdapter;
 import com.example.administrator.aviation.model.hygnc.GNCULDLoading;
 import com.example.administrator.aviation.model.hygnc.ParseGNCmessage;
 import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
+import com.example.administrator.aviation.util.PreferenceUtils;
 import com.example.administrator.aviation.util.ToastUtils;
 import com.example.administrator.aviation.util.WeakHandler;
 import com.example.administrator.aviation.view.AutofitTextView;
 import com.example.administrator.aviation.view.SwitchView;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.qmuiteam.qmui.widget.popup.QMUIPopup;
 
@@ -83,12 +90,13 @@ public class ReWeightMain extends AppCompatActivity {
     private String OriULD = "";
     private String LiuShuiHao = "";
 
+    private SocThread socketThread = null;
+
     private NavBar navBar;
     private Context mContext;
     private Activity mAct;
     private LoadingDialog Ldialog;
     private PopupWindow pw;
-    private QMUIPopup pop;
 
     private List<GNCULDLoading> gnculd;
     private ArrayList<String> list;
@@ -203,6 +211,16 @@ public class ReWeightMain extends AppCompatActivity {
         Ldialog = new LoadingDialog(mContext);
         SwitchBtn.setOpened(true);
         LLay_11.setVisibility(View.GONE);
+        navBar.setRight(R.drawable.ic_menu_two);
+
+        String fbzdy = PreferenceUtils.getFBzdy(mContext);
+        if (!fbzdy.contains("_")) {
+            PreferenceUtils.saveFBzdy(mContext,"取消_雨布网罩");
+        }
+
+        if (!SwitchBtn.isOpened()) {
+            startSocket();
+        }
 
         TxtViewSetEmpty();
         setListener();
@@ -240,6 +258,8 @@ public class ReWeightMain extends AppCompatActivity {
         txtZhuangTai.setText("");
         txtCalc.setText("");
         txtHangBanRiQi.setText("");
+
+        txtZhuangTai.setBackgroundColor(Color.WHITE);
     }
     //endregion
 
@@ -260,12 +280,76 @@ public class ReWeightMain extends AppCompatActivity {
     private void setListener() {
 
         //region navBar右侧图片的点击事件
-//        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        navBar.getRightImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(mAct);
+                View myView = LayoutInflater.from(mAct).inflate(R.layout.pop_expuld_info, null);
+                pw = new PopupWindow(myView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                pw.showAsDropDown(navBar.getPopMenuView());
+
+                List list = new ArrayList<String>();
+                list.add(0,"自定义备注");
+                list.add(1,"地磅编号");
+
+                PopWindowsAdapter ul = new PopWindowsAdapter(mAct, R.layout.pop_expuld_list_item, list);
+                ListView lv = (ListView) myView.findViewById(R.id.list_pop_expUld);
+                lv.setAdapter(ul);
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        pw.dismiss();
+                        if (position == 0) {
+
+                            builder.setTitle("自定义备注")
+                                    .setDefaultText(PreferenceUtils.getFBzdy(mContext))
+                                    .setInputType(InputType.TYPE_CLASS_TEXT)
+                                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                                        @Override
+                                        public void onClick(QMUIDialog dialog, int index) {
+                                            PublicFun.KeyBoardHide(mAct,mContext);
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .addAction("确定", new QMUIDialogAction.ActionListener() {
+                                        @Override
+                                        public void onClick(QMUIDialog dialog, int index) {
+                                            CharSequence text = builder.getEditText().getText();
+                                            PreferenceUtils.saveFBzdy(mContext,text.toString());
+                                            dialog.dismiss();
+                                        }
+                                    }).show();
+                        } else if (position == 1) {
+                            builder.setTitle("地磅编号")
+                                    .setDefaultText(PreferenceUtils.getDBnumber(mContext))
+                                    .setInputType(InputType.TYPE_CLASS_TEXT)
+                                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                                        @Override
+                                        public void onClick(QMUIDialog dialog, int index) {
+                                            PublicFun.KeyBoardHide(mAct,mContext);
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .addAction("确定", new QMUIDialogAction.ActionListener() {
+                                        @Override
+                                        public void onClick(QMUIDialog dialog, int index) {
+                                            CharSequence text = builder.getEditText().getText();
+                                            String re = text.toString();
+                                            if (PublicFun.CheckFirstLetter(re) && re.trim().length() > 1 && re.trim().length() < 4) {
+                                                PreferenceUtils.saveDBnumber(mContext,re.toUpperCase());
+                                                dialog.dismiss();
+                                            } else {
+                                                ToastUtils.showToast(mContext, "请填写规范地磅编号！", Toast.LENGTH_SHORT);
+                                            }
+                                        }
+                                    }).show();
+                        }
+                    }
+                });
+            }
+        });
         //endregion
 
         //region 查询按钮的点击事件
@@ -348,6 +432,58 @@ public class ReWeightMain extends AppCompatActivity {
         });
         //endregion
 
+        //region ULD编号框长按事件
+        txtULDHao.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (TextUtils.isEmpty(editPinBanHao.getText().toString().trim())) {
+                    final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(mAct);
+                    builder.setTitle("ULD编号")
+                            .setPlaceholder("在此输入ULD编号")
+                            .setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+                            .setTransformationMethod(new ReplacementTransformationMethod() {
+                                @Override
+                                protected char[] getOriginal() {
+                                    char[] originalCharArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+                                    return originalCharArr;
+                                }
+
+                                @Override
+                                protected char[] getReplacement() {
+                                    char[] replacementCharArr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
+                                    return replacementCharArr;
+                                }
+                            })
+                            .addAction("取消", new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    PublicFun.KeyBoardHide(mAct, mContext);
+                                    dialog.dismiss();
+                                }
+                            })
+                            .addAction("确定", new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    Map<String, String> params = new HashMap<>();
+                                    CharSequence uld = builder.getEditText().getText();
+                                    params.put("ID", "0");
+                                    params.put("CarID", "");
+                                    params.put("ULD", uld.toString().toUpperCase().trim());
+                                    params.put("ErrString", "");
+                                    GetInfo(params);
+
+                                    PublicFun.KeyBoardHide(mAct, mContext);
+                                    Ldialog.show();
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+                return true;
+            }
+        });
+        //endregion
+
         //region 目标平板修改开关
         SwitchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -356,10 +492,13 @@ public class ReWeightMain extends AppCompatActivity {
                     if (SwitchBtn.isOpened()) {
                         editDiBangZhong.setFocusable(true);
                         editDiBangZhong.setFocusableInTouchMode(true);
+                        stopSocket();
+
                     } else {
                         editDiBangZhong.setText("");
                         editDiBangZhong.setFocusable(false);
                         editDiBangZhong.setFocusableInTouchMode(false);
+                        startSocket();
                     }
                 }
             }
@@ -400,18 +539,26 @@ public class ReWeightMain extends AppCompatActivity {
                         DecimalFormat df2 = new DecimalFormat("0.0%");
                         if (biZhi > 0.03 || biZhi < -0.03) {
                             txtCalc.setTextColor(Color.RED);
+                            txtCalc.setText("偏差值:  " + df1.format(chaZhi) + "KG" + "\n" + "偏差比:  " + df2.format(biZhi));
                         } else {
                             txtCalc.setTextColor(Color.BLUE);
+                            txtCalc.setText("正常");
                             editDangQianZhongLiang.setText(txtZhuangJiJinZhong.getText().toString().trim());
                         }
-                        txtCalc.setText("偏差值:  " + df1.format(chaZhi) + "KG" + "\n" + "偏差比:  " + df2.format(biZhi));
+
                     } else {
-                        txtCalc.setText("");
+                        txtCalc.setTextColor(Color.BLUE);
+                        txtCalc.setText("正常");
                     }
 
                 } else {
+                    if (!TextUtils.isEmpty(editDiBangZhong.getText())) {
+                        txtCalc.setTextColor(Color.RED);
+                        txtCalc.setText("小于板重！");
+                    } else {
+                        txtCalc.setText("");
+                    }
                     editDangQianZhongLiang.setText("");
-                    txtCalc.setText("");
                 }
             }
         });
@@ -453,19 +600,19 @@ public class ReWeightMain extends AppCompatActivity {
         //endregion
 
         //region 修改重量时选择备注
-        editDangQianZhongLiang.setOnFocusChangeListener(new android.view.View.
-                OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    // 此处为得到焦点时的处理内容
-                } else {
-                    if (!TextUtils.isEmpty(editDangQianZhongLiang.getText()) ) {
-                        editBeiZhu.performLongClick();
-                    }
-                }
-            }
-        });
+//        editDangQianZhongLiang.setOnFocusChangeListener(new android.view.View.
+//                OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    // 此处为得到焦点时的处理内容
+//                } else {
+//                    if (!TextUtils.isEmpty(editDangQianZhongLiang.getText()) ) {
+//                        editBeiZhu.performLongClick();
+//                    }
+//                }
+//            }
+//        });
         //endregion
 
         //region 备注长按选择
@@ -473,14 +620,23 @@ public class ReWeightMain extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 PublicFun.KeyBoardHide(mAct, mContext);
-                final String[] items = new String[]{"取消","雨布网罩", "正常偏差" };
+
+                String fbzdy = PreferenceUtils.getFBzdy(mContext);
+                String[] item = new String[]{};
+                if (fbzdy.contains("_")) {
+                    item = fbzdy.split("_");
+                }
+                final String[] items = item;
                 new QMUIDialog.CheckableDialogBuilder(mAct)
                         .addItems(items, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which > 0) {
-                                    editBeiZhu.setText(items[which]);
-                                    editBeiZhu.setSelection(items[which].length());
+                                    editBeiZhu.setText(editBeiZhu.getText() + "_" + items[which]);
+                                    editBeiZhu.setSelection(editBeiZhu.getText().length());
+                                } else {
+                                    editBeiZhu.setText(editBeiZhu.getText() + "_");
+                                    editBeiZhu.setSelection(editBeiZhu.getText().length());
                                 }
                                 dialog.dismiss();
                             }
@@ -554,7 +710,7 @@ public class ReWeightMain extends AppCompatActivity {
         });
         //endregion
 
-        //region 提交按钮点击事件
+        //region 放行按钮点击事件
         btnTiJiao.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
@@ -565,11 +721,13 @@ public class ReWeightMain extends AppCompatActivity {
                 if (re.size() > 0 && !TextUtils.isEmpty(editDangQianZhongLiang.getText().toString().trim())) {
                     CalcInt();
                     if (biZhi > 0.03 || biZhi < -0.03) {
-                        ToastUtils.showToast(mContext,"偏差值过大！",Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(mContext, "偏差值过大！", Toast.LENGTH_SHORT);
                     } else {
                         Ldialog.show();
                         UpdatePinBanInfo(getUpdateXml(re));
                     }
+                } else {
+                    ToastUtils.showToast(mContext, "无地磅重量！", Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -579,17 +737,10 @@ public class ReWeightMain extends AppCompatActivity {
         btnQueDin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Cid = editPinBanHao.getText().toString().trim();
-                ArrayMap<String, String> re = getUpdateEntity(Cid);
-
-                if (re.size() > 0 && !TextUtils.isEmpty(editDangQianZhongLiang.getText().toString().trim())) {
-                    CalcInt();
-                    if (biZhi > 0.03 || biZhi < -0.03) {
-                        ToastUtils.showToast(mContext,"偏差值过大！",Toast.LENGTH_SHORT);
-                    } else {
-                        Ldialog.show();
-                        UpdatePinBanInfo(getUpdateXml(re));
-                    }
+                if (editBeiZhu.getText().toString().contains("_")) {
+                    btnTiJiao.performClick();
+                } else {
+                    ToastUtils.showToast(mContext,"请在备注中选择修改原因！",Toast.LENGTH_LONG);
                 }
             }
         });
@@ -670,9 +821,12 @@ public class ReWeightMain extends AppCompatActivity {
                         Log.i(TAG, object.toString());
                         String res = object.getProperty(0).toString();
                         if (res.contains("true")) {
-                            btnQuXiao.performClick();
                             Ldialog.dismiss();
-                            ToastUtils.showToast(ReWeightMain.this, "修改成功", Toast.LENGTH_SHORT);
+                            ToastUtils.showToast(ReWeightMain.this, "成功", Toast.LENGTH_SHORT);
+                            if (!btnTiJiao.isEnabled()) {
+                                CloseWri();
+                            }
+                            TxtViewSetEmpty();
                         }
                     }
 
@@ -729,7 +883,7 @@ public class ReWeightMain extends AppCompatActivity {
             }
         }
 
-        TxtViewSetEmpty();
+//        TxtViewSetEmpty();
 
         LiuShuiHao = gnculd.get(x).getID().toString();
 
@@ -771,8 +925,11 @@ public class ReWeightMain extends AppCompatActivity {
 
         String cFlagTxt = gnculd.get(x).getcFlag().toString();
         if (cFlagTxt.contains("-")) {
+            txtZhuangTai.setBackgroundColor(Color.WHITE);
             txtZhuangTai.setText(gnculd.get(x).getcFlag().toString().split("-")[1]);
+
         } else {
+            txtZhuangTai.setBackgroundColor(Color.RED);
             txtZhuangTai.setText(cFlagTxt);
         }
     }
@@ -782,17 +939,41 @@ public class ReWeightMain extends AppCompatActivity {
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if (msg.what == AviationCommons.GNC_expULDLoading) {
-                if (gnculd.size() > 0) {
-                    TextSetVaule(0);
-                    list = new ArrayList<>();
-                    editPinBanHao.setSelection(editPinBanHao.getText().toString().trim().length());
-                } else {
-                    ToastUtils.showToast(ReWeightMain.this,"数据为空",Toast.LENGTH_SHORT);
-                    TxtViewSetEmpty();
-                }
-            } else if (msg.what == 0) {
+            try {
 
+                if (msg.what == AviationCommons.GNC_expULDLoading) {
+                    if (gnculd.size() > 0) {
+                        TextSetVaule(0);
+                        list = new ArrayList<>();
+                        editPinBanHao.setSelection(editPinBanHao.getText().toString().trim().length());
+                    } else {
+                        ToastUtils.showToast(ReWeightMain.this,"数据为空",Toast.LENGTH_SHORT);
+                        TxtViewSetEmpty();
+                    }
+                } else if (msg.what == 0) {
+
+                } else if (msg.what == 1) {
+                    String s = msg.obj.toString();
+                    Log.i(TAG, s + "      发送成功");
+                } else if (msg.what == 2) {
+
+                    String s = msg.obj.toString();
+                    if (s.trim().length() > 0) {
+                        Log.i(TAG, "mhandler接收到obj=" + s);
+                        Log.i(TAG, "开始更新UI");
+                        editDiBangZhong.setText(s);
+                        Log.i(TAG, "更新UI完毕");
+                    } else {
+                        Log.i(TAG, "没有数据返回不更新");
+                    }
+                } else {
+                    String s = msg.obj.toString();
+                    Log.i(TAG, s + "      发送失败");
+                }
+
+            }catch (Exception ee) {
+                Log.i(TAG, "加载过程出现异常");
+                ee.printStackTrace();
             }
             return false;
         }
@@ -904,6 +1085,43 @@ public class ReWeightMain extends AppCompatActivity {
             chaZhi = (dq - yl);
             biZhi = (dq - yl) / yl;
         }
+    }
+    //endregion
+
+    //region 开始socket连接
+    public void startSocket() {
+        if (socketThread == null) {
+            socketThread = new SocThread(mHandler, mHandler, mContext);
+            socketThread.start();
+        }
+    }
+    //endregion
+
+    //region 关闭socket连接
+    private void stopSocket() {
+        if (socketThread != null) {
+            socketThread.isRun = false;
+            socketThread.close();
+            socketThread = null;
+            Log.i(TAG, "Socket已终止");
+        }
+    }
+    //endregion
+
+    //region 页面挂起恢复后重启socket
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e(TAG, "start onRestart~~~");
+        startSocket();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(TAG, "start onStop~~~");
+        stopSocket();
     }
     //endregion
 

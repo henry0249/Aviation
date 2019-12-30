@@ -52,6 +52,7 @@ import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrier
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.GnBaowenActivity;
 import com.example.administrator.aviation.ui.cgo.domestic.JinChengGuanKong;
 import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
 import com.example.administrator.aviation.ui.cgo.domestic.ZhuangJiDanMain;
@@ -254,7 +255,8 @@ public class HomePageFragment extends Fragment{
                         Intent CgoDomExpULDLoading = new Intent(getActivity(), ReWeightMain.class);
                         startActivity(CgoDomExpULDLoading);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_CheckIn)) {
-                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
+//                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
+                    Intent CgoDomExpULDLoading = new Intent(getActivity(), GnBaowenActivity.class);
                     startActivity(CgoDomExpULDLoading);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_MftLoading)) {
                     Intent CgoDomExpULDLoading = new Intent(getActivity(), ZhuangJiDanMain.class);

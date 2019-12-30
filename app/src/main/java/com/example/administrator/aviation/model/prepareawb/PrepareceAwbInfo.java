@@ -1,5 +1,6 @@
 package com.example.administrator.aviation.model.prepareawb;
 
+import android.text.TextUtils;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -89,7 +90,15 @@ public class PrepareceAwbInfo {
                             mawbm = new Mawbm();
                         }
                         else if (name.equalsIgnoreCase("FlightChecked")) {
-                            mawbm.setFlightChecked(parser.nextText());
+                            String nTxt = parser.nextText().trim();
+                            if (!TextUtils.isEmpty(nTxt)) {
+                                if (nTxt.equals("0")) {
+                                    nTxt = "";
+                                } else if (nTxt.equals("1")) {
+                                    nTxt = "已审批";
+                                }
+                                mawbm.setFlightChecked(nTxt);
+                            }
                         }
                         else if (name.equalsIgnoreCase("FDate")) {
                             mawbm.setFDate(parser.nextText());
@@ -120,6 +129,35 @@ public class PrepareceAwbInfo {
                         }
                         else if (name.equalsIgnoreCase("CIQNumber")) {
                             mawbm.setCIQNumber(parser.nextText());
+                        }
+                        else if (name.equalsIgnoreCase("Priority")) {
+                            String nTxt = parser.nextText().trim();
+                            if (!TextUtils.isEmpty(nTxt)) {
+                                switch (nTxt) {
+                                    case "1":
+                                        nTxt = "1:特别级";
+                                        break;
+                                    case "2":
+                                        nTxt = "2:优先级";
+                                        break;
+                                    case "3":
+                                        nTxt = "3:普通级";
+                                        break;
+                                    case "4":
+                                        nTxt = "4:重点级";
+                                        break;
+                                    default:
+                                        nTxt = "";
+                                        break;
+                                }
+                                mawbm.setPriority(nTxt);
+                            }
+                        }
+                        else if (name.equalsIgnoreCase("CheckID")) {
+                            mawbm.setCheckID(parser.nextText());
+                        }
+                        else if (name.equalsIgnoreCase("CheckTime")) {
+                            mawbm.setCheckTime(parser.nextText());
                         }
                         break;
                     case XmlPullParser.END_TAG:// 结束元素事件

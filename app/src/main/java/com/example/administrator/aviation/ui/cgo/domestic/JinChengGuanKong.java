@@ -70,6 +70,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.administrator.aviation.R.id.tv_table_content_right_item0;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_JinChenGuanKong_REQUEST;
 import static com.example.administrator.aviation.util.AviationCommons.GNC_ZhuangJiDan_REQUEST;
 
@@ -318,18 +319,6 @@ public class JinChengGuanKong extends AppCompatActivity {
                     aa.put("预计到达",item.getText24());
                     aa.put("实际到达",item.getText25());
 
-                    tv_table_content_right_item2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!TextUtils.isEmpty(item.getText2())) {
-                                String XiangQin = item.getLeftTitle() + "/" + txt_riqi.getText().toString().trim();
-                                Intent intent = new Intent(mContext, ZhuangJiDanMain.class);
-                                intent.putExtra(TAG,XiangQin);
-                                startActivityForResult(intent, GNC_JinChenGuanKong_REQUEST);
-                            }
-                        }
-                    });
-
                     tv_table_content_right_item18.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -343,6 +332,20 @@ public class JinChengGuanKong extends AppCompatActivity {
                                             + "实际起飞: " + aa.get("实际起飞") + "\n"
                                             + "预计到达: " + aa.get("预计到达") + "\n"
                                             + "实际到达: " + aa.get("实际到达") + "\n").show();
+                        }
+                    });
+                }
+                //endregion
+
+                //region 点击平板转跳详情
+                if (!TextUtils.isEmpty(item.getText2())) {
+                    tv_table_content_right_item2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                String XiangQin = item.getLeftTitle() + "/" + txt_riqi.getText().toString().trim();
+                                Intent intent = new Intent(mContext, ZhuangJiDanMain.class);
+                                intent.putExtra(TAG,XiangQin);
+                                startActivityForResult(intent, GNC_JinChenGuanKong_REQUEST);
                         }
                     });
                 }

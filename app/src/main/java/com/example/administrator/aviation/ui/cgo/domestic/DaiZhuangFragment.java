@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -270,6 +271,7 @@ public class DaiZhuangFragment extends Fragment {
                 TextView tv_table_content_right_item10 = helper.getView(R.id.tv_table_content_right_item10);
                 TextView tv_table_content_right_item11 = helper.getView(R.id.tv_table_content_right_item11);
                 TextView tv_table_content_right_item12 = helper.getView(R.id.tv_table_content_right_item12);
+                TextView tv_table_content_right_item13 = helper.getView(R.id.tv_table_content_right_item13);
 
                 tv_table_content_right_item0.setText(item.getText0());
                 tv_table_content_right_item1.setText(item.getText1());
@@ -290,6 +292,26 @@ public class DaiZhuangFragment extends Fragment {
 
                 tv_table_content_right_item11.setText(item.getText11());
                 tv_table_content_right_item12.setText(item.getText12());
+
+                tv_table_content_right_item13.setText(item.getText13());
+
+//                if (item.getText13().length() < 6) {
+//                    tv_table_content_right_item13.setText(item.getText13());
+//                } else {
+//                    final ArrayMap<String,String> aa = new ArrayMap<>();
+//                    aa.put("备注",item.getText13());
+//                    tv_table_content_right_item13.setText(item.getText13().substring(0,5)+ "...");
+//
+//                    tv_table_content_right_item13.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            new QMUIDialog.MessageDialogBuilder(mAct)
+//                                    .setTitle("备注详情")
+//                                    .setMessage(aa.get("备注")).show();
+//                        }
+//                    });
+//                }
+
 
                 //部分行设置颜色凸显
 //                item.setTextColor(tv_table_content_right_item0, item.getText0());
@@ -639,6 +661,7 @@ loop1:        for(int i = 0; i < mTitleTvArray.size(); i++) {
                 }
 
                 tableMode.setText12(cc.getPlanFno() + "");//
+                tableMode.setText13(cc.getRemark() + "");//
                 mDatas.add(tableMode);
             }
             boolean isMore;

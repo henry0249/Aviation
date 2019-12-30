@@ -239,6 +239,7 @@ public class ZhuangZaiFragment extends Fragment {
                 TextView tv_table_content_right_item10 = helper.getView(R.id.tv_table_content_right_item10);
                 TextView tv_table_content_right_item11 = helper.getView(R.id.tv_table_content_right_item11);
                 TextView tv_table_content_right_item12 = helper.getView(R.id.tv_table_content_right_item12);
+                TextView tv_table_content_right_item13 = helper.getView(R.id.tv_table_content_right_item13);
 
                 tv_table_content_right_item0.setText(item.getText0());
                 tv_table_content_right_item1.setText(item.getText1());
@@ -259,6 +260,7 @@ public class ZhuangZaiFragment extends Fragment {
 
                 tv_table_content_right_item11.setText(item.getText11());
                 tv_table_content_right_item12.setText(item.getText12());
+                tv_table_content_right_item13.setText(item.getText13());
 
                 //部分行设置颜色凸显
 //                item.setTextColor(tv_table_content_right_item0, item.getText0());
@@ -592,6 +594,7 @@ public class ZhuangZaiFragment extends Fragment {
                 }
 
                 tableMode.setText12(cc.getPlanFno() + "");//
+                tableMode.setText13(cc.getRemark() + "");//
                 mDatas.add(tableMode);
             }
             boolean isMore;

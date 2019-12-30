@@ -5,6 +5,23 @@ package com.example.administrator.aviation.util;
  */
 
 public class AviationCommons {
+
+    //常用公共变量
+    public static String[] SPfenlei = new String[]{"DZHA:大宗货(无锂电池的电子产品、纸质品、塑料制品、特殊货物)",
+            "WYXH:无氧鲜活" ,
+            "DZHB:大宗货(有油机械、航材、工艺品、生物制品)",
+            "YYXH:有氧鲜活", "KJ:快件", "YJ:邮件",
+            "SP:食品",
+            "CPY:成品药",
+            "HGP:化工品",
+            "WXP:危险品",
+            "SPFZ:散拼,回收类服装",
+            "FEP:著名企业电子产品",
+            "FZB:服装包",
+            "WYJX:无油机械",
+            "LZK:陆转空",
+            "PH:普货"};
+
     public static String TAG = "ACTAG";
     /**
      * 登录得到服务器成功返回的ID（每次注销得到的ID值不一样）

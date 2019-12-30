@@ -19,6 +19,10 @@ public class Mawbm implements Serializable{
     private String CIQNumber ;//商检号
     private String ProTime;//预约时间
 
+    private String Priority;//优先级
+    private String CheckID;//确认人
+    private String CheckTime;//确认时间
+
     public Mawbm() {
         FlightChecked = "";//定舱确认，系统提供
         FDate = "";//计划航班日期，必填
@@ -31,6 +35,9 @@ public class Mawbm implements Serializable{
         AllowTransNO = "";//'准运证
         CIQNumber = "";//商检号
         ProTime = "";//预约时间
+        Priority = "";
+        CheckID = "";
+        CheckTime = "";
     }
 
     public String getFlightChecked() {
@@ -100,6 +107,32 @@ public class Mawbm implements Serializable{
     public void setProTime(String proTime) {
         ProTime = proTime;
     }
+
+    public String getPriority() {
+        return Priority;
+    }
+
+    public void setPriority(String priority) {
+        Priority = priority;
+    }
+
+    public String getCheckID() {
+        return CheckID;
+    }
+
+    public void setCheckID(String checkID) {
+        CheckID = checkID;
+    }
+
+    public String getCheckTime() {
+        return CheckTime;
+    }
+
+    public void setCheckTime(String checkTime) {
+        CheckTime = checkTime;
+    }
+
+
     @Override
     public String toString() {
         return "Mawbm [FlightChecked=" + FlightChecked + ", FDate=" + FDate

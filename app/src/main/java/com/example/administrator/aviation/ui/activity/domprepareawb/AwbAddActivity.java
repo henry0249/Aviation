@@ -44,6 +44,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.administrator.aviation.util.AviationCommons.SPfenlei;
+
 /**
  * 订单增加
  */
@@ -204,7 +206,6 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
 
         Spinner goodsSpinner = (Spinner) findViewById(R.id.awb_package_spinner);
         List<String> goodsList = new ArrayList<>();
-        goodsList.add("");
         goodsList.add("再生木托");
         goodsList.add("塑料编织袋");
         goodsList.add("夹板箱");
@@ -247,15 +248,12 @@ public class AwbAddActivity extends Activity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 PublicFun.KeyBoardHide(mAct, mContext);
-                final String[] items = new String[]{"取消","DZHA:大宗货(无油机械、著名企业纺织品、无锂电池的电子产品、著名企业含锂电池的电子产品、纸质品、塑料制品、特殊货物)", "WYXH:无氧鲜活" , "DZHB:大宗货(有油机械、航材、工艺品、生物制品)", "YYXH:有氧鲜活", "KJ:快件", "YJ:邮件", "SP:食品", "CPY:成品药", "HGP:化工品", "WXP:危险品", "SPFZ:散拼,回收类服装"};
                 new QMUIDialog.CheckableDialogBuilder(mAct)
-                        .addItems(items, new DialogInterface.OnClickListener() {
+                        .addItems(SPfenlei, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (which > 0) {
-                                    String re = items[which].split(":")[0];
-                                    TextView_huowuleixin.setText(re);
-                                }
+                                String re = SPfenlei[which].split(":")[0];
+                                TextView_huowuleixin.setText(re);
                                 dialog.dismiss();
                             }
                         })

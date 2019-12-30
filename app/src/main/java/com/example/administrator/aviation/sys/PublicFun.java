@@ -184,5 +184,18 @@ public class PublicFun {
     }
     //endregion
 
+    ////region 判断首字符是否为字母
+    public static boolean  CheckFirstLetter(String   fstrData)
+    {
+        char   c   =   fstrData.charAt(0);
+        if(((c>='a'&&c<='z')   ||   (c>='A'&&c<='Z')))
+        {
+            return   true;
+        }else{
+            return   false;
+        }
+    }
+    //endregion
+
 }
 
