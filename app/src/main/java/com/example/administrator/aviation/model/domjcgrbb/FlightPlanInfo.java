@@ -9,12 +9,24 @@ public class FlightPlanInfo {
     private String Fno;
     private String FlightChecked;
     private String Mawb;
+    private String Volume;
+    private String Cstatus;
 
-    public FlightPlanInfo(String FDate, String fno, String flightChecked, String mawb) {
+    public String getCstatus() {
+        return Cstatus;
+    }
+
+    public void setCstatus(String cstatus) {
+        Cstatus = cstatus;
+    }
+
+    public FlightPlanInfo(String FDate, String fno, String flightChecked, String mawb, String volume, String cstatus) {
         this.FDate = FDate;
         Fno = fno;
         FlightChecked = flightChecked;
         Mawb = mawb;
+        Volume = volume;
+        Cstatus = cstatus;
     }
 
     public String getFDate() {
@@ -47,5 +59,13 @@ public class FlightPlanInfo {
 
     public void setMawb(String mawb) {
         Mawb = mawb;
+    }
+
+    public String getVolume() {
+        return Volume;
+    }
+
+    public void setVolume(String volume) {
+        Volume = volume;
     }
 }

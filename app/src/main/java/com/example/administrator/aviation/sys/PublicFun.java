@@ -184,7 +184,7 @@ public class PublicFun {
     }
     //endregion
 
-    ////region 判断首字符是否为字母
+    //region 判断首字符是否为字母
     public static boolean  CheckFirstLetter(String   fstrData)
     {
         char   c   =   fstrData.charAt(0);

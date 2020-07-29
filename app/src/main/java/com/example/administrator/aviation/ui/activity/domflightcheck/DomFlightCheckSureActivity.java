@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +29,14 @@ import com.example.administrator.aviation.model.domjcgrbb.FlightAWBPlanInfo;
 import com.example.administrator.aviation.model.domjcgrbb.FlightCheckInfo;
 import com.example.administrator.aviation.model.domjcgrbb.FlightPlanInfo;
 import com.example.administrator.aviation.model.domjcgrbb.PrepareceFlightAWBPlanInfo;
+import com.example.administrator.aviation.sys.PublicFun;
 import com.example.administrator.aviation.ui.base.NavBar;
+import com.example.administrator.aviation.ui.cgo.domestic.ActLiHuoXinZenPinBan;
+import com.example.administrator.aviation.util.AviationCommons;
+import com.qmuiteam.qmui.qqface.IQMUIQQFaceManager;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -37,6 +47,10 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.attr.color;
+import static android.R.attr.key;
+import static android.R.attr.name;
 
 /**
  * 订舱确认界面
@@ -53,19 +67,28 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
     Button flightCheckSureBtn;
     @BindView(R.id.flight_check_cancel_btn)
     Button flightCheckCancelBtn;
+    @BindView(R.id.flight_VolumnCheck_btn)
+    Button VolumnCheck_Btn;
 
     private FlightCheckInfo flightCheckInfo;
+    private FlightPlanInfo VolumnCheckedInfo;
     private List<FlightAWBPlanInfo> flightAWBPlanInfoList;
     private MyAWBPlanAdapter myAWBPlanAdapter;
 
     private Map<Integer, FlightPlanInfo> choseMap;
 
     private String xml;
+    private Context mContext;
+    private Activity mAct;
+    private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
+    private QMUITipDialog tipDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appintflight_check_sure);
+        mContext = DomFlightCheckSureActivity.this;
+        mAct = (Activity) mContext;
         ButterKnife.bind(this);
         initView();
     }
@@ -78,6 +101,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
         // 按钮点击事件
         flightCheckSureBtn.setOnClickListener(this);
         flightCheckCancelBtn.setOnClickListener(this);
+        VolumnCheck_Btn.setOnClickListener(this);
 
         choseMap = new HashMap<>();
 
@@ -180,12 +204,72 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                 }
                 break;
 
+            case R.id.flight_VolumnCheck_btn:
+
+                if (choseMap.size() == 1) {
+                    final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(mAct);
+                    Set<Integer> keyInts = choseMap.keySet();
+
+                    for (Integer key:keyInts) {
+                        VolumnCheckedInfo = choseMap.get(key);
+
+                        if (VolumnCheckedInfo.getCstatus().equals("入库")) {
+                            Toast.makeText(this, "已入库货物不可操作！", Toast.LENGTH_SHORT).show();
+                        } else {
+                            builder.setTitle("舱位体积")
+                                    .setDefaultText(VolumnCheckedInfo.getVolume())
+                                    .setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                                        @Override
+                                        public void onClick(QMUIDialog dialog, int index) {
+//                                            mHandler.postDelayed(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    PublicFun.KeyBoardHide(mAct, mContext);
+//                                                }
+//                                            }, 100);
+
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .addAction("确定", new QMUIDialogAction.ActionListener() {
+                                        @Override
+                                        public void onClick(QMUIDialog dialog, int index) {
+                                            CharSequence text = builder.getEditText().getText();
+                                            if (text != null && text.length() > 0) {
+                                                VolumnCheckedInfo.setVolume(text.toString());
+                                                UpdateVolumn();
+                                                dialog.dismiss();
+                                            } else {
+                                                Toast.makeText(mAct, "请填入体积", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    })
+                                    .create(mCurrentDialogStyle).show();
+
+                            builder.getEditText().setSelection(VolumnCheckedInfo.getVolume().length());
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "请单选数据批复体积！", Toast.LENGTH_SHORT).show();
+                }
+                break;
             default:
                 break;
         }
     }
 
-    // 适配器
+    //region 处理UI的线程
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+
+            return false;
+        }
+    });
+    //endregion
+
+    //region 适配器
     private class MyAWBPlanAdapter extends BaseAdapter {
         private Context context;
         private List<FlightAWBPlanInfo> flightAWBPlanInfoList;
@@ -231,11 +315,18 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             String mawb = flightAWBPlanInfoList.get(position).getMawb();
+            String status = flightAWBPlanInfoList.get(position).getcStatus();
+
             if (mawb != null && !mawb.equals("")) {
-                viewHolder.mawbTv.setText(mawb);
+                viewHolder.mawbTv.setText(mawb.split("-")[0] + "-" + "\n" + mawb.split("-")[1]);
+
+                if (status.equals("入库")) {
+                    viewHolder.mawbTv.setTextColor(Color.BLUE);
+                }
             } else {
                 viewHolder.mawbTv.setText("");
             }
+
             String name = flightAWBPlanInfoList.get(position).getAgentName();
             if (name != null && !name.equals("")) {
                 viewHolder.nameTv.setText(name);
@@ -282,11 +373,13 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                 viewHolder.sureStateTv.setText("");
             }
 
+
+
             viewHolder.planCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
-                        FlightPlanInfo info = new FlightPlanInfo(item.getFDate(),item.getFno(),item.getFlightChecked(),item.getMawb());
+                        FlightPlanInfo info = new FlightPlanInfo(item.getFDate(),item.getFno(),item.getFlightChecked(),item.getMawb(),item.getVolume(),item.getcStatus());
                         choseMap.put(position, info);
                     } else {
                         choseMap.remove(position);
@@ -309,6 +402,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
             LinearLayout showLy;
         }
     }
+    //endregion
 
     // 请求数据信息
     private String getXml(String fdate, String fno, String jTg, String fDest) {
@@ -333,6 +427,82 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
         return result;
     }
 
+    private void MawbChecked() {
+        String fdate = flightCheckInfo.getFDate();
+        String fno = flightCheckInfo.getFno();
+        String istrue = "1";
+        xml = getsureCancelXml(VolumnCheckedInfo, fdate, fno, istrue);
+
+        Map<String, String> checkSureMap = new HashMap<>();
+        checkSureMap.put("awbXml", xml);
+        checkSureMap.put("ErrString", "");
+        HttpRoot.getInstance().requstAync(DomFlightCheckSureActivity.this, HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_NAME,
+                HttpCommons.CGO_DOM_EXPORT_FLIGHT_PLAN_CHECK_ACTION, checkSureMap, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject soapObject = (SoapObject) result;
+                        Boolean re = Boolean.parseBoolean(soapObject.getProperty(0).toString());
+
+                        if (re) {
+                            tipDialog = new QMUITipDialog.Builder(mContext)
+                                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
+                                    .setTipWord("操作成功")
+                                    .create();
+
+                            tipDialog.show();
+                            mHandler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tipDialog.dismiss();
+                                }
+                            }, 1500);
+                        }
+
+                        showData();
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+
+    }
+
+
+    private void UpdateVolumn(){
+        Map<String, String> checkSureMap = new HashMap<>();
+        checkSureMap.put("Mawb", VolumnCheckedInfo.getMawb().replaceAll("-",""));
+        checkSureMap.put("Volume", VolumnCheckedInfo.getVolume());
+
+        HttpRoot.getInstance().requstAync(DomFlightCheckSureActivity.this, HttpCommons.CGO_AWBVolume_Checked_NAME,
+                HttpCommons.CGO_AWBVolume_Checked_ACTION, checkSureMap, new HttpRoot.CallBack() {
+                    @Override
+                    public void onSucess(Object result) {
+                        SoapObject soapObject = (SoapObject) result;
+                        Boolean re = Boolean.parseBoolean(soapObject.getProperty(0).toString());
+
+                        if (re) {
+                            MawbChecked();
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+    }
     // 展示订舱确认数据界面
     private void showData() {
         // 得到待确认航班计划列表传递过来的数据

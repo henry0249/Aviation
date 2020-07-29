@@ -423,7 +423,7 @@
             android:name=".ui.activity.domflightcheck.DomFlightCheckSureActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.domflightcheck.DomFlightCheckSureDetailActivity"
             android:launchMode="singleTask"

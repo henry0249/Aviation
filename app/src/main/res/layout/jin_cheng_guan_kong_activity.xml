@@ -168,7 +168,7 @@
             android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.22"
             android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
@@ -218,7 +218,7 @@
                         android:id="@+id/JinChen_left_container_listview"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:layout_weight="0.2"
+                        android:layout_weight="0.22"
                         android:scrollbars="none">
                     </com.example.administrator.aviation.ui.base.MyListView>
 

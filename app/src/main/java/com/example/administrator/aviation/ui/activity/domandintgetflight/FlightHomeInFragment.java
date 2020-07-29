@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.http.HttpCommons;
@@ -25,6 +27,7 @@ import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.AviationNoteConvert;
 import com.example.administrator.aviation.util.PullToRefreshView;
+import com.example.administrator.aviation.util.ToastUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -36,6 +39,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static android.R.attr.x;
+import static android.R.attr.y;
+import static com.example.administrator.aviation.R.id.pulltorefreshview;
 
 /**
  * 航班动态进港数据
@@ -154,6 +161,18 @@ public class FlightHomeInFragment extends Fragment {
         });
     }
 
+    //region 碎片show的时候刷新
+    @Override
+    public void onHiddenChanged(boolean hidd) {
+        if (hidd) {
+            //隐藏时所作的事情
+            ToastUtils.hideToast();
+        } else {
+            //显示时所作的事情
+        }
+    }
+    //endregion
+
     private class FlightInAdapter extends BaseAdapter {
         private List<FlightMessage> list;
         private Context context;
@@ -204,7 +223,7 @@ public class FlightHomeInFragment extends Fragment {
             }
             String fno = list.get(position).getFno();
             if (!fno.equals("")) {
-                viewHolder.fnoTv.setText(fno);
+                viewHolder.fnoTv.setText(fno.substring(0,2) + "\n" + fno.substring(2));
             } else {
                 viewHolder.fnoTv.setText("");
             }

@@ -14,12 +14,12 @@ public class HttpCommons {
     public static final String NAME_SPACE = "http://58.213.128.130/";
 
     // EndPoint 正式版本
-//    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
-//    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirCargoService.asmx";
+    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
+    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirCargoService.asmx";
 
     // EndPoint 测试版本
-    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirLogisticsService.asmx";
-    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirCargoService.asmx";
+//    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirLogisticsService.asmx";
+//    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirCargoService.asmx";
 
     // 登录
     public static final String LOGIN_METHOD_NAME = "APPUserLogin";
@@ -251,4 +251,7 @@ public class HttpCommons {
     public static final String GET_GNC_TallyEnd_NAME = "GNCTallyEnd";
     public static final String GET_GNC_TallyEnd_ACTION = "http://58.213.128.130/GNCTallyEnd";
 
+    //订舱体积批复
+    public static final String CGO_AWBVolume_Checked_NAME = "CGODomExportAWBVolumeChecked";
+    public static final String CGO_AWBVolume_Checked_ACTION = "http://58.213.128.130/CGODomExportAWBVolumeChecked";
 }

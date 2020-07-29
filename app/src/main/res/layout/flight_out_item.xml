@@ -18,9 +18,10 @@
                 android:id="@+id/flight_home_out_fno_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ZH986"
+                android:gravity="center"
+                android:text="ZH\n9986"
                 android:textColor="#3c3c3b"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout

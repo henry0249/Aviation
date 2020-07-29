@@ -193,6 +193,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="取消订舱"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_selector"
+            android:textColor="#ffffff"
+            android:textSize="19sp"/>
+
+        <Button
+            android:id="@+id/flight_VolumnCheck_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="批舱体积"
             android:layout_marginRight="21dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/button_selector"

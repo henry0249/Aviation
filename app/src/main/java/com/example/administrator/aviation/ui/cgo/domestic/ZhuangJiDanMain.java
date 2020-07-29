@@ -448,7 +448,6 @@ public class ZhuangJiDanMain extends AppCompatActivity {
                 } else {
                     if (TextUtils.isEmpty(Fdate) || TextUtils.isEmpty(Fno)) {
                         ToastUtils.showToast(mContext, "查询数据有误", Toast.LENGTH_SHORT);
-
                     } else {
                         if(Fno.equals(editHangBanHao.getText().toString().toUpperCase().trim()) && Fdate.equals(txt_riqi.getText().toString().toUpperCase().trim() + "T00:00:00")){
                             HashMap<String, String> go = new HashMap<String, String>();
