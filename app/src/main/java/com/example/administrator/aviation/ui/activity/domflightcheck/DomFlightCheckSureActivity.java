@@ -228,7 +228,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
 //                                                    PublicFun.KeyBoardHide(mAct, mContext);
 //                                                }
 //                                            }, 100);
-
+//windowSoftInputMode设置adjustUnspecified|stateAlwaysHidden，act获取焦点自动隐藏软键盘
                                             dialog.dismiss();
                                         }
                                     })
