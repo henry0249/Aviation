@@ -216,7 +216,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                         if (VolumnCheckedInfo.getCstatus().equals("入库")) {
                             Toast.makeText(this, "已入库货物不可操作！", Toast.LENGTH_SHORT).show();
                         } else {
-                            builder.setTitle("舱位体积")
+                            builder.setTitle("舱位体积(M3)")
                                     .setDefaultText(VolumnCheckedInfo.getVolume())
                                     .setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL)
                                     .addAction("取消", new QMUIDialogAction.ActionListener() {
