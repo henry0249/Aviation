@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/PickUpSignature_main">
+
+    <include layout="@layout/navbar"
+        android:id="@+id/PickUpSignatureBar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="#ffffff">
+        <Button
+            android:id="@+id/PickUpSignature_Btn_qingchu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="00dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_selector"
+            android:text="清除签名"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/PickUpSignature_Btn_PaiZhao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_selector"
+            android:text="拍摄照片"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/PickUpSignature_Btn_Shangchuan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="00dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_selector"
+            android:text="上传材料"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ffffff">
+
+            <com.example.administrator.aviation.view.AutofitTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="0.7"
+                android:maxLines="1"
+                android:text="请在下框内手写签名:"
+                android:textColor="#666666"
+                android:textSize="@dimen/house_size"
+                app:sizeToFit="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginBottom="4dp"
+            android:background="#ffffff">
+
+            <com.example.administrator.aviation.view.LinePathView
+                android:id="@+id/PickUpSignature_LinePathView"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ffffff">
+
+            <com.example.administrator.aviation.view.AutofitTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="0.6"
+                android:maxLines="1"
+                android:text="请拍摄身份证正面:"
+                android:textColor="#666666"
+                android:textSize="@dimen/house_size"
+                app:sizeToFit="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff">
+
+            <com.example.administrator.aviation.view.AutofitTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="0.6"
+                android:maxLines="2"
+                android:text="收货人证件放上面，提货人证件放下面。两证件放置间隔一定的上下距离。"
+                android:textColor="#666666"
+                android:textSize="@dimen/house_size"
+                app:sizeToFit="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="#ffffff">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/PickUpSignature_ImageView1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edit_bg" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/PickUpSignature_ImageView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edit_bg" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

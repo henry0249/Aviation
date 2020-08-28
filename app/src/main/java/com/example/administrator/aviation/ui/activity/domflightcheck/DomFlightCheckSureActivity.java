@@ -218,7 +218,7 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                         } else {
                             builder.setTitle("舱位体积(M3)")
                                     .setDefaultText(VolumnCheckedInfo.getVolume())
-                                    .setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                                    .setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL)
                                     .addAction("取消", new QMUIDialogAction.ActionListener() {
                                         @Override
                                         public void onClick(QMUIDialog dialog, int index) {
@@ -534,16 +534,20 @@ public class DomFlightCheckSureActivity extends Activity implements View.OnClick
                             flightCheckSureNodataTv.setVisibility(View.VISIBLE);
                         }
 
+                        choseMap.clear();
+
                     }
 
                     @Override
                     public void onFailed(String message) {
                         zhixianPb.setVisibility(View.GONE);
+                        choseMap.clear();
                     }
 
                     @Override
                     public void onError() {
                         zhixianPb.setVisibility(View.GONE);
+                        choseMap.clear();
                     }
                 });
     }

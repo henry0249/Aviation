@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    //主要内容为paths里的内容
+    <paths>
+        <external-path
+            name="download"
+            path="" />
+    </paths>
+</resources>

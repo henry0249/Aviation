@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.util.DisplayUtil;
 
+
 /**
  * © 2012 amsoft.cn
  * 名称：AbListViewFooter.java 

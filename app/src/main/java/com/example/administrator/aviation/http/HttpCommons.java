@@ -14,12 +14,12 @@ public class HttpCommons {
     public static final String NAME_SPACE = "http://58.213.128.130/";
 
     // EndPoint 正式版本
-    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
-    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirCargoService.asmx";
+//    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirLogisticsService.asmx";
+//    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPP/AirCargoService.asmx";
 
     // EndPoint 测试版本
-//    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirLogisticsService.asmx";
-//    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirCargoService.asmx";
+    public static final String END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirLogisticsService.asmx";
+    public static final String CGO_END_POINT = "http://58.213.128.130:888/AirLogisticsAPPTest/AirCargoService.asmx";
 
     // 登录
     public static final String LOGIN_METHOD_NAME = "APPUserLogin";
@@ -254,4 +254,22 @@ public class HttpCommons {
     //订舱体积批复
     public static final String CGO_AWBVolume_Checked_NAME = "CGODomExportAWBVolumeChecked";
     public static final String CGO_AWBVolume_Checked_ACTION = "http://58.213.128.130/CGODomExportAWBVolumeChecked";
+
+    //获取提取信息
+    public static final String GET_GNC_GetGNJPickUpForPAD_NAME = "GetGNJPickUpForPAD";
+    public static final String GET_GNC_GetGNJPickUpForPAD_ACTION = "http://58.213.128.130/GetGNJPickUpForPAD";
+
+    //重置提取状态
+    public static final String UPDATA_GNJ_ResetPickUpStatus_NAME = "ResetPickUpStatus";
+    public static final String UPDATA_GNJ_ResetPickUpStatus_ACTION = "http://58.213.128.130/ResetPickUpStatus";
+
+    //货物提取，上传图片
+    public static final String UPDATA_GNJ_GNJCargoPickUp_NAME = "GNJCargoPickUp";
+    public static final String UPDATA_GNJ_GNJCargoPickUp_ACTION = "http://58.213.128.130/GNJCargoPickUp";
+
+    //获取货物提取签名信息
+    public static final String GET_GNJ_GetGNJPickUpSign_NAME = "GetGNJPickUpSign";
+    public static final String GET_GNJ_GetGNJPickUpSign_ACTION = "http://58.213.128.130/GetGNJPickUpSign";
+
+
 }

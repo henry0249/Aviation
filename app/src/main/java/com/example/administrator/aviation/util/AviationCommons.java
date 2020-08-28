@@ -1,5 +1,7 @@
 package com.example.administrator.aviation.util;
 
+import android.os.Environment;
+
 /**
  * 主要存全局常用值
  */
@@ -33,6 +35,10 @@ public class AviationCommons {
 
     // intent传递xml的标识
     public static final String LOGIN_XML = "loginxml";
+    public static final String DST_FOLDER_NAME = "AviationApp";
+    public static final String StoragePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + DST_FOLDER_NAME;
+    public static final int Camera_Quality = 30;
+    public static float MyDPI = 0;
 
     // bundle传递list项
     public static final String AWB_ITEM_INFO = "awbItemInfo";
@@ -104,6 +110,8 @@ public class AviationCommons {
     public static final String APP_CGO_Dom_Exp_MftLoading = "appCGODomExpMftLoading";
     //国内出港航班进程管控
     public static final String APP_CGO_Dom_Exp_FlightCtrl = "appCGODomExpFlightCtrl";
+    //国内出港提取
+    public static final String APP_CGO_Dom_Exp_GnjPickUp = "appCGODomImportPickUp";
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int FLIGHT_REFERCH = 0x222;
@@ -120,6 +128,7 @@ public class AviationCommons {
     public static final int GNC_ManifestLoading = 0x112;
     public static final int GNC_ManifestVsLoading = 0x113;
     public static final int GNC_FlightControls = 0x114;
+    public static final int GNC_gnjPickUpLoadList = 0x114;
 
     // intent传值需要返回
     public static final int AWB_ADD = 3;
@@ -138,13 +147,19 @@ public class AviationCommons {
     public static final int GNC_gnShouYun_REQUEST = 4;
     public static final int GNC_ZhuangJiDan_REQUEST = 5;
     public static final int GNC_JinChenGuanKong_REQUEST = 6;
+    public static final int gnjPickUp_CAMERA_REQUEST = 7;
+    public static final int PickUpSignatureActivity_REQUEST = 8;
+    public static final int PickUpSearchActivity_REQUEST = 9;
 
-    public static final int GNC_ULDLOADING_CAMERA_RESULT = 11;
-    public static final int GNC_ULDinfo_CAMERA_RESULT = 22;
-    public static final int GNC_ULDLOADING_XinZenPinBan_RESULT = 33;
-    public static final int GNC_gnShouYun_RESULT = 44;
-    public static final int GNC_ZhuangJiDan_RESULT = 55;
-    public static final int GNC_JinChenGuanKong_RESULT = 66;
+    public static final int GNC_ULDLOADING_CAMERA_RESULT = 10;
+    public static final int GNC_ULDinfo_CAMERA_RESULT = 20;
+    public static final int GNC_ULDLOADING_XinZenPinBan_RESULT = 30;
+    public static final int GNC_gnShouYun_RESULT = 40;
+    public static final int GNC_ZhuangJiDan_RESULT = 50;
+    public static final int GNC_JinChenGuanKong_RESULT = 60;
+    public static final int gnjPickUp_CAMERA_RESULT = 70;
+    public static final int PickUpSignatureActivity_RESULT = 80;
+    public static final int PickUpSearchActivity_RESULT = 90;
     //上拉加载更多
     public static final int LOAD_DATA = 2;
     //下拉刷新

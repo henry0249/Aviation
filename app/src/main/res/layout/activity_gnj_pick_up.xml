@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/gnjPickUpActivity_main">
+
+    <include layout="@layout/navbar"
+        android:id="@+id/gnjPickUpBar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="运单号:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+
+        <EditText
+            android:id="@+id/gnjPickUp_EdTxt_yundanhao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="请输入完整运单号"
+            android:layout_weight="0.7"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:maxLength="11"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="身份证号:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+
+        <EditText
+            android:id="@+id/gnjPickUp_EdTxt_ShenFenZheng"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="请输入身份证号"
+            android:layout_weight="0.7"
+            android:inputType="number|text"
+            android:digits="0123456789xyzXYZ"
+            android:imeOptions="actionDone"
+            android:maxLength="20"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="提取状态:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+
+        <EditText
+            android:id="@+id/gnjPickUp_EdTxt_TiQuBiaoShi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="请选择提取状态"
+            android:layout_weight="0.7"
+            android:inputType="number"
+            android:digits="0123456789xyzXYZ"
+            android:imeOptions="actionDone"
+            android:maxLength="20"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="代理人:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+
+        <EditText
+            android:id="@+id/gnjPickUp_EdTxt_DaiLiRen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="请输入代理人代码"
+            android:layout_weight="0.7"
+            android:inputType="text"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:imeOptions="actionDone"
+            android:maxLength="9"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="交费日期:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+
+        <EditText
+            android:id="@+id/gnjPickUp_EdTxt_riqi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="请选择日期"
+            android:layout_weight="0.7"
+            android:inputType="number"
+            android:digits="0123456789xyzXYZ"
+            android:imeOptions="actionDone"
+            android:maxLength="20"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:editable="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/gnjPickUp_Btn_chaxun"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="查询"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/gnjPickUpInfo_Btn_qingkong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="清空"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</LinearLayout>

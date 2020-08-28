@@ -22,7 +22,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.support.v4.content.FileProvider;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,6 +49,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
+
+import static com.example.administrator.aviation.sys.PublicFun.getSDPath;
 
 /**
  * 所有用户首页
@@ -507,10 +509,21 @@ public class UserHomePageActivity extends FragmentActivity implements View.OnCli
 
     // 安装文件，一般固定写法
     void update() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "app-release.apk")),
-                "application/vnd.android.package-archive");
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT >= 24) {// 判读版本是否在7.0以上
+            File file = new File(getSDPath(UserHomePageActivity.this), "app-release.apk");
+            // 在AndroidManifest中的android:authorities值
+            Uri apkUri = FileProvider.getUriForFile(UserHomePageActivity.this, "com.example.administrator.aviation.fileprovider", file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "app-release.apk")),"application/vnd.android.package-archive");
+            startActivity(intent);
+        }
     }
 
 }

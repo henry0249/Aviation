@@ -58,6 +58,7 @@ import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
 import com.example.administrator.aviation.ui.cgo.domestic.ZhuangJiDanMain;
 import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
 import com.example.administrator.aviation.ui.cgo.domestic.gnShouYunChaXun;
+import com.example.administrator.aviation.ui.cgo.gnj.gnjPickUpInfoActivity;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
@@ -170,6 +171,8 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.gnchugangcangdan);
                 }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_FlightCtrl)){
                     holder.setImageResource(R.id.image_iv, R.drawable.hangbanjinchen);
+                }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_GnjPickUp)){
+                    holder.setImageResource(R.id.image_iv, R.drawable.gnjgtq);
                 }
                 Log.d("guoji", obj.getName());
 
@@ -264,6 +267,9 @@ public class HomePageFragment extends Fragment{
                 } else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_FlightCtrl)) {
                     Intent CgoDomExpULDLoading = new Intent(getActivity(), JinChengGuanKong.class);
                     startActivity(CgoDomExpULDLoading);
+                }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_GnjPickUp)) {
+                    Intent PickUP = new Intent(getActivity(), gnjPickUpInfoActivity.class);
+                    startActivity(PickUP);
                 } else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }

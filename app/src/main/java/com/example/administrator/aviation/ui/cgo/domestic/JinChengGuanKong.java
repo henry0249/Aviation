@@ -168,7 +168,7 @@ public class JinChengGuanKong extends AppCompatActivity {
     //endregion
 
     //region 设置初始化
-    public void init() {
+    private void init() {
         navBar = new NavBar(this);
 
         Ldialog = new LoadingDialog(mContext);
@@ -929,7 +929,7 @@ public class JinChengGuanKong extends AppCompatActivity {
     //endregion
 
     //region 显示时间选择控件
-    protected void showDatePickDlg() {
+    private void showDatePickDlg() {
         final Calendar calendar = Calendar.getInstance();
         int yy = calendar.get(Calendar.YEAR);
         int mm = calendar.get(Calendar.MONTH);
