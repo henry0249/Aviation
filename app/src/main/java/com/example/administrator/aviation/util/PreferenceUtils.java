@@ -35,6 +35,8 @@ public class PreferenceUtils {
     // 通道号
     private static final String TongDaoHao = "TongDaoHao";
 
+    private static final String GnjPickUpFlag = "GnjPickUpFlag";
+
     // APP升级用到的信息
     private static final String APP_VERSION = "APPVersion";
     private static final String APP_DESCRIBE = "APPDescribe";
@@ -94,6 +96,20 @@ public class PreferenceUtils {
     public static String getjcgk(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(JCGK,"");
+    }
+
+    // 保存提货标识
+    public static void saveGnjPickUpFlag(Context context, String TDH) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(GnjPickUpFlag, TDH);
+        editor.commit();
+
+    }
+
+    public static String getGnjPickUpFlag(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(GnjPickUpFlag,"");
     }
 
     //保存复磅自定义信息

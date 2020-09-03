@@ -31,6 +31,7 @@ import com.example.administrator.aviation.model.gnj.gnjPickUpConverter;
 import com.example.administrator.aviation.model.hygnc.GncFlightControl;
 import com.example.administrator.aviation.model.hygnc.ParseGncFlightControl;
 import com.example.administrator.aviation.sys.PublicFun;
+import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.ui.base.SyncHorizontalScrollView;
 import com.example.administrator.aviation.ui.base.TableModel;
@@ -55,6 +56,13 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.administrator.aviation.R.id.never;
+import static com.example.administrator.aviation.R.id.tv_table_content_right_item10;
+import static com.example.administrator.aviation.R.id.tv_table_content_right_item11;
+import static com.example.administrator.aviation.R.id.tv_table_content_right_item12;
+import static com.example.administrator.aviation.R.id.tv_table_content_right_item13;
+import static com.example.administrator.aviation.R.id.tv_table_content_right_item9;
+
 public class gnjPickUpInfoActivity extends AppCompatActivity {
 
     //region 自定义变量
@@ -68,6 +76,11 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
     private AbsCommonAdapter<TableModel> mLeftAdapter, mRightAdapter;
     private HashMap<String,String> PickUpstore = new HashMap();
     private gnjPickUpModel SearchFlag;
+    private int lihuoFlag = 1;
+    // 双击事件记录最近一次点击的ID
+//    private String lastClickId = "";
+    // 双击事件记录最近一次点击的时间
+//    private long lastClickTime;
     //endregion
 
     //region 未预设XML控件
@@ -173,7 +186,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
         re.put("PickFlag", "0");
         re.put("DLVID", "");
         re.put("AgentCode", "");
-        re.put("DLVTime", PublicFun.getDateStr("yyyy-MM-dd") + "T00:00:00");
+        re.put("ChargeTime", PublicFun.getDateStr("yyyy-MM-dd"));
         GetInfo(getPickUpXml(re));
     }
     //endregion
@@ -194,7 +207,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
     //region 利用反射初始化标题的TextView的item引用
     private void findTitleTextViewIds() {
         mTitleTvArray = new SparseArray<>();
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 9; i++) {
             try {
                 Field field = R.id.class.getField("gnjPickUp_tv_table_title_" + i);
                 int key = field.getInt(new R.id());
@@ -217,16 +230,6 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 CheckBox cb = helper.getView(R.id.item_cb);
                 tv_table_content_left.setText(item.getLeftTitle());
                 cb.setChecked(false);
-
-                if (!TextUtils.isEmpty(item.getText10()) && item.getText10() == "出库中") {
-                    tv_table_content_left.setBackgroundColor(Color.parseColor("#FFBB33"));
-                } else if (!TextUtils.isEmpty(item.getText10()) && item.getText10() == "待提取") {
-                    tv_table_content_left.setBackgroundColor(Color.parseColor("#00FFFF"));
-                } else if (!TextUtils.isEmpty(item.getText10()) && item.getText10() == "已提取") {
-                    tv_table_content_left.setBackgroundColor(Color.parseColor("#00ff00"));
-                } else {
-                    tv_table_content_left.setBackgroundColor(Color.parseColor("#ffffff"));
-                }
             }
         };
 
@@ -242,11 +245,16 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 TextView tv_table_content_right_item6 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item6);
                 TextView tv_table_content_right_item7 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item7);
                 TextView tv_table_content_right_item8 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item8);
-                TextView tv_table_content_right_item9 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item9);
-                TextView tv_table_content_right_item10 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item10);
-                TextView tv_table_content_right_item11 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item11);
-                TextView tv_table_content_right_item12 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item12);
-                TextView tv_table_content_right_item13 = helper.getView(R.id.gnjPickUp_tv_table_content_right_item13);
+
+                if (item.getText0().equals("出库中")){
+                    helper.setTextColor(R.id.gnjPickUp_tv_table_content_right_item0,"#0000FF");
+                } else if (item.getText0().equals("待提取")) {
+                    helper.setTextColor(R.id.gnjPickUp_tv_table_content_right_item0, "#008000");
+                }else if (item.getText0().equals("待出库")) {
+                    helper.setTextColor(R.id.gnjPickUp_tv_table_content_right_item0, "#FFA500");
+                }else{
+                    helper.setTextColor(R.id.gnjPickUp_tv_table_content_right_item0, "#000000");
+                }
 
                 tv_table_content_right_item0.setText(item.getText0());
                 tv_table_content_right_item1.setText(item.getText1());
@@ -257,57 +265,56 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 tv_table_content_right_item6.setText(item.getText6());
                 tv_table_content_right_item7.setText(item.getText7());
                 tv_table_content_right_item8.setText(item.getText8());
-                tv_table_content_right_item9.setText(item.getText9());
-                tv_table_content_right_item10.setText(item.getText10());
-                tv_table_content_right_item11.setText(item.getText11());
-                tv_table_content_right_item12.setText(item.getText12());
-                tv_table_content_right_item13.setText(item.getText13());
 
-                for (int i = 0; i < 14; i++) {
+                for (int i = 0; i < 9; i++) {
                     View view = ((LinearLayout) helper.getConvertView()).getChildAt(i);
                     view.setVisibility(View.VISIBLE);
                 }
 
-                tv_table_content_right_item0.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        gnjPickUpModel pickupGo = new gnjPickUpModel();
-                        for (gnjPickUpModel pi:pickUpModelList){
-                            if (pi.getID().equals(item.getOrgCode())) {
-                                pickupGo.setID(pi.getID());
-                                pickupGo.setPKID(pi.getPKID());
-                                pickupGo.setCHGMode(pi.getCHGMode());
-                                pickupGo.setAgentCode(pi.getAgentCode());
-                                pickupGo.setAWBPC(pi.getAWBPC());
-                                pickupGo.setPC(pi.getPC());
-                                pickupGo.setSpCode(pi.getSpCode());
-                                pickupGo.setGoods(pi.getGoods());
-                                pickupGo.setOrigin(pi.getOrigin());
-                                pickupGo.setFDate(pi.getFDate());
-                                pickupGo.setFno(pi.getFno());
-                                pickupGo.setChargeTime(pi.getChargeTime());
-                                pickupGo.setPickFlag(gnjPickUpConverter.SwitchPickUpFlag(pi.getPickFlag()));
-                                pickupGo.setDLVTime(pi.getDLVTime());
-                                pickupGo.setCNEName(pi.getCNEName());
-                                pickupGo.setCNEIDType(pi.getCNEIDType());
-                                pickupGo.setCNEID(pi.getCNEID());
-                                pickupGo.setCNEPhone(pi.getCNEPhone());
-                                pickupGo.setDLVName(pi.getDLVName());
-                                pickupGo.setDLVIDType(pi.getDLVIDType());
-                                pickupGo.setDLVID(pi.getDLVID());
-                                pickupGo.setDLVPhone(pi.getDLVPhone());
-                                pickupGo.setREFID(pi.getREFID());
-                                break;
-                            }
-                        }
+                //region 点击查看详情
+//                tv_table_content_right_item2.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        gnjPickUpModel pickupGo = new gnjPickUpModel();
+//                        for (gnjPickUpModel pi:pickUpModelList){
+//                            if (pi.getID().equals(item.getOrgCode())) {
+//                                pickupGo.setID(pi.getID());
+//                                pickupGo.setPKID(pi.getPKID());
+//                                pickupGo.setMawb(pi.getMawb());
+//                                pickupGo.setCHGMode(pi.getCHGMode());
+//                                pickupGo.setAgentCode(pi.getAgentCode());
+//                                pickupGo.setAWBPC(pi.getAWBPC());
+//                                pickupGo.setPC(pi.getPC());
+//                                pickupGo.setSpCode(pi.getSpCode());
+//                                pickupGo.setGoods(pi.getGoods());
+//                                pickupGo.setOrigin(pi.getOrigin());
+//                                pickupGo.setFDate(pi.getFDate());
+//                                pickupGo.setFno(pi.getFno());
+//                                pickupGo.setChargeTime(pi.getChargeTime());
+//                                pickupGo.setPickFlag(gnjPickUpConverter.SwitchPickUpFlag(pi.getPickFlag()));
+//                                pickupGo.setDLVTime(pi.getDLVTime());
+//                                pickupGo.setCNEName(pi.getCNEName());
+//                                pickupGo.setCNEIDType(pi.getCNEIDType());
+//                                pickupGo.setCNEID(pi.getCNEID());
+//                                pickupGo.setCNEPhone(pi.getCNEPhone());
+//                                pickupGo.setDLVName(pi.getDLVName());
+//                                pickupGo.setDLVIDType(pi.getDLVIDType());
+//                                pickupGo.setDLVID(pi.getDLVID());
+//                                pickupGo.setDLVPhone(pi.getDLVPhone());
+//                                pickupGo.setREFID(pi.getREFID());
+//                                break;
+//                            }
+//                        }
+//
+//                        Bundle mBundle = new Bundle();
+//                        mBundle.putSerializable("Info", pickupGo);
+//                        Intent intent = new Intent(mContext,gnjPicjUpDetailsActivity.class);
+//                        intent.putExtras(mBundle);
+//                        startActivity(intent);
+//                    }
+//                });
+                //endregion
 
-                        Bundle mBundle = new Bundle();
-                        mBundle.putSerializable("Info", pickupGo);
-                        Intent intent = new Intent(mContext,gnjPicjUpDetailsActivity.class);
-                        intent.putExtras(mBundle);
-                        startActivity(intent);
-                    }
-                });
             }
         };
 
@@ -348,16 +355,82 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                         checkBox.setChecked(true);
                         boolean flag = PickUpstore.containsKey(ke);
                         if (!flag) {
-                            String Mawb = ta.getLeftTitle().toString().replace("P","").trim();
-                            String pkid = ta.getText0().trim();
-                            String pickF = gnjPickUpConverter.SwitchPickUpFlag(ta.getText10().trim());
-                            PickUpstore.put(ke,Mawb + "/" + pkid + "/" + pickF);
+                            String Mawb = ta.getLeftTitle().toString().replaceAll("P","").replaceAll("-","").trim();
+                            String pkid = ta.getText30().trim();
+                            String pickF = gnjPickUpConverter.SwitchPickUpFlag(ta.getText0().trim());
+                            String dlvname = "*";
+                            String cnename = "*";
+                            if (!TextUtils.isEmpty(ta.getText4().trim())) {
+                                dlvname = ta.getText4().trim();
+                            }
+                            if (!TextUtils.isEmpty(ta.getText3().trim())) {
+                                cnename = ta.getText3().trim();
+                            }
+
+                            PickUpstore.put(ke,Mawb + "/" + pkid + "/" + pickF + "/" + dlvname + "/" + cnename);
                         }
                     }
                 }
             }
         });
         //rendregion
+
+        rightListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mAct != null){
+                    TableModel ta = (TableModel) parent.getItemAtPosition(position);
+                    String ke = ta.getOrgCode().toString().trim();
+
+                    gnjPickUpModel pickupGo = new gnjPickUpModel();
+                    for (gnjPickUpModel pi:pickUpModelList){
+                        if (pi.getID().equals(ke)) {
+                            pickupGo.setID(pi.getID());
+                            pickupGo.setPKID(pi.getPKID());
+                            pickupGo.setMawb(pi.getMawb().replaceAll("P","").replaceAll("-",""));
+                            pickupGo.setCHGMode(pi.getCHGMode());
+                            pickupGo.setAgentCode(pi.getAgentCode());
+                            pickupGo.setAWBPC(pi.getAWBPC());
+                            pickupGo.setPC(pi.getPC());
+                            pickupGo.setSpCode(pi.getSpCode());
+                            pickupGo.setGoods(pi.getGoods());
+                            pickupGo.setOrigin(pi.getOrigin());
+                            pickupGo.setFDate(pi.getFDate());
+                            pickupGo.setFno(pi.getFno());
+                            pickupGo.setChargeTime(pi.getChargeTime());
+                            pickupGo.setPickFlag(gnjPickUpConverter.SwitchPickUpFlag(pi.getPickFlag()));
+                            pickupGo.setDLVTime(pi.getDLVTime());
+                            pickupGo.setCNEName(pi.getCNEName());
+                            pickupGo.setCNEIDType(pi.getCNEIDType());
+                            pickupGo.setCNEID(pi.getCNEID());
+                            pickupGo.setCNEPhone(pi.getCNEPhone());
+                            pickupGo.setDLVName(pi.getDLVName());
+                            pickupGo.setDLVIDType(pi.getDLVIDType());
+                            pickupGo.setDLVID(pi.getDLVID());
+                            pickupGo.setDLVPhone(pi.getDLVPhone());
+                            pickupGo.setREFID(pi.getREFID());
+                            break;
+                        }
+                    }
+
+                    if (!TextUtils.isEmpty(pickupGo.getMawb())) {
+                        Bundle mBundle = new Bundle();
+                        mBundle.putSerializable("Info", pickupGo);
+                        Intent intent = new Intent(mContext, gnjPicjUpDetailsActivity.class);
+                        intent.putExtras(mBundle);
+                        startActivity(intent);
+                    } else {
+                        ToastUtils.showToast(mContext, "未找到数据!", Toast.LENGTH_SHORT);
+                    }
+//                    if (ke.equals(lastClickId) && (Math.abs(lastClickTime-System.currentTimeMillis()) < 700)) {
+//
+//                    }else{
+//                        lastClickId = ta.getOrgCode().toString().trim();
+//                        lastClickTime = System.currentTimeMillis();
+//                    }
+                }
+            }
+        });
 
         //region 下拉刷新
         pulltorefreshview.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -380,9 +453,9 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                     String ori = "";
                     for (String key : PickUpstore.keySet()){
                         if (cc == 0) {
-                            ori = PickUpstore.get(key).split("/")[1];
+                            ori = PickUpstore.get(key).split("/")[3];
                         } else {
-                            if (!ori.equals(PickUpstore.get(key).split("/")[1])) {
+                            if (!ori.equals(PickUpstore.get(key).split("/")[3])) {
                                 pkidFlag = false;
                                 break;
                             }
@@ -405,14 +478,14 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                             intent.putExtras(mBundle);
                             startActivityForResult(intent, AviationCommons.PickUpSignatureActivity_REQUEST);
                         }else {
-                            ToastUtils.showToast(mContext, "选择的数据集提取状态非待提取!", Toast.LENGTH_SHORT);
+                            ToastUtils.showToast(mContext, "选择的数据非待提取状态!", Toast.LENGTH_SHORT);
                         }
 
                     } else {
-                        ToastUtils.showToast(mContext, "选择的数据集提货编号不一致!", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(mContext, "选择的数据提货人不一致!", Toast.LENGTH_SHORT);
                     }
                 }else {
-                    ToastUtils.showToast(mContext, "请先选择数据", Toast.LENGTH_SHORT);
+                    LiHuoRefresh("2");
                 }
             }
         });
@@ -423,31 +496,10 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mAct != null && PickUpstore.size() > 0) {
+                    lihuoFlag = 1;
                     lihuo("1");
-//                    String keys = "";
-//                    for (String key : PickUpstore.keySet()){
-//                        keys += key + " ";
-//                    }
-//                    new QMUIDialog.MessageDialogBuilder(mAct)
-//                            .setTitle("理货开始")
-//                            .setMessage(keys)
-//                            .addAction("取消", new QMUIDialogAction.ActionListener() {
-//                                @Override
-//                                public void onClick(QMUIDialog dialog, int index) {
-//                                    dialog.dismiss();
-//                                }
-//                            })
-//                            .addAction("确定", new QMUIDialogAction.ActionListener() {
-//                                @Override
-//                                public void onClick(QMUIDialog dialog, int index) {
-//                                    dialog.dismiss();
-//                                    lihuo("1");
-//                                }
-//                            })
-//                            .show();
-
                 } else {
-                    ToastUtils.showToast(mContext, "请先选择数据", Toast.LENGTH_SHORT);
+                    LiHuoRefresh("0");
                 }
             }
         });
@@ -458,30 +510,10 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mAct != null && PickUpstore.size() > 0) {
+                    lihuoFlag = 2;
                     lihuo("2");
-//                    String keys = "";
-//                    for (String key : PickUpstore.keySet()){
-//                        keys += key + " ";
-//                    }
-//                    new QMUIDialog.MessageDialogBuilder(mAct)
-//                            .setTitle("理货结束")
-//                            .setMessage(keys)
-//                            .addAction("取消", new QMUIDialogAction.ActionListener() {
-//                                @Override
-//                                public void onClick(QMUIDialog dialog, int index) {
-//                                    dialog.dismiss();
-//                                }
-//                            })
-//                            .addAction("确定", new QMUIDialogAction.ActionListener() {
-//                                @Override
-//                                public void onClick(QMUIDialog dialog, int index) {
-//                                    dialog.dismiss();
-//                                    lihuo("2");
-//                                }
-//                            })
-//                            .show();
                 } else {
-                    ToastUtils.showToast(mContext, "请先选择数据", Toast.LENGTH_SHORT);
+                    LiHuoRefresh("1");
                 }
             }
         });
@@ -510,15 +542,16 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
             ll.setID(key);
             ll.setMawb(str.split("/")[0]);
 
-            if (pickflag.equals("1")) {
-                if (str.split("/")[2].equals("0")) {
-                    LiHuoList.add(ll);
-                }
-            } else if (pickflag.equals("2")) {
-                if (str.split("/")[2].equals("1")) {
-                    LiHuoList.add(ll);
-                }
-            }
+//            if (pickflag.equals("1")) {
+//                if (str.split("/")[2].equals("0")) {
+//                    LiHuoList.add(ll);
+//                }
+//            } else if (pickflag.equals("2")) {
+//                if (str.split("/")[2].equals("1")) {
+//                    LiHuoList.add(ll);
+//                }
+//            }
+            LiHuoList.add(ll);
         }
 
         if (LiHuoList.size() > 0) {
@@ -567,7 +600,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                         String Exp_ULDLoading = object.getProperty(0).toString();
                         pickUpModelList = gnjPickUpConverter.gnjPickUpXMLtoMdoel(Exp_ULDLoading);
 
-                        Ldialog.dismiss();
+
                         mHandler.sendEmptyMessage(AviationCommons.GNC_gnjPickUpLoadList);
                     }
 
@@ -602,6 +635,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
         sb.append("    <DLVID>" + maps.get("DLVID") +"</DLVID>");
         sb.append("    <AgentCode>" + maps.get("AgentCode") +"</AgentCode>");
         sb.append("    <DLVTime>" + maps.get("DLVTime") +"</DLVTime>");
+        sb.append("    <ChargeTime>" + maps.get("ChargeTime") +"</ChargeTime>");
         sb.append("  </AWBInfo>");
         sb.append("</GNJPickUp>");
 
@@ -622,7 +656,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
             sb.append("  <AWBInfo>");
             sb.append("    <ID>" + mo.getID() + "</ID>");
             sb.append("    <PickFlag>" + status +"</PickFlag>");
-            sb.append("    <Mawb>" + mo.getMawb() +"</Mawb>");
+            sb.append("    <Mawb>" + mo.getMawb().replaceAll("-","") +"</Mawb>");
             sb.append("  </AWBInfo>");
         }
 
@@ -642,23 +676,22 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 gnjPickUpModel cc = CGO.get(i);
                 TableModel tableMode = new TableModel();
                 tableMode.setOrgCode(cc.getID());
-                tableMode.setLeftTitle(cc.getMawb());
-                tableMode.setText0(cc.getPKID());
-                tableMode.setText1(cc.getGoods());//列0内容
-                tableMode.setText2(cc.getPC());//列1内容
-                tableMode.setText3(cc.getAWBPC());//列2内容
-                tableMode.setText4(cc.getSpCode());
+                if (!cc.getPC().equals(cc.getAWBPC())) {
+                    tableMode.setLeftTitle(cc.getMawb() + "P");
+                } else {
+                    tableMode.setLeftTitle(cc.getMawb());
+                }
+
+                tableMode.setText0(gnjPickUpConverter.SwitchPickUpFlag(cc.getPickFlag()));
+                tableMode.setText1(cc.getSpCode());
+                tableMode.setText2(cc.getPC());
+                tableMode.setText3(cc.getCNEName());
+                tableMode.setText4(cc.getDLVName());
                 tableMode.setText5(cc.getAgentCode());
-                tableMode.setText6(cc.getOrigin());
-                tableMode.setText7(cc.getFDate());
-                tableMode.setText8(cc.getFno());
-                tableMode.setText9(cc.getChargeTime());
-                tableMode.setText10(gnjPickUpConverter.SwitchPickUpFlag(cc.getPickFlag()));
-                tableMode.setText11(cc.getDLVTime());
-                tableMode.setText12(cc.getCNEName());
-                tableMode.setText13(cc.getDLVName());
-                tableMode.setText14(cc.getDLVID());
-                tableMode.setText15(cc.getPKID());
+                tableMode.setText6(cc.getGoods());
+                tableMode.setText7(cc.getChargeTime());
+                tableMode.setText8(cc.getDLVTime());
+                tableMode.setText30(cc.getPKID());
 
                 mDatas.add(tableMode);
             }
@@ -689,6 +722,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                     pickUpModelList = new ArrayList<gnjPickUpModel>();
                     clearTableView();
                     pulltorefreshview.setRefreshing(false);
+                    Ldialog.dismiss();
                 }else {
                     setDatas(pickUpModelList,AviationCommons.REFRESH_DATA);
                     mHandler.postDelayed(new Runnable(){
@@ -696,10 +730,15 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                             //execute the task
                             Ldialog.dismiss();
                         }
-                    }, 1000);
+                    }, 700);
                 }
             }else if(msg.what == 666){
-                RefreshList();
+                if (lihuoFlag == 1) {
+                    LiHuoRefresh("0");
+                } else if (lihuoFlag == 2) {
+                    LiHuoRefresh("1");
+                }
+
             }
             return false;
         }
@@ -709,23 +748,34 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
     //region 其他界面返回值处理
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        lastClickId = "";
+//        lastClickTime = 0L;
         switch (requestCode) {
             case AviationCommons.PickUpSearchActivity_REQUEST:
                 if (resultCode == AviationCommons.PickUpSearchActivity_RESULT) {
                     String[] quest = data.getStringArrayExtra("result");
-                    if (quest.length == 5 && !TextUtils.isEmpty(quest[1])) {
+                    if (quest.length == 6 && !TextUtils.isEmpty(quest[1])) {
                         ArrayMap<String, String> go = new ArrayMap<>();
                         go.put("Mawb", quest[0]);
                         go.put("PickFlag",quest[1]);
                         go.put("DLVID", quest[2]);
                         go.put("AgentCode", quest[3]);
-                        go.put("DLVTime",quest[4]);
+
 
                         SearchFlag.setMawb(quest[0]);
                         SearchFlag.setPickFlag(quest[1]);
                         SearchFlag.setDLVID(quest[2]);
                         SearchFlag.setAgentCode(quest[3]);
-                        SearchFlag.setDLVTime(quest[4]);
+
+                        if (!TextUtils.isEmpty(quest[4])) {
+                            go.put("ChargeTime",quest[4]);
+                            SearchFlag.setChargeTime(quest[4]);
+                        } else if (!TextUtils.isEmpty(quest[5])) {
+                            go.put("DLVTime",quest[5]);
+                            SearchFlag.setDLVTime(quest[5]);
+                        }
+
+
 
                         GetInfo(getPickUpXml(go));
                     } else {
@@ -736,7 +786,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 break;
             case AviationCommons.PickUpSignatureActivity_REQUEST:
                 if (resultCode == AviationCommons.PickUpSignatureActivity_RESULT) {
-                    String re = data.getStringExtra("result");
+                    final  String re = data.getStringExtra("result");
                     if (re.equals("true")) {
                         tipDialog = new QMUITipDialog.Builder(mContext)
                                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
@@ -748,21 +798,11 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 tipDialog.dismiss();
+                                LiHuoRefresh("2");
                             }
                         }, 1000);
-                    } else if (re.equals("false")){
-                        tipDialog = new QMUITipDialog.Builder(mContext)
-                                .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
-                                .setTipWord("上传失败")
-                                .create();
-
-                        tipDialog.show();
-                        mHandler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                tipDialog.dismiss();
-                            }
-                        }, 1000);
+                    } else if (re.contains("false")){
+                        ToastUtils.showToast(mContext,re.replace("false",""),Toast.LENGTH_SHORT);
                     }
                 }
                 break;
@@ -772,9 +812,22 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
     }
     //endregion
 
+    //region 理货完成后刷新
+    private void LiHuoRefresh(String ff){
+        ArrayMap<String, String> go = new ArrayMap<>();
+        go.put("Mawb", "");
+        go.put("PickFlag",ff);
+        go.put("DLVID", "");
+        go.put("AgentCode", "");
+        go.put("ChargeTime","");
+        go.put("DLVTime","");
+        GetInfo(getPickUpXml(go));
+    }
+    //endregion
+
     //region 刷新数据
     private void RefreshList(){
-        if (!TextUtils.isEmpty(SearchFlag.getPickFlag()) && !TextUtils.isEmpty(SearchFlag.getDLVTime())) {
+        if (!TextUtils.isEmpty(SearchFlag.getPickFlag()) && (!TextUtils.isEmpty(SearchFlag.getChargeTime()) || !TextUtils.isEmpty(SearchFlag.getDLVTime()))) {
             ArrayMap<String, String> go = new ArrayMap<>();
 
             if (!TextUtils.isEmpty(SearchFlag.getMawb())) {
@@ -783,7 +836,9 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 go.put("Mawb", "");
             }
 
+
             go.put("PickFlag",SearchFlag.getPickFlag());
+
 
             if (!TextUtils.isEmpty(SearchFlag.getDLVID())) {
                 go.put("DLVID", SearchFlag.getDLVID());
@@ -797,7 +852,11 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 go.put("AgentCode", "");
             }
 
-            go.put("DLVTime",SearchFlag.getDLVTime());
+            if (!TextUtils.isEmpty(SearchFlag.getChargeTime())) {
+                go.put("ChargeTime",SearchFlag.getChargeTime());
+            } else if (!TextUtils.isEmpty(SearchFlag.getDLVTime())) {
+                go.put("DLVTime",SearchFlag.getDLVTime());
+            }
 
             GetInfo(getPickUpXml(go));
         } else {

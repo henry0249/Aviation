@@ -12,10 +12,12 @@ import android.text.method.ReplacementTransformationMethod;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.administrator.aviation.R;
@@ -30,6 +32,7 @@ import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 import com.example.administrator.aviation.util.ToastUtils;
+import com.example.administrator.aviation.view.AutofitTextView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.text.SimpleDateFormat;
@@ -56,8 +59,7 @@ public class gnjPickUpActivity extends AppCompatActivity {
 
   //endregion
 
-  //region 其他控件
-
+    //region 其他控件
   //endregion
 
   //region Layout控件
@@ -83,15 +85,17 @@ public class gnjPickUpActivity extends AppCompatActivity {
     EditText EdTxt_DaiLiRen;
     @BindView(R.id.gnjPickUp_EdTxt_riqi)
     EditText EdTxt_riqi;
-
+    @BindView(R.id. gnjPickUp_EdTxt_TiQuRiQi)
+    EditText EdTxt_TiQuRiQi;
   //endregion
 
   //region 滚动View控件
 
   //endregion
 
-  //region TextView控件
-
+    //region TextView控件
+    @BindView(R.id.gnjPickUp_Txt_TimeTxt)
+    AutofitTextView Txt_TimeTxt;
   //endregion
 
   //region ImgView控件
@@ -129,7 +133,8 @@ public class gnjPickUpActivity extends AppCompatActivity {
       EdTxt_riqi.setFocusable(false);//不可编辑
       EdTxt_riqi.setKeyListener(null);//不可粘贴，长按不会弹出粘贴框;
 
-
+      EdTxt_TiQuRiQi.setFocusable(false);
+      EdTxt_TiQuRiQi.setKeyListener(null);
 
       setTextEmpty();
       setListener();
@@ -142,7 +147,14 @@ public class gnjPickUpActivity extends AppCompatActivity {
       EdTxt_ShenFenZheng.setText("");
       EdTxt_DaiLiRen.setText("");
       EdTxt_riqi.setText(PublicFun.getDateStr("yyyy-MM-dd"));
-      EdTxt_TiQuBiaoShi.setText("待出库");
+      EdTxt_TiQuRiQi.setText("");
+      String flag = PreferenceUtils.getGnjPickUpFlag(mContext);
+      if (TextUtils.isEmpty(flag)) {
+          EdTxt_TiQuBiaoShi.setText("待出库");
+      } else {
+          EdTxt_TiQuBiaoShi.setText(flag);
+      }
+
   }
   //endregion
 
@@ -160,14 +172,15 @@ public class gnjPickUpActivity extends AppCompatActivity {
       Btn_chaxun.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              String[] quest = new String[]{"","","","",""};
+              String[] quest = new String[]{"","","","","",""};
               String yundanhao = EdTxt_yundanhao.getText().toString().trim();
               String tiqubiaoshi = gnjPickUpConverter.SwitchPickUpFlag(EdTxt_TiQuBiaoShi.getText().toString().trim());
               String shenfenzheng = EdTxt_ShenFenZheng.getText().toString().trim().toUpperCase();
               String daliren  =EdTxt_DaiLiRen.getText().toString().trim().toUpperCase();
-              String riqi = EdTxt_riqi.getText().toString().trim();
+              String JiaoFeiRiQi = EdTxt_riqi.getText().toString().trim();
+              String TiQuRiQi = EdTxt_TiQuRiQi.getText().toString().trim();
 
-              if (TextUtils.isEmpty(yundanhao) && TextUtils.isEmpty(tiqubiaoshi) && TextUtils.isEmpty(shenfenzheng) && TextUtils.isEmpty(daliren) && TextUtils.isEmpty(riqi)) {
+              if (TextUtils.isEmpty(yundanhao) && TextUtils.isEmpty(tiqubiaoshi) && TextUtils.isEmpty(shenfenzheng) && TextUtils.isEmpty(daliren) && TextUtils.isEmpty(JiaoFeiRiQi) && TextUtils.isEmpty(TiQuRiQi)) {
                   ToastUtils.showToast(mContext, "请填写查询条件！", Toast.LENGTH_SHORT);
               } else {
                   if (!TextUtils.isEmpty(yundanhao)) {
@@ -186,9 +199,13 @@ public class gnjPickUpActivity extends AppCompatActivity {
                       quest[3] = daliren;
                   }
 
-                  if (!TextUtils.isEmpty(riqi)) {
-                      quest[4] = riqi + "T00:00:00";
+                  if (!TextUtils.isEmpty(JiaoFeiRiQi)) {
+                      quest[4] = JiaoFeiRiQi;
+                  } else if (!TextUtils.isEmpty(TiQuRiQi)) {
+                      quest[5] = TiQuRiQi;
                   }
+
+                  PreferenceUtils.saveGnjPickUpFlag(mContext,EdTxt_TiQuBiaoShi.getText().toString().trim());
 
                   Integer req = (Integer) getIntent().getSerializableExtra("id");
                   Intent intent = new Intent(mContext,gnjPickUpInfoActivity.class);
@@ -254,7 +271,17 @@ public class gnjPickUpActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               PublicFun.KeyBoardHideTwo(mAct, views);
-              showDatePickDlg();
+              showDatePickDlg(0);
+          }
+      });
+      //endregion
+
+      //region 日期选择
+      EdTxt_TiQuRiQi.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              PublicFun.KeyBoardHideTwo(mAct, views);
+              showDatePickDlg(1);
           }
       });
       //endregion
@@ -282,7 +309,7 @@ public class gnjPickUpActivity extends AppCompatActivity {
   //endregion
 
     //region 显示时间选择控件
-    private void showDatePickDlg() {
+    private void showDatePickDlg(final int flag) {
         final Calendar calendar = Calendar.getInstance();
         int yy = calendar.get(Calendar.YEAR);
         int mm = calendar.get(Calendar.MONTH);
@@ -295,8 +322,15 @@ public class gnjPickUpActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 String ymd = year + "-" + (month + 1) + "-" + dayOfMonth;
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                EdTxt_riqi.setText(formatter.format(DateUtils.convertFromStrYMD(ymd)));
-                EdTxt_riqi.setSelection(EdTxt_riqi.getText().length());
+                if (flag == 0) {
+                    EdTxt_TiQuRiQi.setText("");
+                    EdTxt_riqi.setText(formatter.format(DateUtils.convertFromStrYMD(ymd)));
+                    EdTxt_riqi.setSelection(EdTxt_riqi.getText().length());
+                } else if (flag == 1) {
+                    EdTxt_riqi.setText("");
+                    EdTxt_TiQuRiQi.setText(formatter.format(DateUtils.convertFromStrYMD(ymd)));
+                    EdTxt_TiQuRiQi.setSelection(EdTxt_TiQuRiQi.getText().length());
+                }
             }
         });
         dlg.show();

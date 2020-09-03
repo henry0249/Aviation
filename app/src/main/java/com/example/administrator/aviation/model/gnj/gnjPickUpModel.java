@@ -11,6 +11,62 @@ import lombok.Data;
 
 @Data
 public class gnjPickUpModel implements Serializable {
+    public gnjPickUpModel() {
+         ID = "";
+        //提取记录编号
+         PKID = "";
+        //运单号
+         Mawb = "";
+        //收费模式
+         CHGMode = "";
+        //代理人代码
+         AgentCode = "";
+        //运单总件数
+         AWBPC = "";
+        //件数
+         PC = "";
+        //特码
+         SpCode = "";
+        //品名
+         Goods = "";
+        //始发港
+         Origin = "";
+        //航班日期
+         FDate = "";
+        //航班号
+         Fno = "";
+        //缴费时间
+         ChargeTime = "";
+        //提取标识
+         PickFlag = "";
+        //提货时间
+         DLVTime = "";
+        //收货人名字
+         CNEName = "";
+        //收货人ID类型
+         CNEIDType = "";
+        //身份证号
+         CNEID = "";
+        //电话
+         CNEPhone = "";
+        //提货人名字
+         DLVName = "";
+        //提货人ID类型
+         DLVIDType = "";
+        //提货人ID
+         DLVID = "";
+        //提货人电话
+        DLVPhone = "";
+        //发货人ID
+        REFID = "";
+        //签名图
+        Sign = "";
+        //收货人身份证
+        CNEIDCard = "";
+        //提货人身份证
+        DLVIDCard = "";
+    }
+
     //流水号
     private String ID;
     //提取记录编号

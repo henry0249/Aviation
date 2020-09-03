@@ -547,6 +547,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.cgo.gnj.KuaiJianSaoMiaoMainActivity"></activity>
     </application>
 
 </manifest>

@@ -255,11 +255,18 @@ public class AppDomExpPrePareAWBActivity extends Activity implements AdapterView
                 viewHolder.volumeTv.setText("");
             }
 
+
+
             if (position % 2 == 0) {
                 viewHolder.awbLayout.setBackgroundColor(Color.parseColor("#ffffff"));
             } else {
                 viewHolder.awbLayout.setBackgroundColor(Color.parseColor("#ebf5fe"));
             }
+
+            if (awbInfoList.get(position).getMawbm().getFlightChecked().equals("已审批")) {
+                viewHolder.awbLayout.setBackgroundColor(Color.parseColor("#aafabb"));
+            }
+
             return convertView;
         }
 

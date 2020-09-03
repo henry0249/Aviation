@@ -37,7 +37,7 @@ public class AviationCommons {
     public static final String LOGIN_XML = "loginxml";
     public static final String DST_FOLDER_NAME = "AviationApp";
     public static final String StoragePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + DST_FOLDER_NAME;
-    public static final int Camera_Quality = 30;
+    public static final int Camera_Quality = 20;
     public static float MyDPI = 0;
 
     // bundle传递list项

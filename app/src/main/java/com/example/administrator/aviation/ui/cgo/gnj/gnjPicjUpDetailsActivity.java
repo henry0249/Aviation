@@ -36,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.R.attr.bitmap;
+import static android.R.attr.key;
 import static com.example.administrator.aviation.R.id.pulltorefreshview;
 
 public class gnjPicjUpDetailsActivity extends AppCompatActivity {
@@ -150,6 +151,20 @@ public class gnjPicjUpDetailsActivity extends AppCompatActivity {
         result = (gnjPickUpModel) getIntent().getSerializableExtra("Info");
         setTextViewEmpty();
         setTextViewValue();
+        setSignPic();
+    }
+    //endregion
+
+    //region 请求图片
+    private void setSignPic(){
+        if (result != null && !TextUtils.isEmpty(result.getID())) {
+            HashMap<String, String> quest = new HashMap<>();
+            quest.put("ID", result.getID().trim());
+            quest.put("ErrString", "");
+            GetInfo(quest);
+        } else {
+            ToastUtils.showToast(mContext,"ID参数传递错误!",Toast.LENGTH_SHORT);
+        }
     }
     //endregion
 
@@ -180,26 +195,30 @@ public class gnjPicjUpDetailsActivity extends AppCompatActivity {
 
     //region 绑定数据
     private void setTextViewValue(){
-        Txt_PKID.setText(result.getPKID());
-        Txt_mawb.setText(result.getMawb());
-        Txt_chgmode.setText(result.getCHGMode());
-        Txt_agentcode.setText(result.getAgentCode());
-        Txt_awbpc.setText(result.getAWBPC());
-        Txt_pc.setText(result.getPC());
-        Txt_spcode.setText(result.getSpCode());
-        Txt_origin.setText(result.getOrigin());
-        Txt_fdate.setText(result.getFDate());
-        Txt_fno.setText(result.getFno());
-        Txt_chargetime.setText(result.getChargeTime());
-        Txt_pickupflag.setText(result.getPickFlag());
-        Txt_dlvtime.setText(result.getDLVTime());
-        Txt_cnename.setText(result.getCNEName());
-        Txt_cneid.setText(result.getCNEID());
-        Txt_cnephone.setText(result.getCNEPhone());
-        Txt_dlvname.setText(result.getDLVName());
-        Txt_dlvid.setText(result.getDLVID());
-        Txt_dlvphone.setText(result.getDLVPhone());
-        Txt_refid.setText(result.getREFID());
+        if (result != null && !TextUtils.isEmpty(result.getPKID())) {
+            Txt_PKID.setText(result.getPKID());
+            Txt_mawb.setText(result.getMawb());
+            Txt_chgmode.setText(result.getCHGMode());
+            Txt_agentcode.setText(result.getAgentCode());
+            Txt_awbpc.setText(result.getAWBPC());
+            Txt_pc.setText(result.getPC());
+            Txt_spcode.setText(result.getSpCode());
+            Txt_origin.setText(result.getOrigin());
+            Txt_fdate.setText(result.getFDate());
+            Txt_fno.setText(result.getFno());
+            Txt_chargetime.setText(result.getChargeTime());
+            Txt_pickupflag.setText(result.getPickFlag());
+            Txt_dlvtime.setText(result.getDLVTime());
+            Txt_cnename.setText(result.getCNEName());
+            Txt_cneid.setText(result.getCNEID());
+            Txt_cnephone.setText(result.getCNEPhone());
+            Txt_dlvname.setText(result.getDLVName());
+            Txt_dlvid.setText(result.getDLVID());
+            Txt_dlvphone.setText(result.getDLVPhone());
+            Txt_refid.setText(result.getREFID());
+        } else {
+            ToastUtils.showToast(mContext,"参数传递错误!",Toast.LENGTH_SHORT);
+        }
     }
     //endregion
 
@@ -228,16 +247,18 @@ public class gnjPicjUpDetailsActivity extends AppCompatActivity {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
-                if (!TextUtils.isEmpty(SignModelList.get(0).getSign())) {
-                    Img_tihuorenSign.setImageBitmap(PublicFun.DecodeBase64ToPic(SignModelList.get(0).getSign()));
-                }
+                if (SignModelList.size() > 0) {
+                    if (!TextUtils.isEmpty(SignModelList.get(0).getSign())) {
+                        Img_tihuorenSign.setImageBitmap(PublicFun.DecodeBase64ToPic(SignModelList.get(0).getSign()));
+                    }
 
-                if (!TextUtils.isEmpty(SignModelList.get(0).getDLVIDCard())) {
-                    Img_tihuorenCard.setImageBitmap(PublicFun.DecodeBase64ToPic(SignModelList.get(0).getDLVIDCard()));
-                }
+                    if (!TextUtils.isEmpty(SignModelList.get(0).getDLVIDCard())) {
+                        Img_tihuorenCard.setImageBitmap(PublicFun.DecodeBase64ToPic(SignModelList.get(0).getDLVIDCard()));
+                    }
 
-                if (!TextUtils.isEmpty(SignModelList.get(0).getCNEIDCard())) {
-                    Img_shouhuorenCard.setImageBitmap(PublicFun.DecodeBase64ToPic(SignModelList.get(0).getCNEIDCard()));
+                    if (!TextUtils.isEmpty(SignModelList.get(0).getCNEIDCard())) {
+                        Img_shouhuorenCard.setImageBitmap(PublicFun.DecodeBase64ToPic(SignModelList.get(0).getCNEIDCard()));
+                    }
                 }
             }
             return false;
@@ -264,6 +285,7 @@ public class gnjPicjUpDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onFailed(String message) {
                         Ldialog.dismiss();
+
                         ToastUtils.showToast(mContext,message,Toast.LENGTH_SHORT);
                     }
 

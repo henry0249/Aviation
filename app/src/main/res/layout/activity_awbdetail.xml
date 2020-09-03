@@ -550,6 +550,7 @@
                     android:layout_marginLeft="21dp"
                     android:layout_weight="1"
                     android:text="@string/awb_detail_FlightChecked"
+                    android:textColor="@color/mBlue"
                     android:textSize="@dimen/declare_size" />
 
                 <TextView

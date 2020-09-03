@@ -4,60 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <TextView android:id="@+id/gnjPickUp_tv_table_title_0"
         style="@style/TextView_Table_Right"
-        android:text="提货编号"
-        android:textColor="#009cd0"/>
+        android:layout_width="54dp"
+        android:text="状态"/>
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_1"
         style="@style/TextView_Table_Right"
-        android:text="品名"/>
+        android:layout_width="54dp"
+        android:text="特码"/>
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_2"
         style="@style/TextView_Table_Right"
-        android:text="件数"/>
+        android:text="件数"
+        android:layout_width="54dp" />
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_3"
         style="@style/TextView_Table_Right"
-        android:text="总件数" />
+        android:layout_width="64dp"
+        android:text="收货人"/>
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_4"
+        android:layout_width="64dp"
         style="@style/TextView_Table_Right"
-        android:text="特码"/>
+        android:text="提货人"/>
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_5"
         style="@style/TextView_Table_Right"
+        android:layout_width="54dp"
         android:text="代理"/>
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_6"
         style="@style/TextView_Table_Right"
-        android:text="始发港"/>
+        android:text="品名" />
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_7"
         style="@style/TextView_Table_Right"
-        android:text="航班日期"/>
+        android:text="收费时间"/>
 
     <TextView android:id="@+id/gnjPickUp_tv_table_title_8"
         style="@style/TextView_Table_Right"
-        android:text="航班号"/>
-
-    <TextView android:id="@+id/gnjPickUp_tv_table_title_9"
-        style="@style/TextView_Table_Right"
-        android:text="收费时间"/>
-
-    <TextView android:id="@+id/gnjPickUp_tv_table_title_10"
-        style="@style/TextView_Table_Right"
-        android:text="状态"/>
-
-    <TextView android:id="@+id/gnjPickUp_tv_table_title_11"
-        style="@style/TextView_Table_Right"
         android:text="提取时间"/>
-
-    <TextView android:id="@+id/gnjPickUp_tv_table_title_12"
-        style="@style/TextView_Table_Right"
-        android:text="提货人"/>
-
-    <TextView android:id="@+id/gnjPickUp_tv_table_title_13"
-        style="@style/TextView_Table_Right"
-        android:text="发货人"/>
 </merge>

@@ -77,10 +77,12 @@
                     android:layout_marginLeft="12dp"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textColor="#666666"
+                    android:textColor="@color/mBlue"
                     android:textSize="@dimen/house_size"
                     android:maxLines="1"
-                    app:sizeToFit="true"/>
+                    app:sizeToFit="true"
+                    android:textColorHighlight="#CCCCCC"
+                    android:textIsSelectable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -493,10 +495,12 @@
                     android:layout_marginLeft="12dp"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textColor="#666666"
+                    android:textColor="@color/mBlue"
                     android:textSize="@dimen/house_size"
                     android:maxLines="1"
-                    app:sizeToFit="true"/>
+                    app:sizeToFit="true"
+                    android:textColorHighlight="#CCCCCC"
+                    android:textIsSelectable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -589,10 +593,12 @@
                     android:layout_marginLeft="12dp"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textColor="#666666"
+                    android:textColor="@color/mBlue"
                     android:textSize="@dimen/house_size"
                     android:maxLines="1"
-                    app:sizeToFit="true"/>
+                    app:sizeToFit="true"
+                    android:textColorHighlight="#CCCCCC"
+                    android:textIsSelectable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -670,7 +676,7 @@
                     android:layout_weight="0.3"
                     android:layout_marginLeft="12dp"
                     android:layout_gravity="center"
-                    android:text="提货人签名:"
+                    android:text="收货人证件:"
                     android:textColor="#666666"
                     android:textSize="@dimen/house_size"
                     android:maxLines="1"
@@ -680,17 +686,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="250dp"
                 android:background="#ffffff">
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/gnjPicjUpDetails_Img_tihuorenSign"
+                    android:id="@+id/gnjPicjUpDetails_Img_shouhuorenCard"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="250dp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:background="@drawable/edit_bg" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -738,7 +743,7 @@
                     android:layout_weight="0.3"
                     android:layout_marginLeft="12dp"
                     android:layout_gravity="center"
-                    android:text="收货人证件:"
+                    android:text="提货人签名:"
                     android:textColor="#666666"
                     android:textSize="@dimen/house_size"
                     android:maxLines="1"
@@ -748,13 +753,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="180dp"
+                android:layout_marginBottom="4dp"
                 android:background="#ffffff">
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/gnjPicjUpDetails_Img_shouhuorenCard"
+                    android:id="@+id/gnjPicjUpDetails_Img_tihuorenSign"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="180dp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:background="@drawable/edit_bg" />

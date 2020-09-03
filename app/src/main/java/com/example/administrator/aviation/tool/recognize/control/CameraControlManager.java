@@ -218,23 +218,35 @@ public class CameraControlManager {
 //                Bitmap rectBitmap = Bitmap.createBitmap(b);
                 FileUtil.saveBitmap(rectBitmap,card);
 
+				if(DST_RECT_HEIGHT > 1000){
+                    scalW = rectBitmap.getWidth();
+                    scalH = rectBitmap.getHeight() / 2;
+                    x = 0;
+                    y = 0;
 
-                scalW = rectBitmap.getWidth();
-                scalH = rectBitmap.getHeight() / 2;
-                x = 0;
-                y = 0;
+                    Bitmap ShouHuoRenBitmap = Bitmap.createBitmap(rectBitmap, x, y, (int)scalW, (int)scalH);
+                    FileUtil.saveBitmap(ShouHuoRenBitmap,ShouHuoRenCard);
 
-                Bitmap ShouHuoRenBitmap = Bitmap.createBitmap(rectBitmap, x, y, (int)scalW, (int)scalH);
-                FileUtil.saveBitmap(ShouHuoRenBitmap,ShouHuoRenCard);
+                    scalW = rectBitmap.getWidth();
+                    scalH = rectBitmap.getHeight() / 2;
+                    x = 0;
+                    y = rectBitmap.getHeight() / 2;
 
-                scalW = rectBitmap.getWidth();
-                scalH = rectBitmap.getHeight() / 2;
-                x = 0;
-                y = rectBitmap.getHeight() / 2;
+                    Bitmap TiHuoRenBitmap = Bitmap.createBitmap(rectBitmap, x, y, (int)scalW, (int)scalH);
+                    FileUtil.saveBitmap(TiHuoRenBitmap,TiHuoRenCard);
 
-                Bitmap TiHuoRenBitmap = Bitmap.createBitmap(rectBitmap, x, y, (int)scalW, (int)scalH);
-                FileUtil.saveBitmap(TiHuoRenBitmap,TiHuoRenCard);
+                    if(ShouHuoRenBitmap.isRecycled()){
+                        ShouHuoRenBitmap.recycle();
+                        ShouHuoRenBitmap = null;
+                    }
 
+                    if(TiHuoRenBitmap.isRecycled()){
+                        TiHuoRenBitmap.recycle();
+                        TiHuoRenBitmap = null;
+                    }
+                }
+
+                
 				if(b.isRecycled()){
 					b.recycle();
 					b = null;
@@ -244,17 +256,6 @@ public class CameraControlManager {
 					rectBitmap.recycle();
 					rectBitmap = null;
 				}
-
-                if(ShouHuoRenBitmap.isRecycled()){
-                    ShouHuoRenBitmap.recycle();
-                    ShouHuoRenBitmap = null;
-                }
-
-                if(TiHuoRenBitmap.isRecycled()){
-                    TiHuoRenBitmap.recycle();
-                    TiHuoRenBitmap = null;
-                }
-
 			}
 
 			//再次进入预览

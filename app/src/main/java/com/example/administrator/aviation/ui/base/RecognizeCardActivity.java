@@ -46,7 +46,9 @@ public class RecognizeCardActivity extends Activity{
         navBar = new NavBar(this);
         navBar.setTitle("身份证识别");
         AviationCommons.MyDPI = mContext.getResources().getDisplayMetrics().density;
-        facade.setTransParentRectWH(948,1200);
+
+        int HH = (int)getIntent().getSerializableExtra("Height");
+        facade.setTransParentRectWH(948,HH);
 
         File f = new File(AviationCommons.StoragePath + "/" + "card" +".jpg");
         if (f.exists()) {

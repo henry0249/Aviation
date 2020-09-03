@@ -81,7 +81,7 @@
                 android:layout_weight="0.7"
                 android:maxLines="1"
                 android:text="请在下框内手写签名:"
-                android:textColor="#666666"
+                android:textColor="@color/home_color"
                 android:textSize="@dimen/house_size"
                 app:sizeToFit="true" />
 
@@ -115,7 +115,7 @@
                 android:layout_weight="0.6"
                 android:maxLines="1"
                 android:text="请拍摄身份证正面:"
-                android:textColor="#666666"
+                android:textColor="@color/home_color"
                 android:textSize="@dimen/house_size"
                 app:sizeToFit="true" />
         </LinearLayout>
@@ -126,14 +126,15 @@
             android:background="#ffffff">
 
             <com.example.administrator.aviation.view.AutofitTextView
+                android:id="@+id/PickUpSignature_txt_shuomin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="12dp"
                 android:layout_weight="0.6"
                 android:maxLines="2"
-                android:text="收货人证件放上面，提货人证件放下面。两证件放置间隔一定的上下距离。"
-                android:textColor="#666666"
+                android:text="收货人证件放上面，提货人证件放下面。请间隔一指宽的上下距离。拍摄时，证件尽量靠近拍摄框上下边缘。"
+                android:textColor="@color/mBlue"
                 android:textSize="@dimen/house_size"
                 app:sizeToFit="true" />
         </LinearLayout>

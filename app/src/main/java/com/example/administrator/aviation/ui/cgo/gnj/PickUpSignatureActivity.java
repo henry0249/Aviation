@@ -26,6 +26,7 @@ import com.example.administrator.aviation.ui.base.RecognizeCardActivity;
 import com.example.administrator.aviation.ui.dialog.LoadingDialog;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.ToastUtils;
+import com.example.administrator.aviation.view.AutofitTextView;
 import com.example.administrator.aviation.view.LinePathView;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
@@ -50,12 +51,11 @@ public class PickUpSignatureActivity extends AppCompatActivity {
     private Context mContext;
     private Activity mAct;
     private NavBar navBar;
-//    private List<PickUpPicModel> PickUpstore;
     private final String SignerjpegFile = StoragePath + "/" + "Signer" + ".jpg";
-    private String ResultStr = "";
-    private int intFlag = 0;
     private final String page = "one";
     private ArrayMap<String, String> PickUpMap = new ArrayMap();
+    private String ErrStr = "";
+    private int CardFlag = 1;
     //endregion
 
     //region 未预设XML控件
@@ -85,8 +85,9 @@ public class PickUpSignatureActivity extends AppCompatActivity {
     Button Btn_Shangchuan;
     //endregion
 
-    //region EditText控件
-
+    //region Text控件
+    @BindView(R.id.PickUpSignature_txt_shuomin)
+    AutofitTextView txt_shuomin;
     //endregion
 
     //region 滚动View控件
@@ -126,6 +127,18 @@ public class PickUpSignatureActivity extends AppCompatActivity {
         HashMap<String,String> p = (HashMap<String,String>) getIntent().getSerializableExtra("Info");
         for (String key : p.keySet()){
             PickUpMap.put(key, p.get(key).split("/")[0]);
+            String dlv = p.get(key).split("/")[3];
+            String cne = p.get(key).split("/")[4];
+            if (dlv.equals("*") || cne.equals("*")) {
+                CardFlag = 1;
+            } else if (!dlv.equals(cne)) {
+                CardFlag = 2;
+            }
+        }
+
+        if (CardFlag == 1) {
+            txt_shuomin.setText("一张证件拍摄时，证件放置拍摄框中间区域。");
+            ImageView1.setVisibility(View.GONE);
         }
 
         setListener();
@@ -138,23 +151,34 @@ public class PickUpSignatureActivity extends AppCompatActivity {
         switch (requestCode) {
             case PickUpSignatureActivity_REQUEST:
                 if (resultCode == AviationCommons.PickUpSignatureActivity_RESULT) {
-                    File f1 = new File(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
-                    File f2 = new File(StoragePath + "/" + "TiHuoRenCard" +".jpg");
 
-                    if (f1.exists()) {
-                        Bitmap bitmap = PublicFun.getLoacalBitmap(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
-                        ImageView1.setImageBitmap(bitmap);
-                    } else {
-                        ToastUtils.showToast(mContext, "照片拍摄未成功!", Toast.LENGTH_SHORT);
+                    if (CardFlag == 1) {
+                        File f1 = new File(StoragePath + "/" + "card" +".jpg");
+                        if (f1.exists()) {
+                            Bitmap bitmap = PublicFun.getLoacalBitmap(StoragePath + "/" + "card" +".jpg");
+                            ImageView2.setImageBitmap(bitmap);
+                        }else {
+                            ToastUtils.showToast(mContext, "照片拍摄未成功!", Toast.LENGTH_SHORT);
+                        }
+                    } else if (CardFlag == 2){
+                        File f1 = new File(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
+                        File f2 = new File(StoragePath + "/" + "TiHuoRenCard" +".jpg");
+
+                        if (f1.exists()) {
+                            Bitmap bitmap = PublicFun.getLoacalBitmap(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
+                            ImageView1.setImageBitmap(bitmap);
+                        } else {
+                            ToastUtils.showToast(mContext, "照片拍摄未成功!", Toast.LENGTH_SHORT);
+                        }
+
+                        if (f2.exists()) {
+                            Bitmap bitmap = PublicFun.getLoacalBitmap(StoragePath + "/" + "TiHuoRenCard" +".jpg");
+                            ImageView2.setImageBitmap(bitmap);
+                        }else {
+                            ToastUtils.showToast(mContext, "照片截取未成功!", Toast.LENGTH_SHORT);
+                        }
+
                     }
-
-                    if (f2.exists()) {
-                        Bitmap bitmap = PublicFun.getLoacalBitmap(StoragePath + "/" + "TiHuoRenCard" +".jpg");
-                        ImageView2.setImageBitmap(bitmap);
-                    }else {
-                        ToastUtils.showToast(mContext, "照片截取未成功!", Toast.LENGTH_SHORT);
-                    }
-
                 }
                 break;
             default:
@@ -184,6 +208,12 @@ public class PickUpSignatureActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, RecognizeCardActivity.class);
                 intent.putExtra("id", PickUpSignatureActivity_REQUEST);
+                if (CardFlag == 1) {
+                    intent.putExtra("Height", 600);
+                } else if (CardFlag == 2) {
+                    intent.putExtra("Height", 1200);
+                }
+
                 startActivityForResult(intent, PickUpSignatureActivity_REQUEST);
             }
         });
@@ -195,33 +225,52 @@ public class PickUpSignatureActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LinePathView_HuaBu.saveJPEG();
                 File mFile= new File(SignerjpegFile);
-                File sFile = new File(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
-                File tFile = new File(StoragePath + "/" + "TiHuoRenCard" +".jpg");
 
-                if (mFile.exists() && sFile.exists() && tFile.exists()) {
-                    byte[] SignerJepgByte = PublicFun.FileToByte(SignerjpegFile);
-                    String SignerJepgStr = PublicFun.EncodeBase64(SignerJepgByte);
+                if (CardFlag == 1) {
+                    File cFile = new File(StoragePath + "/" + "card" +".jpg");
+                    if (mFile.exists() && cFile.exists()) {
+                        byte[] SignerJepgByte = PublicFun.FileToByte(SignerjpegFile);
+                        String SignerJepgStr = PublicFun.EncodeBase64(SignerJepgByte);
 
-                    byte[] sJepgByte = PublicFun.FileToByte(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
-                    String sCardJepgStr = PublicFun.EncodeBase64(sJepgByte);
+                        byte[] sJepgByte = PublicFun.FileToByte(StoragePath + "/" + "card" +".jpg");
+                        String cCardJepgStr = PublicFun.EncodeBase64(sJepgByte);
 
-                    byte[] tJepgByte = PublicFun.FileToByte(StoragePath + "/" + "TiHuoRenCard" +".jpg");
-                    String tCardJepgStr = PublicFun.EncodeBase64(tJepgByte);
+                        String[] go = new String[]{SignerJepgStr,"",cCardJepgStr};
 
-                    mFile.delete();
-                    sFile.delete();
-                    tFile.delete();
+                        mFile.delete();
+                        cFile.delete();
 
-                    String[] go = new String[]{SignerJepgStr,sCardJepgStr,tCardJepgStr};
+                        Map<String, String> pic = getPickUpXml(go);
+                        GetInfo(pic);
+                    }else {
+                        ToastUtils.showToast(mContext, "未拍照或图片未找到!", Toast.LENGTH_SHORT);
+                    }
+                } else if((CardFlag == 2)){
+                    File sFile = new File(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
+                    File tFile = new File(StoragePath + "/" + "TiHuoRenCard" +".jpg");
 
-                    Map<String, String> pic = getPickUpXml(go);
-                    GetInfo(pic);
-                } else {
-                    ToastUtils.showToast(mContext, "未拍照或图片未找到!", Toast.LENGTH_SHORT);
+                    if (mFile.exists() && sFile.exists() && tFile.exists()) {
+                        byte[] SignerJepgByte = PublicFun.FileToByte(SignerjpegFile);
+                        String SignerJepgStr = PublicFun.EncodeBase64(SignerJepgByte);
+
+                        byte[] sJepgByte = PublicFun.FileToByte(StoragePath + "/" + "ShouHuoRenCard" +".jpg");
+                        String sCardJepgStr = PublicFun.EncodeBase64(sJepgByte);
+
+                        byte[] tJepgByte = PublicFun.FileToByte(StoragePath + "/" + "TiHuoRenCard" +".jpg");
+                        String tCardJepgStr = PublicFun.EncodeBase64(tJepgByte);
+
+                        String[] go = new String[]{SignerJepgStr,sCardJepgStr,tCardJepgStr};
+
+                        mFile.delete();
+                        sFile.delete();
+                        tFile.delete();
+
+                        Map<String, String> pic = getPickUpXml(go);
+                        GetInfo(pic);
+                    } else {
+                        ToastUtils.showToast(mContext, "未拍照或图片未找到!", Toast.LENGTH_SHORT);
+                    }
                 }
-
-
-
             }
         });
         //endregion
@@ -239,7 +288,7 @@ public class PickUpSignatureActivity extends AppCompatActivity {
     //endregion
 
     //region 封装查询信息
-    private Map<String,String> getPickUpXml(String[] pic) {
+    private Map<String,String>  getPickUpXml(String[] pic) {
         StringBuilder sb = new StringBuilder();
         Map<String, String> pa = new HashMap<>();
         sb.append("<?xml version='1.0' encoding='UTF-8'?>");
@@ -253,9 +302,14 @@ public class PickUpSignatureActivity extends AppCompatActivity {
         }
 
         sb.append("  <SignInfo>");
-        sb.append("    <CNEIDCard>" + pic[1] + "</CNEIDCard>");
-        sb.append("    <DLVIDCard>" + pic[2] +"</DLVIDCard>");
-        sb.append("    <Sign>" + pic[0] +"</Sign>");
+        if (CardFlag == 2) {
+            sb.append("    <CNEIDCard><![CDATA[" + pic[1] + "]]></CNEIDCard>");
+        } else {
+            sb.append("    <CNEIDCard><![CDATA[" + "" + "]]></CNEIDCard>");
+        }
+
+        sb.append("    <DLVIDCard><![CDATA[" + pic[2] +"]]></DLVIDCard>");
+        sb.append("    <Sign><![CDATA[" + pic[0] +"]]></Sign>");
         sb.append("  </SignInfo>");
         sb.append("</GNJPickUp>");
 
@@ -285,7 +339,7 @@ public class PickUpSignatureActivity extends AppCompatActivity {
                 Intent intent = new Intent(mContext,gnjPickUpInfoActivity.class);
 
                 if (req == AviationCommons.PickUpSignatureActivity_REQUEST) {
-                    intent.putExtra("result", "false");
+                    intent.putExtra("result", "false" + ErrStr);
                     setResult(AviationCommons.PickUpSignatureActivity_RESULT,intent);
                     mAct.finish();
                 } else {
@@ -316,7 +370,7 @@ public class PickUpSignatureActivity extends AppCompatActivity {
                     @Override
                     public void onFailed(String message) {
                         Ldialog.dismiss();
-
+                        ErrStr = message;
                         mHandler.sendEmptyMessage(0);
                     }
 

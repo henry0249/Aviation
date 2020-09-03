@@ -21,6 +21,7 @@ import java.io.IOException;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.util.AviationCommons;
 
+import static android.R.attr.bitmap;
 import static com.example.administrator.aviation.util.AviationCommons.StoragePath;
 
 /**
@@ -192,9 +193,14 @@ public class LinePathView extends View {
                 b = clearBlank(b, blank);
             }
 
+            Bitmap outB=b.copy(Bitmap.Config.ARGB_8888,true);
+            Canvas canvas=new Canvas(outB);
+            canvas.drawColor(Color.WHITE);
+            canvas.drawBitmap(b, 0, 0, null);
+
             FileOutputStream fout = new FileOutputStream(jpegName);
             BufferedOutputStream bos = new BufferedOutputStream(fout);
-            b.compress(Bitmap.CompressFormat.JPEG, AviationCommons.Camera_Quality, bos);
+            outB.compress(Bitmap.CompressFormat.JPEG, AviationCommons.Camera_Quality, bos);
             bos.flush();
             bos.close();
             Log.i(TAG, "saveBitmap成功");

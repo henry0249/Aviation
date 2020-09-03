@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="ChargeTime">
+        <item>交费时间</item>
+        <item>提取时间</item>
+    </string-array>
+</resources>
