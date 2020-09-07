@@ -25,6 +25,7 @@ public class AviationCommons {
             "PH:普货"};
 
     public static String TAG = "ACTAG";
+    public static String AndroidModel = android.os.Build.MODEL;
     /**
      * 登录得到服务器成功返回的ID（每次注销得到的ID值不一样）
      */
@@ -112,6 +113,9 @@ public class AviationCommons {
     public static final String APP_CGO_Dom_Exp_FlightCtrl = "appCGODomExpFlightCtrl";
     //国内出港提取
     public static final String APP_CGO_Dom_Exp_GnjPickUp = "appCGODomImportPickUp";
+    //国际出港快件扫码
+    public static final String APP_GJC_appIntExpKJScanCommand = "appIntExpKJScanCommand";
+
     // handler传递的值（int型）
     public static final int HOUSE_HANDLER = 0x111;
     public static final int FLIGHT_REFERCH = 0x222;

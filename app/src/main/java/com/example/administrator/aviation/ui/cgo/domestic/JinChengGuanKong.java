@@ -173,8 +173,8 @@ public class JinChengGuanKong extends AppCompatActivity {
 
         Ldialog = new LoadingDialog(mContext);
         dialog = new DragSortDialog(mContext);
-        String  model = android.os.Build.MODEL;
-        if (model.equals("HDN-L09")){dialog.setTxSize(8.0f);}
+//        String  model = android.os.Build.MODEL;
+        if (AviationCommons.AndroidModel.equals("HDN-L09")){dialog.setTxSize(8.0f);}
         navBar.setTitle("航班进程管控");
         navBar.setRight(R.drawable.ic_menu_two);
         txt_RightTitle.setText("航班号");

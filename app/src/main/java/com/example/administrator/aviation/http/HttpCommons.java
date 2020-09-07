@@ -271,5 +271,8 @@ public class HttpCommons {
     public static final String GET_GNJ_GetGNJPickUpSign_NAME = "GetGNJPickUpSign";
     public static final String GET_GNJ_GetGNJPickUpSign_ACTION = "http://58.213.128.130/GetGNJPickUpSign";
 
+    //快件扫包
+    public static final String GET_CGO_IntExportKJScanCommand_NAME = "CGOIntExportKJScanCommand";
+    public static final String GET_CGO_IntExportKJScanCommand_ACTION = "http://58.213.128.130/CGOIntExportKJScanCommand";
 
 }

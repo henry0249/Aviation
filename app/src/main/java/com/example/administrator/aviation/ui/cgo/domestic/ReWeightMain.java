@@ -211,7 +211,7 @@ public class ReWeightMain extends AppCompatActivity {
         Ldialog = new LoadingDialog(mContext);
         SwitchBtn.setOpened(true);
         LLay_11.setVisibility(View.GONE);
-        navBar.setRight(R.drawable.ic_menu_two);
+        navBar.setRight(R.drawable.ic_menu);
 
         String fbzdy = PreferenceUtils.getFBzdy(mContext);
         if (!fbzdy.contains("_")) {

@@ -17,48 +17,32 @@ import com.example.administrator.aviation.model.adapter.HomePageAdapter;
 import com.example.administrator.aviation.model.homemessge.HomeMessage;
 import com.example.administrator.aviation.model.homemessge.PrefereceHomeMessage;
 import com.example.administrator.aviation.tool.DateUtils;
-import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightActivity;
 import com.example.administrator.aviation.ui.activity.domandintgetflight.FlightHomeDetailActivity;
 import com.example.administrator.aviation.ui.activity.domexphouse.AppDomWareHouseHomeActivity;
-import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightCheckInSearchActivity;
 import com.example.administrator.aviation.ui.activity.domflightcheck.DomFlightInHomeActivity;
-import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomExportDayCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgrbb.DomImportDayCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomExportCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.domjcgywl.DomImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.domjcgywl.DomImportCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEDeclareInfoSearchActivity;
 import com.example.administrator.aviation.ui.activity.edeclareinfo.AppEdeclareHomeActivity;
 import com.example.administrator.aviation.ui.activity.intawbofprepare.AppIntExpPrepareAWBActivity;
-import com.example.administrator.aviation.ui.activity.domexphouse.AppDomExpWareHouseActivity;
 import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoHomeActivity;
 import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAwbHouseHomeActivity;
 import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntOneKeyDeclarelHomeActivity;
 import com.example.administrator.aviation.ui.activity.intimpcargoinfo.AppIntimpCarGoInfoHomeActivity;
-import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntExportDayCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.intjcgrbb.IntImportDayCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgrbb.IntImportDayCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrierActivity;
-import com.example.administrator.aviation.ui.activity.intdeclareinfo.AppIntDeclareInfoSearchActivity;
-import com.example.administrator.aviation.ui.activity.intexpawbhousemanage.AppIntExpAWBHouseManageActivity;
 import com.example.administrator.aviation.ui.activity.domprepareawb.AppDomExpPrePareAWBActivity;
-import com.example.administrator.aviation.ui.activity.intexponekeydeclare.AppIntExpOneKeyDeclareActivity;
-import com.example.administrator.aviation.ui.activity.intimpcargoinfo.AppIntimpCargoInfoActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntExportCarrierHomeActivity;
-import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierActivity;
 import com.example.administrator.aviation.ui.activity.intjcgywl.IntImportCarrierHomeActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
-import com.example.administrator.aviation.ui.cgo.domestic.GnBaowenActivity;
 import com.example.administrator.aviation.ui.cgo.domestic.JinChengGuanKong;
 import com.example.administrator.aviation.ui.cgo.domestic.ReWeightMain;
 import com.example.administrator.aviation.ui.cgo.domestic.ZhuangJiDanMain;
 import com.example.administrator.aviation.ui.cgo.domestic.expULDLoading;
-import com.example.administrator.aviation.ui.cgo.domestic.gnShouYunChaXun;
+import com.example.administrator.aviation.ui.cgo.gnj.KuaiJianSaoMiaoMainActivity;
 import com.example.administrator.aviation.ui.cgo.gnj.gnjPickUpInfoActivity;
+import com.example.administrator.aviation.ui.cgo.gnj.kjsmSaoMaQiangActivity;
 import com.example.administrator.aviation.util.AviationCommons;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
@@ -173,6 +157,8 @@ public class HomePageFragment extends Fragment{
                     holder.setImageResource(R.id.image_iv, R.drawable.hangbanjinchen);
                 }else if (obj.getName().equals(AviationCommons.APP_CGO_Dom_Exp_GnjPickUp)){
                     holder.setImageResource(R.id.image_iv, R.drawable.gnjgtq);
+                }else if(obj.getName().equals(AviationCommons.APP_GJC_appIntExpKJScanCommand)){
+                    holder.setImageResource(R.id.image_iv, R.drawable.kuaijiansaoma);
                 }
                 Log.d("guoji", obj.getName());
 
@@ -259,8 +245,8 @@ public class HomePageFragment extends Fragment{
                         startActivity(CgoDomExpULDLoading);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_CheckIn)) {
 //                    Intent CgoDomExpULDLoading = new Intent(getActivity(), gnShouYunChaXun.class);
-                    Intent CgoDomExpULDLoading = new Intent(getActivity(), GnBaowenActivity.class);
-                    startActivity(CgoDomExpULDLoading);
+//                    Intent CgoDomExpULDLoading = new Intent(getActivity(), KuaiJianSaoMiaoMainActivity.class);
+//                    startActivity(CgoDomExpULDLoading);
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_MftLoading)) {
                     Intent CgoDomExpULDLoading = new Intent(getActivity(), ZhuangJiDanMain.class);
                     startActivity(CgoDomExpULDLoading);
@@ -270,7 +256,17 @@ public class HomePageFragment extends Fragment{
                 }else if (result && list.get(position).getName().equals(AviationCommons.APP_CGO_Dom_Exp_GnjPickUp)) {
                     Intent PickUP = new Intent(getActivity(), gnjPickUpInfoActivity.class);
                     startActivity(PickUP);
-                } else {
+                } else if (result && list.get(position).getName().equals(AviationCommons.APP_GJC_appIntExpKJScanCommand)) {
+                    Intent ScanCommand = null;
+
+                    if (AviationCommons.AndroidModel.equals("PDA")) {
+                        ScanCommand = new Intent(getActivity(), kjsmSaoMaQiangActivity.class);
+                    } else {
+                        ScanCommand = new Intent(getActivity(), KuaiJianSaoMiaoMainActivity.class);
+                    }
+
+                    startActivity(ScanCommand);
+                }else {
                     Toast.makeText(getActivity(), "功能尚未开发", Toast.LENGTH_LONG).show();
                 }
             }

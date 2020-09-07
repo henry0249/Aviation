@@ -1,9 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.aviation.ui.cgo.gnj.KuaiJianSaoMiaoMainActivity">
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:id="@+id/KuaiJianSaoMiao_layout">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/navbar"
+        android:id="@+id/KuaiJianSaoMiaoBar"/>
+
+    <SurfaceView
+        android:id="@+id/KuaiJianSaoMiao_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/KuaiJianSaoMiaoBar" />
+
+    <RelativeLayout
+        android:id="@+id/KuaiJianSaoMiao_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/KuaiJianSaoMiaoBar">
+
+        <ImageView
+            android:id="@+id/KuaiJianSaoMiao_mask_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/shadow"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
+
+        <RelativeLayout
+            android:id="@+id/KuaiJianSaoMiao_crop_view"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/qr_code_bg"
+            android:layout_below="@+id/KuaiJianSaoMiao_mask_top"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/KuaiJianSaoMiao_scan_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/scan_line" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/KuaiJianSaoMiao_mask_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/KuaiJianSaoMiao_crop_view"
+            android:orientation="vertical"
+            android:background="#FFFFFF" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:background="#ffffff">
+
+                <com.example.administrator.aviation.view.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center"
+                    android:text="包号:"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/house_size"
+                    android:maxLines="1"
+                    app:sizeToFit="true"/>
+
+                <EditText
+                    android:id="@+id/KuaiJianSaoMiao_EdTxt_BaoHao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:layout_weight="0.6"
+                    android:inputType="number|text"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:imeOptions="actionDone"
+                    android:maxLength="30"
+                    android:paddingLeft="5dp"
+                    android:layout_marginRight="10dp"/>
+
+                <ImageView
+                    android:id="@+id/KuaiJianSaoMiao_Img_chaxun"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/chaxun" />
+
+                <ImageView
+                    android:id="@+id/KuaiJianSaoMiao_Img_QingKong"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/qingkongziyuan" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:background="#ffffff">
+
+                <ScrollView
+                    android:id="@+id/KuaiJianSaoMiao_Scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/KuaiJianSaoMiao_Txt_BaoHao"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/house_size"/>
+                </ScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:id="@+id/KuaiJianSaoMiao_mask_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/KuaiJianSaoMiao_mask_bottom"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/KuaiJianSaoMiao_mask_top"
+            android:layout_toLeftOf="@id/KuaiJianSaoMiao_crop_view"
+            android:background="@drawable/shadow" />
+
+        <ImageView
+            android:id="@+id/KuaiJianSaoMiao_mask_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/KuaiJianSaoMiao_mask_bottom"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/KuaiJianSaoMiao_mask_top"
+            android:layout_toRightOf="@id/KuaiJianSaoMiao_crop_view"
+            android:background="@drawable/shadow" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

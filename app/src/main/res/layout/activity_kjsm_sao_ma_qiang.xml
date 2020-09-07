@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/kjsmSaoMaQiang_main">
+
+    <include layout="@layout/navbar"
+        android:id="@+id/kjsmSaoMaQiangBar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="扫描结果:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:id="@+id/kjsmSaoMaQiang_Txt_JieGuo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text=""
+            android:layout_weight="1"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        android:background="#ffffff">
+
+        <com.example.administrator.aviation.view.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"
+            android:text="包号:"
+            android:textColor="#666666"
+            android:textSize="@dimen/house_size"
+            android:maxLines="1"
+            app:sizeToFit="true"/>
+
+        <EditText
+            android:id="@+id/kjsmSaoMaQiang_EdTxt_BaoHao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_weight="0.6"
+            android:inputType="number|text"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:imeOptions="actionDone"
+            android:maxLength="30"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/kjsmSaoMaQiang_Img_chaxun"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/chaxun" />
+
+        <ImageView
+            android:id="@+id/kjsmSaoMaQiang_Img_QingKong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/qingkongziyuan" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:background="#ffffff">
+
+        <ScrollView
+            android:id="@+id/kjsmSaoMaQiang_Scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/kjsmSaoMaQiang_Txt_BaoHao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/house_size"/>
+        </ScrollView>
+
+    </LinearLayout>
+</LinearLayout>

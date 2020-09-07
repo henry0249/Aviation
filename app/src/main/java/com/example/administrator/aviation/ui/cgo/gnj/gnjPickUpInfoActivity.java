@@ -187,6 +187,7 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
         re.put("DLVID", "");
         re.put("AgentCode", "");
         re.put("ChargeTime", PublicFun.getDateStr("yyyy-MM-dd"));
+        re.put("DLVTime","");
         GetInfo(getPickUpXml(re));
     }
     //endregion
@@ -760,7 +761,8 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                         go.put("PickFlag",quest[1]);
                         go.put("DLVID", quest[2]);
                         go.put("AgentCode", quest[3]);
-
+                        go.put("ChargeTime","");
+                        go.put("DLVTime","");
 
                         SearchFlag.setMawb(quest[0]);
                         SearchFlag.setPickFlag(quest[1]);
@@ -774,8 +776,6 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                             go.put("DLVTime",quest[5]);
                             SearchFlag.setDLVTime(quest[5]);
                         }
-
-
 
                         GetInfo(getPickUpXml(go));
                     } else {
@@ -852,6 +852,8 @@ public class gnjPickUpInfoActivity extends AppCompatActivity {
                 go.put("AgentCode", "");
             }
 
+            go.put("ChargeTime","");
+            go.put("DLVTime","");
             if (!TextUtils.isEmpty(SearchFlag.getChargeTime())) {
                 go.put("ChargeTime",SearchFlag.getChargeTime());
             } else if (!TextUtils.isEmpty(SearchFlag.getDLVTime())) {
