@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.example.administrator.aviation.LoginActivity;
 import com.example.administrator.aviation.R;
 import com.example.administrator.aviation.ui.activity.ChangePassActivity;
 import com.example.administrator.aviation.ui.activity.SettingPasswordActivity;
+import com.example.administrator.aviation.ui.activity.UserHomePageActivity;
 import com.example.administrator.aviation.ui.base.NavBar;
 import com.example.administrator.aviation.util.PreferenceUtils;
 
@@ -35,6 +38,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+
+import static com.example.administrator.aviation.sys.PublicFun.getSDPath;
 
 /**
  * 我的fragment(这里主要包括用户的一些设置)
@@ -128,7 +133,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
             case R.id.version_update_layout:
 //                Intent intentUpdate = new Intent(getActivity(), VersionUpdateActivity.class);
 //                startActivity(intentUpdate);
-                Toast.makeText(getActivity(), "正在检查版本更新", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "正在检查版本更新", Toast.LENGTH_LONG).show();
                 // 自动检查有没有新版本，如果有新版本就提示更新
                 new Thread() {
                     @Override
@@ -294,9 +299,20 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
 
     // 安装文件，一般固定写法
     void update() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "app-release.apk")),
-                "application/vnd.android.package-archive");
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT >= 24) {// 判读版本是否在7.0以上
+            File file = new File(getSDPath(getActivity().getApplicationContext()), "app-release.apk");
+            // 在AndroidManifest中的android:authorities值
+            Uri apkUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), "com.example.administrator.aviation.fileprovider", file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "app-release.apk")),"application/vnd.android.package-archive");
+            startActivity(intent);
+        }
     }
 }
